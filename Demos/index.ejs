@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>OU WxC - Sign in</title>
+    <style>
+        div.box{
+            margin: 10px;
+            backgroundcolor: #ffffff;
+            border: 3px solid black;
+            opacity: 0.7;
+        }
+    </style>
+
+    <div class="box">
+        <center>
+            <h3>Welcome to the Ohio University Women's Cross Country Performance Program </h3>
+        </center>
+    </div>
+</head>
+
+
+<body>
+<% include templates/header.ejs %>
+
+<br><br><br>
+<br><br><br>
+
+<script type="text/javascript">
+    function verify(form){
+        var username, password, error = '';
+
+        username = form.user.name.value;
+        password = form.pass.value;
+
+        if(username.length == 0){
+            error += "Please enter a username.\n";
+        }
+        if(password.length == 0){
+            error += "Please enter a password.\n";
+        }
+        if(error){
+            alert(error);
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+<!--Missing an action here, need to have a form handler for server verification-->
+<form action="/" method="post"> <!-- onsubmit="return verify(this);"> -->
+    <center>
+        Sign-in: <br><br>
+        Username:&nbsp;
+        <input type="text" placeholder="pid111" name="user"><br><br>
+        Password: &nbsp;
+        <input type="password" placeholder="*******" name="pass"><br>
+        <br>
+        <input type="submit" value="Sign-in">
+    </center>
+</form>
+</body>
+
+
+<footer>
+    <center>
+        <h6> version 0.1.0 </h6>
+    </center>
+</footer>
+
+</html>
