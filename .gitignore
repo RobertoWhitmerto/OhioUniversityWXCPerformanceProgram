@@ -13,6 +13,7 @@
 *.rar
 *.tar
 *.zip
+*.swp
 
 # Executables
 *.exe
@@ -23,3 +24,5 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+
