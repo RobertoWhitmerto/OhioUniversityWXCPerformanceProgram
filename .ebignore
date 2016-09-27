@@ -5,3 +5,7 @@ InitialDocuments/
 LICENSE
 
 *.md
+
+.git/
+
+.gitignore
