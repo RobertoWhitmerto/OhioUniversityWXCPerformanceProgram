@@ -3,7 +3,7 @@ var path = require("path");
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var db = require('./db');
+//var db = require('./db');
 
 var app = express();
 
@@ -26,13 +26,14 @@ app.post("/", function(req, res){
   console.log(req.body.pass)
 });
 
-var queryString = 'SELECT * FROM Roles;';
+/*var queryString = 'SELECT * FROM Roles;';
 db.query(queryString, function(err, rows, fields) {
     if (err) throw err;
     for (var i in rows) {
         console.log('Data: ', rows[i]);
     }
 });
+*/
 
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
