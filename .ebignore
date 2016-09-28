@@ -9,3 +9,5 @@ LICENSE
 .git/
 
 .gitignore
+
+*.sh
