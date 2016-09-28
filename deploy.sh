@@ -11,3 +11,5 @@ echo $gcommand
 git add .
 
 eval $gcommand
+
+eb deploy
