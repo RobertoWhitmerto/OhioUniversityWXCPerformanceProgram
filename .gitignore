@@ -25,4 +25,8 @@
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
+# Express Files
+/node_modules/*
 
+#ide files
+*.idea
