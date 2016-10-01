@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>- New Workout -</title>
+	<h2>Adding a Workout: </h2>
+</head>
+
+
+<body>
+
+
+<form action="/" method="post"> 
+<br>
+        Day of month: &nbsp;&nbsp;
+        <select name="dayofmonth">
+			<option value="dayinvalid">--</option>
+			<option value="day1">1</option>
+			<option value="day2">2</option>
+			<option value="day3">3</option>
+			<option value="day4">4</option>
+			<option value="day5">5</option>
+			<option value="day6">6</option>
+			<option value="day7">7</option>
+			<option value="day8">8</option>
+			<option value="day9">9</option>
+			<option value="day10">10</option>
+			<option value="day11">11</option>
+			<option value="day12">12</option>
+			<option value="day13">13</option>
+			<option value="day14">14</option>
+			<option value="day15">15</option>
+			<option value="day16">16</option>
+			<option value="day17">17</option>
+			<option value="day18">18</option>
+			<option value="day19">19</option>
+			<option value="day20">20</option>
+			<option value="day21">21</option>
+			<option value="day22">22</option>
+			<option value="day23">23</option>
+			<option value="day24">24</option>
+			<option value="day25">25</option>
+			<option value="day26">26</option>
+			<option value="day27">27</option>
+			<option value="day28">28</option>
+			<option value="day29">29</option>
+			<option value="day30">30</option>
+			<option value="day31">31</option>
+		</select><br><br>
+		
+        Hours of sleep: &nbsp;
+        <input type="text" name="hoursofsleep"><br><br>
+		
+		Health status: &nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" name="healthstatus"><br><br>
+		
+		Illness: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" name="illness"><br><br>
+		
+		Injury: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" name="injury"><br><br>
+		
+		% of full health:
+		<input type="text" name="percentfullhealth"><br><br>
+		
+		Start of cycle?
+		<input type="radio" name="startofcycle" value ="Yes">Yes
+		<input type="radio" name="startofcycle" value ="No">No
+		<br><br>
+		
+		RPE (6-20): &nbsp;&nbsp;&nbsp;&nbsp;
+		<select name="RPE">
+			<option value="rpeinvalid">--</option>
+			<option value="rpe6">6</option>
+			<option value="rpe7">7</option>
+			<option value="rpe8">8</option>
+			<option value="rpe9">9</option>
+			<option value="rpe10">10</option>
+			<option value="rpe11">11</option>
+			<option value="rpe12">12</option>
+			<option value="rpe13">13</option>
+			<option value="rpe14">14</option>
+			<option value="rpe15">15</option>
+			<option value="rpe16">16</option>
+			<option value="rpe17">17</option>
+			<option value="rpe18">18</option>
+			<option value="rpe19">19</option>
+			<option value="rpe20">20</option>
+		</select><br><br>
+		
+		Time: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" placeholder="0:58:20 = 0h 58m 20s" name="time"><br><br>
+		
+		Distance: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" name="----"><br><br><br>
+		
+		Notes:<br>
+		<textarea name="message" placeholder="Enter your notes here" rows="3" cols="50"></textarea>
+		<br> <br>
+		
+        <input type="submit" value="submit workout">
+</form>
+</body>
+
+
+<footer>
+    <center>
+        <h6> version 0.1.0 </h6>
+    </center>
+</footer>
+
+</html>
