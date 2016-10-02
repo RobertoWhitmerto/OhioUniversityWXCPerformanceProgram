@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html> 
+<html> 
+
+
+<head> 
+<title>Adding / Removing Users</title> 
+
+<style> 
+div.container{ 
+width: 100%; 
+border: 1px solid black; 
+} 
+
+header, footer{ 
+padding: 1em; 
+color: black; 
+background-color: #ffffff; 
+clear: left; 
+text-align: center; 
+} 
+
+nav{ 
+float: left; 
+max-width: 320px; 
+margin: 0; 
+padding: 1em; 
+} 
+
+article{ 
+margin-left: 170px; 
+padding: 1em; 
+overflow: hidden; 
+} 
+</style> 
+</head> 
+
+
+<body> 
+<div class="container"> 
+<header> 
+<h1> Ohio University Women's Cross Country Performance Program </h1> 
+</header> 
+
+
+<nav> 
+
+<ul> 
+<li>Athlete</li> 
+<ul> 
+<li><a href="#">Enter Workout</a></li> 
+<li><a href="#">View Past Workouts</a></li> 
+</ul> 
+
+<li>Coaches and Trainers</li> 
+
+<ul> 
+<li><a href="#">View Athletes</a></li> 
+</ul> 
+
+<li>Administrators</li> 
+<ul> 
+<li><a href="#">View Athletes and Workouts</a></li> 
+<li><a href="#">Add/Remove Users</a></li> 
+</ul> 
+
+<ul> 
+<form> 
+<br><br><br> 
+<input type="submit" value="Log Out"> 
+</form> 
+</nav> 
+
+
+<article> 
+<h2> Adding a User: </h2> 
+<p> 
+	<form action="/" method="post">
+		User's First Name: 
+		<input type="text" name="newuserfirstname"><br><br>
+		User's Last Name:
+		<input type="text" name="newuserlastname"><br><br>
+		User's Role Type:
+		<input type="radio" name="newuserrole" value ="athlete">Athlete
+		<input type="radio" name="newuserrole" value ="coach/trainer">Coach/trainer
+		<input type="radio" name="newuserrole" value ="admin">Administrator
+		<br><br>
+		<input type="submit" value="submit-newuser">
+	</form>
+</p>
+ 
+<h2> Removing a User: </h2>
+<p>
+	<form action="/" method = "post">
+		User's First Name: 
+		<input type="text" name="newuserfirstname"><br><br>
+		User's Last Name:
+		<input type="text" name="newuserlastname"><br><br>
+		<input type="submit" value="remove user">
+	</form>
+</article> 
+
+<footer> 
+<center> 
+
+<h6> version 0.1.0 </h6> 
+</center> 
+</footer> 
+ 
+</div> 
+
+</body> 
+</html> 
