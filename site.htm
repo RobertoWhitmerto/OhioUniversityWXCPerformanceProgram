@@ -1,49 +1,69 @@
-<!-- 
-     Ohio University Women's Cross country Performance Program 
-     Date: 9/30/2016
-     Version: 0.1.0 
--->
-
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<title>OU WxC - Sign in</title>
+<head>
+    <title>OU WxC - Sign in</title>
+    <style>
+        div.box{
+            margin: 10px;
+            backgroundcolor: #ffffff;
+            border: 3px solid black;
+            opacity: 0.7;
+        }
+    </style>
+
 	<style>
-		div.box{
-			margin: 10px;
-			backgroundcolor: #ffffff;
-			border: 3px solid black;
-			opacity: 0.7;
-			}	
+		.button {
+		background-color: #f44336;
+		border: none;
+		color: white;
+		padding: 10px 26px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 10px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
 	</style>
-			<div class="box">
-			<center>
-				<h3>Welcome to the Ohio University Women's Cross Country Performance Program </h3>
-			</center>
-			</div>
-	</head>
+
+	<style> 
+	input {
+		padding: 6px 10px;
+		border: 2px solid red;
+   		border-radius: 4px;
+	}
+	</style>
+
+    <div class="box">
+        <center>
+            <h3>Welcome to the Ohio University Women's Cross Country Performance Program </h3>
+        </center>
+    </div>
+</head>
 
 
-	<body><br><br><br><br><br><br>
-	<form action="/" method="post"> <!--onsubmit="return verify(this);"-->
-	   	<center>
-        	Sign-in: <br><br>
+<body>
+<br><br><br><br><br><br>
 
-		Username:&nbsp;
-        	<input type="text" placeholder="pid111" name="user"><br><br>
+<form action="/" method="post"> <!--onsubmit="return verify(this);"-->
+    <center>
+        Sign-in: <br><br>
+        Username:&nbsp;
+        <input type="text" placeholder="pid111" name="user" required><br><br>
+        Password: &nbsp;
+        <input type="password" placeholder="*******" name="pass" required><br>
+        <br>
+        <input type="submit" class="button" value="Sign-in">
+    </center>
+</form>
+</body>
 
-		Password: &nbsp;
-        	<input type="password" placeholder="*******" name="pass"><br><br>
-        <input type="submit" value="Sign-in">
-    		</center>
-	</form>
-	</body>
 
-	<footer>
-		<center>
-		<h6> version 0.1.0 </h6>
-		</center>
-	</footer>
+<footer>
+    <center>
+        <h6> version 0.1.0 </h6>
+    </center>
+</footer>
 
 </html>
