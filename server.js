@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require("path");
+var passport = require('passport');
 //var logger = require('morgan');
 //var bodyParser = require('body-parser');
 //var cookieParser = require('cookie-parser');
