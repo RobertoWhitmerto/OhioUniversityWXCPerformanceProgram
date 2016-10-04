@@ -11,3 +11,5 @@ LICENSE
 .gitignore
 
 *.sh
+
+*.pdf
