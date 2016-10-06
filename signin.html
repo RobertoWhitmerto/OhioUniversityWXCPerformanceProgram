@@ -2,7 +2,7 @@
 <html> 
 
 <head> 
-	<title> OU WxC - Home </title> 
+	<title>OU WxC - Home</title> 
 
 		<!-- Materialize CSS imports [head] -->
 	  <!--Import Google Icon Font-->
@@ -15,9 +15,9 @@
 </head> 
 
 
-<body> 
+<body style="background:black;"> 
 	<header> 
-		<h1> Ohio University Women's Cross Country Performance Program </h1> 
+		<font color="green"> <h1> OU WxC Performance Application </h1> </font>
 	</header> 
 
 
@@ -27,7 +27,6 @@
   <li class="divider"></li>
   <li><a href="#!">View past workouts</a></li>
 </ul>
-
 <ul id="CoachesTrainers" class="dropdown-content">
   <li><a href="#!">View Athletes</a></li>
 </ul>
@@ -38,19 +37,22 @@
   <li><a href="#!">Add/remove users</a></li>
 </ul>
 
+<!-- Navbar up at the top -->
 <nav>
-  <div class="nav-wrapper">
+  <div class="nav-wrapper grey darken-3">
     <a class="brand-logo">Home</a>
 		<ul class="right hide-on-med-and-down">
-			<li><a class="waves-effect waves-light btn">Home</a></li>
-			<li><a class="waves-effect waves-light btn">About</a></li>
-			<li><a class='dropdown-button btn' href='#' data-activates='Athletes'>Athletes</a></li>
-			<li><a class='dropdown-button btn' href='#' data-activates='CoachesTrainers'>Coaches/Trainers</a></li>
-	        <li><a class='dropdown-button btn' href='#' data-activates='Administrators'>Administrators</a></li>
-
+			<li><a class="waves-effect waves-light btn grey darken-1">Home</a></li>
+			<li><a class="waves-effect waves-light btn grey darken-1">About</a></li>
+			<li><a class='dropdown-button btn green lighten-1' href='#' data-activates='Athletes'>Athletes</a></li>
+			<li><a class='dropdown-button btn blue lighten-1' href='#' data-activates='CoachesTrainers'>Coaches/Trainers</a></li>
+	        <li><a class='dropdown-button btn red lighten-1' href='#' data-activates='Administrators'>Administrators</a></li>
+			<li><a class="waves-effect waves-light btn-large orange">Log-out</a></li>
+			
 	  </ul>
   </div>
 </nav>
+  
 <br><br><br><br><br>
 
 
@@ -62,10 +64,10 @@
         <div class="col s4 m4">
           <div class="card green lighten-1">
             <div class="card-content white-text">
-              <span class="card-title"><center>Athlete</center></span>
+              <span class="card-title"><center><h3 class="truncate">Athlete</h3></center></span>
 			  <center>
-				<a href="#" class="waves-effect waves-light btn">Enter a Workout</a><br><br><br>
-				<a href="#" class="waves-effect waves-light btn">View Past Workouts</a><br><br>
+				<a href="#" class="waves-effect waves-light btn green darken-3">Enter a Workout</a><br><br><br>
+				<a href="#" class="waves-effect waves-light btn green darken-3">View Past Workouts</a><br><br>
 			  </center>
             </div>
           </div>
@@ -75,9 +77,9 @@
         <div class="col s4 m4">
           <div class="card blue lighten-1">
             <div class="card-content white-text">
-              <span class="card-title"><center>Coaches/Trainers</center></span><br>
+              <span class="card-title"><center><h3 class="truncate">Coaches/Trainers</h3></center></span>
 			  <center>
-				<a href="#" class="waves-effect waves-light btn">View Athletes</a><br><br>
+				<a href="#" class="waves-effect waves-light btn-large blue darken-3">View Athletes</a><br><br><br>
 			  </center><br><br>
             </div>
           </div>
@@ -87,17 +89,17 @@
         <div class="col s4 m4">
           <div class="card red lighten-1">
             <div class="card-content white-text">
-              <span class="card-title"><center>Administrators</center></span>
+              <span class="card-title"><center><h3 class="truncate">Administrators</h3></center></span>
 			  <center>
-				<a href="#" class="waves-effect waves-light btn">View Athletes and Workouts</a><br><br><br>
-				<a href="#" class="waves-effect waves-light btn">Add/Remove Users</a><br><br>
+				<a href="#" class="waves-effect waves-light btn red darken-3">View Athletes and Workouts</a><br><br><br>
+				<a href="#" class="waves-effect waves-light btn red darken-3">Add/Remove Users</a><br><br>
 			  </center>
             </div>
           </div>
         </div>
       </div>
-      </div>
-      </div>
+     </div>
+    </div>
 
 
 	<!-- Materialize CSS imports [body] -->
