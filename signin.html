@@ -1,94 +1,110 @@
-﻿<!--  
-	Ohio University Women's Cross country Performance Program  
-	Date: 9/21/2016 
-	Version: 0.1.0  
---> 
 <!DOCTYPE html> 
 <html> 
 
-
 <head> 
-<title> OU WxC - Home </title> 
+	<title> OU WxC - Home </title> 
 
-<style> 
-div.container{ 
-width: 100%; 
-border: 1px solid black; 
-} 
-
-header, footer{ 
-padding: 1em; 
-color: black; 
-background-color: #ffffff; 
-clear: left; 
-text-align: center; 
-} 
-
-nav{ 
-float: left; 
-max-width: 320px; 
-margin: 0; 
-padding: 1em; 
-} 
-
-article{ 
-margin-left: 170px; 
-padding: 1em; 
-overflow: hidden; 
-} 
-</style> 
+		<!-- Materialize CSS imports [head] -->
+	  <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	 
 </head> 
 
 
 <body> 
-<div class="container"> 
-<header> 
-<h1> Ohio University Women's Cross Country Performance Program </h1> 
-</header> 
+	<header> 
+		<h1> Ohio University Women's Cross Country Performance Program </h1> 
+	</header> 
 
 
-<nav> 
+<!--Drop down associations -->
+<ul id="Athletes" class="dropdown-content">
+  <li><a href="#!">Enter a workout</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">View past workouts</a></li>
+</ul>
 
-<ul> 
-<li>Athlete</li> 
-<ul> 
-<li><a href="#">Enter Workout</a></li> 
-<li><a href="#">View Past Workouts</a></li> 
-</ul> 
+<ul id="CoachesTrainers" class="dropdown-content">
+  <li><a href="#!">View Athletes</a></li>
+</ul>
 
-<li>Coaches and Trainers</li> 
+<ul id="Administrators" class="dropdown-content">
+  <li><a href="#!">View athletes and workouts</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">Add/remove users</a></li>
+</ul>
 
-<ul> 
-<li><a href="#">View Athletes</a></li> 
-</ul> 
+<nav>
+  <div class="nav-wrapper">
+    <a class="brand-logo">Home</a>
+		<ul class="right hide-on-med-and-down">
+			<li><a class="waves-effect waves-light btn">Home</a></li>
+			<li><a class="waves-effect waves-light btn">About</a></li>
+			<li><a class='dropdown-button btn' href='#' data-activates='Athletes'>Athletes</a></li>
+			<li><a class='dropdown-button btn' href='#' data-activates='CoachesTrainers'>Coaches/Trainers</a></li>
+	        <li><a class='dropdown-button btn' href='#' data-activates='Administrators'>Administrators</a></li>
 
-<li>Administrators</li> 
-<ul> 
-<li><a href="#">View Athletes and Workouts</a></li> 
-<li><a href="#">Add/Remove Users</a></li> 
-</ul> 
-
-<ul> 
-<form> 
-<br><br><br> 
-<input type="submit" value="Log Out"> 
-</form> 
-</nav> 
+	  </ul>
+  </div>
+</nav>
+<br><br><br><br><br>
 
 
-<article> 
-<h2> Welcome User! </h2> 
-<p> Description of site functionality...</p> 
-</article> 
 
-<footer> 
-<center> 
 
-<h6> version 0.1.0 </h6> 
-</center> 
-</footer> 
- 
-</div> 
+<!--3 User Type Cards -->
+<!--Athletes-->
+<div class="row">
+        <div class="col s4 m4">
+          <div class="card green lighten-1">
+            <div class="card-content white-text">
+              <span class="card-title"><center>Athlete</center></span>
+			  <center>
+				<a href="#" class="waves-effect waves-light btn">Enter a Workout</a><br><br><br>
+				<a href="#" class="waves-effect waves-light btn">View Past Workouts</a><br><br>
+			  </center>
+            </div>
+          </div>
+        </div>
+		<div class="row">
+		<!--Coach and Trainers -->
+        <div class="col s4 m4">
+          <div class="card blue lighten-1">
+            <div class="card-content white-text">
+              <span class="card-title"><center>Coaches/Trainers</center></span><br>
+			  <center>
+				<a href="#" class="waves-effect waves-light btn">View Athletes</a><br><br>
+			  </center><br><br>
+            </div>
+          </div>
+        </div>
+		<!--Administrators-->
+		<div class="row">
+        <div class="col s4 m4">
+          <div class="card red lighten-1">
+            <div class="card-content white-text">
+              <span class="card-title"><center>Administrators</center></span>
+			  <center>
+				<a href="#" class="waves-effect waves-light btn">View Athletes and Workouts</a><br><br><br>
+				<a href="#" class="waves-effect waves-light btn">Add/Remove Users</a><br><br>
+			  </center>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
 
+
+	<!-- Materialize CSS imports [body] -->
+	  <!-- put this at the end of the body -->
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
 </body> 
+
 </html> 
