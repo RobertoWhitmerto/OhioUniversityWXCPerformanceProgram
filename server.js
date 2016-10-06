@@ -14,10 +14,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 */
+
+app.use(express.static('public'));
 app.set('port', (process.env.PORT || 5000));
 
 app.get('/', function(request, response) {
-  response.sendFile(path.join(__dirname+'/site.htm'));
+  response.sendFile(__dirname + '/site.htm');
 });
 /*
 app.use(bodyParser.urlencoded({extended: true}));
