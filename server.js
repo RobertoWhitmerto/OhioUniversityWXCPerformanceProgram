@@ -7,6 +7,7 @@ var path = require("path");
 //var db = require('./db');
 
 var app = express();
+
 /*
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -14,13 +15,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 */
-
-app.use(express.static('public'));
+app.use(express.static('materialize'));
 app.set('port', (process.env.PORT || 5000));
 
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/site.htm');
 });
+
 /*
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
