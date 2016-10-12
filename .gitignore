@@ -26,7 +26,7 @@
 !.elasticbeanstalk/*.global.yml
 
 # Express Files
-/node_modules/*
+#/node_modules/*
 
 #ide files
 *.idea
