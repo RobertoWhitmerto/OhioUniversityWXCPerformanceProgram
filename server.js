@@ -2,7 +2,7 @@ var express = require('express');
 var path = require("path");
 //var passport = require('passport');
 //var logger = require('morgan');
-//var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 //var cookieParser = require('cookie-parser');
 //var db = require('./db');
 
@@ -22,14 +22,14 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/site.htm');
 });
 
-/*
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.post("/", function(req, res){
   console.log(req.body.user)
   console.log(req.body.pass)
 });
-*/
+
 /*var queryString = 'SELECT * FROM Roles;';
 db.query(queryString, function(err, rows, fields) {
     if (err) throw err;
