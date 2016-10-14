@@ -87,8 +87,24 @@ app.post("/admin_add_user_form", function(req, res){
   var newuserfirstname = req.body.newuserfirstname;
   var newuserlastname = req.body.newuserlastname;
 
-  var queryString2 = `INSERT INTO ouwxcpp_db.user(username, email, password, create_time) VALUES ("${newuserfirstname}", "robbie.whitmer@gmail.com", "${newuserlastname}", NOW())`;
-  db.query(queryString2, function(err, result) {
+  var queryString3 = `INSERT INTO ouwxcpp_db.user(username, email, password, create_time) VALUES ("${newuserfirstname}", "robbie.whitmer@gmail.com", "${newuserlastname}", NOW())`;
+  db.query(queryString3, function(err, result) {
+    console.log(err)
+    console.log(result)
+  });
+
+  res.redirect('/admin_add_user.htm');
+});
+
+//ADMIN REMOVE USER FORM PARSER
+app.post("/admin_remove_user_form", function(req, res){
+  console.log(req.body.newuserfirstname)
+  console.log(req.body.newuserlastname)
+  var newuserfirstname = req.body.newuserfirstname;
+  var newuserlastname = req.body.newuserlastname;
+
+  var queryString4 = `DELETE FROM ouwxcpp_db.user WHERE username="${newuserfirstname}" AND password="${newuserlastname}"`;
+  db.query(queryString4, function(err, result) {
     console.log(err)
     console.log(result)
   });
