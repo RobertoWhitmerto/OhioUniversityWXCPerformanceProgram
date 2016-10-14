@@ -79,6 +79,23 @@ app.post("/workoutentry", function(req, res){
 
   res.redirect('/workoutentry.htm');
 });
+
+//ADMIN ADD USER FORM PARSER
+app.post("/admin_add_user_form", function(req, res){
+  console.log(req.body.newuserfirstname)
+  console.log(req.body.newuserlastname)
+  var newuserfirstname = req.body.newuserfirstname;
+  var newuserlastname = req.body.newuserlastname;
+
+  var queryString2 = `INSERT INTO ouwxcpp_db.user(username, email, password, create_time) VALUES ("${newuserfirstname}", "robbie.whitmer@gmail.com", "${newuserlastname}", NOW())`;
+  db.query(queryString2, function(err, result) {
+    console.log(err)
+    console.log(result)
+  });
+
+  res.redirect('/admin_add_user.htm');
+});
+
 /*var queryString = 'SELECT * FROM Roles;';
 db.query(queryString, function(err, rows, fields) {
     if (err) throw err;
