@@ -10,4 +10,5 @@ app.get('/signin', function(request, response) {
 app.get('/workoutentry', function(request, response) {
   response.sendFile(__dirname + '/workoutentry.htm');
 });
-}
+
+};
