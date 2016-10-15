@@ -20,7 +20,7 @@ app.set('port', (process.env.PORT || 5000));
 
 
 //LOAD ROUTES
-require('/routes')(app);
+require('./routes')(app);
 
 //BODY PARSER
 app.use(bodyParser.urlencoded({extended: true}));
