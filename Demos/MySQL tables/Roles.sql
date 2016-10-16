@@ -1,4 +1,4 @@
-CREATE TABLE `ouwxcpp_db`.`Roles` (
+CREATE TABLE `OUWXC`.`Roles` (
   
 	`Role` VARCHAR(45) NOT NULL,
   

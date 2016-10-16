@@ -1,4 +1,4 @@
-CREATE TABLE `ouwxcpp_db`.`athlete_data` (
+CREATE TABLE `OUWXC`.`athlete_data` (
   `athlete` VARCHAR(45) NOT NULL,
   `date` DATETIME NOT NULL,
   `sleep` FLOAT ZEROFILL NULL,

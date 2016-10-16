@@ -1,4 +1,4 @@
-CREATE TABLE `ouwxcpp_db`.`User_Access` (
+CREATE TABLE `OUWXC`.`User_Access` (
   
 	`User` INT NOT NULL,
   

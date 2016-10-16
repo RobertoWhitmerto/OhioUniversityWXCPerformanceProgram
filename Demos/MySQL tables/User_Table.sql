@@ -1,4 +1,4 @@
-CREATE TABLE `ouwxcpp_db`.`user` (
+CREATE TABLE `OUWXC`.`user` (
   
 	`username` VARCHAR(16) NOT NULL,
   
