@@ -25,16 +25,16 @@
 <ul id="Athletes" class="dropdown-content">
   <li><a href="/workoutentry">Enter a workout</a></li>
   <li class="divider"></li>
-  <li><a href="#!">View past workouts</a></li>
+  <li><a href="/myworkouts">View past workouts</a></li>
 </ul>
 <ul id="CoachesTrainers" class="dropdown-content">
   <li><a href="#!">View Athletes</a></li>
 </ul>
 
 <ul id="Administrators" class="dropdown-content">
-  <li><a href="#!">View athletes and workouts</a></li>
+  <li><a href="/admin_athlete_vis">View athletes and workouts</a></li>
   <li class="divider"></li>
-  <li><a href="#!">Add/remove users</a></li>
+  <li><a href="/admin_add_user">Add/remove users</a></li>
 </ul>
 
 <!-- Navbar up at the top -->
@@ -42,7 +42,7 @@
   <div class="nav-wrapper grey darken-3">
     <a class="brand-logo">Home</a>
 		<ul class="right hide-on-med-and-down">
-			<li><a class="waves-effect waves-light btn grey darken-1">Home</a></li>
+			<li><a href="/signin" class="waves-effect waves-light btn grey darken-1">Home</a></li>
 			<li><a class="waves-effect waves-light btn grey darken-1">About</a></li>
 			<li><a class='dropdown-button btn green lighten-1' href='#' data-activates='Athletes'>Athletes</a></li>
 			<li><a class='dropdown-button btn blue lighten-1' href='#' data-activates='CoachesTrainers'>Coaches/Trainers</a></li>
@@ -67,7 +67,7 @@
               <span class="card-title"><center><h3 class="truncate">Athlete</h3></center></span>
 			  <center>
 				<a href="/workoutentry" class="waves-effect waves-light btn green darken-3">Enter a Workout</a><br><br><br>
-				<a href="#" class="waves-effect waves-light btn green darken-3">View Past Workouts</a><br><br>
+				<a href="/myworkouts" class="waves-effect waves-light btn green darken-3">View Past Workouts</a><br><br>
 			  </center>
             </div>
           </div>
@@ -91,8 +91,8 @@
             <div class="card-content white-text">
               <span class="card-title"><center><h3 class="truncate">Administrators</h3></center></span>
 			  <center>
-				<a href="#" class="waves-effect waves-light btn red darken-3">View Athletes and Workouts</a><br><br><br>
-				<a href="#" class="waves-effect waves-light btn red darken-3">Add/Remove Users</a><br><br>
+				<a href="/admin_athlete_vis" class="waves-effect waves-light btn red darken-3">View Athletes and Workouts</a><br><br><br>
+				<a href="/admin_add_user" class="waves-effect waves-light btn red darken-3">Add/Remove Users</a><br><br>
 			  </center>
             </div>
           </div>
