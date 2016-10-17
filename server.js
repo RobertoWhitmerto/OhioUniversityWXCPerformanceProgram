@@ -35,23 +35,50 @@ app.post("/", function(req, res){
     if (err) throw err;
   });
 */
-  var queryString = `SELECT * FROM ouwxcpp_db.user WHERE username="${user}"`;
-  db.query(queryString, function(err, rows, fields) {
-    if (err) throw err;
-    if (rows.length > 0){
-    	if(pass === rows[0].password){
-    		console.log('Correct password!');
-  			  res.redirect('/signin.html');
-    		console.log('Did we make it here?');
-    	}
-    	else
-    		console.log('Incorrect Password');
-    }
-    else
-    	console.log('Not a user');
-  });
+  if((typeof user !== 'undefined')){
+      var queryString = `SELECT * FROM ouwxcpp_db.user WHERE username="${user}"`;
+      db.query(queryString, function(err, rows, fields) {
+        if (err) throw err;
+        if (rows.length > 0){
+        	if(pass === rows[0].password){
+        		console.log('Correct password!');
+      			  res.redirect('/signin.html');
+        		console.log('Did we make it here?');
+        	}
+        	else{
+        		console.log('Incorrect Password');
+            res.redirect('/site.htm');
+          }
+        }
+        else{
+        	console.log('Not a user');
+          res.redirect('/site.htm');
+        }
+    });
+  }
 });
 
+//WORKOUT ENTRY FORM PARSER
+app.post("/workoutentry", function(req, res){
+  console.log(req.body.healthstatus)
+  console.log(req.body.illness)
+  console.log(req.body.injury)
+  console.log(req.body.time)
+  console.log(req.body.distance)
+  var healthstatus = req.body.healthstatus;
+  var illness = req.body.illness;
+  var injury = req.body.injury;
+  var time = req.body.time;
+  var distance = req.body.distance;
+
+  var queryString2 = `INSERT INTO ouwxcpp_db.athlete_data(athlete, date, sleep, Illness, Injury, percent_health, cycle_start, notes) VALUES ("WillSmith", NOW(), "10", "${illness}", "${injury}", "100", NOW(), "just dummy data for testing")`;
+  db.query(queryString2, function(err, result) {
+    console.log(err)
+    console.log(result)
+  });
+
+  res.redirect('/workoutentry.htm');
+});
 /*var queryString = 'SELECT * FROM Roles;';
 db.query(queryString, function(err, rows, fields) {
     if (err) throw err;
