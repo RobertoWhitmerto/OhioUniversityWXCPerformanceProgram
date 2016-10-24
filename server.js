@@ -60,6 +60,7 @@ app.post("/", function(req, res){
 
 //WORKOUT ENTRY FORM PARSER
 app.post("/workoutentry", function(req, res){
+  console.log(req.body)
   console.log(req.body.healthstatus)
   console.log(req.body.illness)
   console.log(req.body.injury)
@@ -82,12 +83,14 @@ app.post("/workoutentry", function(req, res){
 
 //ADMIN ADD USER FORM PARSER
 app.post("/admin_add_user_form", function(req, res){
-  console.log(req.body.newuserfirstname)
-  console.log(req.body.newuserlastname)
-  var newuserfirstname = req.body.newuserfirstname;
-  var newuserlastname = req.body.newuserlastname;
+  console.log(req.body)
+  var newusername = req.body.newusername;
+  var newuserpw = req.body.newuserpw;
+  var newuserfirst = req.body.newuserfirst;
+  var newuserlast = req.body.newuserlast;
+  var newuseremail = req.body.newuseremail;
 
-  var queryString3 = `INSERT INTO OUWXC.user(username, email, password, create_time) VALUES ("${newuserfirstname}", "robbie.whitmer@gmail.com", "${newuserlastname}", NOW())`;
+  var queryString3 = `INSERT INTO OUWXC.user(username, email, password, first, last, create_time) VALUES ("${newusername}", "${newuseremail}", "${newuserpw}", "${newuserfirst}", "${newuserlast}", NOW())`;
   db.query(queryString3, function(err, result) {
     console.log(err)
     console.log(result)

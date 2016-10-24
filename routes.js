@@ -27,4 +27,8 @@ app.get('/admin_remove_user', function(request,response) {
 	response.sendFile(__dirname + '/admin_remove_user.htm');
 });
 
+app.get('/admin_remove_user', function(request, response) {
+	response.sendFile(__dirname + '/admin_remove_user.htm');
+});  
+  
 };
