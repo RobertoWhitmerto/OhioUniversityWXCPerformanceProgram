@@ -36,7 +36,7 @@ app.post("/", function(req, res){
   });
 */
   if((typeof user !== 'undefined')){
-      var queryString = `SELECT * FROM ouwxcpp_db.user WHERE username="${user}"`;
+      var queryString = `SELECT * FROM OUWXC.user WHERE username="${user}"`;
       db.query(queryString, function(err, rows, fields) {
         if (err) throw err;
         if (rows.length > 0){
@@ -71,7 +71,7 @@ app.post("/workoutentry", function(req, res){
   var time = req.body.time;
   var distance = req.body.distance;
 
-  var queryString2 = `INSERT INTO ouwxcpp_db.athlete_data(athlete, date, sleep, Illness, Injury, percent_health, cycle_start, notes) VALUES ("WillSmith", NOW(), "10", "${illness}", "${injury}", "100", NOW(), "just dummy data for testing")`;
+  var queryString2 = `INSERT INTO OUWXC.athlete_data(athlete, date, sleep, Illness, Injury, percent_health, cycle_start, notes) VALUES ("WillSmith", NOW(), "10", "${illness}", "${injury}", "100", NOW(), "just dummy data for testing")`;
   db.query(queryString2, function(err, result) {
     console.log(err)
     console.log(result)
@@ -87,7 +87,7 @@ app.post("/admin_add_user_form", function(req, res){
   var newuserfirstname = req.body.newuserfirstname;
   var newuserlastname = req.body.newuserlastname;
 
-  var queryString3 = `INSERT INTO ouwxcpp_db.user(username, email, password, create_time) VALUES ("${newuserfirstname}", "robbie.whitmer@gmail.com", "${newuserlastname}", NOW())`;
+  var queryString3 = `INSERT INTO OUWXC.user(username, email, password, create_time) VALUES ("${newuserfirstname}", "robbie.whitmer@gmail.com", "${newuserlastname}", NOW())`;
   db.query(queryString3, function(err, result) {
     console.log(err)
     console.log(result)
@@ -103,7 +103,7 @@ app.post("/admin_remove_user_form", function(req, res){
   var newuserfirstname = req.body.newuserfirstname;
   var newuserlastname = req.body.newuserlastname;
 
-  var queryString4 = `DELETE FROM ouwxcpp_db.user WHERE username="${newuserfirstname}" AND password="${newuserlastname}"`;
+  var queryString4 = `DELETE FROM OUWXC.user WHERE username="${newuserfirstname}" AND password="${newuserlastname}"`;
   db.query(queryString4, function(err, result) {
     console.log(err)
     console.log(result)
