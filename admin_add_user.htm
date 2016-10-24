@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html> 
+<!DOCTYPE html> 
 <html> 
 
 <head> 
@@ -34,7 +34,9 @@
 <ul id="Administrators" class="dropdown-content">
   <li><a href="/admin_athlete_vis">View athletes and workouts</a></li>
   <li class="divider"></li>
-  <li><a href="/admin_add_user">Add/remove users</a></li>
+  <li><a href="/admin_add_user">Add a user</a></li>
+  <li class="divider"></li>
+  <li><a href="/admin_remove_user">Remove a user</a></li>
 </ul>
 
 <!-- Navbar up at the top -->
@@ -42,12 +44,12 @@
   <div class="nav-wrapper grey darken-3">
     <a class="brand-logo">Add/Remove a User</a>
 		<ul class="right hide-on-med-and-down">
-			<li><a href="/signin" class="waves-effect waves-light btn grey darken-1">Home</a></li>
+			<li><a href="/home" class="waves-effect waves-light btn grey darken-1">Home</a></li>
 			<li><a class="waves-effect waves-light btn grey darken-1">About</a></li>
 			<li><a class='dropdown-button btn green lighten-1' href='#' data-activates='Athletes'>Athletes</a></li>
 			<li><a class='dropdown-button btn blue lighten-1' href='#' data-activates='CoachesTrainers'>Coaches/Trainers</a></li>
 	        <li><a class='dropdown-button btn red lighten-1' href='#' data-activates='Administrators'>Administrators</a></li>
-			<li><a href="/site" class="waves-effect waves-light btn-large orange">Log-out</a></li>
+			<li><a href="/" class="waves-effect waves-light btn-large orange">Log-out</a></li>
 			
 	  </ul>
   </div>
@@ -58,23 +60,29 @@
 
 <article> 
 <div class="row">
-        <div class="col s5 m5">
+        <div class="col s3 m3">
           <div class="card green accent-3">
             <div class="card-content black-text">
               <span class="card-title"><center><h3 class="truncate">Create a new user:</h3></center></span>
 			  <center>
 				<form action="/admin_add_user_form" method="post">
 					New username: 
-					<input type="text" name="newuserfirstname"><br><br>
-					New username's password:
-					<input type="text" name="newuserlastname"><br><br>
+					<input type="text" name="newusername" required><br><br>
+					New user's password:
+					<input type="text" name="newuserpw" required><br><br>
+					New user's email:
+					<input type="text" name="newuseremail" required><br><br>
+					New user's first name:
+					<input type="text" name="newuserfirst" required><br><br>
+					New user's last name:
+					<input type="text" name="newuserlast" required><br><br>
 					<label><font color="black">Users Role Level</font></label><br>
 					<input class="with-gap" name="cycle" type="radio" id="opt1" checked />
-						<label for="opt1"><font color="black">Athlete</font></label>
+						<label name="roleathlete" for="opt1"><font color="black">Athlete</font></label>
 					<input class="with-gap" name="cycle" type="radio" id="opt2" />
-						<label for="opt2"><font color="black">Trainer/Coach</font></label>
+						<label name="roletrainer" for="opt2"><font color="black">Trainer/Coach</font></label>
 					<input class="with-gap" name="cycle" type="radio" id="opt3" />
-						<label for="opt3"><font color="black">Admin</font></label>
+						<label name="roleadmin" for="opt3"><font color="black">Admin</font></label>
 					<br><br>
 					<button class="btn waves-effect waves-light green" type="submit" name="action">Create User
 							<i class="material-icons right">send</i>
@@ -85,16 +93,16 @@
 	</div>
 	</div>
 		<div class="row">
-			<div class="col s5 m5">
+			<div class="col s3 m3">
 			<div class="card red accent-3">
 			<div class="card-content black-text">
 			<span class="card-title"><center><h3 class="truncate">Remove an existing user:</h3></center></span>
 				<center>
 					<form action="/admin_remove_user_form" method = "post">
 					User's First Name: 
-					<input type="text" name="newuserfirstname"><br><br>
+					<input type="text" name="newuserfirstname" required><br><br>
 					User's Last Name:
-					<input type="text" name="newuserlastname"><br><br><br><br><br>
+					<input type="text" name="newuserlastname" required><br><br><br><br><br>
 						<button class="btn waves-effect waves-light red" type="submit" name="action">Remove User
 							<i class="material-icons right">send</i>
 						</button>

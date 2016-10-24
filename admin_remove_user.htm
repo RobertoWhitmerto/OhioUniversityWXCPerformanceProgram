@@ -2,7 +2,7 @@
 <html> 
 
 <head> 
-	<title>Athlete Visibilty</title> 
+	<title>Remove a User</title> 
 
 		<!-- Materialize CSS imports [head] -->
 	  <!--Import Google Icon Font-->
@@ -42,7 +42,7 @@
 <!-- Navbar up at the top -->
 <nav>
   <div class="nav-wrapper grey darken-3">
-    <a class="brand-logo">Athlete Visibility</a>
+    <a class="brand-logo">Remove a User</a>
 		<ul class="right hide-on-med-and-down">
 			<li><a href="/home" class="waves-effect waves-light btn grey darken-1">Home</a></li>
 			<li><a class="waves-effect waves-light btn grey darken-1">About</a></li>
@@ -57,31 +57,30 @@
   
 <br><br><br><br><br>
 
-<div class="container">
+
+<article> 
 <div class="row">
-        <div class="col s12 m12">
-          <div class="card grey darken-3">
-            <div class="card-content white-text">
-              <span class="card-title"><center>Athlete Visibility</center></span>
-					<form>
-						Athlete's First Name:
-						<input type="text" name="newuserfirstname"><br><br>
-						Athlete's Last Name:
-						<input type="text" name="newuserlastname"><br><br>
-						New Access User's First Name:
-						<input type="text" name="newuseraccessfirst"><br><br>
-						New Access User's Last Name:
-						<input type="text" name="newuseraccesslast"><br><br>
-						<button class="btn waves-effect waves-light green" type="submit" name="action">Add New User Access
+		<div class="row">
+			<div class="col s5 m6 offset-m3">
+			<div class="card red accent-3">
+			<div class="card-content black-text">
+			<span class="card-title"><center><h3 class="truncate">Remove an existing user:</h3></center></span>
+				<center>
+					<form action="/admin_remove_user_form" method = "post">
+					User's First Name: 
+					<input type="text" name="newuserfirstname" required><br><br>
+					User's Last Name:
+					<input type="text" name="newuserlastname" required><br><br><br><br><br>
+						<button class="btn waves-effect waves-light red" type="submit" name="action">Remove User
 							<i class="material-icons right">send</i>
 						</button>
 					</form>
-            </div>
-          </div>
-        </div>
-      </div>
+				</center>
+			</div>
+			</div>
+			</div>
+		</div>
 	</div>
-
 				
 	<!-- Materialize CSS imports [body] -->
 	<!-- put this at the end of the body -->

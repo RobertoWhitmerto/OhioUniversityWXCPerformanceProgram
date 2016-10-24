@@ -34,7 +34,9 @@
 <ul id="Administrators" class="dropdown-content">
   <li><a href="/admin_athlete_vis">View athletes and workouts</a></li>
   <li class="divider"></li>
-  <li><a href="/admin_add_user">Add/remove users</a></li>
+  <li><a href="/admin_add_user">Add a user</a></li>
+  <li class="divider"></li>
+  <li><a href="/admin_remove_user">Remove a user</a></li>
 </ul>
 
 <!-- Navbar up at the top -->
@@ -42,12 +44,12 @@
   <div class="nav-wrapper grey darken-3">
     <a class="brand-logo">Enter a Workout</a>
 		<ul class="right hide-on-med-and-down">
-			<li><a href="/signin" class="waves-effect waves-light btn grey darken-1">Home</a></li>
+			<li><a href="/home" class="waves-effect waves-light btn grey darken-1">Home</a></li>
 			<li><a class="waves-effect waves-light btn grey darken-1">About</a></li>
 			<li><a class='dropdown-button btn green lighten-1' href='#' data-activates='Athletes'>Athletes</a></li>
 			<li><a class='dropdown-button btn blue lighten-1' href='#' data-activates='CoachesTrainers'>Coaches/Trainers</a></li>
 	        <li><a class='dropdown-button btn red lighten-1' href='#' data-activates='Administrators'>Administrators</a></li>
-			<li><a href="/site" class="waves-effect waves-light btn-large orange">Log-out</a></li>
+			<li><a href="/" class="waves-effect waves-light btn-large orange">Log-out</a></li>
 			
 	  </ul>
   </div>
@@ -67,68 +69,68 @@
 <br>
         <label>Day of month</label>
         <select class="browser-default">
-			<option value="dayinvalid">--</option>
-			<option value="day1">1</option>
-			<option value="day2">2</option>
-			<option value="day3">3</option>
-			<option value="day4">4</option>
-			<option value="day5">5</option>
-			<option value="day6">6</option>
-			<option value="day7">7</option>
-			<option value="day8">8</option>
-			<option value="day9">9</option>
-			<option value="day10">10</option>
-			<option value="day11">11</option>
-			<option value="day12">12</option>
-			<option value="day13">13</option>
-			<option value="day14">14</option>
-			<option value="day15">15</option>
-			<option value="day16">16</option>
-			<option value="day17">17</option>
-			<option value="day18">18</option>
-			<option value="day19">19</option>
-			<option value="day20">20</option>
-			<option value="day21">21</option>
-			<option value="day22">22</option>
-			<option value="day23">23</option>
-			<option value="day24">24</option>
-			<option value="day25">25</option>
-			<option value="day26">26</option>
-			<option value="day27">27</option>
-			<option value="day28">28</option>
-			<option value="day29">29</option>
-			<option value="day30">30</option>
-			<option value="day31">31</option>
+			<option name="dayinvalid" value="dayinvalid">--</option>
+			<option name="day1" value="day1">1</option>
+			<option name="day2" value="day2">2</option>
+			<option name="day3" value="day3">3</option>
+			<option name="day4" value="day4">4</option>
+			<option name="day5" value="day5">5</option>
+			<option name="day6" value="day6">6</option>
+			<option name="day7" value="day7">7</option>
+			<option name="day8" value="day8">8</option>
+			<option name="day9" value="day9">9</option>
+			<option name="day10" value="day10">10</option>
+			<option name="day11" value="day11">11</option>
+			<option name="day12" value="day12">12</option>
+			<option name="day13" value="day13">13</option>
+			<option name="day14" value="day14">14</option>
+			<option name="day15" value="day15">15</option>
+			<option name="day16" value="day16">16</option>
+			<option name="day17" value="day17">17</option>
+			<option name="day18" value="day18">18</option>
+			<option name="day19" value="day19">19</option>
+			<option name="day20" value="day20">20</option>
+			<option name="day21" value="day21">21</option>
+			<option name="day22" value="day22">22</option>
+			<option name="day23" value="day23">23</option>
+			<option name="day24" value="day24">24</option>
+			<option name="day25" value="day25">25</option>
+			<option name="day26" value="day26">26</option>
+			<option name="day27" value="day27">27</option>
+			<option name="day28" value="day28">28</option>
+			<option name="day29" value="day29">29</option>
+			<option name="day30" value="day30">30</option>
+			<option name="day31" value="day31">31</option>
 		</select><br><br>
 		
         <label>Hours of sleep</label> 
         <select class="browser-default">
-			<option value="sleepinvalid">--</option>
-			<option value="sleep0">0</option>
-			<option value="sleep1">1</option>
-			<option value="sleep2">2</option>
-			<option value="sleep3">3</option>
-			<option value="sleep4">4</option>
-			<option value="sleep5">5</option>
-			<option value="sleep6">6</option>
-			<option value="sleep7">7</option>
-			<option value="sleep8">8</option>
-			<option value="sleep9">9</option>
-			<option value="sleep10">10</option>
-			<option value="sleep11">11</option>
-			<option value="sleep12">12</option>
-			<option value="sleep13">13</option>
-			<option value="sleep14">14</option>
-			<option value="sleep15">15</option>
-			<option value="sleep16">16</option>
-			<option value="sleep17">17</option>
-			<option value="sleep18">18</option>
-			<option value="sleep19">19</option>
-			<option value="sleep20">20</option>
-			<option value="sleep21">21</option>
-			<option value="sleep22">22</option>
-			<option value="sleep23">23</option>
-			<option value="sleep24">24</option>
+			<option name="sleepinvalid" value="sleepinvalid">--</option>
+			<option name="sleep0" value="sleep0">0</option>
+			<option name="sleep1" value="sleep1">1</option>
+			<option name="sleep2" value="sleep2">2</option>
+			<option name="sleep3" value="sleep3">3</option>
+			<option name="sleep4" value="sleep4">4</option>
+			<option name="sleep5" value="sleep5">5</option>
+			<option name="sleep6" value="sleep6">6</option>
+			<option name="sleep7" value="sleep7">7</option>
+			<option name="sleep8" value="sleep8">8</option>
+			<option name="sleep9" value="sleep9">9</option>
+			<option name="sleep10" value="sleep10">10</option>
+			<option name="sleep11" value="sleep11">11</option>
+			<option name="sleep12" value="sleep12">12</option>
+			<option name="sleep13" value="sleep13">13</option>
+			<option name="sleep14" value="sleep14">14</option>
+			<option name="sleep15" value="sleep15">15</option>
+			<option name="sleep16" value="sleep16">16</option>
+			<option name="sleep17" value="sleep17">17</option>
+			<option name="sleep18" value="sleep18">18</option>
+			<option name="sleep19" value="sleep19">19</option>
+			<option name="sleep20" value="sleep20">20</option>
+			<option name="sleep21" value="sleep21">21</option>
+			<option name="sleep22" value="sleep22">22</option>
+			<option name="sleep23" value="sleep23">23</option>
+			<option name="sleep24" value="sleep24">24</option>
 		</select><br><br>
 		
 		<label>Health status</label>
@@ -142,34 +144,34 @@
 		
 		<label>% of full health</label>
 		<p class="range-field white">
-			<input type="range" id="opt0" min="0" max="100" />
+			<input name="myhealth" type="range" id="opt0" min="0" max="100" />
 		</p><br><br>
 		
 		<label>Start of cycle</label><br>
 		<input class="with-gap" name="cycle" type="radio" id="opt1" checked />
-			<label for="opt1">No</label>
+			<label name="cycleno" for="opt1">No</label>
 		<input class="with-gap" name="cycle" type="radio" id="opt2" />
-			<label for="opt2">Yes</label>
+			<label name="cycleyes" for="opt2">Yes</label>
 		<br><br>
 		
 		<label>RPE (6-20)</label>
 		<select class="browser-default">
-			<option value="rpeinvalid">--</option>
-			<option value="rpe6">6</option>
-			<option value="rpe7">7</option>
-			<option value="rpe8">8</option>
-			<option value="rpe9">9</option>
-			<option value="rpe10">10</option>
-			<option value="rpe11">11</option>
-			<option value="rpe12">12</option>
-			<option value="rpe13">13</option>
-			<option value="rpe14">14</option>
-			<option value="rpe15">15</option>
-			<option value="rpe16">16</option>
-			<option value="rpe17">17</option>
-			<option value="rpe18">18</option>
-			<option value="rpe19">19</option>
-			<option value="rpe20">20</option>
+			<option name="rpeinvalid" value="rpeinvalid">--</option>
+			<option name="rep6" value="rpe6">6</option>
+			<option name="rep7" value="rpe7">7</option>
+			<option name="rep8"value="rpe8">8</option>
+			<option name="rep9"value="rpe9">9</option>
+			<option name="rep10"value="rpe10">10</option>
+			<option name="rep11"value="rpe11">11</option>
+			<option name="rep12"value="rpe12">12</option>
+			<option name="rep13"value="rpe13">13</option>
+			<option name="rep14"value="rpe14">14</option>
+			<option name="rep15"value="rpe15">15</option>
+			<option name="rep16"value="rpe16">16</option>
+			<option name="rep17"value="rpe17">17</option>
+			<option name="rep18"value="rpe18">18</option>
+			<option name="rep19"value="rpe19">19</option>
+			<option name="rep20"value="rpe20">20</option>
 		</select><br><br>
 		
 		<label>Time:</label>
@@ -182,7 +184,7 @@
 		<div class="row">
           <div class="input-field col s12">
             <textarea id="textarea1" class="materialize-textarea" length="256"></textarea>
-            <label for="textarea1">My Notes</label>
+            <label name="notes" for="textarea1">My Notes</label>
           </div>
         </div>
 		<br><br>
