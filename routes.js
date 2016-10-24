@@ -3,7 +3,7 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/site.htm');
 });
 
-app.get('/signin', function(request, response) {
+app.get('/home', function(request, response) {
   response.sendFile(__dirname + '/signin.html');
 });
 
