@@ -23,8 +23,8 @@ app.get('/admin_add_user', function(request, response) {
 	response.sendFile(__dirname + '/admin_add_user.htm');
 });
 
-app.get('/site', function(request, response) {
-	response.sendFile(__dirname + '/site.htm');
+app.get('/admin_remove_user', function(request,response) {
+	response.sendFile(__dirname + '/admin_remove_user.htm');
 });
 
 };
