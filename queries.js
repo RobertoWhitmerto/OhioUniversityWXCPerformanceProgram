@@ -27,8 +27,6 @@ var insertUser = `INSERT INTO OUWXC.user (
 			"test@gmail.com",
 			"testing")`;
 
-function dbObject(input) {
-	this.user = input.user
 
 
 function get_query(query, queryString) {
