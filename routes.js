@@ -1,6 +1,6 @@
 module.exports = function(app) {
 app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/site.htm');
+  response.render('site.pug');
 });
 
 app.get('/home', function(request, response) {
@@ -8,7 +8,7 @@ app.get('/home', function(request, response) {
 });
 
 app.get('/workoutentry', function(request, response) {
-  response.sendFile(__dirname + '/workoutentry.htm');
+  response.render('workoutentry.pug');
 });
 
 app.get('/myworkouts', function(request, response) {
