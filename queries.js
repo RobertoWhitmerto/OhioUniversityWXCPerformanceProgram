@@ -9,15 +9,7 @@ var insertData = `INSERT INTO OUWXC.athlete_data (
 			Injury, 
 			percent_health, 
 			cycle_start, 
-			notes) VALUES (
-			"test",
-			"test",
-			"test",
-			"test",
-			"test",
-			"test",
-			"test",
-			"test")`;
+			notes)`;
 
 var insertUser = `INSERT INTO OUWXC.user (
 			username,
@@ -34,11 +26,12 @@ function get_query(query, input, queryString) {
 	if(query == "authenticate")
 	{
 		string = authQuery;
-		string += ` WHERE username="${input.user}" AND password="${input.pass}"`;
+		string += ` WHERE username="${input.user}" AND 	password="${input.pass}"`;
 	}
 	else if(query == "insertD")
 	{
 		string = insertData;
+		string +=
 	}
 	else if(query == "insertU")
 	{
@@ -76,4 +69,17 @@ function exec_query(query, input, result) {
 	});
 }
 
+
+function get_user(input, done){
+	
+      exec_dbquery("authenticate", input.body, function(err, rows, fields) {
+    	
+      	if (err) { return done(err); }
+      	if (rows.length == 0) {return done(null, false, {message: 'Username or password is incorrect' });
+      	return done(null, rows[0].username);
+      }
+
+}
+
 module.exports.exec_query = exec_query;
+module.exports.get_user = get_user;
