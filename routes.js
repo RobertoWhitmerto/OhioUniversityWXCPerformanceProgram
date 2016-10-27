@@ -12,7 +12,7 @@ app.get('/workoutentry', function(request, response) {
 });
 
 app.get('/myworkouts', function(request, response) {
-	response.sendFile(__dirname + '/myworkouts.htm');
+	response.render('myworkouts.pug');
 });
 
 app.get('/admin_athlete_vis', function(request, response) {
@@ -29,6 +29,6 @@ app.get('/admin_remove_user', function(request,response) {
 
 app.get('/admin_remove_user', function(request, response) {
 	response.sendFile(__dirname + '/admin_remove_user.htm');
-});  
-  
+});
+
 };

@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 */
+app.set('template engine', 'pug');
 app.use(express.static(__dirname + '/'));
 app.use(express.static('materialize'));
 app.set('port', (process.env.PORT || 5000));
