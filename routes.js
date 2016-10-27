@@ -4,7 +4,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/home', function(request, response) {
-  response.sendFile(__dirname + '/signin.html');
+  response.render('signin.pug');
 });
 
 app.get('/workoutentry', function(request, response) {
@@ -16,19 +16,19 @@ app.get('/myworkouts', function(request, response) {
 });
 
 app.get('/admin_athlete_vis', function(request, response) {
-	response.sendFile(__dirname + '/admin_athlete_vis.htm');
+	response.render('admin_athlete_vis.pug');
 });
 
 app.get('/admin_add_user', function(request, response) {
-	response.sendFile(__dirname + '/admin_add_user.htm');
+	response.render('admin_add_user.pug');
 });
 
 app.get('/admin_remove_user', function(request,response) {
-	response.sendFile(__dirname + '/admin_remove_user.htm');
+	response.render('admin_remove_user.pug');
 });
 
 app.get('/admin_remove_user', function(request, response) {
-	response.sendFile(__dirname + '/admin_remove_user.htm');
+	response.render('admin_remove_user.pug');
 });
 
 };

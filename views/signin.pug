@@ -1,0 +1,110 @@
+doctype html
+html
+  head
+    title OU WxC - Home
+    // Materialize CSS imports [head]
+    // Import Google Icon Font
+    link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    // Import materialize.css
+    link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
+    // Let browser know website is optimized for mobile
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body(style='background:black;')
+    header
+      font(color='green')
+        h1  OU WxC Performance Application
+    // Drop down associations
+    ul#Athletes.dropdown-content
+      li
+        a(href='/workoutentry') Enter a workout
+      li.divider
+      li
+        a(href='/myworkouts') View past workouts
+    ul#CoachesTrainers.dropdown-content
+      li
+        a(href='#!') View Athletes
+    ul#Administrators.dropdown-content
+      li
+        a(href='/admin_athlete_vis') View athletes and workouts
+      li.divider
+      li
+        a(href='/admin_add_user') Add a user
+      li.divider
+      li
+        a(href='/admin_remove_user') Remove a user
+    // Navbar up at the top
+    nav
+      .nav-wrapper.grey.darken-3
+        a.brand-logo Home
+        ul.right.hide-on-med-and-down
+          li
+            a.waves-effect.waves-light.btn.grey.darken-1(href='/home') Home
+          li
+            a.waves-effect.waves-light.btn.grey.darken-1 About
+          li
+            a.dropdown-button.btn.green.lighten-1(href='#', data-activates='Athletes') Athletes
+          li
+            a.dropdown-button.btn.blue.lighten-1(href='#', data-activates='CoachesTrainers') Coaches/Trainers
+          li
+            a.dropdown-button.btn.red.lighten-1(href='#', data-activates='Administrators') Administrators
+          li
+            a.waves-effect.waves-light.btn-large.orange(href='/') Log-out
+    br
+    br
+    br
+    br
+    br
+    // 3 User Type Cards
+    // Athletes
+    .row
+      .col.s4.m4
+        .card.green.lighten-1
+          .card-content.white-text
+            span.card-title
+              center
+                h3.truncate Athlete
+            center
+              a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') Enter a Workout
+              br
+              br
+              br
+              a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') View Past Workouts
+              br
+              br
+      .row
+        // Coach and Trainers
+        .col.s4.m4
+          .card.blue.lighten-1
+            .card-content.white-text
+              span.card-title
+                center
+                  h3.truncate Coaches/Trainers
+              center
+                a.waves-effect.waves-light.btn-large.blue.darken-3(href='#') View Athletes
+                br
+                br
+                br
+              br
+              br
+        // Administrators
+        .row
+          .col.s4.m4
+            .card.red.lighten-1
+              .card-content.white-text
+                span.card-title
+                  center
+                    h3.truncate Administrators
+                center
+                  a.waves-effect.waves-light.btn.red.darken-3(href='/admin_athlete_vis') View Athletes and Workouts
+                  br
+                  br
+                  br
+                  a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
+                  a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
+                  br
+                  br
+    // Materialize CSS imports [body]
+    // put this at the end of the body
+    // Import jQuery before materialize.js
+    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(type='text/javascript', src='js/materialize.min.js')

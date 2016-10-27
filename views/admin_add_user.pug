@@ -1,0 +1,108 @@
+doctype html
+html
+  head
+    title Add a User
+    // Materialize CSS imports [head]
+    // Import Google Icon Font
+    link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    // Import materialize.css
+    link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
+    // Let browser know website is optimized for mobile
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body(style='background:black;')
+    header
+      font(color='green')
+        h1  OU WxC Performance Application 
+    // Drop down associations
+    ul#Athletes.dropdown-content
+      li
+        a(href='/workoutentry') Enter a workout
+      li.divider
+      li
+        a(href='/myworkouts') View past workouts
+    ul#CoachesTrainers.dropdown-content
+      li
+        a(href='#!') View Athletes
+    ul#Administrators.dropdown-content
+      li
+        a(href='/admin_athlete_vis') View athletes and workouts
+      li.divider
+      li
+        a(href='/admin_add_user') Add a user
+      li.divider
+      li
+        a(href='/admin_remove_user') Remove a user
+    // Navbar up at the top
+    nav
+      .nav-wrapper.grey.darken-3
+        a.brand-logo Add a User
+        ul.right.hide-on-med-and-down
+          li
+            a.waves-effect.waves-light.btn.grey.darken-1(href='/home') Home
+          li
+            a.waves-effect.waves-light.btn.grey.darken-1 About
+          li
+            a.dropdown-button.btn.green.lighten-1(href='#', data-activates='Athletes') Athletes
+          li
+            a.dropdown-button.btn.blue.lighten-1(href='#', data-activates='CoachesTrainers') Coaches/Trainers
+          li
+            a.dropdown-button.btn.red.lighten-1(href='#', data-activates='Administrators') Administrators
+          li
+            a.waves-effect.waves-light.btn-large.orange(href='/') Log-out
+    br
+    br
+    br
+    br
+    br
+    article
+      .row
+        .col.s3.m6.offset-m3
+          .card.green.accent-3
+            .card-content.black-text
+              span.card-title
+                center
+                  h3.truncate Create a new user:
+              center
+                form(action='/admin_add_user_form', method='post')
+                  | New username: 
+                  input(type='text', name='newusername', required='')
+                  br
+                  br
+                  | 					New user's password:
+                  input(type='text', name='newuserpw', required='')
+                  br
+                  br
+                  | 					New user's email:
+                  input(type='text', name='newuseremail', required='')
+                  br
+                  br
+                  | 					New user's first name:
+                  input(type='text', name='newuserfirst', required='')
+                  br
+                  br
+                  | 					New user's last name:
+                  input(type='text', name='newuserlast', required='')
+                  br
+                  br
+                  label
+                    font(color='black') Users Role Level
+                  br
+                  input#opt1.with-gap(name='cycle', type='radio', checked='')
+                  label(name='roleathlete', for='opt1')
+                    font(color='black') Athlete
+                  input#opt2.with-gap(name='cycle', type='radio')
+                  label(name='roletrainer', for='opt2')
+                    font(color='black') Trainer/Coach
+                  input#opt3.with-gap(name='cycle', type='radio')
+                  label(name='roleadmin', for='opt3')
+                    font(color='black') Admin
+                  br
+                  br
+                  button.btn.waves-effect.waves-light.green(type='submit', name='action')
+                    | Create User
+                    i.material-icons.right send
+      // Materialize CSS imports [body]
+      // put this at the end of the body
+      // Import jQuery before materialize.js
+      script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+      script(type='text/javascript', src='js/materialize.min.js')

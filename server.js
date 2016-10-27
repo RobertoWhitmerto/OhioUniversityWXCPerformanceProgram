@@ -43,17 +43,17 @@ app.post("/", function(req, res){
         if (rows.length > 0){
         	if(pass === rows[0].password){
         		console.log('Correct password!');
-      			  res.redirect('/signin.html');
+      			  res.redirect('/home');
         		console.log('Did we make it here?');
         	}
         	else{
         		console.log('Incorrect Password');
-            res.redirect('/site.htm');
+            res.redirect('/');
           }
         }
         else{
         	console.log('Not a user');
-          res.redirect('/site.htm');
+          res.redirect('/');
         }
     });
   }
@@ -79,7 +79,7 @@ app.post("/workoutentry", function(req, res){
     console.log(result)
   });
 
-  res.redirect('/workoutentry.htm');
+  res.redirect('/workoutentry');
 });
 
 //ADMIN ADD USER FORM PARSER
@@ -97,7 +97,7 @@ app.post("/admin_add_user_form", function(req, res){
     console.log(result)
   });
 
-  res.redirect('/admin_add_user.htm');
+  res.redirect('/admin_add_user');
 });
 
 //ADMIN REMOVE USER FORM PARSER
@@ -113,7 +113,7 @@ app.post("/admin_remove_user_form", function(req, res){
     console.log(result)
   });
 
-  res.redirect('/admin_add_user.htm');
+  res.redirect('/admin_add_user');
 });
 
 /*var queryString = 'SELECT * FROM Roles;';
