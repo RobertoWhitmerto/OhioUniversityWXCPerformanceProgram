@@ -1,0 +1,201 @@
+doctype html
+html
+  head
+    title OU WxC - Workout Entry
+    // Materialize CSS imports [head]
+    // Import Google Icon Font
+    link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    // Import materialize.css
+    link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
+    // Let browser know website is optimized for mobile
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body(style='background:black;')
+    header
+      font(color='green')
+        h1  OU WxC Performance Application 
+    // Drop down associations
+    ul#Athletes.dropdown-content
+      li
+        a(href='/workoutentry') Enter a workout
+      li.divider
+      li
+        a(href='/myworkouts') View past workouts
+    ul#CoachesTrainers.dropdown-content
+      li
+        a(href='#!') View Athletes
+    ul#Administrators.dropdown-content
+      li
+        a(href='/admin_athlete_vis') View athletes and workouts
+      li.divider
+      li
+        a(href='/admin_add_user') Add a user
+      li.divider
+      li
+        a(href='/admin_remove_user') Remove a user
+    // Navbar up at the top
+    nav
+      .nav-wrapper.grey.darken-3
+        a.brand-logo Enter a Workout
+        ul.right.hide-on-med-and-down
+          li
+            a.waves-effect.waves-light.btn.grey.darken-1(href='/home') Home
+          li
+            a.waves-effect.waves-light.btn.grey.darken-1 About
+          li
+            a.dropdown-button.btn.green.lighten-1(href='#', data-activates='Athletes') Athletes
+          li
+            a.dropdown-button.btn.blue.lighten-1(href='#', data-activates='CoachesTrainers') Coaches/Trainers
+          li
+            a.dropdown-button.btn.red.lighten-1(href='#', data-activates='Administrators') Administrators
+          li
+            a.waves-effect.waves-light.btn-large.orange(href='/') Log-out
+    br
+    br
+    br
+    br
+    br
+    body
+      .row
+        .col.s4.m5.offset-m3
+          .card.light-blue.darken-4
+            .card-content.cyan-text
+              span.card-title
+                center
+                  h2.truncate My Workout
+              form(action='/workoutentry', method='post')
+                br
+                label Day of month
+                select.browser-default
+                  option(name='dayinvalid', value='dayinvalid') --
+                  option(name='day1', value='day1') 1
+                  option(name='day2', value='day2') 2
+                  option(name='day3', value='day3') 3
+                  option(name='day4', value='day4') 4
+                  option(name='day5', value='day5') 5
+                  option(name='day6', value='day6') 6
+                  option(name='day7', value='day7') 7
+                  option(name='day8', value='day8') 8
+                  option(name='day9', value='day9') 9
+                  option(name='day10', value='day10') 10
+                  option(name='day11', value='day11') 11
+                  option(name='day12', value='day12') 12
+                  option(name='day13', value='day13') 13
+                  option(name='day14', value='day14') 14
+                  option(name='day15', value='day15') 15
+                  option(name='day16', value='day16') 16
+                  option(name='day17', value='day17') 17
+                  option(name='day18', value='day18') 18
+                  option(name='day19', value='day19') 19
+                  option(name='day20', value='day20') 20
+                  option(name='day21', value='day21') 21
+                  option(name='day22', value='day22') 22
+                  option(name='day23', value='day23') 23
+                  option(name='day24', value='day24') 24
+                  option(name='day25', value='day25') 25
+                  option(name='day26', value='day26') 26
+                  option(name='day27', value='day27') 27
+                  option(name='day28', value='day28') 28
+                  option(name='day29', value='day29') 29
+                  option(name='day30', value='day30') 30
+                  option(name='day31', value='day31') 31
+                br
+                br
+                label Hours of sleep
+                select.browser-default
+                  option(name='sleepinvalid', value='sleepinvalid') --
+                  option(name='sleep0', value='sleep0') 0
+                  option(name='sleep1', value='sleep1') 1
+                  option(name='sleep2', value='sleep2') 2
+                  option(name='sleep3', value='sleep3') 3
+                  option(name='sleep4', value='sleep4') 4
+                  option(name='sleep5', value='sleep5') 5
+                  option(name='sleep6', value='sleep6') 6
+                  option(name='sleep7', value='sleep7') 7
+                  option(name='sleep8', value='sleep8') 8
+                  option(name='sleep9', value='sleep9') 9
+                  option(name='sleep10', value='sleep10') 10
+                  option(name='sleep11', value='sleep11') 11
+                  option(name='sleep12', value='sleep12') 12
+                  option(name='sleep13', value='sleep13') 13
+                  option(name='sleep14', value='sleep14') 14
+                  option(name='sleep15', value='sleep15') 15
+                  option(name='sleep16', value='sleep16') 16
+                  option(name='sleep17', value='sleep17') 17
+                  option(name='sleep18', value='sleep18') 18
+                  option(name='sleep19', value='sleep19') 19
+                  option(name='sleep20', value='sleep20') 20
+                  option(name='sleep21', value='sleep21') 21
+                  option(name='sleep22', value='sleep22') 22
+                  option(name='sleep23', value='sleep23') 23
+                  option(name='sleep24', value='sleep24') 24
+                br
+                br
+                label Health status
+                input(type='text', name='healthstatus', required='')
+                br
+                br
+                label Illness
+                input(type='text', name='illness', required='')
+                br
+                br
+                label Injury
+                input(type='text', name='injury', required='')
+                br
+                br
+                label % of full health
+                p.range-field.white
+                  input#opt0(name='myhealth', type='range', min='0', max='100')
+                br
+                br
+                label Start of cycle
+                br
+                input#opt1.with-gap(name='cycle', type='radio', checked='')
+                label(name='cycleno', for='opt1') No
+                input#opt2.with-gap(name='cycle', type='radio')
+                label(name='cycleyes', for='opt2') Yes
+                br
+                br
+                label RPE (6-20)
+                select.browser-default
+                  option(name='rpeinvalid', value='rpeinvalid') --
+                  option(name='rep6', value='rpe6') 6
+                  option(name='rep7', value='rpe7') 7
+                  option(name='rep8', value='rpe8') 8
+                  option(name='rep9', value='rpe9') 9
+                  option(name='rep10', value='rpe10') 10
+                  option(name='rep11', value='rpe11') 11
+                  option(name='rep12', value='rpe12') 12
+                  option(name='rep13', value='rpe13') 13
+                  option(name='rep14', value='rpe14') 14
+                  option(name='rep15', value='rpe15') 15
+                  option(name='rep16', value='rpe16') 16
+                  option(name='rep17', value='rpe17') 17
+                  option(name='rep18', value='rpe18') 18
+                  option(name='rep19', value='rpe19') 19
+                  option(name='rep20', value='rpe20') 20
+                br
+                br
+                label Time:
+                input(type='text', placeholder='0:00:00', name='time', required='')
+                br
+                br
+                label Distance:
+                input(type='text', name='distance', required='')
+                br
+                br
+                br
+                .row
+                  .input-field.col.s12
+                    textarea#textarea1.materialize-textarea(length='256')
+                    label(name='notes', for='textarea1') My Notes
+                br
+                br
+                button.btn.waves-effect.waves-light.red(type='submit', name='action')
+                  | Submit My Workout
+                  i.material-icons.right send
+      p
+      // Materialize CSS imports [body]
+      // put this at the end of the body
+      // Import jQuery before materialize.js
+      script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+      script(type='text/javascript', src='js/materialize.min.js')
