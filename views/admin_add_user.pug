@@ -87,13 +87,13 @@ html
                   label
                     font(color='black') Users Role Level
                   br
-                  input#opt1.with-gap(name='cycle', type='radio', checked='')
+                  input#opt1.with-gap(name='role', type='radio', checked='', value="athlete")
                   label(name='roleathlete', for='opt1')
                     font(color='black') Athlete
-                  input#opt2.with-gap(name='cycle', type='radio')
+                  input#opt2.with-gap(name='role', type='radio', value="trainer")
                   label(name='roletrainer', for='opt2')
                     font(color='black') Trainer/Coach
-                  input#opt3.with-gap(name='cycle', type='radio')
+                  input#opt3.with-gap(name='role', type='radio', value="admin")
                   label(name='roleadmin', for='opt3')
                     font(color='black') Admin
                   br
