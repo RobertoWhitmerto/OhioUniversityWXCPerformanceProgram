@@ -64,123 +64,140 @@ html
                   h2.truncate My Workout
               form(action='/workoutentry', method='post')
                 br
+                label Month
+                select.browser-default(name='month')
+                  option(name='month', value='invalidmonth') --
+                  option(name='month', value='January') January
+                  option(name='month', value='February') February
+                  option(name='month', value='March') March
+                  option(name='month', value='April') April
+                  option(name='month', value='May') May
+                  option(name='month', value='June') June
+                  option(name='month', value='July') July
+                  option(name='month', value='August') August
+                  option(name='month', value='September') September
+                  option(name='month', value='October') October
+                  option(name='month', value='November') November
+                  option(name='month', value='December') December
+                br
+                br
                 label Day of month
-                select.browser-default
-                  option(name='dayinvalid', value='dayinvalid') --
-                  option(name='day1', value='day1') 1
-                  option(name='day2', value='day2') 2
-                  option(name='day3', value='day3') 3
-                  option(name='day4', value='day4') 4
-                  option(name='day5', value='day5') 5
-                  option(name='day6', value='day6') 6
-                  option(name='day7', value='day7') 7
-                  option(name='day8', value='day8') 8
-                  option(name='day9', value='day9') 9
-                  option(name='day10', value='day10') 10
-                  option(name='day11', value='day11') 11
-                  option(name='day12', value='day12') 12
-                  option(name='day13', value='day13') 13
-                  option(name='day14', value='day14') 14
-                  option(name='day15', value='day15') 15
-                  option(name='day16', value='day16') 16
-                  option(name='day17', value='day17') 17
-                  option(name='day18', value='day18') 18
-                  option(name='day19', value='day19') 19
-                  option(name='day20', value='day20') 20
-                  option(name='day21', value='day21') 21
-                  option(name='day22', value='day22') 22
-                  option(name='day23', value='day23') 23
-                  option(name='day24', value='day24') 24
-                  option(name='day25', value='day25') 25
-                  option(name='day26', value='day26') 26
-                  option(name='day27', value='day27') 27
-                  option(name='day28', value='day28') 28
-                  option(name='day29', value='day29') 29
-                  option(name='day30', value='day30') 30
-                  option(name='day31', value='day31') 31
+                select.browser-default(name='day')
+                  option(name='day', value='dayinvalid') --
+                  option(name='day', value='day1') 1
+                  option(name='day', value='day2') 2
+                  option(name='day', value='day3') 3
+                  option(name='day', value='day4') 4
+                  option(name='day', value='day5') 5
+                  option(name='day', value='day6') 6
+                  option(name='day', value='day7') 7
+                  option(name='day', value='day8') 8
+                  option(name='day', value='day9') 9
+                  option(name='day', value='day10') 10
+                  option(name='day', value='day11') 11
+                  option(name='day', value='day12') 12
+                  option(name='day', value='day13') 13
+                  option(name='day', value='day14') 14
+                  option(name='day', value='day15') 15
+                  option(name='day', value='day16') 16
+                  option(name='day', value='day17') 17
+                  option(name='day', value='day18') 18
+                  option(name='day', value='day19') 19
+                  option(name='day', value='day20') 20
+                  option(name='day', value='day21') 21
+                  option(name='day', value='day22') 22
+                  option(name='day', value='day23') 23
+                  option(name='day', value='day24') 24
+                  option(name='day', value='day25') 25
+                  option(name='day', value='day26') 26
+                  option(name='day', value='day27') 27
+                  option(name='day', value='day28') 28
+                  option(name='day', value='day29') 29
+                  option(name='day', value='day30') 30
+                  option(name='day', value='day31') 31
                 br
                 br
                 label Hours of sleep
-                select.browser-default
-                  option(name='sleepinvalid', value='sleepinvalid') --
-                  option(name='sleep0', value='sleep0') 0
-                  option(name='sleep1', value='sleep1') 1
-                  option(name='sleep2', value='sleep2') 2
-                  option(name='sleep3', value='sleep3') 3
-                  option(name='sleep4', value='sleep4') 4
-                  option(name='sleep5', value='sleep5') 5
-                  option(name='sleep6', value='sleep6') 6
-                  option(name='sleep7', value='sleep7') 7
-                  option(name='sleep8', value='sleep8') 8
-                  option(name='sleep9', value='sleep9') 9
-                  option(name='sleep10', value='sleep10') 10
-                  option(name='sleep11', value='sleep11') 11
-                  option(name='sleep12', value='sleep12') 12
-                  option(name='sleep13', value='sleep13') 13
-                  option(name='sleep14', value='sleep14') 14
-                  option(name='sleep15', value='sleep15') 15
-                  option(name='sleep16', value='sleep16') 16
-                  option(name='sleep17', value='sleep17') 17
-                  option(name='sleep18', value='sleep18') 18
-                  option(name='sleep19', value='sleep19') 19
-                  option(name='sleep20', value='sleep20') 20
-                  option(name='sleep21', value='sleep21') 21
-                  option(name='sleep22', value='sleep22') 22
-                  option(name='sleep23', value='sleep23') 23
-                  option(name='sleep24', value='sleep24') 24
+                select.browser-default(name='sleephours')
+                  option(name='sleephours', value='sleepinvalid') --
+                  option(name='sleephours', value='0') 0
+                  option(name='sleephours', value='1') 1
+                  option(name='sleephours', value='2') 2
+                  option(name='sleephours', value='3') 3
+                  option(name='sleephours', value='4') 4
+                  option(name='sleephours', value='5') 5
+                  option(name='sleephours', value='6') 6
+                  option(name='sleephours', value='7') 7
+                  option(name='sleephours', value='8') 8
+                  option(name='sleephours', value='9') 9
+                  option(name='sleephours', value='10') 10
+                  option(name='sleephours', value='11') 11
+                  option(name='sleephours', value='12') 12
+                  option(name='sleephours', value='13') 13
+                  option(name='sleephours', value='14') 14
+                  option(name='sleephours', value='15') 15
+                  option(name='sleephours', value='16') 16
+                  option(name='sleephours', value='17') 17
+                  option(name='sleephours', value='18') 18
+                  option(name='sleephours', value='19') 19
+                  option(name='sleephours', value='20') 20
+                  option(name='sleephours', value='21') 21
+                  option(name='sleephours', value='22') 22
+                  option(name='sleephours', value='23') 23
+                  option(name='sleephours', value='24') 24
                 br
                 br
                 label Health status
-                input(type='text', name='healthstatus', required='')
+                input(type='text', name='healthstatus')
                 br
                 br
                 label Illness
-                input(type='text', name='illness', required='')
+                input(type='text', name='illness')
                 br
                 br
                 label Injury
-                input(type='text', name='injury', required='')
+                input(type='text', name='injury')
                 br
                 br
                 label % of full health
                 p.range-field.white
-                  input#opt0(name='myhealth', type='range', min='0', max='100')
+                  input#opt0(name='myhealth', type='range', min='0', max='100', value='1', step='1')
                 br
                 br
                 label Start of cycle
                 br
-                input#opt1.with-gap(name='cycle', type='radio', checked='')
-                label(name='cycleno', for='opt1') No
-                input#opt2.with-gap(name='cycle', type='radio')
-                label(name='cycleyes', for='opt2') Yes
+                input#opt1.with-gap(name='cycle', type='radio', checked='', value='no')
+                label(name='cycle', for='opt1') No
+                input#opt2.with-gap(name='cycle', type='radio', value='yes')
+                label(name='cycle', for='opt2') Yes
                 br
                 br
                 label RPE (6-20)
-                select.browser-default
-                  option(name='rpeinvalid', value='rpeinvalid') --
-                  option(name='rep6', value='rpe6') 6
-                  option(name='rep7', value='rpe7') 7
-                  option(name='rep8', value='rpe8') 8
-                  option(name='rep9', value='rpe9') 9
-                  option(name='rep10', value='rpe10') 10
-                  option(name='rep11', value='rpe11') 11
-                  option(name='rep12', value='rpe12') 12
-                  option(name='rep13', value='rpe13') 13
-                  option(name='rep14', value='rpe14') 14
-                  option(name='rep15', value='rpe15') 15
-                  option(name='rep16', value='rpe16') 16
-                  option(name='rep17', value='rpe17') 17
-                  option(name='rep18', value='rpe18') 18
-                  option(name='rep19', value='rpe19') 19
-                  option(name='rep20', value='rpe20') 20
+                select.browser-default(name='rpeval')
+                  option(name='rpeval', value='rpeinvalid') --
+                  option(name='rpeval', value='rpe6') 6
+                  option(name='rpeval', value='rpe7') 7
+                  option(name='rpeval', value='rpe8') 8
+                  option(name='rpeval', value='rpe9') 9
+                  option(name='rpeval', value='rpe10') 10
+                  option(name='rpeval', value='rpe11') 11
+                  option(name='rpeval', value='rpe12') 12
+                  option(name='rpeval', value='rpe13') 13
+                  option(name='rpeval', value='rpe14') 14
+                  option(name='rpeval', value='rpe15') 15
+                  option(name='rpeval', value='rpe16') 16
+                  option(name='rpeval', value='rpe17') 17
+                  option(name='rpeval', value='rpe18') 18
+                  option(name='rpeval', value='rpe19') 19
+                  option(name='rpeval', value='rpe20') 20
                 br
                 br
                 label Time:
-                input(type='text', placeholder='0:00:00', name='time', required='')
+                input(type='text', placeholder='h:mm:ss', name='time', required='')
                 br
                 br
                 label Distance:
-                input(type='text', name='distance', required='')
+                input(type='text', name='distance')
                 br
                 br
                 br
