@@ -1,0 +1,116 @@
+doctype html
+html
+  head
+    title OU WxC - Home
+    // Materialize CSS imports [head]
+    // Import Google Icon Font
+    link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    // Import materialize.css
+    link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
+    // Let browser know website is optimized for mobile
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body(style='background:black;')
+    header
+      font(color='green')
+        h1  OU WxC Performance Application 
+    // Drop down associations
+    ul#Athletes.dropdown-content
+      li
+        a(href='/workoutentry') Enter a workout
+      li.divider
+      li
+        a(href='/myworkouts') View past workouts
+    ul#CoachesTrainers.dropdown-content
+      li
+        a(href='#!') View Athletes
+    ul#Administrators.dropdown-content
+      li
+        a(href='/admin_athlete_vis') View athletes and workouts
+      li.divider
+      li
+        a(href='/admin_add_user') Add a user
+      li.divider
+      li
+        a(href='/admin_remove_user') Remove a user
+    // Navbar up at the top
+    nav
+      .nav-wrapper.grey.darken-3
+        a.brand-logo Home
+        ul.right.hide-on-med-and-down
+          li
+            a.waves-effect.waves-light.btn.grey.darken-1(href='/home') Home
+          li
+            a.waves-effect.waves-light.btn.grey.darken-1(href='/about') About
+          li
+            a.dropdown-button.btn.green.lighten-1(href='#', data-activates='Athletes') Athletes
+          li
+            a.dropdown-button.btn.blue.lighten-1(href='#', data-activates='CoachesTrainers') Coaches/Trainers
+          li
+            a.dropdown-button.btn.red.lighten-1(href='#', data-activates='Administrators') Administrators
+          li
+            a.waves-effect.waves-light.btn-large.orange(href='/') Log-out
+    br
+    body
+      font(color='white')
+        | Hello and welcome to the Women's Cross Country Performance Application!
+        br
+        | ---PLACEHOLDER---
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        | Here is a brief listing of some functionality that is included within this web application: 
+        br
+        br
+        font(color='green') Athletes:
+        br
+        | - Add workouts into the system through the navigation bar or home page. Try it out!
+        br
+        | - Edit their previous workouts incase of error or manual removal through the navigation bar or home page. 
+        br
+        | - View past workouts through the navigation bar or home page. 
+        br
+        br
+        font(color='blue') Trainers:
+        br
+        | - View their teams physiological statistics through the navigation bar or home page. 
+        br
+        br
+        font(color='red') Administrators:
+        br
+        | - Add a user into the system through the navigation bar or home page. 
+        br
+        | - Remove a user from the system through the navigation bar or home page. 
+        br
+        | - View athletes and workouts through the navigation bar or home page. 
+        br
+        br
+        br
+        | Need further help? Please contact ____ ____ at __________. 
+        br
+        br
+        br
+        br
+        br
+        footer
+          h6
+            center
+              font(color='grey')
+                | Team on a Cob 2016, 
+                br
+                | |Robert Whitmer|
+                | Andrew Leach|
+                | Peter Essman|
+                | Brent Gruber|
+                | Lucas Nation|
+    // Materialize CSS imports [body]
+    // put this at the end of the body
+    // Import jQuery before materialize.js
+    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(type='text/javascript', src='js/materialize.min.js')
