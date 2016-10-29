@@ -56,12 +56,12 @@ html
     br
     article
       .row
-        .col.s3.m6.offset-m3
+        .col.s12.m6.offset-m3
           .card.green.accent-3
             .card-content.black-text
               span.card-title
                 center
-                  h3.truncate Create a new user:
+                  p.fonts Create a new user:
               center
                 form(action='/admin_add_user_form', method='post')
                   | New username: 
@@ -89,16 +89,13 @@ html
                   br
                   input#opt1.with-gap(name='role', type='radio', value='athlete', checked='')
                   label(name='roleathlete', for='opt1')
-                    font(color='black')
-                      font(color='green') Athlete
+                    font(color='green') Athlete
                   input#opt2.with-gap(name='role', type='radio', value='trainer')
                   label(name='roletrainer', for='opt2')
-                    font(color='black')
-                      font(color='blue') Trainer/Coach
+                    font(color='blue') Trainer/Coach
                   input#opt3.with-gap(name='role', type='radio', value='admin')
                   label(name='roleadmin', for='opt3')
-                    font(color='black')
-                      font(color='red') Admin
+                    font(color='red') Admin
                   br
                   br
                   button.btn.waves-effect.waves-light.green(type='submit', name='action')
