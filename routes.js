@@ -7,6 +7,10 @@ app.get('/home', function(request, response) {
   response.render('signin.pug');
 });
 
+app.get('/about', function(request, response) {
+  response.render('about.pug');
+});	
+	
 app.get('/workoutentry', function(request, response) {
   response.render('workoutentry.pug');
 });
