@@ -12,7 +12,7 @@ html
   body(style='background:black;')
     header
       font(color='green')
-        h1  OU WxC Performance Application
+        h3  OU WxC Performance Application 
     // Drop down associations
     ul#Athletes.dropdown-content
       li
@@ -57,12 +57,12 @@ html
     // 3 User Type Cards
     // Athletes
     .row
-      .col.s4.m4
+      .col.s12.m4
         .card.green.lighten-1
           .card-content.white-text
             span.card-title
               center
-                h3.truncate Athlete
+                p.fonts Athlete
             center
               a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') Enter a Workout
               br
@@ -73,12 +73,12 @@ html
               br
       .row
         // Coach and Trainers
-        .col.s4.m4
+        .col.s12.m4
           .card.blue.lighten-1
             .card-content.white-text
               span.card-title
                 center
-                  h3.truncate Coaches/Trainers
+                  p.fonts Coaches/Trainers
               center
                 a.waves-effect.waves-light.btn-large.blue.darken-3(href='#') View Athletes
                 br
@@ -88,12 +88,12 @@ html
               br
         // Administrators
         .row
-          .col.s4.m4
+          .col.s12.m4
             .card.red.lighten-1
               .card-content.white-text
                 span.card-title
                   center
-                    h3.truncate Administrators
+                    p.fonts Administrators
                 center
                   a.waves-effect.waves-light.btn.red.darken-3(href='/admin_athlete_vis') View Athletes and Workouts
                   br
