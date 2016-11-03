@@ -37,6 +37,47 @@ router.get('/logout', function(req, res){
 	res.redirect('/');
 });
 
+// Workout Entry
+router.get('/workoutentry', function(req, res){
+	if(req.isAuthenticated()){
+		res.render('workoutentry.pug');
+	}
+	res.redirect('/');
+});
+
+// View my workouts
+router.get('/myworkouts', function(req, res){
+	if(req.isAuthenticated()){
+		res.render('myworkouts.pug');
+	}
+	res.redirect('/');
+});
+
+// View Athletes
+router.get('/admin_athlete_vis', function(req, res){
+	if(req.isAuthenticated()){
+		res.render('admin_athlete_vis.pug');
+	}
+	res.redirect('/');
+});
+
+// Remove User
+router.get('/admin_remove_user', function(req, res){
+	if(req.isAuthenticated()){
+		res.render('admin_remove_user.pug');
+	}
+	res.redirect('/');
+});
+
+// About Page
+router.get('/about', function(req, res){
+	if(req.isAuthenticated()){
+		res.render('about.pug');
+	}
+	res.redirect('/');
+});
+
+
 // Register a User
 router.post('/register', function(req, res){
 	var username = req.body.newusername;
