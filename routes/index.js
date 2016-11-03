@@ -33,48 +33,55 @@ router.get('/home', function(req, res){
 router.get('/logout', function(req, res){
 	if(req.isAuthenticated()){
 		req.logout();
+		res.redirect('/');
+	} else {
+		res.redirect('/');
 	}
-	res.redirect('/');
 });
 
 // Workout Entry
 router.get('/workoutentry', function(req, res){
 	if(req.isAuthenticated()){
 		res.render('workoutentry.pug');
+	} else {
+		res.redirect('/');
 	}
-	res.redirect('/');
 });
 
 // View my workouts
 router.get('/myworkouts', function(req, res){
 	if(req.isAuthenticated()){
 		res.render('myworkouts.pug');
+	} else {
+	 	res.redirect('/');
 	}
-	res.redirect('/');
 });
 
 // View Athletes
 router.get('/admin_athlete_vis', function(req, res){
 	if(req.isAuthenticated()){
 		res.render('admin_athlete_vis.pug');
+	} else {
+		res.redirect('/');
 	}
-	res.redirect('/');
 });
 
 // Remove User
 router.get('/admin_remove_user', function(req, res){
 	if(req.isAuthenticated()){
 		res.render('admin_remove_user.pug');
+	} else {
+		res.redirect('/');
 	}
-	res.redirect('/');
 });
 
 // About Page
 router.get('/about', function(req, res){
 	if(req.isAuthenticated()){
 		res.render('about.pug');
+	} else {
+		res.redirect('/');
 	}
-	res.redirect('/');
 });
 
 
