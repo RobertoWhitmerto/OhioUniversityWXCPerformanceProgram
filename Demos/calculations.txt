@@ -1,0 +1,44 @@
+Pysiological Test Data
+    Mass (kg) needed.
+    Pace (min/mile) = 3600/Speed(mph), (will be in seconds).
+    VO2 (Liters of oxygen/min),
+    RER (Respiratory exchange ratio),
+    Heart Rate (bpm),
+    GRF-R (BW) (maximal ground reaction force on right leg),
+    GRF-L (BW) (maximal ground reaction force on left leg),
+    RPE (rated perceived exertion),
+    Cycles(steps/min).
+    
+    Formulas for the charts are from 'Pace Charts and Training Zones,' which 
+    are listed below.
+        
+Training Analysis-Monthly
+    Charts include: Time in Training Zones, Distance in Training Zones,
+    Monthly Accumulated GRF, Training Load, Monthly Mileage, Health Issues 
+    and Sleep Pattern.
+    
+    Summation of total time in each zone, for each month.
+    Summation of total mileage, for each month.
+    
+Volume Summary
+
+Pace Charts and Training Zones
+    Speed (mph)
+    Pace (min/mile)
+    Heartrate = 10.87699*Speed + 56.19444
+    RPE = 1.852033*Speed - 3.711416
+    Lactate = (0.05711546*Speed^3) - (0.8546505*Speed^2) + (3.056008*Speed) +
+              1.390775
+    VO2 = 0.3200882*Speed - 0.5437482
+    % of VO2 peak = VO2/3.08
+    RER = 0.06404704*Speed + 0.350001
+    GRF-Right = 0.0842*Speed + 1.8695
+    GRF-Left = 0.0842*Speed + 1.8695
+    Cycles = 4.7*Speed + 146
+    VO2 (ml/kg/min) = (VO2*1000)/mass
+    
+Training Analysis-Weekly
+    Same process and charts as Training Analysis-Monthly.
+    
+Training Stress Analysis
+    Information for charts are from Volume Summary.
