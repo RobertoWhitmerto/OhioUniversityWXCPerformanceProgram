@@ -67,13 +67,14 @@ app.post("/workoutentry", function(req, res){
   console.log(req.body.injury)
   console.log(req.body.time)
   console.log(req.body.distance)
+  var rpe = req.body.rpeval;
   var healthstatus = req.body.healthstatus;
   var illness = req.body.illness;
   var injury = req.body.injury;
   var time = req.body.time;
   var distance = req.body.distance;
 
-  var queryString2 = `INSERT INTO OUWXC.athlete_data(athlete, date, sleep, Illness, Injury, percent_health, cycle_start, notes) VALUES ("WillSmith", NOW(), "10", "${illness}", "${injury}", "100", NOW(), "just dummy data for testing")`;
+  var queryString2 = `INSERT INTO OUWXC.athlete_data(athlete, date, sleep, health_status, Illness, Injury, percent_health, cycle_start, RPE, time, distance, notes) VALUES ("WillSmith", NOW(), "10", "${healthstatus}", "${illness}", "${injury}", "100", NOW(), "${rpe}", "${time}", "${distance}", "just dummy data for testing")`;
   db.query(queryString2, function(err, result) {
     console.log(err)
     console.log(result)
