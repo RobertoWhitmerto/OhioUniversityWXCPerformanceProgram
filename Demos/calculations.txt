@@ -21,6 +21,13 @@ Training Analysis-Monthly
     Summation of total mileage, for each month.
     
 Volume Summary
+    Date, Start Cycle(0 or 1).
+    Short Term Average (6 days)
+    Long Term Average (30 days)
+    Short Term Miles
+    Long Term Miles
+    Fatigue Index = Long Term Average/Short Term Average
+    Training Load = RPE*time
 
 Pace Charts and Training Zones
     Speed (mph)
@@ -42,3 +49,6 @@ Training Analysis-Weekly
     
 Training Stress Analysis
     Information for charts are from Volume Summary.
+    
+Data and Formulas
+    Information is from "Pace and Training Zones."
