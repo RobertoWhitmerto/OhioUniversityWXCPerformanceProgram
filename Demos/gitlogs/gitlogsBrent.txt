@@ -1,0 +1,33 @@
+commit 158d0b637316accb1a908ab954f6782c4e80b772
+Merge: 4376be7 883307c
+Author: Brent Gruber <bg240711@outlook.com>
+Date:   Mon Nov 7 19:44:57 2016 -0500
+
+    Merge branch 'master' of https://github.com/RobertoWhitmerto/OhioUniversityWXCPerformanceProgram
+
+commit 43ad4b677031a0345c1a84884a2a1960a42ed83f
+Author: Brent Gruber <bg240711@outlook.com>
+Date:   Thu Oct 27 10:10:55 2016 -0400
+
+    adding function to authenticate user
+
+ queries.js | 26 ++++++++++++++++----------
+ 1 file changed, 16 insertions(+), 10 deletions(-)
+
+commit eeb0b1d3370d975051f67089a7a25f80af4fc6a3
+Author: Brent Gruber <bg240711@outlook.com>
+Date:   Thu Oct 27 09:33:40 2016 -0400
+
+    committing a working queries file
+
+ queries.js | 25 +++++++++++++------------
+ 1 file changed, 13 insertions(+), 12 deletions(-)
+
+commit cf8f4dbbb610a7bfe68283c6e68ec58ceaac9cc6
+Author: Brent Gruber <bg240711@outlook.com>
+Date:   Tue Oct 25 18:21:42 2016 -0400
+
+    fixing a debug issue
+
+ queries.js | 2 --
+ 1 file changed, 2 deletions(-)

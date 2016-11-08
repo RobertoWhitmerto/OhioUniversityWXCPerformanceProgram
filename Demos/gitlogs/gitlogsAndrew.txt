@@ -1,0 +1,296 @@
+commit c660064991326d019442fab90cd305c418e53f80
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 14:20:01 2016 -0400
+
+    Update workoutentry.pug
+    
+    - Made our workout entry mobile friendly
+
+ views/workoutentry.pug | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 1a9f8890c4506db971f464f652d86f68a1de6b6c
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 14:19:14 2016 -0400
+
+    Update admin_remove_user.pug
+    
+    - Made our remove a user mobile friendly
+
+ views/admin_remove_user.pug | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit a209205330bc86fb1c568790e20506f7e8ac0a71
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 14:18:38 2016 -0400
+
+    Update admin_add_user.pug
+    
+    - Made our add user mobile friendly.
+
+ views/admin_add_user.pug | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+
+commit 3d4b2a937a4f3a7ab79db1c1407ca2cbb623f259
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 14:17:54 2016 -0400
+
+    Update signin.pug
+    
+    - Made our home page mobile friendly.
+
+ views/signin.pug | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+commit 4ec68fb866aca703653195e8e0b05cd465723dc3
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 12:57:36 2016 -0400
+
+    Update routes.js
+    
+    - Updated route to include new about page
+
+ routes.js | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 7df8848262cc960f9fae955b4cc4f7e08b0a1c25
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 12:56:33 2016 -0400
+
+    Update workoutentry.pug
+
+ views/workoutentry.pug | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit c3ae4f7b8827bd823f36f41e9930424e93a5464a
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 12:56:21 2016 -0400
+
+    Update signin.pug
+
+ views/signin.pug | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6b5be0eb04d7eb28f9b9313b82242e4350f72016
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 12:56:10 2016 -0400
+
+    Update myworkouts.pug
+
+ views/myworkouts.pug | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 866a316d137451a55b42dd24d4c6ce91a4f430e2
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 12:55:57 2016 -0400
+
+    Update admin_remove_user.pug
+
+ views/admin_remove_user.pug | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6307b4a013dbe21b9dfb277d51da0ee50c656d09
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 12:55:46 2016 -0400
+
+    Update admin_athlete_vis.pug
+
+ views/admin_athlete_vis.pug | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 828ef5e9d4ea14be5c6ca8f9cee262b1d8cdb769
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 12:55:31 2016 -0400
+
+    Update admin_add_user.pug
+    
+    - navbar update to include about
+
+ views/admin_add_user.pug | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e04ee0393ddea883a335b4ae9a9a29568fcfcef2
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 29 12:54:54 2016 -0400
+
+    Create about.pug
+    
+    - New about page that describes application functionality per role and who to contact for help (could insert all admins on this page for assistance down the road)
+
+ views/about.pug | 116 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 116 insertions(+)
+
+commit ea7cdc7aad6f449d3c4d199779f84090f1caed8d
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Fri Oct 28 18:47:42 2016 -0400
+
+    Update admin_add_user.pug
+    
+    - Fixed radio buttons to submit only one value, and actually submit a value
+    - Added some color to the role selection to match current color scheme
+
+ views/admin_add_user.pug | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
+
+commit e0dad7d4780b0b4e76a7613012e97f040f24c201
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Fri Oct 28 18:31:00 2016 -0400
+
+    Update workoutentry.pug
+    
+    - Fixed all form entry radio buttons and drop down menus to only submit one value and only once per input.
+
+ views/workoutentry.pug | 191 +++++++++++++++++++++++++++----------------------
+ 1 file changed, 104 insertions(+), 87 deletions(-)
+
+commit ac0169c525628f6c0b8c11bd4ea7368a84dcc118
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Fri Oct 28 18:05:49 2016 -0400
+
+    Update admin_add_user.pug
+    
+    - Added values for radio buttons
+    - Renamed button name to a more appropriate group 'role'
+
+ views/admin_add_user.pug | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 3e725c58257eb4ee6ce1b9cf204933faf220f00a
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Tue Oct 25 14:09:34 2016 -0400
+
+    Update admin_remove_user.htm
+    
+    - Now uses removeusername and removelastname as fields to remove a user from the database
+
+ admin_remove_user.htm | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit f3a75b8461100c28e8c5732dcc83ea82cdf02a75
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 17:38:40 2016 -0400
+
+    Update admin_remove_user.htm
+
+ admin_remove_user.htm | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit a1056642f9b60bb92243c96578df73ba127927c4
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 17:36:15 2016 -0400
+
+    Update admin_remove_user.htm
+
+ admin_remove_user.htm | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+commit 2b0553e62bf1e0e9daaf1cc7a6fae1d14e83adfc
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 17:35:52 2016 -0400
+
+    Update admin_add_user.htm
+
+ admin_add_user.htm | 26 +++-----------------------
+ 1 file changed, 3 insertions(+), 23 deletions(-)
+
+commit e89f6edd40384b7ebd15fbe896208cd6c0d76673
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 17:33:30 2016 -0400
+
+    Update signin.html
+
+ signin.html | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit dfa4b4a836a521a1abc49130caf42be0aa5a3480
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 15:58:38 2016 -0400
+
+    Update workoutentry.htm
+
+ workoutentry.htm | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 8a25f21f997d19d4f3e5023b3158e94029ec8639
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 15:57:06 2016 -0400
+
+    Update signin.html
+
+ signin.html | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit a8fcca6b33969e1538e14e3c50469182737ff7bf
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 15:56:19 2016 -0400
+
+    Update myworkouts.htm
+
+ myworkouts.htm | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit cdda16070126bc4d462ec284549f5a95bcc745b7
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 15:55:57 2016 -0400
+
+    Update admin_remove_user.htm
+
+ admin_remove_user.htm | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 9bcaf8d770e51120de334cfbaa1a66901b2510b6
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 15:55:42 2016 -0400
+
+    Update admin_athlete_vis.htm
+    
+    - navbar update
+
+ admin_athlete_vis.htm | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 90b02a0831dbbf93a221e28c687c6108b6ed332d
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 15:52:53 2016 -0400
+
+    Update admin_add_user.htm
+    
+    - navbar update
+
+ admin_add_user.htm | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 8a1edcead1ec7e0b2864a082370c9bebf7f4365b
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Mon Oct 24 15:51:31 2016 -0400
+
+    New admin remove page
+    
+    - Split the add/remove into two separate pages
+
+ admin_remove_user.htm | 89 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 89 insertions(+)
+
+commit c1965f85d0780ddbe0e670a0dd67f8ea4bb49650
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 22 19:14:07 2016 -0400
+
+    Update workoutentry.htm
+    
+    - Added names to all radio, drop down menus, and text fields (try to see if this will parse)
+
+ workoutentry.htm | 156 +++++++++++++++++++++++++++----------------------------
+ 1 file changed, 78 insertions(+), 78 deletions(-)
+
+commit e1541b184d15cc929b776a21b8d1f1002ae3bf39
+Author: yoyoma56 <al426212@ohio.edu>
+Date:   Sat Oct 22 19:12:28 2016 -0400
+
+    Update admin_add_user.htm
+    
+    - Added required fields so it forces input fields to be filled on both removing and adding a user
+    - Added new fields for adding a user: first name, last name, and email.
+    - Added names to radio buttons (try to see if this will parse now)
+
+ admin_add_user.htm | 28 +++++++++++++++++-----------
+ 1 file changed, 17 insertions(+), 11 deletions(-)
