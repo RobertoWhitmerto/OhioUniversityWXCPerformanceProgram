@@ -31,7 +31,7 @@ function get_query(query, input, queryString) {
 	else if(query == "insertD")
 	{
 		string = insertData;
-		string +=
+		string += ` VALUES ( "${input.healthstatus}","${input.illness}","${input.injury}","${input.time}", "${input.distance}" )`;
 	}
 	else if(query == "insertU")
 	{
