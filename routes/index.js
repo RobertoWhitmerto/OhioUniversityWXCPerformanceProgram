@@ -84,6 +84,15 @@ router.get('/about', function(req, res){
 	}
 });
 
+// Remove User
+router.get('/admin_add_user', function(req, res){
+	if(req.isAuthenticated()){
+		res.render('admin_add_user.pug');
+	} else {
+		res.redirect('/');
+	}
+});
+  
 
 // Register a User
 router.post('/register', function(req, res){
@@ -173,6 +182,39 @@ router.post('/',
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
 		res.redirect('/home');
+});
+
+router.post("/admin_add_user_form", function(req, res){
+  console.log(req.body)
+  var newusername = req.body.newusername;
+  var newuserpw = req.body.newuserpw;
+  var newuserfirst = req.body.newuserfirst;
+  var newuserlast = req.body.newuserlast;
+  var newuseremail = req.body.newuseremail;
+
+  var queryString3 = `INSERT INTO OUWXC.user(username, email, password, first, last, create_time) VALUES ("${newusername}", "${newuseremail}", "${newuserpw}", "${newuserfirst}", "${newuserlast}", NOW())`;
+  db.query(queryString3, function(err, result) {
+    console.log(err)
+    console.log(result)
+  });
+
+  res.redirect('/admin_add_user');
+});
+
+//ADMIN REMOVE USER FORM PARSER
+router.post("/admin_remove_user_form", function(req, res){
+  console.log(req.body.newuserfirstname)
+  console.log(req.body.newuserlastname)
+  var newuserfirstname = req.body.newuserfirstname;
+  var newuserlastname = req.body.newuserlastname;
+
+  var queryString4 = `DELETE FROM OUWXC.user WHERE username="${newuserfirstname}" AND password="${newuserlastname}"`;
+  db.query(queryString4, function(err, result) {
+    console.log(err)
+    console.log(result)
+  });
+
+  res.redirect('/admin_add_user');
 });
 
 module.exports = router;
