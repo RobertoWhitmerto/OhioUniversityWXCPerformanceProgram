@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var queries = require('./queries');
 var db = require('./db');
 
 
@@ -51,6 +52,15 @@ router.get('/workoutentry', function(req, res){
 // View my workouts
 router.get('/myworkouts', function(req, res){
 	if(req.isAuthenticated()){
+
+		//access workout info through [] index operator, rows of query returned
+		var workouts;
+
+		queries.get_workouts({user: req.user.id}, function(err, result){
+			workouts = result;
+			console.log(workouts);
+		})
+
 		res.render('myworkouts.pug');
 	} else {
 	 	res.redirect('/');
@@ -61,6 +71,15 @@ router.get('/myworkouts', function(req, res){
 router.get('/admin_athlete_vis', function(req, res){
 	if(req.isAuthenticated()){
 		res.render('admin_athlete_vis.pug');
+	} else {
+		res.redirect('/');
+	}
+});
+
+// Add User
+router.get('/admin_add_user', function(req, res){
+	if(req.isAuthenticated()){
+		res.render('admin_add_user.pug');
 	} else {
 		res.redirect('/');
 	}
@@ -92,17 +111,10 @@ router.get('/admin_add_user', function(req, res){
 		res.redirect('/');
 	}
 });
-  
+
 
 // Register a User
 router.post('/register', function(req, res){
-	var username = req.body.newusername;
-	var password = req.body.newuserpw;
-	var password2 = req.body.newuserpw2;
-	var email = req.body.newuseremail;
-	var firstname = req.body.newuserfirst;
-	var lastname = req.body.newuserlast;
-	var role = req.body.cycle;
 
 	// Validation
 	req.checkBody('newusername', 'Username is required').notEmpty();
@@ -121,63 +133,52 @@ router.post('/register', function(req, res){
 		});
 		console.log(errors);
 	} else {
-		var queryString3 = `INSERT INTO OUWXC.user(username, email, password, first, last, create_time) VALUES ("${username}", "${email}", "${password}", "${firstname}", "${lastname}", "role", NOW())`;
-  		db.query(queryString3, function(err, result) {
-    		console.log(err)
-    		console.log(result)
-			// render add user page again with successful message if success...
-		});
+		queries.add_user(req.body, function(err, result){
+			console.log(result);
+		})
 
-		/*res.render('admin_add_user.pug', {
+		res.render('admin_add_user.pug', {
 			message: 'User successfully added!'
-		});*/
+		});
 	}
 
 	console.log(req.body);
 });
 
 passport.use(new LocalStrategy( function(username, password, done){
-	if((typeof username !== 'undefined')){
-		var queryString = `SELECT * FROM OUWXC.user WHERE username="${username}"`;
-		db.query(queryString, function(err, rows, fields) {
-			if (err) throw err;
-			if (rows.length > 0){
-				if(password === rows[0].password){
-					console.log('Correct password!');
-					/*res.redirect('/home');*/
-					done(null, {id: username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role});
-					console.log('Did we make it here?');
-        		} else {
-					console.log('Incorrect Password');
-					done(null, false, {message: 'Incorrect Password'});
-					/*res.redirect('/');*/
-				}
-			} else {
-				console.log('Not a user');
-				done(null, false, {message: 'Not a user!'});
-				/*res.redirect('/');*/
-			}
-		});
-	}
+	queries.authenticate({user: username, pass: password}, function(err, result){
+		done(null,result);
+	})
 }));
+
+router.post('/workoutentry', function(req, res){
+	req.body.user = req.user.id;
+
+	//console.log(req.body);
+	queries.add_workout(req.body, function(err, result){
+		console.log("Affected Rows: " + result.affectedRows);
+		if(result.affectedRows > 0)
+		{
+			res.render('workoutentry.pug', {
+				message: 'Workout successfully added'
+			});
+		}
+	})
+});
 
 passport.serializeUser(function(user, done){
 	done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done){
-	var queryString = `SELECT * FROM OUWXC.user WHERE username="${id}"`;
-	db.query(queryString, function(err, rows, fields) {
-		if (err) throw err;
-		if (rows.length > 0){
-			done(null, {id: id, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role});
-		}
+	queries.get_user({user: id}, function(err, result){
+		done(null, result);
 	})
 });
 
 
 router.post('/',
-	passport.authenticate('local', {successRedirect: '/home', failureRedirect: '/login', failureFlash: true}),
+	passport.authenticate('local', {successRedirect: '/home', failureRedirect: '/', failureFlash: true}),
 	function(req, res){
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
@@ -186,35 +187,39 @@ router.post('/',
 
 router.post("/admin_add_user_form", function(req, res){
   console.log(req.body)
-  var newusername = req.body.newusername;
-  var newuserpw = req.body.newuserpw;
-  var newuserfirst = req.body.newuserfirst;
-  var newuserlast = req.body.newuserlast;
-  var newuseremail = req.body.newuseremail;
 
-  var queryString3 = `INSERT INTO OUWXC.user(username, email, password, first, last, create_time) VALUES ("${newusername}", "${newuseremail}", "${newuserpw}", "${newuserfirst}", "${newuserlast}", NOW())`;
-  db.query(queryString3, function(err, result) {
-    console.log(err)
-    console.log(result)
-  });
+  queries.add_user(req.body, function(err, result){
+		console.log(result);
+		if(result.affectedRows > 0)
+		{
+			console.log("successfully added user");
+		}
+	})
 
   res.redirect('/admin_add_user');
 });
 
 //ADMIN REMOVE USER FORM PARSER
 router.post("/admin_remove_user_form", function(req, res){
-  console.log(req.body.newuserfirstname)
-  console.log(req.body.newuserlastname)
-  var newuserfirstname = req.body.newuserfirstname;
-  var newuserlastname = req.body.newuserlastname;
+  console.log(req.body.removeusername)
+  console.log(req.body.removelastname)
 
-  var queryString4 = `DELETE FROM OUWXC.user WHERE username="${newuserfirstname}" AND password="${newuserlastname}"`;
-  db.query(queryString4, function(err, result) {
-    console.log(err)
-    console.log(result)
-  });
+  	queries.remove_user(req.body, function(err, result){
+		console.log("Affected Rows: " + result.affectedRows);
+		if(result.affectedRows > 0)
+		{
+			console.log("successfully removed user");
+		}
+	})
 
   res.redirect('/admin_add_user');
 });
+
+
+router.post("/myworkouts", function(req, res){
+	queries.get_workouts(req.body, function(err, result){
+		console.log(result);
+	})
+})
 
 module.exports = router;
