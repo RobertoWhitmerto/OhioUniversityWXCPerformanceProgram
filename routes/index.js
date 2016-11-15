@@ -154,12 +154,12 @@ router.post('/register', function(req, res){
 	req.checkBody('newuserfirst', 'First name is required').notEmpty();
 	req.checkBody('newuserlast', 'Last name is required').notEmpty();
 	req.checkBody('newuserpw', 'Password is required').notEmpty();
-	req.checkBody('newuserpw2', 'Passwords do not match').equals(req.body.newuserpw);
 
 	var errors = req.validationErrors();
 
 	if(errors){
 		res.render('admin_add_user.pug', {
+			message: 'Error! User not added.',
 			errors: errors
 		});
 		console.log(errors);
@@ -215,7 +215,7 @@ router.post('/',
 		// 'req.user' contains the authenticated user.
 		res.redirect('/home');
 });
-
+/*
 router.post("/admin_add_user_form", function(req, res){
   console.log(req.body)
 
@@ -228,7 +228,7 @@ router.post("/admin_add_user_form", function(req, res){
 	})
 
   res.redirect('/admin_add_user');
-});
+});*/
 
 //ADMIN REMOVE USER FORM PARSER
 router.post("/admin_remove_user_form", function(req, res){
