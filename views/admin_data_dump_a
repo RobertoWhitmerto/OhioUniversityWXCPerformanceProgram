@@ -35,7 +35,7 @@ html
     // Navbar up at the top
     nav
       .nav-wrapper.grey.darken-3
-        a.brand-logo Athlete Visibility
+        a.brand-logo Athlete Data Dump
         ul.right.hide-on-med-and-down
           li
             a.waves-effect.waves-light.btn.grey.darken-1(href='/home') Home
