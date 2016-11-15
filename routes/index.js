@@ -113,6 +113,9 @@ router.get('/about',
 					var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
 		            var str = '';
 		            for (var i = 0; i < array.length; i++) {
+		            	if(i == 0){
+		            		str += 'athlete,date,sleep,health_status,Illness,Injury,percent_health,cycle_start,RPE,time,distance,notes,workoutID\r\n';
+		            	}
 		                var line = '';
 		                for (var index in array[i]) {
 		                    if (line != '') line += ','
