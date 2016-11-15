@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Athlete Visibilty
+    title Athlete Data Dump
     // Materialize CSS imports [head]
     // Import Google Icon Font
     link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
@@ -25,7 +25,7 @@ html
         a(href='#!') View Athletes
     ul#Administrators.dropdown-content
       li
-        a(href='/admin_athlete_vis') View athletes and workouts
+        a(href='/admin_data_dump_a') View athletes and workouts
       li.divider
       li
         a(href='/admin_add_user') Add a user
@@ -35,7 +35,7 @@ html
     // Navbar up at the top
     nav
       .nav-wrapper.grey.darken-3
-        a.brand-logo Athlete Visibility
+        a.brand-logo Athlete Data Dump
         ul.right.hide-on-med-and-down
           li
             a.waves-effect.waves-light.btn.grey.darken-1(href='/home') Home
@@ -60,26 +60,14 @@ html
           .card.grey.darken-3
             .card-content.white-text
               span.card-title
-                center Athlete Visibility
+                center Athlete Data Dump (CSV)
               form
-                | Athlete's First Name:
-                input(type='text', name='newuserfirstname')
-                br
-                br
-                | 						Athlete's Last Name:
-                input(type='text', name='newuserlastname')
-                br
-                br
-                | 						New Access User's First Name:
-                input(type='text', name='newuseraccessfirst')
-                br
-                br
-                | 						New Access User's Last Name:
-                input(type='text', name='newuseraccesslast')
+                | Athlete's User Name:
+                input(type='text', name='datadumpusr')
                 br
                 br
                 button.btn.waves-effect.waves-light.green(type='submit', name='action')
-                  | Add New User Access
+                  | Download CSV File
                   i.material-icons.right send
     // Materialize CSS imports [body]
     // put this at the end of the body

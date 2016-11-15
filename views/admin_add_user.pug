@@ -63,7 +63,15 @@ html
                 center
                   p.fonts Create a new user:
               center
-                form(action='/admin_add_user_form', method='post')
+                -if(message)
+                  p
+                    = message
+                -if(errors)
+                  each error in errors
+                    p
+                      = error.msg 
+                br
+                form(action='/register', method='post')
                   | New username: 
                   input(type='text', name='newusername', required='')
                   br
