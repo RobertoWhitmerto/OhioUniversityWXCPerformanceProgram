@@ -4,7 +4,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var queries = require('./queries');
 var db = require('./db');
-
+var child = require('child_process');
+var filesystem = require('fs');
 
 
 // Get Homepage
@@ -95,12 +96,42 @@ router.get('/admin_remove_user', function(req, res){
 });
 
 // About Page
-router.get('/about', function(req, res){
-	if(req.isAuthenticated()){
-		res.render('about.pug');
-	} else {
-		res.redirect('/');
-	}
+router.get('/about',
+        function(req, res){
+			if(req.isAuthenticated()){
+				var objArray;
+				var csv_data;
+				
+				//access workout info through [] index operator, rows of query returned
+				var workouts;
+		
+				queries.get_workouts({user: req.user.id}, function(err, result){
+					workouts = result;
+					objArray = workouts;
+					//console.log(objArray);
+					
+					var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+		            var str = '';
+		            for (var i = 0; i < array.length; i++) {
+		                var line = '';
+		                for (var index in array[i]) {
+		                    if (line != '') line += ','
+		 
+		                    line += array[i][index];
+		                }
+		                str += line + '\r\n';
+		            }
+		            console.log(str);
+		            filesystem.writeFile('datadump.txt', str, function (err) {
+					  if (err) throw err;
+					  console.log('It\'s saved!');
+					});
+				});
+				res.download('datadump.txt', 'datadump.txt');
+				//res.render('about.pug');
+			} else {
+				res.redirect('/');
+			}
 });
 
 // Remove User

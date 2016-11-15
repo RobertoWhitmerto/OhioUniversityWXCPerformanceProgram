@@ -1,0 +1,3 @@
+roberto,Tue Nov 15 2016 01:08:33 GMT+0000 (UTC),01,null,asdasdasdasd,sdfgdfgdfg,12,0,0,0,0,hello world,18
+roberto,Tue Nov 15 2016 00:46:51 GMT+0000 (UTC),06,null,Cold,None,71,0,0,0,0,I've been sick with a cold/cough,17
+roberto,Mon Nov 14 2016 01:34:42 GMT+0000 (UTC),10,null,none,none,32,0,0,0,0,,16
