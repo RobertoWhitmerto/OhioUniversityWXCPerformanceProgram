@@ -11,10 +11,11 @@ var insertData = `INSERT INTO OUWXC.athlete_data (
 			cycle_start, 
 			notes)`;
 
-var insertUser = `INSERT IGNORE INTO OUWXC.user(username, email, password, first, last, create_time)`;
+var insertUser = `INSERT IGNORE INTO OUWXC.user(username, email, password, first, last, create_time, team)`;
 var deleteUser = `DELETE FROM OUWXC.user`;
 var getUser = `SELECT * FROM OUWXC.user`;
 var selectWorkouts = `SELECT * FROM OUWXC.athlete_data`;
+var updateData = `UPDATE OUWXC.user`;
 
 
 function get_query(query, input, queryString) {
@@ -33,7 +34,7 @@ function get_query(query, input, queryString) {
 	else if(query == "insertU")
 	{
 		string = insertUser;
-		string += ` VALUES ( "${input.newusername}", "${input.newuseremail}", "${input.newuserpw}", "${input.newuserfirst}", "${input.newuserlast}", NOW() )`;
+		string += ` VALUES ( "${input.newusername}", "${input.newuseremail}", "${input.newuserpw}", "${input.newuserfirst}", "${input.newuserlast}", NOW(), "${input.newuserteam}" )`;
 	}
 	else if(query == "remove")
 	{
@@ -49,6 +50,11 @@ function get_query(query, input, queryString) {
 	{
 		string = selectWorkouts;
 		string += ` WHERE athlete="${input.user}" ORDER BY date DESC LIMIT 10`;
+	}
+	else if(query == "addteam")
+	{
+		string = updateData;
+		string += ` SET team = "${input.team}" WHERE username="${input.username}"`;
 	}
 	else
 	{
@@ -143,10 +149,21 @@ function get_workouts(input, done){
 	});
 }
 
+function add_team(input, done){
+
+	exec_query("addteam", input, function(err, rows, fields) {
+
+		if(err) { return done(err);}
+		if(row.length == 0){return done({message: "Could not add team"})}
+		done(null, rows);
+	})
+}
+
 module.exports.exec_query = exec_query;
 module.exports.authenticate = authenticate;
 module.exports.get_user = get_user;
 module.exports.remove_user = remove_user;
 module.exports.add_user = add_user;
-module.exports.add_workout = add_workout
-module.exports.get_workouts = get_workouts
+module.exports.add_workout = add_workout;
+module.exports.get_workouts = get_workouts;
+module.exports.add_team = add_team;

@@ -8,7 +8,7 @@ var child = require('child_process');
 var filesystem = require('fs');
 
 
-// Get Homepage
+// Get Login Page
 router.get('/', function(req, res){
 	res.render('site.pug');
 });
@@ -22,7 +22,7 @@ router.get('/register', function(req, res){
 	}
 });
     
-// Login
+// Home Page
 router.get('/home', function(req, res){
 	if(req.isAuthenticated()){
 		res.render('signin.pug');
