@@ -9,39 +9,49 @@ html
     link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
     // Let browser know website is optimized for mobile
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    .card-panel.grey.darken-3
-      .card-content.green-text
-        center
-          h3 Welcome to the Ohio University Women's Cross Country Performance Program 
-  body(style='background-color:black;')
-    br
-    br
-    br
+  body(background='bg.jpg')
     br
     br
     br
     .container
       .row
         .col.s12.m6.offset-m3
-          .card.grey.darken-3
-            .card-content.green-text
-              span.card-title
-                center Sign-in:
-              form(action='/', method='post')
-                i.material-icons.prefix account_circle
-                input(type='text', placeholder='Username', name='username', required='')
-                br
-                br
-                i.material-icons.prefix vpn_key
-                input(type='password', placeholder='Password', name='password', required='')
-                br
-                br
-                button.btn.waves-effect.waves-orange.green(type='submit', name='action')
-                  | Submit
-                  i.material-icons.right send
-    // Materialize CSS imports [body]
-    // put this at the end of the body
-    // Import jQuery before materialize.js
-    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
-    script(type='text/javascript', src='js/materialize.min.js')
- 
+          .card.blue.accent-4
+            .card-content.white-text
+              .container
+                .row
+                  .col.s12.m12
+                    .card.blue.accent-2
+                      .card-content.white-text
+                        span.card-title
+                          center
+                            b
+                              p.fonts OU WxC Performance Application
+                center
+                  .row
+                    .col.s12.m12
+                      .card.blue.accent-2
+                        .card-content.white-text
+                          span.card-title Log in:
+                          form(action='/', method='post')
+                            i.material-icons.prefix account_circle
+                            input(type='text', placeholder='Username', name='username', required='')
+                            br
+                            br
+                            i.material-icons.prefix vpn_key
+                            input(type='password', placeholder='Password', name='password', required='')
+                            br
+                            br
+                            button.btn.waves-effect.waves-orange.blue.accent-4(type='submit', name='action')
+                              | Log in
+                              i.material-icons.right send
+                  .card-action
+                    center
+                      b
+                        h6
+                          font(color='grey') Team on a Cob 2016
+      // Materialize CSS imports [body]
+      // put this at the end of the body
+      // Import jQuery before materialize.js
+      script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+      script(type='text/javascript', src='js/materialize.min.js')
