@@ -9,46 +9,109 @@ html
     link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
     // Let browser know website is optimized for mobile
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-  body(style='background:black;')
-    header
-      font(color='green')
-        h3  OU WxC Performance Application 
-    // Drop down associations
-    ul#Athletes.dropdown-content
-      li
-        a(href='/workoutentry') Enter a workout
-      li.divider
-      li
-        a(href='/myworkouts') View past workouts
-    ul#CoachesTrainers.dropdown-content
-      li
-        a(href='#!') View Athletes
-    ul#Administrators.dropdown-content
-      li
-        a(href='/admin_athlete_vis') View athletes and workouts
-      li.divider
-      li
-        a(href='/admin_add_user') Add a user
-      li.divider
-      li
-        a(href='/admin_remove_user') Remove a user
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script.
+      $(document).ready(function(){
+      $(".dropdown-button").dropdown();
+      $(".button-collapse").sideNav();
+      });
+  .row
+    .col.s12.m6.offset-m3
+      .card.blue-grey.lighten-1
+        .card-content.white-text
+          span.card-title
+            h3
+              center OU WxC Performance Application
+  body(background='bg3.jpg')
     // Navbar up at the top
     nav
-      .nav-wrapper.grey.darken-3
+      .nav-wrapper.blue-grey.darken-2
         a.brand-logo Home
+        a.button-collapse(href='#', data-activates='mobile-demo')
+          i.material-icons menu
         ul.right.hide-on-med-and-down
           li
-            a.waves-effect.waves-light.btn.grey.darken-1(href='/home') Home
+            a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/home') Home
           li
-            a.waves-effect.waves-light.btn.grey.darken-1(href='/about') About
+            a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
           li
-            a.dropdown-button.btn.green.lighten-1(href='#', data-activates='Athletes') Athletes
+            a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
+              | Athletes
+              i.material-icons.right arrow_drop_down
           li
-            a.dropdown-button.btn.blue.lighten-1(href='#', data-activates='CoachesTrainers') Coaches/Trainers
+            a.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
+              | Coaches/Trainers
+              i.material-icons.right arrow_drop_down
           li
-            a.dropdown-button.btn.red.lighten-1(href='#', data-activates='Administrators') Administrators
+            a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
+              | Administrators
+              i.material-icons.right arrow_drop_down
           li
             a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
+      // Drop down associations Non-Mobile
+      ul#Athletes.dropdown-content
+        li
+          a(href='/workoutentry') Enter a workout
+        li.divider
+        li
+          a(href='/myworkouts') View past workouts
+      ul#CoachesTrainers.dropdown-content
+        li
+          a(href='#!') View Athletes
+      ul#Administrators.dropdown-content
+        li
+          a(href='/admin_data_dump_a') CSV Data Dump (Individual)
+        li.divider
+        li
+          a(href='/admin_add_user') Add a user
+        li.divider
+        li
+          a(href='/admin_remove_user') Remove a user
+      // Hambug Menu Options
+      ul#mobile-demo.side-nav.amber.lighten-5
+        li
+          font(color='green')
+            h5 Athletes
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') Enter a Workout
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') View Past Workouts
+        li.divider
+        li
+          font(color='blue')
+            h5 Trainers
+        li.divider
+        li
+          a.waves-effect.waves-light.btn-large.blue.darken-3(href='#') View Athletes
+        li.divider
+        li
+          font(color='red')
+            h5 Administrators
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_data_dump_a') CSV Data Dump (Individual)
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
+        li.divider
+        li
+          br
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
+        li.divider
+        li
+          a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
+        li.divider
+        li
+          font(color='grey')
+            h6
+              center Team on a Cob 2016
     br
     br
     br
@@ -95,7 +158,7 @@ html
                   center
                     p.fonts Administrators
                 center
-                  a.waves-effect.waves-light.btn.red.darken-3(href='/admin_athlete_vis') View Athletes and Workouts
+                  a.waves-effect.waves-light.btn.red.darken-3(href='/admin_data_dump_a') CSV Data Dump (Individual)
                   br
                   br
                   br
