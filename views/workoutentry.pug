@@ -9,46 +9,109 @@ html
     link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
     // Let browser know website is optimized for mobile
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-  body(style='background:black;')
-    header
-      font(color='green')
-        h1  OU WxC Performance Application 
-    // Drop down associations
-    ul#Athletes.dropdown-content
-      li
-        a(href='/workoutentry') Enter a workout
-      li.divider
-      li
-        a(href='/myworkouts') View past workouts
-    ul#CoachesTrainers.dropdown-content
-      li
-        a(href='#!') View Athletes
-    ul#Administrators.dropdown-content
-      li
-        a(href='/admin_athlete_vis') View athletes and workouts
-      li.divider
-      li
-        a(href='/admin_add_user') Add a user
-      li.divider
-      li
-        a(href='/admin_remove_user') Remove a user
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script.
+      $(document).ready(function(){
+      $(".dropdown-button").dropdown();
+      $(".button-collapse").sideNav();
+      });
+  .row
+    .col.s12.m6.offset-m3
+      .card.blue-grey.lighten-1
+        .card-content.white-text
+          span.card-title
+            h3
+              center OU WxC Performance Application
+  body(background='bg3.jpg')
     // Navbar up at the top
     nav
-      .nav-wrapper.grey.darken-3
-        a.brand-logo Enter a Workout
+      .nav-wrapper.blue-grey.darken-2
+        a.brand-logo My Workout
+        a.button-collapse(href='#', data-activates='mobile-demo')
+          i.material-icons menu
         ul.right.hide-on-med-and-down
           li
-            a.waves-effect.waves-light.btn.grey.darken-1(href='/home') Home
+            a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/home') Home
           li
-            a.waves-effect.waves-light.btn.grey.darken-1(href='/about') About
+            a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
           li
-            a.dropdown-button.btn.green.lighten-1(href='#', data-activates='Athletes') Athletes
+            a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
+              | Athletes
+              i.material-icons.right arrow_drop_down
           li
-            a.dropdown-button.btn.blue.lighten-1(href='#', data-activates='CoachesTrainers') Coaches/Trainers
+            a.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
+              | Coaches/Trainers
+              i.material-icons.right arrow_drop_down
           li
-            a.dropdown-button.btn.red.lighten-1(href='#', data-activates='Administrators') Administrators
+            a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
+              | Administrators
+              i.material-icons.right arrow_drop_down
           li
             a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
+      // Drop down associations Non-Mobile
+      ul#Athletes.dropdown-content
+        li
+          a(href='/workoutentry') Enter a workout
+        li.divider
+        li
+          a(href='/myworkouts') View past workouts
+      ul#CoachesTrainers.dropdown-content
+        li
+          a(href='#!') View Athletes
+      ul#Administrators.dropdown-content
+        li
+          a(href='/admin_data_dump_a') CSV Data Dump (Individual)
+        li.divider
+        li
+          a(href='/admin_add_user') Add a user
+        li.divider
+        li
+          a(href='/admin_remove_user') Remove a user
+      // Hambug Menu Options
+      ul#mobile-demo.side-nav.amber.lighten-5
+        li
+          font(color='green')
+            h5 Athletes
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') Enter a Workout
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') View Past Workouts
+        li.divider
+        li
+          font(color='blue')
+            h5 Trainers
+        li.divider
+        li
+          a.waves-effect.waves-light.btn-large.blue.darken-3(href='#') View Athletes
+        li.divider
+        li
+          font(color='red')
+            h5 Administrators
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_data_dump_a') CSV Data Dump (Individual)
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
+        li.divider
+        li
+          br
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
+        li.divider
+        li
+          a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
+        li.divider
+        li
+          font(color='grey')
+            h6
+              center Team on a Cob 2016
     br
     br
     br
@@ -57,157 +120,195 @@ html
     body
       .row
         .col.s12.m5.offset-m3
-          .card.light-blue.darken-4
+          .card.indigo.accent-4
             .card-content.cyan-text
               span.card-title
                 center
-                  p.fonts My Workout
-              form(action='/workoutentry', method='post')
-                br
-                label Month
-                select.browser-default(name='month')
-                  option(name='month', value='invalidmonth') --
-                  option(name='month', value='January') January
-                  option(name='month', value='February') February
-                  option(name='month', value='March') March
-                  option(name='month', value='April') April
-                  option(name='month', value='May') May
-                  option(name='month', value='June') June
-                  option(name='month', value='July') July
-                  option(name='month', value='August') August
-                  option(name='month', value='September') September
-                  option(name='month', value='October') October
-                  option(name='month', value='November') November
-                  option(name='month', value='December') December
-                br
-                br
-                label Day of month
-                select.browser-default(name='day')
-                  option(name='day', value='dayinvalid') --
-                  option(name='day', value='day1') 1
-                  option(name='day', value='day2') 2
-                  option(name='day', value='day3') 3
-                  option(name='day', value='day4') 4
-                  option(name='day', value='day5') 5
-                  option(name='day', value='day6') 6
-                  option(name='day', value='day7') 7
-                  option(name='day', value='day8') 8
-                  option(name='day', value='day9') 9
-                  option(name='day', value='day10') 10
-                  option(name='day', value='day11') 11
-                  option(name='day', value='day12') 12
-                  option(name='day', value='day13') 13
-                  option(name='day', value='day14') 14
-                  option(name='day', value='day15') 15
-                  option(name='day', value='day16') 16
-                  option(name='day', value='day17') 17
-                  option(name='day', value='day18') 18
-                  option(name='day', value='day19') 19
-                  option(name='day', value='day20') 20
-                  option(name='day', value='day21') 21
-                  option(name='day', value='day22') 22
-                  option(name='day', value='day23') 23
-                  option(name='day', value='day24') 24
-                  option(name='day', value='day25') 25
-                  option(name='day', value='day26') 26
-                  option(name='day', value='day27') 27
-                  option(name='day', value='day28') 28
-                  option(name='day', value='day29') 29
-                  option(name='day', value='day30') 30
-                  option(name='day', value='day31') 31
-                br
-                br
-                label Hours of sleep
-                select.browser-default(name='sleephours')
-                  option(name='sleephours', value='sleepinvalid') --
-                  option(name='sleephours', value='0') 0
-                  option(name='sleephours', value='1') 1
-                  option(name='sleephours', value='2') 2
-                  option(name='sleephours', value='3') 3
-                  option(name='sleephours', value='4') 4
-                  option(name='sleephours', value='5') 5
-                  option(name='sleephours', value='6') 6
-                  option(name='sleephours', value='7') 7
-                  option(name='sleephours', value='8') 8
-                  option(name='sleephours', value='9') 9
-                  option(name='sleephours', value='10') 10
-                  option(name='sleephours', value='11') 11
-                  option(name='sleephours', value='12') 12
-                  option(name='sleephours', value='13') 13
-                  option(name='sleephours', value='14') 14
-                  option(name='sleephours', value='15') 15
-                  option(name='sleephours', value='16') 16
-                  option(name='sleephours', value='17') 17
-                  option(name='sleephours', value='18') 18
-                  option(name='sleephours', value='19') 19
-                  option(name='sleephours', value='20') 20
-                  option(name='sleephours', value='21') 21
-                  option(name='sleephours', value='22') 22
-                  option(name='sleephours', value='23') 23
-                  option(name='sleephours', value='24') 24
-                br
-                br
-                label Health status
-                input(type='text', name='healthstatus')
-                br
-                br
-                label Illness
-                input(type='text', name='illness')
-                br
-                br
-                label Injury
-                input(type='text', name='injury')
-                br
-                br
-                label % of full health
-                p.range-field.white
-                  input#opt0(name='myhealth', type='range', min='0', max='100', value='1', step='1')
-                br
-                br
-                label Start of cycle
-                br
-                input#opt1.with-gap(name='cycle', type='radio', checked='', value='no')
-                label(name='cycle', for='opt1') No
-                input#opt2.with-gap(name='cycle', type='radio', value='yes')
-                label(name='cycle', for='opt2') Yes
-                br
-                br
-                label RPE (6-20)
-                select.browser-default(name='rpeval')
-                  option(name='rpeval', value='rpeinvalid') --
-                  option(name='rpeval', value='6') 6
-                  option(name='rpeval', value='7') 7
-                  option(name='rpeval', value='8') 8
-                  option(name='rpeval', value='9') 9
-                  option(name='rpeval', value='10') 10
-                  option(name='rpeval', value='11') 11
-                  option(name='rpeval', value='12') 12
-                  option(name='rpeval', value='13') 13
-                  option(name='rpeval', value='14') 14
-                  option(name='rpeval', value='15') 15
-                  option(name='rpeval', value='16') 16
-                  option(name='rpeval', value='17') 17
-                  option(name='rpeval', value='18') 18
-                  option(name='rpeval', value='19') 19
-                  option(name='rpeval', value='20') 20
-                br
-                br
-                label Time:
-                input(type='text', placeholder='h:mm:ss', name='time', required='')
-                br
-                br
-                label Distance:
-                input(type='text', name='distance')
-                br
-                br
-                br
-                .row
-                  .input-field.col.s12
-                    textarea#textarea1.materialize-textarea(length='256', name='mynotes')
-                    label(name='notes', for='textarea1') My Notes
-                br
-                br
-                button.btn.waves-effect.waves-light.red(type='submit', name='action')
+                  p.fonts
+                    b My Workout
+              .row
+                .col.s12.m12
+                  .card.light-blue.darken-4
+                    .card-content.cyan-text
+                      span.card-title Date Information:
+                      form(action='/workoutentry', method='post')
+                        br
+                        center
+                          a.waves-effect.waves-light.btn.light-green(onclick='myFunction()') Autofill - Today
+                        br
+                        script.
+                          function myFunction() {
+                          var d = new Date();
+                          var n = d.getDate();
+                          var m = d.getMonth();
+                          document.getElementById("month").selectedIndex = m + 1;
+                          document.getElementById("day").selectedIndex = n;
+                          }
+                        label Month
+                        select#month.browser-default(name='month')
+                          option(name='month', value='invalidmonth') --
+                          option(name='month', value='January') January
+                          option(name='month', value='February') February
+                          option(name='month', value='March') March
+                          option(name='month', value='April') April
+                          option(name='month', value='May') May
+                          option(name='month', value='June') June
+                          option(name='month', value='July') July
+                          option(name='month', value='August') August
+                          option(name='month', value='September') September
+                          option(name='month', value='October') October
+                          option(name='month', value='November') November
+                          option(name='month', value='December') December
+                        br
+                        br
+                        label Day of month
+                        select#day.browser-default(name='day')
+                          option(name='day', value='dayinvalid') --
+                          option(name='day', value='day1') 1
+                          option(name='day', value='day2') 2
+                          option(name='day', value='day3') 3
+                          option(name='day', value='day4') 4
+                          option(name='day', value='day5') 5
+                          option(name='day', value='day6') 6
+                          option(name='day', value='day7') 7
+                          option(name='day', value='day8') 8
+                          option(name='day', value='day9') 9
+                          option(name='day', value='day10') 10
+                          option(name='day', value='day11') 11
+                          option(name='day', value='day12') 12
+                          option(name='day', value='day13') 13
+                          option(name='day', value='day14') 14
+                          option(name='day', value='day15') 15
+                          option(name='day', value='day16') 16
+                          option(name='day', value='day17') 17
+                          option(name='day', value='day18') 18
+                          option(name='day', value='day19') 19
+                          option(name='day', value='day20') 20
+                          option(name='day', value='day21') 21
+                          option(name='day', value='day22') 22
+                          option(name='day', value='day23') 23
+                          option(name='day', value='day24') 24
+                          option(name='day', value='day25') 25
+                          option(name='day', value='day26') 26
+                          option(name='day', value='day27') 27
+                          option(name='day', value='day28') 28
+                          option(name='day', value='day29') 29
+                          option(name='day', value='day30') 30
+                          option(name='day', value='day31') 31
+                        br
+                        br
+              .row
+                .col.s12.m12
+                  .card.light-blue.darken-4
+                    .card-content.cyan-text
+                      span.card-title Workout Information:
+                      br
+                      label Hours of sleep
+                      p.range-field.white
+                        input#opt0(name='sleephours', type='range', min='0', max='14', value='0', step='0.5')
+                      br
+                      br
+                      label Health status
+                      select.browser-default(name='healthstatus')
+                        option(name='healthstatus', value='healthy') Healthy
+                        option(name='healthstatus', value='fatigued') Fatigued
+                        option(name='healthstatus', value='illness') Illness
+                        option(name='healthstatus', value='injured') Injured
+                      br
+                      br
+                      label Illness
+                      select.browser-default(name='illness')
+                        option(name='illness', value='n/a') N/A
+                        option(name='illness', value='fever') Fever
+                        option(name='illness', value='gi_distress') GI Distress
+                        option(name='illness', value='upper_respiratory') Upper Respiratory
+                        option(name='illness', value='abnormal_fatigue') Abnormal Fatigue
+                        option(name='illness', value='insomnia') Insomnia
+                        option(name='illness', value='irritability') Irritability
+                        option(name='illness', value='decreased_motivation') Decreased Motivation
+                        option(name='illness', value='weight_loss') Weight Loss
+                        option(name='illness', value='chronic_soreness') Chronic Soreness
+                      br
+                      br
+                      label Injury
+                      select.browser-default(name='injury')
+                        option(name='injury', value='n/a') N/A
+                        option(name='injury', value='foot_arch') Foot Arch
+                        option(name='injury', value='Heel') Heel
+                        option(name='injury', value='tibia') Tibia
+                        option(name='injury', value='knee') Knee
+                        option(name='injury', value='it_band') IT Band
+                        option(name='injury', value='hip') Hip
+                        option(name='injury', value='low_back') Low Back
+                        option(name='injury', value='pelvis') Pelvis
+                        option(name='injury', value='rib') Rib
+                      br
+                      br
+                      label % of full health
+                      p.range-field.white
+                        input#opt0(name='myhealth', type='range', min='0', max='100', value='0', step='10')
+                      br
+                      br
+                      label Start of cycle
+                      br
+                      input#opt1.with-gap(name='cycle', type='radio', checked='', value='no')
+                      label(name='cycle', for='opt1') No
+                      input#opt2.with-gap(name='cycle', type='radio', value='yes')
+                      label(name='cycle', for='opt2') Yes
+                      br
+                      br
+                      label RPE (6-20)
+                      select.browser-default(name='rpeval')
+                        option(name='rpeval', value='rpeinvalid') --
+                        option(name='rpeval', value='6') 6
+                        option(name='rpeval', value='7') 7
+                        option(name='rpeval', value='8') 8
+                        option(name='rpeval', value='9') 9
+                        option(name='rpeval', value='10') 10
+                        option(name='rpeval', value='11') 11
+                        option(name='rpeval', value='12') 12
+                        option(name='rpeval', value='13') 13
+                        option(name='rpeval', value='14') 14
+                        option(name='rpeval', value='15') 15
+                        option(name='rpeval', value='16') 16
+                        option(name='rpeval', value='17') 17
+                        option(name='rpeval', value='18') 18
+                        option(name='rpeval', value='19') 19
+                        option(name='rpeval', value='20') 20
+                      br
+                      br
+                      label Time:
+                      input(type='text', placeholder='h:mm:ss', name='time', required='')
+                      br
+                      br
+                      label Distance:
+                      input(type='text', placeholder='8.03', name='distance')
+                      br
+                      br
+                      label Surface:
+                      select.browser-default(name='surface')
+                        option(name='surface', value='unknown') --
+                        option(name='surface', value='track') Track
+                        option(name='surface', value='trail') Trail
+                        option(name='surface', value='dirt') Dirt
+                        option(name='surface', value='grass') Grass
+                        option(name='surface', value='concrete/asphalt') Concrete/Asphalt
+                      br
+                      br
+                      br
+              .row
+                .col.s12.m12
+                  .card.light-blue.darken-4
+                    .card-content.cyan-text
+                      span.card-title Extra Information:
+                      .row
+                        .input-field.col.s12
+                          textarea#textarea1.materialize-textarea(length='256', name='mynotes')
+                          label(name='notes', for='textarea1') My Notes
+                      br
+                      br
+              center
+                button.btn.waves-effect.waves-light.light-blue.lighten-1(type='submit', name='action')
                   | Submit My Workout
                   i.material-icons.right send
       p
