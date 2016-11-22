@@ -151,6 +151,14 @@ router.get('/admin_add_user', function(req, res){
 	}
 });
 
+// Data Dump Individual
+router.get('/datadumpindividual', function(req,res){
+	if(req.isAuthenticated()){
+		
+	} else {
+		res.redirect('/');
+	}
+});
 
 // Register a User
 router.post('/register', function(req, res){
