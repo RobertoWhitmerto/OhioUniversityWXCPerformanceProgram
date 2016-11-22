@@ -99,6 +99,24 @@ router.get('/admin_remove_user', function(req, res){
 router.get('/about',
         function(req, res){
 			if(req.isAuthenticated()){
+				res.render('about.pug');
+			} else {
+				res.redirect('/');
+			}
+});
+
+// Remove User
+router.get('/admin_add_user', function(req, res){
+	if(req.isAuthenticated()){
+		res.render('admin_add_user.pug');
+	} else {
+		res.redirect('/');
+	}
+});
+
+// Data Dump Individual
+router.get('/datadumpindividual', function(req, res){
+			if(req.isAuthenticated()){
 				var objArray;
 				var csv_data;
 				
@@ -130,14 +148,6 @@ router.get('/about',
 						  console.log('It\'s saved!');
 						  res.download('datadump.csv', 'datadump.csv');
 						});
-						/*child.exec('rm *.txt', (error, stdout, stderr) => {
-						  if (error) {
-						    console.error(`exec error: ${error}`);
-						    return;
-						  }
-						  console.log(`stdout: ${stdout}`);
-						  console.log(`stderr: ${stderr}`);
-						});*/
 					}
 					else{
 						res.redirect('/home');
@@ -148,24 +158,6 @@ router.get('/about',
 			} else {
 				res.redirect('/');
 			}
-});
-
-// Remove User
-router.get('/admin_add_user', function(req, res){
-	if(req.isAuthenticated()){
-		res.render('admin_add_user.pug');
-	} else {
-		res.redirect('/');
-	}
-});
-
-// Data Dump Individual
-router.get('/datadumpindividual', function(req,res){
-	if(req.isAuthenticated()){
-		res.render('admin_data_dump_a.pug');
-	} else {
-		res.redirect('/');
-	}
 });
 
 // Register a User
