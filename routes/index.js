@@ -154,7 +154,7 @@ router.get('/admin_add_user', function(req, res){
 // Data Dump Individual
 router.get('/datadumpindividual', function(req,res){
 	if(req.isAuthenticated()){
-		
+		res.render('admin_data_dump_a.pug');
 	} else {
 		res.redirect('/');
 	}
