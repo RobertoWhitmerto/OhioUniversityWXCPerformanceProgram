@@ -117,7 +117,7 @@ router.get('/admin_add_user', function(req, res){
 // Data Dump Individual
 router.get('/datadumpindividual', function(req, res){
 			if(req.isAuthenticated()){
-				var objArray;
+				/*var objArray;
 				var csv_data;
 				
 				//access workout info through [] index operator, rows of query returned
@@ -154,10 +154,18 @@ router.get('/datadumpindividual', function(req, res){
 					}
 				});
 				
-				//res.render('about.pug');
+				//res.render('about.pug');*/
+				res.render('admin_data_dump_a.pug');
 			} else {
 				res.redirect('/');
 			}
+});
+
+router.post('/getdatadumpind', function(req, res) {
+	console.log(req.body);
+    res.render('admin_data_dump_a.pug', {
+			message: 'User ID received!'
+	});
 });
 
 // Register a User
