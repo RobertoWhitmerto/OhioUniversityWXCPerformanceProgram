@@ -125,11 +125,19 @@ router.get('/about',
 			                str += line + '\r\n';
 			            }
 			            console.log(str);
-			            filesystem.writeFile('datadump.txt', str, function (err) {
+			            filesystem.writeFile('datadump.csv', str, function (err) {
 						  if (err) throw err;
 						  console.log('It\'s saved!');
-						  res.download('datadump.txt', 'datadump.txt');
+						  res.download('datadump.csv', 'datadump.csv');
 						});
+						/*child.exec('rm *.txt', (error, stdout, stderr) => {
+						  if (error) {
+						    console.error(`exec error: ${error}`);
+						    return;
+						  }
+						  console.log(`stdout: ${stdout}`);
+						  console.log(`stderr: ${stderr}`);
+						});*/
 					}
 					else{
 						res.redirect('/home');
