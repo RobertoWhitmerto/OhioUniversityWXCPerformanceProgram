@@ -162,10 +162,49 @@ router.get('/datadumpindividual', function(req, res){
 });
 
 router.post('/getdatadumpind', function(req, res) {
+	var username = req.body;
 	console.log(req.body);
-    res.render('admin_data_dump_a.pug', {
-			message: 'User ID received!'
+	
+	var objArray;
+	var csv_data;
+	
+	//access workout info through [] index operator, rows of query returned
+	var workouts;
+
+	queries.get_workouts({user: req.body.datadumpusr}, function(err, result){
+		workouts = result;
+		objArray = workouts;
+		//console.log(result);
+		if(typeof result == 'object'){
+			var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+            var str = '';
+            for (var i = 0; i < array.length; i++) {
+            	if(i == 0){
+            		str += 'athlete,date,sleep,health_status,Illness,Injury,percent_health,cycle_start,RPE,time,distance,notes,workoutID\r\n';
+            	}
+                var line = '';
+                for (var index in array[i]) {
+                    if (line != '') line += ','
+ 
+                    line += array[i][index];
+                }
+                str += line + '\r\n';
+            }
+            console.log(str);
+            filesystem.writeFile('datadump.csv', str, function (err) {
+			  if (err) throw err;
+			  console.log('It\'s saved!');
+			  res.download('datadump.csv', 'datadump.csv');
+			});
+		}
+		else{
+			res.render('admin_data_dump_a.pug');
+		}
 	});
+	
+    /*res.render('admin_data_dump_a.pug', {
+			message: 'User ID received!'
+	});*/
 });
 
 // Register a User
