@@ -53,7 +53,7 @@ function get_query(query, input, queryString) {
 	}
 	else if(query == "getW")
 	{
-		if(input.user != null)
+		if(input.team == null)
 		{
 			string = selectWorkouts;
 			string += ` WHERE athlete="${input.user}" ORDER BY date DESC LIMIT 10`;
@@ -61,7 +61,7 @@ function get_query(query, input, queryString) {
 		else if(input.team != null)
 		{
 			string = selectWorkouts;
-			string += ` WHERE team="${input.team}" ORDER BY date DESC LIMIT 25`;
+			string += ` JOIN OUWXC.user on user.username=athlete_data.athlete AND user.team="${input.team}" ORDER BY athlete_data.date DESC LIMIT 25`;
 		}
 	}
 	else if(query == "addteam")
@@ -84,6 +84,7 @@ function exec_query(query, input, result) {
 
 	get_query(query, input, function(output){
 		queryString = output;
+		console.log(queryString);
 	});
 
 	db.query(queryString, function(err, rows, fields) {
@@ -154,6 +155,9 @@ function add_workout(input, done){
 
 //get a list of workouts from db
 function get_workouts(input, done){
+
+	console.log("getting workouts\n");
+	console.log(input);
 
 	exec_query("getW", input, function(err, rows, fields) {
 
