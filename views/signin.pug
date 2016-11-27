@@ -15,25 +15,19 @@ html
       $(".dropdown-button").dropdown();
       $(".button-collapse").sideNav();
       });
-  .row
-    .col.s12.m6.offset-m3
-      .card.blue-grey.lighten-1
-        .card-content.white-text
-          span.card-title
-            h3
-              center OU WxC Performance Application
   body(background='/views/bg3.jpg')
     // Navbar up at the top
     nav
-      .nav-wrapper.blue-grey.darken-2
-        a.brand-logo Home
+      .nav-wrapper.light-blue.darken-4
+        a.brand-logo
+          font(color='cyan') OU WxC
         a.button-collapse(href='#', data-activates='mobile-demo')
           i.material-icons menu
         ul.right.hide-on-med-and-down
           li
-            a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/home') Home
+            a.dropdown-button.light-blue(href='/home') Home
           li
-            a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
+            a.dropdown-button.light-blue.lighten-1(href='/about') About
           li
             a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
               | Athletes
@@ -95,6 +89,8 @@ html
         li.divider
         li
           a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
         li.divider
         li
           a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
@@ -129,12 +125,14 @@ html
             span.card-title
               center
                 p.fonts Athlete
+                br
             center
               a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') Enter a Workout
               br
               br
               br
               a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') View Past Workouts
+              br
               br
               br
       .row
@@ -145,11 +143,13 @@ html
               span.card-title
                 center
                   p.fonts Coaches/Trainers
+                  br
               center
                 a.waves-effect.waves-light.btn-large.blue.darken-3(href='#') View Athletes
                 br
                 br
                 br
+              br
               br
               br
         // Administrators
@@ -161,17 +161,16 @@ html
                   center
                     p.fonts Administrators
                 center
-                  a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
+                  a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV(Individual)
                   br
                   br
-                  a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpTeam') CSV Data Dump (Team)
-                  br
+                  a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV(Team)
                   br
                   br
                   a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
+                  br
+                  br
                   a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
-                  br
-                  br
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js
