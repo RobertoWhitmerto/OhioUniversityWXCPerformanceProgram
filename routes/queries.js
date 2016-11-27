@@ -1,3 +1,8 @@
+// Database interface for interacting with the OUWXC database
+// TODO: restructure to ask for specific values rather than an entire input value.
+// TODO: reformat queries to be more general and used for different things
+
+
 var db = require("./db");
 
 var authQuery = `SELECT * FROM OUWXC.user`;
@@ -11,13 +16,13 @@ var insertData = `INSERT INTO OUWXC.athlete_data (
 			cycle_start, 
 			notes)`;
 
-var insertUser = `INSERT IGNORE INTO OUWXC.user(username, email, password, first, last, create_time, team)`;
+var insertUser = `INSERT IGNORE INTO OUWXC.user(username, email, password, first, last, create_time, team, role)`;
 var deleteUser = `DELETE FROM OUWXC.user`;
 var getUser = `SELECT * FROM OUWXC.user`;
 var selectWorkouts = `SELECT * FROM OUWXC.athlete_data`;
 var updateData = `UPDATE OUWXC.user`;
 
-
+//fill out the query with the input data
 function get_query(query, input, queryString) {
 	var string = "";
 
@@ -34,7 +39,7 @@ function get_query(query, input, queryString) {
 	else if(query == "insertU")
 	{
 		string = insertUser;
-		string += ` VALUES ( "${input.newusername}", "${input.newuseremail}", "${input.newuserpw}", "${input.newuserfirst}", "${input.newuserlast}", NOW(), "${input.newuserteam}" )`;
+		string += ` VALUES ( "${input.newusername}", "${input.newuseremail}", "${input.newuserpw}", "${input.newuserfirst}", "${input.newuserlast}", NOW(), "${input.newuserteam}", "${input.userrole}" )`;
 	}
 	else if(query == "remove")
 	{
@@ -48,8 +53,16 @@ function get_query(query, input, queryString) {
 	}
 	else if(query == "getW")
 	{
-		string = selectWorkouts;
-		string += ` WHERE athlete="${input.user}" ORDER BY date DESC LIMIT 10`;
+		if(input.user != null)
+		{
+			string = selectWorkouts;
+			string += ` WHERE athlete="${input.user}" ORDER BY date DESC LIMIT 10`;
+		}
+		else if(input.team != null)
+		{
+			string = selectWorkouts;
+			string += ` WHERE team="${input.team}" ORDER BY date DESC LIMIT 25`;
+		}
 	}
 	else if(query == "addteam")
 	{
@@ -64,7 +77,7 @@ function get_query(query, input, queryString) {
 	queryString(string);
 }
 
-
+//execute any query
 function exec_query(query, input, result) {
 
 	var queryString = "";
@@ -139,6 +152,7 @@ function add_workout(input, done){
 	})
 }
 
+//get a list of workouts from db
 function get_workouts(input, done){
 
 	exec_query("getW", input, function(err, rows, fields) {
@@ -149,6 +163,7 @@ function get_workouts(input, done){
 	});
 }
 
+//add a team association to a user
 function add_team(input, done){
 
 	exec_query("addteam", input, function(err, rows, fields) {
