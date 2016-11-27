@@ -240,7 +240,7 @@ passport.use(new LocalStrategy( function(username, password, done){
 router.post('/workoutentry', function(req, res){
 	req.body.user = req.user.id;
 
-	//console.log(req.body);
+	console.log(req.body);
 	queries.add_workout(req.body, function(err, result){
 		console.log("Affected Rows: " + result.affectedRows);
 		if(result.affectedRows > 0)
