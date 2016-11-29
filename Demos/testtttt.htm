@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>	
+    <!-- Compiled and minified CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+	
+	<!-- Bootstrap -->
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
+    <!-- Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+	
+	
+    <!-- Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded [A].
+      google.charts.setOnLoadCallback(sleepy);
+      google.charts.setOnLoadCallback(healthy);
+	  google.charts.setOnLoadCallback(dur);
+	  google.charts.setOnLoadCallback(mileage);
+	  google.charts.setOnLoadCallback(rtime);
+
+	 //Identifying Functions [B]
+      function sleepy() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'hours');
+      data.addRows([
+      ['Mon.', 8],
+      ['Tues.', 10],
+      ['Wed.', 8],
+      ['Th.', 8],
+	  ['Fri.', 8],
+	  ['Sat.', 8],
+      ['Sun.', 6]
+      ]);
+
+      // Set chart options
+      var options = {'title':'Weekly Sleep Pattern',
+      'width':700,
+      'height':200,
+	  legend: 'none',
+	  curveType: 'function',
+	  backgroundColor: '#ffffff',
+      vAxis: { 
+        title: "Hours of Sleep", 
+        viewWindowMode:'explicit'
+	  },
+	  colors: ['#00d8ff'],
+	  };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
+      chart.draw(data, options);
+}
+
+      function healthy() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'Health Score');
+      data.addRows([
+	  ['Mon.', 8],
+      ['Tues.', 10],
+      ['Wed.', 8],
+      ['Th.', 8],
+	  ['Fri.', 8],
+	  ['Sat.', 8],
+      ['Sun.', 6]
+        ]);
+
+      // Set chart options
+      var options = {'title':'Health Status',
+      'width':700,
+      'height':200,
+      vAxis: { 
+        title: "Health Score", 
+        viewWindowMode:'explicit'
+	  },
+	  legend: 'none',
+      lineWidth: 3,
+      colors: ['#c41616'],
+	  backgroundColor: '#ffffff'
+	  };
+			
+      // Instantiate and draw our chart, passing in some options.
+      var chart2 = new google.visualization.LineChart(document.getElementById('healthchart'));
+      chart2.draw(data, options);
+	  }
+    	
+	  function dur() {
+      // Create the data table.
+      var data = google.visualization.arrayToDataTable([
+        ['Day', 'T1', 'T2', 'T3', 'T4', 'T5', { role: 'style' } ],
+        ['Mon.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+        ['Tues.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+        ['Wed.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+		['Th.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+		['Fri.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+        ['Sat.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+        ['Sun.', 10, 15, 20, 5, 2, 'opacity: 1.0']
+      ]);
+
+      // Set chart options
+      var options = {'title':'Time in Training Zones',
+      width: 600,
+        height: 400,
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '75%' },
+        isStacked: true,
+	  backgroundColor: '#ffffff',
+      vAxis: { 
+        title: "Time in Zones (Min)", 
+        viewWindowMode:'explicit'
+	  },
+	  colors: ['#ffff99','#ffe699','#ffcc99','#ffb399','#ff9999',],
+	  };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.ColumnChart(document.getElementById('durationchart'));
+      chart.draw(data, options);
+}
+	  
+	  function mileage() {
+      var data = google.visualization.arrayToDataTable([
+        ['Day', 'T1', 'T2', 'T3', 'T4', 'T5', { role: 'style' } ],
+        ['Mon.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+        ['Tues.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+        ['Wed.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+		['Th.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+		['Fri.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+        ['Sat.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+        ['Sun.', 10, 15, 20, 5, 2, 'opacity: 1.0']
+      ]);
+
+      // Set chart options
+      var options = {'title':'Distance in Training Zones',
+      width: 600,
+        height: 400,
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '75%' },
+        isStacked: true,
+	  backgroundColor: '#ffffff',
+      vAxis: { 
+        title: "Distance in Zones (Miles)", 
+        viewWindowMode:'explicit'
+	  },
+	  };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.ColumnChart(document.getElementById('mileagechart'));
+      chart.draw(data, options);
+}
+	  
+	  function rtime() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'hours');
+      data.addRows([
+      ['Mon.', 8],
+      ['Tues.', 10],
+      ['Wed.', 8],
+      ['Th.', 8],
+	  ['Fri.', 8],
+	  ['Sat.', 8],
+      ['Sun.', 6]
+      ]);
+
+      // Set chart options
+      var options = {'title':'Training Load',
+      'width':700,
+      'height':200,
+	  legend: 'none',
+	  curveType: 'function',
+	  backgroundColor: '#ffffff',
+      vAxis: { 
+        title: "RPE x Time", 
+        viewWindowMode:'explicit'
+	  },
+	  colors: ['#00d8ff'],
+	  };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('rpextimechart'));
+      chart.draw(data, options);
+}
+	
+	</script>
+  </head>
+
+<!-- Div that will hold the pie chart [C]-->			  
+<div class="container">
+
+  <h2>Weekly Graphs</h2>
+  <a href="#demo1" class="btn btn-info" data-toggle="collapse">Sleep Graph</a>
+  <div id="demo1" class="collapse">
+    <div id="sleepchart"></div>
+  </div>
+  
+  <a href="#demo2" class="btn btn-info" data-toggle="collapse">Health Graph</a>
+  <div id="demo2" class="collapse">
+    <div id="healthchart"></div>
+  </div>
+  
+  <a href="#demo3" class="btn btn-info" data-toggle="collapse">Time in Zones Graph</a>
+  <div id="demo3" class="collapse">
+    <div id="durationchart"></div>
+  </div>
+  
+  <a href="#demo4" class="btn btn-info" data-toggle="collapse">Distance In Zones Graph</a>
+  <div id="demo4" class="collapse">
+    <div id="mileagechart"></div>
+  </div>
+  
+  <a href="#demo5" class="btn btn-info" data-toggle="collapse">Training Load Graph</a>
+  <div id="demo5" class="collapse">
+    <div id="rpextimechart"></div>
+  </div>
+  
+  <h2>Monthly Graphs</h2>
+  
+</div>
+			    
+</html>
