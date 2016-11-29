@@ -125,12 +125,12 @@ html
                 center
                   p.fonts
                     b My Workout
+            form(action='/workoutentry', method='post')
               .row
                 .col.s12.m12
                   .card.light-blue.darken-4
                     .card-content.cyan-text
                       span.card-title Date Information:
-                      form(action='/workoutentry', method='post')
                         br
                         center
                           a.waves-effect.waves-light.btn.light-green(onclick='myFunction()') Autofill - Today
