@@ -61,7 +61,35 @@ html
             .card-content.white-text
               span.card-title
                 center My Workouts:
-              | 					Your workouts will appear here.
+                  br
+                  table
+                    thead
+                      tr
+                        th Date
+                        th Hours Slept
+                        th Health Status
+                        th Illness
+                        th Injury
+                        th Percent Health
+                        th Cycle
+                        th RPE
+                        th Time
+                        th Distance
+                        th Notes
+                    tbody
+                      for workout in data
+                        tr
+                          td= workout['date']
+                          td= workout['sleep']
+                          td= workout['health_status']
+                          td= workout['Illnessd']
+                          td= workout['Injury']
+                          td= workout['percent_health']
+                          td= workout['cycle_start']
+                          td= workout['RPE']
+                          td= workout['time']
+                          td= workout['distance']
+                          td= workout['notes']
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js

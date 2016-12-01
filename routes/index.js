@@ -60,9 +60,8 @@ router.get('/myworkouts', function(req, res){
 		queries.get_workouts({user: req.user.id}, function(err, result){
 			workouts = result;
 			console.log(workouts);
-		})
-
-		res.render('myworkouts.pug');
+			res.render('myworkouts.pug', {  data: workouts });
+		});
 	} else {
 	 	res.redirect('/');
 	}
@@ -305,7 +304,8 @@ router.post("/admin_remove_user_form", function(req, res){
 router.post("/myworkouts", function(req, res){
 	queries.get_workouts(req.body, function(err, result){
 		console.log(result);
-	})
+		res.render('myworkouts.pug', {  data: req.body });
+	});
 })
 
 
