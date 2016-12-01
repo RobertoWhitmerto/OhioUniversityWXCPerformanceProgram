@@ -10,11 +10,8 @@ html
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-    // Import Google Icon Font
-    link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
     // Let browser know website is optimized for mobile
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    // Materialize CSS imports [head]
     // Import Google Icon Font
     link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
     // Import materialize.css
@@ -22,11 +19,6 @@ html
     // Let browser know website is optimized for mobile
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
-    script.
-      $(document).ready(function(){
-      $(".dropdown-button").dropdown();
-      $(".button-collapse").sideNav();
-      });
     // Load the AJAX API
     script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
     script(type='text/javascript').
@@ -190,6 +182,11 @@ html
       var chart = new google.visualization.LineChart(document.getElementById('rpextimechart'));
       chart.draw(data, options);
       }
+    script.
+      $(document).ready(function(){
+      $(".dropdown-button").dropdown();
+      $(".button-collapse").sideNav();
+      });
   body(background='/views/bg3.jpg')
     // Navbar up at the top
     nav
@@ -287,18 +284,51 @@ html
             h6
               center Team on a Cob 2016
     br
-    br
-    br
-    br
-    br
     hr
-    .container.light-blue.darken-4
+    style(type='text/css').
+      div.ez{
+      background: #01579b;
+      width:900px;
+      border: 3px solid #82b1ff;
+      margin: auto;
+      }
+    style(type='text/css').
+      div.ez2{
+      background: #304ffe;
+      width:900px;
+      border: 3px solid #82b1ff;
+      margin: auto;
+      }
+    style.
+      .table {
+      border: 3.5px solid #03a9f4;
+      border-radius: 5px;
+      }
+      .table-bordered > thead > tr > th,
+      .table-bordered > tbody > tr > th,
+      .table-bordered > tfoot > tr > th,
+      .table-bordered > thead > tr > td,
+      .table-bordered > tbody > tr > td,
+      .table-bordered > tfoot > tr > td {
+      border: 3px solid #03a9f4;
+      border-radius: 5px;
+      }
+      h1{
+      color:white;
+      }
+      td{
+      color:#18ffff;
+      }
+      th{
+      color:white;
+      }
+    .ez
       font(color='cyan')
         center
           h1
             b My Workouts:
           br
-          table.table.table-bordered.table-inverse.table-hover
+          table.table.table-bordered
             thead
               tr
                 th Date
@@ -309,9 +339,10 @@ html
                 th Percent Health
                 th Cycle
                 th RPE
-                th Time in Minutes
-                th Distance in Miles
+                th Time
+                th Distance
                 th Notes
+                th
             tbody
               for workout in data
                 tr
@@ -326,40 +357,53 @@ html
                   td= workout['time']
                   td= workout['distance']
                   td= workout['notes']
+                  td
+                    center
+                      a.waves-effect.waves-light.btn.cyan(href='#')
+                        font(color='white') Edit
     br
     br
     br
     hr
     center
-      .container.light-blue.darken-4
+      .ez
         font(color='cyan')
           p.fonts
           h1
             b Weekly Charts:
           p
     // Div that will hold the pie chart [C]
-    .container.indigo.accent-4
+    .ez2
       br
-      a.btn-sm.btn-info(href='#demo1', data-toggle='collapse') Sleep
+      a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
+      br
+      br
       #demo1.collapse
         #sleepchart
         br
-      a.btn-sm.btn-info(href='#demo2', data-toggle='collapse') Health
+      a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Health
+      br
+      br
       #demo2.collapse
         #healthchart
         br
-      a.btn-sm.btn-info(href='#demo3', data-toggle='collapse') Time in Zones
+      a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Time in Zones
+      br
+      br
       #demo3.collapse
         #durationchart
         br
-      a.btn-sm.btn-info(href='#demo4', data-toggle='collapse') Distance In Zones
+      a.btn.btn-info.green(href='#demo4', data-toggle='collapse') Distance In Zones
+      br
+      br
       #demo4.collapse
         #mileagechart
         br
-      a.btn-sm.btn-info(href='#demo5', data-toggle='collapse') Training Load
+      a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load
+      br
+      br
       #demo5.collapse
         #rpextimechart
-        br
       br
       br
     br
