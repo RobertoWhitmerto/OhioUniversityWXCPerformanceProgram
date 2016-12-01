@@ -1,7 +1,19 @@
 doctype html
 html
   head
-    title My Workouts
+    title OU WxC - My Workouts
+    // Compiled and minified CSS
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css')
+    // Compiled and minified JavaScript
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js')
+    // Bootstrap
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    // Import Google Icon Font
+    link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    // Let browser know website is optimized for mobile
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
     // Materialize CSS imports [head]
     // Import Google Icon Font
     link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
@@ -9,11 +21,202 @@ html
     link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
     // Let browser know website is optimized for mobile
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-  body(style='background:black;')
-    header
-      font(color='green')
-        h1  OU WxC Performance Application 
-    // Drop down associations
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script.
+      $(document).ready(function(){
+      $(".dropdown-button").dropdown();
+      $(".button-collapse").sideNav();
+      });
+    // Load the AJAX API
+    script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+    script(type='text/javascript').
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded [A].
+      google.charts.setOnLoadCallback(sleepy);
+      google.charts.setOnLoadCallback(healthy);
+      google.charts.setOnLoadCallback(dur);
+      google.charts.setOnLoadCallback(mileage);
+      google.charts.setOnLoadCallback(rtime);
+      //Identifying Functions [B]
+      function sleepy() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'hours');
+      data.addRows([
+      ['Mon.', 8],
+      ['Tues.', 10],
+      ['Wed.', 8],
+      ['Th.', 8],
+      ['Fri.', 8],
+      ['Sat.', 8],
+      ['Sun.', 6]
+      ]);
+      // Set chart options
+      var options = {'title':'Weekly Sleep Pattern',
+      'width':450,
+      'height':150,
+      legend: 'none',
+      curveType: 'function',
+      backgroundColor: '#ffffff',
+      vAxis: {
+      title: "Hours of Sleep",
+      viewWindowMode:'explicit'
+      },
+      colors: ['#00d8ff'],
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
+      chart.draw(data, options);
+      }
+      function healthy() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'Health Score');
+      data.addRows([
+      ['Mon.', 8],
+      ['Tues.', 10],
+      ['Wed.', 8],
+      ['Th.', 8],
+      ['Fri.', 8],
+      ['Sat.', 8],
+      ['Sun.', 6]
+      ]);
+      // Set chart options
+      var options = {'title':'Health Status',
+      'width':450,
+      'height':150,
+      vAxis: {
+      title: "Health Score",
+      viewWindowMode:'explicit'
+      },
+      legend: 'none',
+      lineWidth: 3,
+      colors: ['#c41616'],
+      backgroundColor: '#ffffff'
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart2 = new google.visualization.LineChart(document.getElementById('healthchart'));
+      chart2.draw(data, options);
+      }
+      function dur() {
+      // Create the data table.
+      var data = google.visualization.arrayToDataTable([
+      ['Day', 'T1', 'T2', 'T3', 'T4', 'T5', { role: 'style' } ],
+      ['Mon.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Tues.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Wed.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Th.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Fri.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Sat.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Sun.', 10, 15, 20, 5, 2, 'opacity: 1.0']
+      ]);
+      // Set chart options
+      var options = {'title':'Time in Training Zones',
+      width: 600,
+      height: 400,
+      legend: { position: 'top', maxLines: 3 },
+      bar: { groupWidth: '75%' },
+      isStacked: true,
+      backgroundColor: '#ffffff',
+      vAxis: {
+      title: "Time in Zones (Min)",
+      viewWindowMode:'explicit'
+      },
+      colors: ['#ffff99','#ffe699','#ffcc99','#ffb399','#ff9999',],
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.ColumnChart(document.getElementById('durationchart'));
+      chart.draw(data, options);
+      }
+      function mileage() {
+      var data = google.visualization.arrayToDataTable([
+      ['Day', 'T1', 'T2', 'T3', 'T4', 'T5', { role: 'style' } ],
+      ['Mon.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Tues.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Wed.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Th.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Fri.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Sat.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
+      ['Sun.', 10, 15, 20, 5, 2, 'opacity: 1.0']
+      ]);
+      // Set chart options
+      var options = {'title':'Distance in Training Zones',
+      width: 600,
+      height: 400,
+      legend: { position: 'top', maxLines: 3 },
+      bar: { groupWidth: '75%' },
+      isStacked: true,
+      backgroundColor: '#ffffff',
+      vAxis: {
+      title: "Distance in Zones (Miles)",
+      viewWindowMode:'explicit'
+      },
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.ColumnChart(document.getElementById('mileagechart'));
+      chart.draw(data, options);
+      }
+      function rtime() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'hours');
+      data.addRows([
+      ['Mon.', 8],
+      ['Tues.', 10],
+      ['Wed.', 8],
+      ['Th.', 8],
+      ['Fri.', 8],
+      ['Sat.', 8],
+      ['Sun.', 6]
+      ]);
+      // Set chart options
+      var options = {'title':'Training Load',
+      'width':700,
+      'height':200,
+      legend: 'none',
+      curveType: 'function',
+      backgroundColor: '#ffffff',
+      vAxis: {
+      title: "RPE x Time",
+      viewWindowMode:'explicit'
+      },
+      colors: ['#00d8ff'],
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('rpextimechart'));
+      chart.draw(data, options);
+      }
+  // Navbar up at the top
+  nav
+    .nav-wrapper.light-blue.darken-4
+      a.brand-logo
+        font(color='cyan') OU WxC
+      a.button-collapse(href='#', data-activates='mobile-demo')
+        i.material-icons menu
+      ul.right.hide-on-med-and-down
+        li
+          a.dropdown-button.light-blue(href='/home') Home
+        li
+          a.dropdown-button.light-blue.lighten-1(href='/about') About
+        li
+          a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
+            | Athletes
+            i.material-icons.right arrow_drop_down
+        li
+          a.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
+            | Coaches/Trainers
+            i.material-icons.right arrow_drop_down
+        li
+          a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
+            | Administrators
+            i.material-icons.right arrow_drop_down
+        li
+          a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
+    // Drop down associations Non-Mobile
     ul#Athletes.dropdown-content
       li
         a(href='/workoutentry') Enter a workout
@@ -25,42 +228,75 @@ html
         a(href='#!') View Athletes
     ul#Administrators.dropdown-content
       li
-        a(href='/admin_athlete_vis') View athletes and workouts
+        a(href='/datadumpindividual') CSV Data Dump (Individual)
+      li.divider
+      li
+        a(href='/datadumpteam') CSV Data Dump (Team)
       li.divider
       li
         a(href='/admin_add_user') Add a user
       li.divider
       li
         a(href='/admin_remove_user') Remove a user
-    // Navbar up at the top
-    nav
-      .nav-wrapper.grey.darken-3
-        a.brand-logo My Workouts
-        ul.right.hide-on-med-and-down
-          li
-            a.waves-effect.waves-light.btn.grey.darken-1(href='/home') Home
-          li
-            a.waves-effect.waves-light.btn.grey.darken-1(href='/about') About
-          li
-            a.dropdown-button.btn.green.lighten-1(href='#', data-activates='Athletes') Athletes
-          li
-            a.dropdown-button.btn.blue.lighten-1(href='#', data-activates='CoachesTrainers') Coaches/Trainers
-          li
-            a.dropdown-button.btn.red.lighten-1(href='#', data-activates='Administrators') Administrators
-          li
-            a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
-    br
-    br
-    br
-    br
-    br
-    .container
-      .row
-        .col.s12.m12
-          .card.grey.darken-3
-            .card-content.white-text
-              span.card-title
-                center My Workouts:
+    // Hambug Menu Options
+    ul#mobile-demo.side-nav.amber.lighten-5
+      li
+        font(color='green')
+          h5 Athletes
+      li.divider
+      li
+        a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') Enter a Workout
+      li.divider
+      li
+        a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') View Past Workouts
+      li.divider
+      li
+        font(color='blue')
+          h5 Trainers
+      li.divider
+      li
+        a.waves-effect.waves-light.btn-large.blue.darken-3(href='#') View Athletes
+      li.divider
+      li
+        font(color='red')
+          h5 Administrators
+      li.divider
+      li
+        a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
+      li
+        a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
+      li.divider
+      li
+        a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
+      li.divider
+      li
+        a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
+      li.divider
+      li
+        br
+      li.divider
+      li
+        a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
+      li.divider
+      li
+        a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
+      li.divider
+      li
+        font(color='grey')
+          h6
+            center Team on a Cob 2016
+  br
+  br
+  br
+  br
+  br
+  .container
+    .row
+      .col.s12.m5.offset-m3
+        .card.indigo.accent-4
+          .card-content.white-text
+            span.card-title
+              center My Workouts:
                   br
                   table
                     thead
@@ -90,8 +326,28 @@ html
                           td= workout['time']
                           td= workout['distance']
                           td= workout['notes']
-    // Materialize CSS imports [body]
-    // put this at the end of the body
-    // Import jQuery before materialize.js
-    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
-    script(type='text/javascript', src='js/materialize.min.js')
+  .row
+    .col.s12.m5.offset-m3
+      .card.indigo.accent-4
+        .card-content.white-text
+          span.card-title
+            center
+              p.fonts
+                b Weekly Charts
+          // Div that will hold the pie chart [C]
+          .container
+            a.btn-sm.btn-info(href='#demo1', data-toggle='collapse') Sleep
+            #demo1.collapse
+              #sleepchart
+            a.btn-sm.btn-info(href='#demo2', data-toggle='collapse') Health
+            #demo2.collapse
+              #healthchart
+            a.btn-sm.btn-info(href='#demo3', data-toggle='collapse') Time in Zones
+            #demo3.collapse
+              #durationchart
+            a.btn-sm.btn-info(href='#demo4', data-toggle='collapse') Distance In Zones
+            #demo4.collapse
+              #mileagechart
+            a.btn-sm.btn-info(href='#demo5', data-toggle='collapse') Training Load
+            #demo5.collapse
+              #rpextimechart
