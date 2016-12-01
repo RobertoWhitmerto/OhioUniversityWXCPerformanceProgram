@@ -190,164 +190,182 @@ html
       var chart = new google.visualization.LineChart(document.getElementById('rpextimechart'));
       chart.draw(data, options);
       }
-  // Navbar up at the top
-  nav
-    .nav-wrapper.light-blue.darken-4
-      a.brand-logo
-        font(color='cyan') OU WxC
-      a.button-collapse(href='#', data-activates='mobile-demo')
-        i.material-icons menu
-      ul.right.hide-on-med-and-down
+  body(background='/views/bg3.jpg')
+    // Navbar up at the top
+    nav
+      .nav-wrapper.light-blue.darken-4
+        a.brand-logo
+          font(color='cyan') OU WxC
+        a.button-collapse(href='#', data-activates='mobile-demo')
+          i.material-icons menu
+        ul.right.hide-on-med-and-down
+          li
+            a.dropdown-button.light-blue(href='/home') Home
+          li
+            a.dropdown-button.light-blue.lighten-1(href='/about') About
+          li
+            a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
+              | Athletes
+              i.material-icons.right arrow_drop_down
+          li
+            a.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
+              | Coaches/Trainers
+              i.material-icons.right arrow_drop_down
+          li
+            a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
+              | Administrators
+              i.material-icons.right arrow_drop_down
+          li
+            a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
+      // Drop down associations Non-Mobile
+      ul#Athletes.dropdown-content
         li
-          a.dropdown-button.light-blue(href='/home') Home
+          a(href='/workoutentry') Enter a workout
+        li.divider
         li
-          a.dropdown-button.light-blue.lighten-1(href='/about') About
+          a(href='/myworkouts') View past workouts
+      ul#CoachesTrainers.dropdown-content
         li
-          a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
-            | Athletes
-            i.material-icons.right arrow_drop_down
+          a(href='#!') View Athletes
+      ul#Administrators.dropdown-content
         li
-          a.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
-            | Coaches/Trainers
-            i.material-icons.right arrow_drop_down
+          a(href='/datadumpindividual') CSV Data Dump (Individual)
+        li.divider
         li
-          a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
-            | Administrators
-            i.material-icons.right arrow_drop_down
+          a(href='/datadumpteam') CSV Data Dump (Team)
+        li.divider
+        li
+          a(href='/admin_add_user') Add a user
+        li.divider
+        li
+          a(href='/admin_remove_user') Remove a user
+      // Hambug Menu Options
+      ul#mobile-demo.side-nav.amber.lighten-5
+        li
+          font(color='green')
+            h5 Athletes
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') Enter a Workout
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') View Past Workouts
+        li.divider
+        li
+          font(color='blue')
+            h5 Trainers
+        li.divider
+        li
+          a.waves-effect.waves-light.btn-large.blue.darken-3(href='#') View Athletes
+        li.divider
+        li
+          font(color='red')
+            h5 Administrators
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
+        li.divider
+        li
+          br
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
+        li.divider
         li
           a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
-    // Drop down associations Non-Mobile
-    ul#Athletes.dropdown-content
-      li
-        a(href='/workoutentry') Enter a workout
-      li.divider
-      li
-        a(href='/myworkouts') View past workouts
-    ul#CoachesTrainers.dropdown-content
-      li
-        a(href='#!') View Athletes
-    ul#Administrators.dropdown-content
-      li
-        a(href='/datadumpindividual') CSV Data Dump (Individual)
-      li.divider
-      li
-        a(href='/datadumpteam') CSV Data Dump (Team)
-      li.divider
-      li
-        a(href='/admin_add_user') Add a user
-      li.divider
-      li
-        a(href='/admin_remove_user') Remove a user
-    // Hambug Menu Options
-    ul#mobile-demo.side-nav.amber.lighten-5
-      li
-        font(color='green')
-          h5 Athletes
-      li.divider
-      li
-        a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') Enter a Workout
-      li.divider
-      li
-        a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') View Past Workouts
-      li.divider
-      li
-        font(color='blue')
-          h5 Trainers
-      li.divider
-      li
-        a.waves-effect.waves-light.btn-large.blue.darken-3(href='#') View Athletes
-      li.divider
-      li
-        font(color='red')
-          h5 Administrators
-      li.divider
-      li
-        a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
-      li
-        a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
-      li.divider
-      li
-        a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
-      li.divider
-      li
-        a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
-      li.divider
-      li
+        li.divider
+        li
+          font(color='grey')
+            h6
+              center Team on a Cob 2016
+    br
+    br
+    br
+    br
+    br
+    hr
+    .container.light-blue.darken-4
+      font(color='cyan')
+        center
+          h1
+            b My Workouts:
+          br
+          table.table.table-bordered.table-inverse.table-hover
+            thead
+              tr
+                th Date
+                th Hours Slept
+                th Health Status
+                th Illness
+                th Injury
+                th Percent Health
+                th Cycle
+                th RPE
+                th Time
+                th Distance
+                th Notes
+            tbody
+              for workout in data
+                tr
+                  td= workout['date']
+                  td= workout['sleep']
+                  td= workout['health_status']
+                  td= workout['Illnessd']
+                  td= workout['Injury']
+                  td= workout['percent_health']
+                  td= workout['cycle_start']
+                  td= workout['RPE']
+                  td= workout['time']
+                  td= workout['distance']
+                  td= workout['notes']
+    br
+    br
+    br
+    hr
+    center
+      .container.light-blue.darken-4
+        font(color='cyan')
+          p.fonts
+          h1
+            b Weekly Charts:
+          p
+    // Div that will hold the pie chart [C]
+    .container.indigo.accent-4
+      br
+      a.btn-sm.btn-info(href='#demo1', data-toggle='collapse') Sleep
+      #demo1.collapse
+        #sleepchart
         br
-      li.divider
-      li
-        a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
-      li.divider
-      li
-        a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
-      li.divider
-      li
-        font(color='grey')
-          h6
-            center Team on a Cob 2016
-  br
-  br
-  br
-  br
-  br
-  .container
-    .row
-      .col.s12.m5.offset-m3
-        .card.indigo.accent-4
-          .card-content.white-text
-            span.card-title
-              center My Workouts:
-                  br
-                  table
-                    thead.table.table-bordered
-                      tr
-                        th Date
-                        th Hours Slept
-                        th Health Status
-                        th Illness
-                        th Injury
-                        th Percent Health
-                        th Cycle
-                        th RPE
-                        th Time
-                        th Distance
-                        th Notes
-                    tbody
-                      for workout in data
-                        tr
-                          td= workout['date']
-                          td= workout['sleep']
-                          td= workout['health_status']
-                          td= workout['Illnessd']
-                          td= workout['Injury']
-                          td= workout['percent_health']
-                          td= workout['cycle_start']
-                          td= workout['RPE']
-                          td= workout['time']
-                          td= workout['distance']
-                          td= workout['notes']
-  .row
-    .col.s12.m5.offset-m3
-      .card.indigo.accent-4
-        .card-content.white-text
-          span.card-title
-            center
-              p.fonts
-                b Weekly Charts
-          // Div that will hold the pie chart [C]
-          .container
-            a.btn-sm.btn-info(href='#demo1', data-toggle='collapse') Sleep
-            #demo1.collapse
-              #sleepchart
-            a.btn-sm.btn-info(href='#demo2', data-toggle='collapse') Health
-            #demo2.collapse
-              #healthchart
-            a.btn-sm.btn-info(href='#demo3', data-toggle='collapse') Time in Zones
-            #demo3.collapse
-              #durationchart
-            a.btn-sm.btn-info(href='#demo4', data-toggle='collapse') Distance In Zones
-            #demo4.collapse
-              #mileagechart
-            a.btn-sm.btn-info(href='#demo5', data-toggle='collapse') Training Load
-            #demo5.collapse
-              #rpextimechart
+      a.btn-sm.btn-info(href='#demo2', data-toggle='collapse') Health
+      #demo2.collapse
+        #healthchart
+        br
+      a.btn-sm.btn-info(href='#demo3', data-toggle='collapse') Time in Zones
+      #demo3.collapse
+        #durationchart
+        br
+      a.btn-sm.btn-info(href='#demo4', data-toggle='collapse') Distance In Zones
+      #demo4.collapse
+        #mileagechart
+        br
+      a.btn-sm.btn-info(href='#demo5', data-toggle='collapse') Training Load
+      #demo5.collapse
+        #rpextimechart
+        br
+      br
+      br
+    br
+    hr
+    // Materialize CSS imports [body]
+    // put this at the end of the body
+    // Import jQuery before materialize.js
+    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(type='text/javascript', src='js/materialize.min.js')
