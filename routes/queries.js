@@ -166,9 +166,6 @@ function add_workout(input, done){
 //get a list of workouts from db
 function get_workouts(input, done){
 
-	console.log("getting workouts\n");
-	console.log(input);
-
 	exec_query("getW", input, function(err, rows, fields) {
 
 		if(err) { return done(err);}
