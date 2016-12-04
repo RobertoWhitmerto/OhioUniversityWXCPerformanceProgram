@@ -50,7 +50,7 @@ router.get('/myworkouts', function(req, res){
 
 		queries.get_workouts({user: req.user.id}, function(err, result){
 			workouts = result;
-			console.log(workouts);
+			//console.log(workouts);
 			res.render('myworkouts.pug', {  data: workouts });
 		});
 	} else {
@@ -277,10 +277,21 @@ router.post("/admin_remove_user_form", function(req, res){
 
 
 router.post("/myworkouts", function(req, res){
-	queries.get_workouts(req.body, function(err, result){
-		console.log(result);
-		res.render('myworkouts.pug', {  data: req.body });
-	});
+		if(req.isAuthenticated()){
+
+		//delete query
+
+		//access workout info through [] index operator, rows of query returned
+		var workouts;
+
+		queries.get_workouts({user: req.user.id}, function(err, result){
+			workouts = result;
+			console.log(req.body);
+			res.render('myworkouts.pug', {  data: workouts });
+		});
+	} else {
+	 	res.redirect('/');
+	}
 })
 
 //BRENT YOU SHOULD BE ABLE TO JUST STICK THE DELETE QUERY HERE

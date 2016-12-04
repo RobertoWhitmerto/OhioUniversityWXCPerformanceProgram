@@ -346,23 +346,26 @@ html
             tbody
               for workout in data
                 tr
-                  td= workout['date']
-                  td= workout['sleep']
-                  td= workout['health_status']
-                  td= workout['Illnessd']
-                  td= workout['Injury']
-                  td= workout['percent_health']
-                  td= workout['cycle_start']
-                  td= workout['RPE']
-                  td= workout['time']
-                  td= workout['distance']
-                  td= workout['notes']
-                  td
-                    center
-                      a.waves-effect.waves-light.btn.cyan(href='/myworkouts')
-                        font(color='white') Edit
-                      a.waves-effect.waves-light.btn.red(href='/myworkouts_rm')
-                        font(color='white') Remove
+                  form(action='/myworkouts', method='post')
+                    input(type='hidden', value=workout['workout_id'], name='wID', required='')
+                    td= workout['date']
+                    td= workout['sleep']
+                    td= workout['health_status']
+                    td= workout['Illnessd']
+                    td= workout['Injury']
+                    td= workout['percent_health']
+                    td= workout['cycle_start']
+                    td= workout['RPE']
+                    td= workout['time']
+                    td= workout['distance']
+                    td= workout['notes']
+                    td
+                      center
+                        a.waves-effect.waves-light.btn.cyan(href='/myworkouts')
+                          font(color='white') Edit
+                        button.btn.waves-effect.waves-light.red.lighten-1(type='submit', name='action', wID=workout['workout_id'])
+                          | Remove
+                          i.material-icons.right send
     br
     br
     br
