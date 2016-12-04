@@ -69,8 +69,13 @@ router.get('/myworkouts', function(req, res){
 
 // View Athletes
 router.get('/admin_athlete_vis', function(req, res){
+
 	if(req.isAuthenticated()){
-		res.render('admin_athlete_vis.pug');
+		queries.get_workouts({user: req.user.id}, function(err, result){
+		users = result;
+		console.log(users);
+		res.render('admin_athlete_vis.pug', {  data: users });
+	});
 	} else {
 		res.redirect('/');
 	}

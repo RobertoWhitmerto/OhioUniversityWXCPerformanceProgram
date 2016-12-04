@@ -180,7 +180,7 @@ function add_team(input, done){
 	exec_query("addteam", input, function(err, rows, fields) {
 
 		if(err) { return done(err);}
-		if(row.length == 0){return done({message: "Could not add team"})}
+		if(rows.length == 0){return done({message: "Could not add team"})}
 		done(null, rows);
 	})
 }
@@ -190,10 +190,26 @@ function remove_workout(input, done){
 	exec_query("remWork", input, function(err, rows, fields) {
 
 		if(err) { return done(err);}
-		if(row.length == 0){return done({message: "Could not remove workout"})}
+		if(rows.length == 0){return done({message: "Could not remove workout"})}
         done(null, rows);
 	})
 }
+
+ function list_users(input, done){
+
+ 	if(input.team != null)
+ 	{
+ 		console.log("retrieve team here\n")
+ 	}
+ 	else
+ 	{
+		db.query(queryString, function(err, rows, fields) {
+        	if (err){return done(err);}
+        	if(rows.length == 0){return done({message: "no user's found"})}
+			done(null, rows);
+		});
+ 	}
+ }
 
 module.exports.exec_query = exec_query;
 module.exports.authenticate = authenticate;
@@ -204,3 +220,4 @@ module.exports.add_workout = add_workout;
 module.exports.get_workouts = get_workouts;
 module.exports.add_team = add_team;
 module.exports.remove_workout = remove_workout;
+module.exports.list_users = list_users;
