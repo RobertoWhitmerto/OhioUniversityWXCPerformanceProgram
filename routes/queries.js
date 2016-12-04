@@ -39,7 +39,8 @@ function get_query(query, input, queryString) {
 	else if(query == "insertD")
 	{
 		string = insertData;
-		string += ` VALUES ( "${input.user}", NOW(), "${input.sleephours}", "${input.healthstatus}", "${input.illness}", "${input.injury}", "${input.myhealth}", "${input.cycle}", "${input.rpeval}", "${input.time}", "${input.distance}", "${input.surface}", "${input.mynotes}")`;
+		var date = "2016-"+month_lookup(input.month)+"-"+input.day;
+		string += ` VALUES ( "${input.user}", "${date}", "${input.sleephours}", "${input.healthstatus}", "${input.illness}", "${input.injury}", "${input.myhealth}", "${input.cycle}", "${input.rpeval}", "${input.time}", "${input.distance}", "${input.surface}", "${input.mynotes}")`;
 	}
 	else if(query == "insertU")
 	{
@@ -208,6 +209,59 @@ function remove_workout(input, done){
         	if(rows.length == 0){return done({message: "no user's found"})}
 			done(null, rows);
 		});
+ 	}
+ }
+
+
+ function month_lookup(month){
+
+ 	if(month == "January")
+ 	{
+ 		return "01";
+ 	}
+ 	else if(month == "February")
+ 	{
+ 		return "02";
+ 	}
+  	else if(month == "March")
+ 	{
+ 		return "03";
+ 	}
+ 	else if(month == "April")
+ 	{
+ 		return "04";
+ 	}
+  	else if(month == "May")
+ 	{
+ 		return "05";
+ 	}
+ 	else if(month == "June")
+ 	{
+ 		return "06";
+ 	}
+ 	else if(month == "July")
+ 	{
+ 		return "07";
+ 	}
+ 	else if(month == "August")
+ 	{
+ 		return "08";
+ 	}
+  	else if(month == "September")
+ 	{
+ 		return "09";
+ 	}
+  	else if(month == "October")
+ 	{
+ 		return "10";
+ 	}
+  	else if(month == "November")
+ 	{
+ 		return "11";
+ 	}
+  	else if(month == "December")
+ 	{
+ 		return "12";
  	}
  }
 
