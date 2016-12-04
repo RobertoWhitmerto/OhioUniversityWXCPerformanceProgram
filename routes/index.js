@@ -279,7 +279,9 @@ router.post("/admin_remove_user_form", function(req, res){
 router.post("/myworkouts", function(req, res){
 		if(req.isAuthenticated()){
 
-		//delete query
+		queries.remove_workout(req.body, function(err, result){
+			console.log(result);
+		})
 
 		//access workout info through [] index operator, rows of query returned
 		var workouts;

@@ -77,8 +77,8 @@ function get_query(query, input, queryString) {
 	}
 	else if(query == "remWork")
 	{
-		string = remWork;
-		string += ` WHERE workout_id="${input.workout_id}"`;
+		string = removeData;
+		string += ` WHERE workout_id="${input.wID}"`;
 	}
 	else if(query == "editWork")
 	{
