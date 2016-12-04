@@ -80,6 +80,22 @@ function get_query(query, input, queryString) {
 		string = remWork;
 		string += ` WHERE workout_id="${input.workout_id}"`;
 	}
+	else if(query == "editWork")
+	{
+	string = `UPDATE athlete_data`;
+ 	string += ` SET date="${date}", 
+ 				sleep="${input.sleephours}", 
+ 				health_status="${input.healthstatus}", 
+ 				Illness="${input.illness}", 
+ 				Injury="${input.injury}", 
+ 				percent_health="${input.myhealth}", 
+ 				cycle_start="${input.cycle}", 
+ 				RPE="${input.rpeval}", 
+ 				time="${input.time}", 
+ 				distance="${input.distance}", 
+ 				surface="${input.surface}", 
+ 				notes="${input.mynotes}" `;
+	}
 	else
 	{
 		console.log("error, could not find query");
@@ -213,7 +229,13 @@ function remove_workout(input, done){
  }
 
  function edit_workout(input, done){
- 	var string = "UPDATE"
+
+	exec_query("editWork", input, function(err, rows, fields) {
+
+		if(err) { return done(err);}
+		if(rows.length == 0){return done({message: "Could not edit workout"})}
+        done(null, rows);
+	})
 
 
  }
@@ -280,4 +302,5 @@ module.exports.add_workout = add_workout;
 module.exports.get_workouts = get_workouts;
 module.exports.add_team = add_team;
 module.exports.remove_workout = remove_workout;
+module.exports.edit_workout = edit_workout;
 module.exports.list_users = list_users;
