@@ -18,6 +18,7 @@ var insertData = `INSERT INTO OUWXC.athlete_data (
 			RPE,
 			time,
 			distance,
+			surface,
 			notes)`;
 var removeData = `DELETE FROM OUWXC.athlete_data`;
 var insertUser = `INSERT IGNORE INTO OUWXC.user(username, email, password, first, last, create_time, team, role)`;
@@ -38,7 +39,7 @@ function get_query(query, input, queryString) {
 	else if(query == "insertD")
 	{
 		string = insertData;
-		string += ` VALUES ( "${input.user}", NOW(), "${input.sleephours}", "${input.healthstatus}", "${input.illness}", "${input.injury}", "${input.myhealth}", "${input.cycle}", "${input.rpeval}", "${input.time}", "${input.distance}", "${input.mynotes}")`;
+		string += ` VALUES ( "${input.user}", NOW(), "${input.sleephours}", "${input.healthstatus}", "${input.illness}", "${input.injury}", "${input.myhealth}", "${input.cycle}", "${input.rpeval}", "${input.time}", "${input.distance}", "${input.surface}", "${input.mynotes}")`;
 	}
 	else if(query == "insertU")
 	{
