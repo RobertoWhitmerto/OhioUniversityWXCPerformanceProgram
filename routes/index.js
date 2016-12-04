@@ -13,15 +13,6 @@ router.get('/', function(req, res){
 	res.render('site.pug');
 });
 
-// Register
-router.get('/register', function(req, res){
-	if(req.isAuthenticated()){
-		res.render('admin_add_user.pug');
-	} else {
-		res.redirect('/');
-	}
-});
-    
 // Home Page
 router.get('/home', function(req, res){
 	if(req.isAuthenticated()){
@@ -71,11 +62,15 @@ router.get('/myworkouts', function(req, res){
 router.get('/admin_athlete_vis', function(req, res){
 
 	if(req.isAuthenticated()){
-		queries.get_workouts({user: req.user.id}, function(err, result){
-		users = result;
-		console.log(users);
-		res.render('admin_athlete_vis.pug', {  data: users });
-	});
+		if(req.user.role == 'admin' || admin.user.role == 'coach'){
+			queries.get_workouts({user: req.user.id}, function(err, result){
+			users = result;
+			console.log(users);
+			res.render('admin_athlete_vis.pug', {  data: users });
+		});
+		} else {
+			res.redirect(req.get('referer'));
+		}
 	} else {
 		res.redirect('/');
 	}
@@ -84,7 +79,11 @@ router.get('/admin_athlete_vis', function(req, res){
 // Add User
 router.get('/admin_add_user', function(req, res){
 	if(req.isAuthenticated()){
-		res.render('admin_add_user.pug');
+		if(req.user.role == 'admin'){
+			res.render('admin_add_user.pug');
+		} else {
+			res.redirect(req.get('referer'));
+		}
 	} else {
 		res.redirect('/');
 	}
@@ -93,7 +92,11 @@ router.get('/admin_add_user', function(req, res){
 // Remove User
 router.get('/admin_remove_user', function(req, res){
 	if(req.isAuthenticated()){
-		res.render('admin_remove_user.pug');
+		if(req.user.role == 'admin'){
+			res.render('admin_remove_user.pug');
+		} else {
+			res.redirect(req.get('referer'));
+		}
 	} else {
 		res.redirect('/');
 	}
@@ -109,68 +112,29 @@ router.get('/about',
 			}
 });
 
-// Remove User
-router.get('/admin_add_user', function(req, res){
-	if(req.isAuthenticated()){
-		res.render('admin_add_user.pug');
-	} else {
-		res.redirect('/');
-	}
-});
-
 // Data Dump Individual
 router.get('/datadumpindividual', function(req, res){
 			if(req.isAuthenticated()){
-				/*var objArray;
-				var csv_data;
-				
-				//access workout info through [] index operator, rows of query returned
-				var workouts;
-		
-				queries.get_workouts({user: req.user.id}, function(err, result){
-					workouts = result;
-					objArray = workouts;
-					//console.log(result);
-					if(typeof result == 'object'){
-						var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-			            var str = '';
-			            for (var i = 0; i < array.length; i++) {
-			            	if(i == 0){
-			            		str += 'athlete,date,sleep,health_status,Illness,Injury,percent_health,cycle_start,RPE,time,distance,notes,workoutID\r\n';
-			            	}
-			                var line = '';
-			                for (var index in array[i]) {
-			                    if (line != '') line += ','
-			 
-			                    line += array[i][index];
-			                }
-			                str += line + '\r\n';
-			            }
-			            console.log(str);
-			            filesystem.writeFile('datadump.csv', str, function (err) {
-						  if (err) throw err;
-						  console.log('It\'s saved!');
-						  res.download('datadump.csv', 'datadump.csv');
-						});
-					}
-					else{
-						res.redirect('/home');
-					}
-				});
-				
-				//res.render('about.pug');*/
-				res.render('admin_data_dump_a.pug');
+				if(req.user.role == 'admin'){
+					res.render('admin_data_dump_a.pug');
+				} else {
+					res.redirect(req.get('referer'));
+				}
 			} else {
 				res.redirect('/');
 			}
 });
 
 router.get('/datadumpTeam',function(req, res){
-			if(req.isAuthenticated() && req.user.role == "admin"){
-				res.render('admin_data_dump_b.pug');
-			} else {
-				res.redirect('/datadumpTeam');
-			}
+	if(req.isAuthenticated()){
+		if(req.user.role == "admin"){
+			res.render('admin_data_dump_b.pug');
+		} else {
+			res.redirect(req.get('referer'));
+		}
+	} else {
+		res.redirect('/');
+	}
 });
 
 router.post('/getdatadumpind', function(req, res) {
@@ -279,7 +243,6 @@ router.post('/',
 	function(req, res){
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
-		res.redirect('/home');
 });
 
 router.post("/admin_add_user_form", function(req, res){
