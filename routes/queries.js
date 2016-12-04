@@ -19,7 +19,7 @@ var insertData = `INSERT INTO OUWXC.athlete_data (
 			time,
 			distance,
 			notes)`;
-
+var removeData = `DELETE FROM OUWXC.athlete_data`;
 var insertUser = `INSERT IGNORE INTO OUWXC.user(username, email, password, first, last, create_time, team, role)`;
 var deleteUser = `DELETE FROM OUWXC.user`;
 var getUser = `SELECT * FROM OUWXC.user`;
@@ -72,6 +72,11 @@ function get_query(query, input, queryString) {
 	{
 		string = updateData;
 		string += ` SET team = "${input.team}" WHERE username="${input.username}"`;
+	}
+	else if(query == "remWork")
+	{
+		string = remWork;
+		string += ` WHERE workout_id="${input.workout_id}"`;
 	}
 	else
 	{
@@ -182,6 +187,16 @@ function add_team(input, done){
 	})
 }
 
+function remove_workout(input, done){
+
+	exec_query("remWork", input, function(err, rows, fields) {
+
+		if(err) { return done(err);}
+		if(row.length == 0){return done({message: "Could not remove workout"})}
+        done(null, rows);
+	})
+}
+
 module.exports.exec_query = exec_query;
 module.exports.authenticate = authenticate;
 module.exports.get_user = get_user;
@@ -190,3 +205,4 @@ module.exports.add_user = add_user;
 module.exports.add_workout = add_workout;
 module.exports.get_workouts = get_workouts;
 module.exports.add_team = add_team;
+module.exports.remove_workout = remove_workout;
