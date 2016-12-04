@@ -294,25 +294,6 @@ router.post("/myworkouts", function(req, res){
 	} else {
 	 	res.redirect('/');
 	}
-})
-
-//BRENT YOU SHOULD BE ABLE TO JUST STICK THE DELETE QUERY HERE
-router.get("/myworkouts_rm", function(req, res){
-		if(req.isAuthenticated()){
-
-		//delete query
-
-		//access workout info through [] index operator, rows of query returned
-		var workouts;
-
-		queries.get_workouts({user: req.user.id}, function(err, result){
-			workouts = result;
-			console.log(workouts);
-			res.render('myworkouts.pug', {  data: workouts });
-		});
-	} else {
-	 	res.redirect('/');
-	}
 });
 
 function dump(objArray, res)
