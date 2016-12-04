@@ -62,12 +62,12 @@ function get_query(query, input, queryString) {
 		if(input.team == null)
 		{
 			string = selectWorkouts;
-			string += ` WHERE athlete="${input.user}" ORDER BY date DESC LIMIT 10`;
+			string += ` WHERE athlete="${input.user}" ORDER BY date DESC`;
 		}
 		else if(input.team != null)
 		{
 			string = selectWorkouts;
-			string += ` JOIN OUWXC.user on user.username=athlete_data.athlete AND user.team="${input.team}" ORDER BY athlete_data.date DESC LIMIT 25`;
+			string += ` JOIN OUWXC.user on user.username=athlete_data.athlete AND user.team="${input.team}" ORDER BY athlete_data.date DESC`;
 		}
 	}
 	else if(query == "addteam")
