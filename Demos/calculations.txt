@@ -11,14 +11,6 @@ Pysiological Test Data
     
     Formulas for the charts are from 'Pace Charts and Training Zones,' which 
     are listed below.
-        
-Training Analysis-Monthly
-    Charts include: Time in Training Zones, Distance in Training Zones,
-    Monthly Accumulated GRF, Training Load, Monthly Mileage, Health Issues 
-    and Sleep Pattern.
-    
-    Summation of total time in each zone, for each month.
-    Summation of total mileage, for each month.
     
 Volume Summary
     Date, Start Cycle(0 or 1).
