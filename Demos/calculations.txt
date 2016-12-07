@@ -1,7 +1,7 @@
 Pysiological Test Data
     Mass (kg) needed.
     Pace (min/mile) = 3600/Speed(mph), (will be in seconds).
-    VO2 (Liters of oxygen/min),
+    VO2 - max rate of oxygen consumption during a work out (Liters of oxygen/min) or (mL/(kg*min)),
     RER (Respiratory exchange ratio),
     Heart Rate (bpm),
     GRF-R (BW) (maximal ground reaction force on right leg),
