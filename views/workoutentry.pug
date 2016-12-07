@@ -131,76 +131,75 @@ html
                   .card.light-blue.darken-4
                     .card-content.cyan-text
                       span.card-title Date Information:
-                        br
-                        center
-                          a.waves-effect.waves-light.btn.light-green(onclick='myFunction()') Autofill - Today
-                        br
-                        script.
-                          function myFunction() {
-                          var d = new Date();
-                          var n = d.getDate();
-                          var m = d.getMonth();
-                          document.getElementById("month").selectedIndex = m + 1;
-                          document.getElementById("day").selectedIndex = n;
-                          }
-                        label Month
-                        select#month.browser-default(name='month')
-                          option(name='month', value='invalidmonth') --
-                          option(name='month', value='January') January
-                          option(name='month', value='February') February
-                          option(name='month', value='March') March
-                          option(name='month', value='April') April
-                          option(name='month', value='May') May
-                          option(name='month', value='June') June
-                          option(name='month', value='July') July
-                          option(name='month', value='August') August
-                          option(name='month', value='September') September
-                          option(name='month', value='October') October
-                          option(name='month', value='November') November
-                          option(name='month', value='December') December
-                        br
-                        br
-                        label Day of month
-                        select#day.browser-default(name='day')
-                          option(name='day', value='dayinvalid') --
-                          option(name='day', value='1') 1
-                          option(name='day', value='2') 2
-                          option(name='day', value='3') 3
-                          option(name='day', value='4') 4
-                          option(name='day', value='5') 5
-                          option(name='day', value='6') 6
-                          option(name='day', value='7') 7
-                          option(name='day', value='8') 8
-                          option(name='day', value='9') 9
-                          option(name='day', value='10') 10
-                          option(name='day', value='11') 11
-                          option(name='day', value='12') 12
-                          option(name='day', value='13') 13
-                          option(name='day', value='14') 14
-                          option(name='day', value='15') 15
-                          option(name='day', value='16') 16
-                          option(name='day', value='17') 17
-                          option(name='day', value='18') 18
-                          option(name='day', value='19') 19
-                          option(name='day', value='20') 20
-                          option(name='day', value='21') 21
-                          option(name='day', value='22') 22
-                          option(name='day', value='23') 23
-                          option(name='day', value='24') 24
-                          option(name='day', value='25') 25
-                          option(name='day', value='26') 26
-                          option(name='day', value='27') 27
-                          option(name='day', value='28') 28
-                          option(name='day', value='29') 29
-                          option(name='day', value='30') 30
-                          option(name='day', value='31') 31
-                        br
-                        br
-                        script.
-                          var p = new Date();
-                          var y = p.getFullYear();
-                          document.getElementById("currentyear").value = y;
-                        input#currentyear(type='hidden', value='')
+                      center
+                        a.waves-effect.waves-light.btn.light-green(onclick='myFunction()') Autofill - Today
+                      br
+                      script.
+                        function myFunction() {
+                        var d = new Date();
+                        var n = d.getDate();
+                        var m = d.getMonth();
+                        document.getElementById("month").selectedIndex = m + 1;
+                        document.getElementById("day").selectedIndex = n;
+                        }
+                      label Month
+                      select#month.browser-default(name='month')
+                        option(name='month', value='invalidmonth') --
+                        option(name='month', value='January') January
+                        option(name='month', value='February') February
+                        option(name='month', value='March') March
+                        option(name='month', value='April') April
+                        option(name='month', value='May') May
+                        option(name='month', value='June') June
+                        option(name='month', value='July') July
+                        option(name='month', value='August') August
+                        option(name='month', value='September') September
+                        option(name='month', value='October') October
+                        option(name='month', value='November') November
+                        option(name='month', value='December') December
+                      br
+                      br
+                      label Day of month
+                      select#day.browser-default(name='day')
+                        option(name='day', value='dayinvalid') --
+                        option(name='day', value='1') 1
+                        option(name='day', value='2') 2
+                        option(name='day', value='3') 3
+                        option(name='day', value='4') 4
+                        option(name='day', value='5') 5
+                        option(name='day', value='6') 6
+                        option(name='day', value='7') 7
+                        option(name='day', value='8') 8
+                        option(name='day', value='9') 9
+                        option(name='day', value='10') 10
+                        option(name='day', value='11') 11
+                        option(name='day', value='12') 12
+                        option(name='day', value='13') 13
+                        option(name='day', value='14') 14
+                        option(name='day', value='15') 15
+                        option(name='day', value='16') 16
+                        option(name='day', value='17') 17
+                        option(name='day', value='18') 18
+                        option(name='day', value='19') 19
+                        option(name='day', value='20') 20
+                        option(name='day', value='21') 21
+                        option(name='day', value='22') 22
+                        option(name='day', value='23') 23
+                        option(name='day', value='24') 24
+                        option(name='day', value='25') 25
+                        option(name='day', value='26') 26
+                        option(name='day', value='27') 27
+                        option(name='day', value='28') 28
+                        option(name='day', value='29') 29
+                        option(name='day', value='30') 30
+                        option(name='day', value='31') 31
+                      br
+                      br
+                      script.
+                        var p = new Date();
+                        var y = p.getFullYear();
+                        document.getElementById("currentyear").value = y;
+                      input#currentyear(type='hidden', value='')
               .row
                 .col.s12.m12
                   .card.light-blue.darken-4
@@ -316,6 +315,7 @@ html
                 button.btn.waves-effect.waves-light.light-blue.lighten-1(type='submit', name='action')
                   | Submit My Workout
                   i.material-icons.right send
+              br
       p
       // Materialize CSS imports [body]
       // put this at the end of the body
