@@ -36,15 +36,22 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'hours');
-      data.addRows([
-      ['Mon.', 8],
-      ['Tues.', 10],
-      ['Wed.', 8],
-      ['Th.', 8],
-      ['Fri.', 8],
-      ['Sat.', 8],
-      ['Sun.', 6]
-      ]);
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      var rows = [['Sun.',18],['Mon.',18],['Tues.',18],['Wed.',18],['Th.',18],['Fri.',18],['Sat.',18]];
+      console.log(JSON.stringify(d));
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          var dt = new Date(Date.parse(obj.date));
+          if(dt > oneWeekAgo){
+            console.log(dt.getDay());
+            rows[dt.getDay()][1] = parseInt(obj.sleep, 10);
+          }
+      }
+      console.log(rows);
+      data.addRows(rows);
       // Set chart options
       var options = {'title':'Weekly Sleep Pattern',
       'width':450,

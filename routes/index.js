@@ -51,7 +51,7 @@ router.get('/myworkouts', function(req, res){
 		queries.get_workouts({user: req.user.id}, function(err, result){
 			workouts = result;
 			//console.log(workouts);
-			res.render('myworkouts.pug', {  data: workouts });
+			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
 		});
 	} else {
 	 	res.redirect('/');
@@ -64,7 +64,7 @@ router.get('/admin_athlete_vis', function(req, res){
 	if(req.isAuthenticated()){
 		if(req.user.role == 'admin' || admin.user.role == 'coach'){
 			queries.get_workouts({user: req.user.id}, function(err, result){
-			users = result;
+			var users = result;
 			console.log(users);
 			res.render('admin_athlete_vis.pug', {  data: users });
 		});
@@ -289,7 +289,7 @@ router.post("/myworkouts", function(req, res){
 		queries.get_workouts({user: req.user.id}, function(err, result){
 			workouts = result;
 			console.log(req.body);
-			res.render('myworkouts.pug', {  data: workouts });
+			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
 		});
 	} else {
 	 	res.redirect('/');
