@@ -7,6 +7,8 @@ var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
 
+var athlete = false;
+
 
 // Get Login Page
 router.get('/', function(req, res){
@@ -146,9 +148,8 @@ router.post('/getdatadumpind', function(req, res) {
 	if(req.user.role != "admin" && req.user.id != req.body.datadumpusr)
 	{
 		queries.get_workouts({user: req.body.datadumpusr}, function(err, result){
-		console.log(result);
 			workouts = result;
-			dump(workouts, res);
+			dump(false,workouts, res);
 		});
 	}
 	else
@@ -166,7 +167,7 @@ router.post('/getdatadumpteam', function(req, res) {
 
 	queries.get_workouts({team: req.body.datadumpteam}, function(err, result){
 		workouts = result;
-		dump(workouts, res);
+		dump(true, workouts, res);
 	});
 
 });
@@ -209,7 +210,13 @@ router.post('/register', function(req, res){
 
 passport.use(new LocalStrategy( function(username, password, done){
 	queries.authenticate({user: username, pass: password}, function(err, result){
+		console.log(result);
 		done(null,result);
+
+		if(result.role == "Athlete")
+		{
+			athlete = true;
+		}
 	})
 }));
 
@@ -237,18 +244,15 @@ passport.deserializeUser(function(id, done){
 		done(null, result);
 	})
 });
-}
+
+
 router.post('/',
-	passport.authenticate('local'), function(req, res){
-		console.log(req.user);
-		if(req.user == 'Athlete'){
-			res.redirect('/workoutentry');
-		} else {
-			res.redirect('/home');
-		}
-		
+	passport.authenticate('local', {successRedirect: '/home', failureRedirect: '/', failureFlash: true}),
+	function(req, res){
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
+		console.log(req.user);
+
 });
 
 router.post("/admin_add_user_form", function(req, res){
@@ -302,7 +306,7 @@ router.post("/myworkouts", function(req, res){
 	}
 });
 
-function dump(objArray, res)
+function dump(team,objArray, res)
 {
 			if(typeof objArray == 'object'){
 			var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
@@ -327,7 +331,8 @@ function dump(objArray, res)
 			});
 		}
 		else{
-			res.render('admin_data_dump_a.pug');
+			if(team==true) res.render('admin_data_dump_b.pug');
+			else res.render('admin_data_dump_a.pug');
 		}
 }
 
