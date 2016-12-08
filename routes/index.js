@@ -238,10 +238,9 @@ passport.deserializeUser(function(id, done){
 	})
 });
 
-router.post('/',
-	passport.authenticate('local'), function(req, res){
+router.post('/', passport.authenticate('local'), function(req, res){
 		console.log(req.user);
-		if(req.user == 'Athlete'){
+		if(req.user.role == 'Athlete'){
 			res.redirect('/workoutentry');
 		} else {
 			res.redirect('/home');
