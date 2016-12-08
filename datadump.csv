@@ -1,7 +1,0 @@
-athlete,date,sleep,health_status,Illness,Injury,percent_health,cycle_start,RPE,time,distance,notes,workoutID
-WillSmith,Tue Nov 08 2016 03:14:33 GMT+0000 (UTC),10,asdasd,asdasd,asdasd,100,127,0,1,2,just dummy data for testing,15
-WillSmith,Tue Nov 08 2016 02:56:55 GMT+0000 (UTC),10,and,another ,one,100,127,0,5,2,just dummy data for testing,14
-WillSmith,Tue Nov 08 2016 02:54:04 GMT+0000 (UTC),10,meme,town,boys,100,127,0,15,2,just dummy data for testing,13
-WillSmith,Mon Nov 07 2016 23:23:44 GMT+0000 (UTC),10,Real,Fake,Doors,100,127,0,21,3,just dummy data for testing,12
-WillSmith,Mon Nov 07 2016 23:21:43 GMT+0000 (UTC),10,Fair,Cold,Shin Splints,100,127,0,0,0,just dummy data for testing,11
-WillSmith,Mon Nov 07 2016 23:15:15 GMT+0000 (UTC),10,null,Meme,Bones,100,127,0,0,0,just dummy data for testing,10
