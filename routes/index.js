@@ -239,6 +239,11 @@ passport.deserializeUser(function(id, done){
 });
 
 router.post('/',
+<<<<<<< HEAD
+	passport.authenticate('local', {successRedirect: '/home', failureRedirect: '/', failureFlash: true}),
+	function(req, res){
+		console.log("hey");
+=======
 	passport.authenticate('local'), function(req, res){
 		console.log(req.user);
 		if(req.user == 'Athlete'){
@@ -247,6 +252,7 @@ router.post('/',
 			res.redirect('/home');
 		}
 		
+>>>>>>> e08d17b548bbd5c48596fa2c6736b884d6a80972
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
 });
