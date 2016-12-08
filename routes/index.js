@@ -237,7 +237,7 @@ passport.deserializeUser(function(id, done){
 		done(null, result);
 	})
 });
-}
+
 router.post('/',
 	passport.authenticate('local'), function(req, res){
 		console.log(req.user);
