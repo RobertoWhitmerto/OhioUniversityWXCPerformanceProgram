@@ -124,7 +124,7 @@ html
               .card-content.white-text
                 span.card-title
                   center Individual Data Dump:
-                form
+                form(action='/getdatadumpind', method='post')
                   | Athlete's User Name:
                   input(type='text', name='datadumpusr')
                   br
