@@ -149,7 +149,7 @@ router.post('/getdatadumpind', function(req, res) {
 	queries.get_workouts({user: req.body.datadumpusr}, function(err, result){
 		console.log(result);
 		workouts = result;
-		dump(workouts, res);
+		dump(false, workouts, res);
 	});
 	/*else
 	{
