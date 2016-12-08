@@ -246,7 +246,6 @@ router.post('/',
 		} else {
 			res.redirect('/home');
 		}
-		
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
 });
