@@ -328,6 +328,7 @@ html
           h1
             b My Workouts:
           br
+          - if (typeof(data) !== 'undefined'){  
           table.table.table-bordered
             thead
               tr
@@ -366,6 +367,7 @@ html
                         button.btn.waves-effect.waves-light.red.lighten-1(type='submit', name='action', wID=workout['workout_id'])
                           | Remove
                           i.material-icons.right send
+          -}
     br
     br
     br
