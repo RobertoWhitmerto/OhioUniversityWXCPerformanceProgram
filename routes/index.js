@@ -52,7 +52,6 @@ router.get('/myworkouts', function(req, res){
 			workouts = result;
 			//console.log(workouts);
 			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
-		
 		});
 	} else {
 	 	res.redirect('/');
