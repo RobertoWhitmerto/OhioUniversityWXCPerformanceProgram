@@ -26,9 +26,8 @@ html
       google.charts.load('current', {'packages':['corechart']});
       // Set a callback to run when the Google Visualization API is loaded [A].
       google.charts.setOnLoadCallback(sleepy);
-      google.charts.setOnLoadCallback(healthy);
-      google.charts.setOnLoadCallback(dur);
-      google.charts.setOnLoadCallback(mileage);
+      google.charts.setOnLoadCallback(dist);
+      google.charts.setOnLoadCallback(pace);
       google.charts.setOnLoadCallback(rtime);
       //Identifying Functions [B]
       function sleepy() {
@@ -69,26 +68,33 @@ html
       var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
       chart.draw(data, options);
       }
-      function healthy() {
+      function dist() {
       // Create the data table.
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
-      data.addColumn('number', 'Health Score');
-      data.addRows([
-      ['Mon.', 8],
-      ['Tues.', 10],
-      ['Wed.', 8],
-      ['Th.', 8],
-      ['Fri.', 8],
-      ['Sat.', 8],
-      ['Sun.', 6]
-      ]);
+      data.addColumn('number', 'Distance (miles)');
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      var rows = [['Sun.',0],['Mon.',0],['Tues.',0],['Wed.',0],['Th.',0],['Fri.',0],['Sat.',0]];
+      console.log(JSON.stringify(d));
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          var dt = new Date(Date.parse(obj.date));
+          if(dt > oneWeekAgo){
+            console.log(dt.getDay());
+            rows[dt.getDay()][1] = parseInt(obj.distance, 10);
+          }
+      }
+      console.log(rows);
+      data.addRows(rows);
       // Set chart options
-      var options = {'title':'Health Status',
+      var options = {'title':'Distance Ran',
       'width':450,
       'height':150,
       vAxis: {
-      title: "Health Score",
+      title: "Distance",
       viewWindowMode:'explicit'
       },
       legend: 'none',
@@ -97,65 +103,45 @@ html
       backgroundColor: '#ffffff'
       };
       // Instantiate and draw our chart, passing in some options.
-      var chart2 = new google.visualization.LineChart(document.getElementById('healthchart'));
+      var chart2 = new google.visualization.LineChart(document.getElementById('distancechart'));
       chart2.draw(data, options);
       }
-      function dur() {
+      function pace() {
       // Create the data table.
-      var data = google.visualization.arrayToDataTable([
-      ['Day', 'T1', 'T2', 'T3', 'T4', 'T5', { role: 'style' } ],
-      ['Mon.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Tues.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Wed.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Th.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Fri.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Sat.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Sun.', 10, 15, 20, 5, 2, 'opacity: 1.0']
-      ]);
-      // Set chart options
-      var options = {'title':'Time in Training Zones',
-      width: 600,
-      height: 400,
-      legend: { position: 'top', maxLines: 3 },
-      bar: { groupWidth: '75%' },
-      isStacked: true,
-      backgroundColor: '#ffffff',
-      vAxis: {
-      title: "Time in Zones (Min)",
-      viewWindowMode:'explicit'
-      },
-      colors: ['#ffff99','#ffe699','#ffcc99','#ffb399','#ff9999',],
-      };
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.ColumnChart(document.getElementById('durationchart'));
-      chart.draw(data, options);
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'Distance (miles)');
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      var rows = [['Sun.',0.0],['Mon.',0.0],['Tues.',0.0],['Wed.',0.0],['Th.',0.0],['Fri.',0.0],['Sat.',0.0]];
+      console.log(JSON.stringify(d));
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          var dt = new Date(Date.parse(obj.date));
+          if(dt > oneWeekAgo){
+            console.log(dt.getDay());
+            rows[dt.getDay()][1] = parseFloat(obj.time, 10)/parseInt(obj.distance, 10);
+          }
       }
-      function mileage() {
-      var data = google.visualization.arrayToDataTable([
-      ['Day', 'T1', 'T2', 'T3', 'T4', 'T5', { role: 'style' } ],
-      ['Mon.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Tues.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Wed.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Th.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Fri.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Sat.', 10, 15, 20, 5, 2, 'opacity: 1.0'],
-      ['Sun.', 10, 15, 20, 5, 2, 'opacity: 1.0']
-      ]);
+      console.log(rows);
+      data.addRows(rows);
       // Set chart options
-      var options = {'title':'Distance in Training Zones',
-      width: 600,
-      height: 400,
-      legend: { position: 'top', maxLines: 3 },
-      bar: { groupWidth: '75%' },
-      isStacked: true,
-      backgroundColor: '#ffffff',
+      var options = {'title':'Pace',
+      'width':450,
+      'height':150,
       vAxis: {
-      title: "Distance in Zones (Miles)",
+      title: "Pace",
       viewWindowMode:'explicit'
       },
+      legend: 'none',
+      lineWidth: 3,
+      colors: ['#c41616'],
+      backgroundColor: '#ffffff'
       };
       // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.ColumnChart(document.getElementById('mileagechart'));
+      var chart = new google.visualization.ColumnChart(document.getElementById('pacechart'));
       chart.draw(data, options);
       }
       function rtime() {
@@ -163,15 +149,22 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'hours');
-      data.addRows([
-      ['Mon.', 8],
-      ['Tues.', 10],
-      ['Wed.', 8],
-      ['Th.', 8],
-      ['Fri.', 8],
-      ['Sat.', 8],
-      ['Sun.', 6]
-      ]);
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      var rows = [['Sun.',18],['Mon.',18],['Tues.',18],['Wed.',18],['Th.',18],['Fri.',18],['Sat.',18]];
+      console.log(JSON.stringify(d));
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          var dt = new Date(Date.parse(obj.date));
+          if(dt > oneWeekAgo){
+            console.log(dt.getDay());
+            rows[dt.getDay()][1] = parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+          }
+      }
+      console.log(rows);
+      data.addRows(rows);
       // Set chart options
       var options = {'title':'Training Load',
       'width':700,
@@ -393,23 +386,16 @@ html
       #demo1.collapse
         #sleepchart
         br
-      a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Health
+      a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
       br
       br
       #demo2.collapse
-        #healthchart
-        br
-      a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Time in Zones
+        #distancechart
+      a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Pace
       br
       br
       #demo3.collapse
-        #durationchart
-        br
-      a.btn.btn-info.green(href='#demo4', data-toggle='collapse') Distance In Zones
-      br
-      br
-      #demo4.collapse
-        #mileagechart
+        #pacechart
         br
       a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load
       br
