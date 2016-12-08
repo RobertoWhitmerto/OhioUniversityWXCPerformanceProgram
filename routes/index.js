@@ -145,17 +145,17 @@ router.post('/getdatadumpind', function(req, res) {
 	//access workout info through [] index operator, rows of query returned
 	var workouts;
 
-	if(req.user.role != "admin" && req.user.id != req.body.datadumpusr)
-	{
-		queries.get_workouts({user: req.body.datadumpusr}, function(err, result){
-			workouts = result;
-			dump(false,workouts, res);
-		});
-	}
-	else
+
+	queries.get_workouts({user: req.body.datadumpusr}, function(err, result){
+		console.log(result);
+		workouts = result;
+		dump(workouts, res);
+	});
+	/*else
 	{
 		res.redirect('/getdatadumpind', {message: "You do not have access to this user's data"});
 	}
+	*/
 });
 
 

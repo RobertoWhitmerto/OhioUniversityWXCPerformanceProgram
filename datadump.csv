@@ -1,0 +1,8 @@
+athlete,date,sleep,health_status,Illness,Injury,percent_health,cycle_start,RPE,time,distance,notes,workoutID
+roberto,Wed Dec 07 2016 00:00:00 GMT+0000 (UTC),08,illness,fever,n/a,40,0,6,1,0,I am still sick and it is still Finals Week,unknown,50
+roberto,Wed Dec 07 2016 00:00:00 GMT+0000 (UTC),04,healthy,n/a,n/a,50,0,10,54,7,Here da note,track,51
+roberto,Tue Dec 06 2016 00:00:00 GMT+0000 (UTC),03,illness,fever,n/a,30,0,6,1,0,I am sick and it is finals week. What else is new?,concrete/asphalt,47
+roberto,Tue Dec 06 2016 00:00:00 GMT+0000 (UTC),07,healthy,n/a,n/a,60,0,10,60,4,You still sick son? Gonna fail ye finals due to deprivation of sleep.,unknown,48
+roberto,Mon Dec 05 2016 00:00:00 GMT+0000 (UTC),06,healthy,n/a,n/a,100,0,20,1,100,WATS HAPPININ WATS UP? GOT PATRONE IN MY CUPPP,track,46
+roberto,Fri Dec 02 2016 17:00:28 GMT+0000 (UTC),09,illness,insomnia,hip,80,0,19,69,14,Here some note son,null,35
+roberto,Thu Dec 01 2016 22:15:50 GMT+0000 (UTC),14,fatigued,n/a,n/a,10,0,6,52,8,Slept way too much today. Feel zombified.,null,32
