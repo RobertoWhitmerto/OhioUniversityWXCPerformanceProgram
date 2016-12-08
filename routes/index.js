@@ -16,11 +16,7 @@ router.get('/', function(req, res){
 // Home Page
 router.get('/home', function(req, res){
 	if(req.isAuthenticated()){
-		if(req.user.role == 'Athlete'){
-			res.redirect('/workoutentry');
-		} else {
-			res.render('signin.pug');
-		}
+		res.render('signin.pug');
 	} else {
 		res.redirect('/');
 	}
@@ -241,8 +237,7 @@ passport.deserializeUser(function(id, done){
 		done(null, result);
 	})
 });
-
-
+}
 router.post('/',
 	passport.authenticate('local'), function(req, res){
 		console.log(req.user);
