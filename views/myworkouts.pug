@@ -153,14 +153,33 @@ html
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       console.log(oneWeekAgo);
       var d = !{data_w};
-      var rows = [['Sun.',18],['Mon.',18],['Tues.',18],['Wed.',18],['Th.',18],['Fri.',18],['Sat.',18]];
+      var oneWeekAgo_1 = new Date();
+      var oneWeekAgo_1 = oneWeekAgo.getDate() + 1;
+      var oneWeekAgo_2 = new Date();
+      var oneWeekAgo_2 = oneWeekAgo.getDate() + 2;
+      var oneWeekAgo_3 = new Date();
+      var oneWeekAgo_3 = oneWeekAgo.getDate() + 3;
+      var oneWeekAgo_4 = new Date();
+      var oneWeekAgo_4 = oneWeekAgo.getDate() + 4;
+      var oneWeekAgo_5 = new Date();
+      var oneWeekAgo_5 = oneWeekAgo.getDate() + 5;
+      var oneWeekAgo_6 = new Date();
+      var oneWeekAgo_6 = oneWeekAgo.getDate() + 6;
+      var oneWeekAgo_7 = new Date();
+      var oneWeekAgo_7 = oneWeekAgo.getDate() + 7;
+      
+      var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],[oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],[oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
       console.log(JSON.stringify(d));
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
           var dt = new Date(Date.parse(obj.date));
+          console.log("Date of workout: " + dt);
           if(dt > oneWeekAgo){
+            var slot = oneWeekAgo - dt;
             console.log(dt.getDay());
-            rows[dt.getDay()][1] = parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+            //rows[dt.getDay()][1] = parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+            rows[slot][0] = dt;
+            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
           }
       }
       console.log(rows);
