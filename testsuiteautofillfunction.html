@@ -1,0 +1,111 @@
+<!--
+* Name:         Andrew Leach
+* Team:         Team on a Cob
+* Date:         1/15/17
+* Function:     Autofill for today's date test suite.
+
+* Description:  Loops through the possible month and days
+
+* Note:         Blackboard may not allow for the submission of HTML
+                files. If the extension is .txt, simply change it to
+                .htm or .html and this function will appear properly
+                in your browser.
+-->	
+<html>
+	<h3>Test Suite : Autofill - Today Function</h3>
+	<button onclick="myFunction()">Click to begin iteration</a></button><br><br>
+
+	<script>
+	function myFunction(x) {
+
+    if(x == undefined){
+        x = 0;
+    }
+
+	var d = new Date();
+
+    d.setDate(d.getDate() + x);
+
+	var n = d.getDate();
+	var m = d.getMonth();
+
+	document.getElementById("month").selectedIndex = m + 1;
+	document.getElementById("day").selectedIndex = n;
+
+  
+    x = x + 1;
+    setTimeout(function(){myFunction(x)}, 350);
+	}
+	</script>
+
+	<label>Month</label>
+	<select id="month" name="month" class="browser-default">
+	<option name="month" value="invalidmonth">--</option>
+	<option name="month" value="January">January</option>
+	<option name="month" value="February">February</option>
+	<option name="month" value="March">March</option>
+	<option name="month" value="April">April</option>
+	<option name="month" value="May">May</option>
+	<option name="month" value="June">June</option>
+	<option name="month" value="July">July</option>
+	<option name="month" value="August">August</option>
+	<option name="month" value="September">September</option>
+	<option name="month" value="October">October</option>
+	<option name="month" value="November">November</option>
+	<option name="month" value="December">December</option>
+	</select><br><br>
+
+	<label>Day of month</label>
+	<select id="day" name="day" class="browser-default">
+	<option name="day" value="0">--</option>
+	<option name="day" value="1">1</option>
+	<option name="day" value="2">2</option>
+	<option name="day" value="3">3</option>
+	<option name="day" value="4">4</option>
+	<option name="day" value="5">5</option>
+	<option name="day" value="6">6</option>
+	<option name="day" value="7">7</option>
+	<option name="day" value="8">8</option>
+	<option name="day" value="9">9</option>
+	<option name="day" value="10">10</option>
+	<option name="day" value="11">11</option>
+	<option name="day" value="12">12</option>
+	<option name="day" value="13">13</option>
+	<option name="day" value="14">14</option>
+	<option name="day" value="15">15</option>
+	<option name="day" value="16">16</option>
+	<option name="day" value="17">17</option>
+	<option name="day" value="18">18</option>
+	<option name="day" value="19">19</option>
+	<option name="day" value="20">20</option>
+	<option name="day" value="21">21</option>
+	<option name="day" value="22">22</option>
+	<option name="day" value="23">23</option>
+	<option name="day" value="24">24</option>
+	<option name="day" value="25">25</option>
+	<option name="day" value="26">26</option>
+	<option name="day" value="27">27</option>
+	<option name="day" value="28">28</option>
+	<option name="day" value="29">29</option>
+	<option name="day" value="30">30</option>
+	<option name="day" value="31">31</option>
+	</select><br><br>
+
+    <label>Current Year</label>
+    <select disabled="true" id="currentyear" name="currentyear" class="browser-default">
+    <option name="currentyear" value="0000" >----</option>
+    <option name="currentyear" value="2017" >2017</option>
+    <option name="currentyear" value="2018">2018</option>
+    <option name="currentyear" value="2019">2019</option>
+    <option name="currentyear" value="2020">2020</option>
+    <option name="currentyear" value="2021">2021</option>
+    <option name="currentyear" value="2022">2022</option>
+    </select><br><br>
+
+	<script>
+	var p = new Date();
+	var y = p.getFullYear();
+    document.getElementById("currentyear").selectedIndex = y-2016;
+	</script>
+
+</html>
