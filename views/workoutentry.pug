@@ -195,11 +195,21 @@ html
                         option(name='day', value='31') 31
                       br
                       br
+                      label Current Year
+                      select#currentyear.browser-default(disabled='true', name='currentyear')
+                        option(name='currentyear', value='0000') ----
+                        option(name='currentyear', value='2017') 2017
+                        option(name='currentyear', value='2018') 2018
+                        option(name='currentyear', value='2019') 2019
+                        option(name='currentyear', value='2020') 2020
+                        option(name='currentyear', value='2021') 2021
+                        option(name='currentyear', value='2022') 2022
+                      br
+                      br
                       script.
                         var p = new Date();
                         var y = p.getFullYear();
-                        document.getElementById("currentyear").value = y;
-                      input#currentyear(type='hidden', value='')
+                        document.getElementById("currentyear").selectedIndex = y-2016;
               .row
                 .col.s12.m12
                   .card.light-blue.darken-4
@@ -322,3 +332,4 @@ html
       // Import jQuery before materialize.js
       script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
       script(type='text/javascript', src='js/materialize.min.js')
+
