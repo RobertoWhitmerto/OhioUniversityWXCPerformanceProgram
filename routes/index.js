@@ -124,6 +124,16 @@ router.get('/changepassword',
 			}
 });
 
+// Submit a Bug
+router.get('/buggy',
+        function(req, res){
+			if(req.isAuthenticated()){
+				res.render('buggy.pug');
+			} else {
+				res.redirect('/');
+			}
+});
+
 // Data Dump Individual
 router.get('/datadumpindividual', function(req, res){
 			if(req.isAuthenticated()){
