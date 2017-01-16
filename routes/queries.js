@@ -39,7 +39,7 @@ function get_query(query, input, queryString) {
 	else if(query == "insertD")
 	{
 		string = insertData;
-		var date = "2016-"+month_lookup(input.month)+"-"+input.day;
+		var date = input.currentyear+"-"+month_lookup(input.month)+"-"+input.day;
 		string += ` VALUES ( "${input.user}", "${date}", "${input.sleephours}", "${input.healthstatus}", "${input.illness}", "${input.injury}", "${input.myhealth}", "${input.cycle}", "${input.rpeval}", "${input.time}", "${input.distance}", "${input.surface}", "${input.mynotes}")`;
 	}
 	else if(query == "insertU")
