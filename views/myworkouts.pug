@@ -216,10 +216,6 @@ html
           i.material-icons menu
         ul.right.hide-on-med-and-down
           li
-            a.dropdown-button.light-blue(href='/home') Home
-          li
-            a.dropdown-button.light-blue.lighten-1(href='/about') About
-          li
             a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
               | Athletes
               i.material-icons.right arrow_drop_down
@@ -230,6 +226,10 @@ html
           li
             a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
               | Administrators
+              i.material-icons.right arrow_drop_down
+          li
+            a.dropdown-button.red.accent-4(href='#', data-activates='Helpbar')
+              | Need Help?
               i.material-icons.right arrow_drop_down
           li
             a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
@@ -255,6 +255,13 @@ html
         li.divider
         li
           a(href='/admin_remove_user') Remove a user
+      ul#Helpbar.dropdown-content
+        li
+          a(href='/about') About
+        li
+          a(href='/changepassword') Change password
+        li
+          a(href='/buggy') Submit a bug
       // Hambug Menu Options
       ul#mobile-demo.side-nav.amber.lighten-5
         li
@@ -294,6 +301,12 @@ html
         li.divider
         li
           a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/changepassword') Change password
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/buggy') Submit a bug
         li.divider
         li
           a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
