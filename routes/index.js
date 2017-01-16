@@ -114,6 +114,16 @@ router.get('/about',
 			}
 });
 
+// Change Pass
+router.get('/changepassword',
+        function(req, res){
+			if(req.isAuthenticated()){
+				res.render('changepassword.pug');
+			} else {
+				res.redirect('/');
+			}
+});
+
 // Data Dump Individual
 router.get('/datadumpindividual', function(req, res){
 			if(req.isAuthenticated()){
