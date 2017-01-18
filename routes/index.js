@@ -161,6 +161,17 @@ router.get('/datadumpTeam',function(req, res){
 	}
 });
 
+/*
+// Coach/Admin view athletedata
+router.get('/athletedata', function(req, res){
+	if(req.isAuthenticated()){
+		res.render('/ ');
+	} else {
+		res.redirect('/');
+	}
+});
+*/
+
 router.post('/getdatadumpind', function(req, res) {
 	console.log(req.body);
 	
