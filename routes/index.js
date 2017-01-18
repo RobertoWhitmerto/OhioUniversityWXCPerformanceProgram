@@ -161,6 +161,12 @@ router.get('/datadumpTeam',function(req, res){
 	}
 });
 
+router.post('/changepass', function(req, res) {
+
+	console.log(req.body);
+
+});
+
 router.post('/getdatadumpind', function(req, res) {
 	console.log(req.body);
 	
