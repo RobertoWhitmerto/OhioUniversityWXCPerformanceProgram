@@ -14,7 +14,7 @@ var athlete = false;
 router.get('/', function(req, res){
 	res.render('site.pug');
 });
-
+/*
 // Home Page
 router.get('/home', function(req, res){
 	if(req.isAuthenticated()){
@@ -23,6 +23,8 @@ router.get('/home', function(req, res){
 		res.redirect('/');
 	}
 });
+
+*/
 
 // Logout
 router.get('/logout', function(req, res){
@@ -271,7 +273,8 @@ router.post('/', passport.authenticate('local'), function(req, res){
 		if(req.user.role == 'Athlete'){
 			res.redirect('/workoutentry');
 		} else {
-			res.redirect('/home');
+			// Needs to be updated to coaches/admin view athletes once page gets added
+			res.redirect('/workoutentry');
 		}
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
