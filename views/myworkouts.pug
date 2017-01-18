@@ -30,6 +30,8 @@ html
       google.charts.setOnLoadCallback(pace);
       google.charts.setOnLoadCallback(rtime);
       //Identifying Functions [B]
+      
+      // ****************************** SLEEP CHART *************************************
       function sleepy() {
       // Create the data table.
       var data = new google.visualization.DataTable();
@@ -39,14 +41,35 @@ html
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       console.log(oneWeekAgo);
       var d = !{data_w};
-      var rows = [['Sun.',18],['Mon.',18],['Tues.',18],['Wed.',18],['Th.',18],['Fri.',18],['Sat.',18]];
+      
+      var oneWeekAgo_1 = new Date();
+      oneWeekAgo_1.setDate(oneWeekAgo + 1);
+      var oneWeekAgo_2 = new Date();
+      oneWeekAgo_2.setDate(oneWeekAgo + 2);
+      var oneWeekAgo_3 = new Date();
+      oneWeekAgo_3.setDate(oneWeekAgo + 3);
+      var oneWeekAgo_4 = new Date();
+      oneWeekAgo_4.setDate(oneWeekAgo + 4);
+      var oneWeekAgo_5 = new Date();
+      oneWeekAgo_5.setDate(oneWeekAgo + 5);
+      var oneWeekAgo_6 = new Date();
+      oneWeekAgo_6.setDate(oneWeekAgo + 6);
+      var oneWeekAgo_7 = new Date();
+      oneWeekAgo_7.setDate(oneWeekAgo + 7);
+      
+      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
       console.log(JSON.stringify(d));
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
           var dt = new Date(Date.parse(obj.date));
           if(dt > oneWeekAgo){
+            var slot = dt.getDate() - oneWeekAgo.getDate();
+            if(slot < 0)
+              slot = slot * (-1);
             console.log(dt.getDay());
-            rows[dt.getDay()][1] = parseInt(obj.sleep, 10);
+            rows[slot][0] = dt.getDate().toString();
+            rows[slot][1] = parseInt(obj.sleep, 10);
+            //rows[dt.getDay()][1] = parseInt(obj.sleep, 10);
           }
       }
       console.log(rows);
@@ -68,6 +91,8 @@ html
       var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
       chart.draw(data, options);
       }
+      
+      //************************** DISTANCE CHART *********************************************
       function dist() {
       // Create the data table.
       var data = new google.visualization.DataTable();
@@ -77,14 +102,37 @@ html
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       console.log(oneWeekAgo);
       var d = !{data_w};
-      var rows = [['Sun.',0],['Mon.',0],['Tues.',0],['Wed.',0],['Th.',0],['Fri.',0],['Sat.',0]];
+      
+      
+      var oneWeekAgo_1 = new Date();
+      oneWeekAgo_1.setDate(oneWeekAgo + 1);
+      var oneWeekAgo_2 = new Date();
+      oneWeekAgo_2.setDate(oneWeekAgo + 2);
+      var oneWeekAgo_3 = new Date();
+      oneWeekAgo_3.setDate(oneWeekAgo + 3);
+      var oneWeekAgo_4 = new Date();
+      oneWeekAgo_4.setDate(oneWeekAgo + 4);
+      var oneWeekAgo_5 = new Date();
+      oneWeekAgo_5.setDate(oneWeekAgo + 5);
+      var oneWeekAgo_6 = new Date();
+      oneWeekAgo_6.setDate(oneWeekAgo + 6);
+      var oneWeekAgo_7 = new Date();
+      oneWeekAgo_7.setDate(oneWeekAgo + 7);
+      
+      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      
       console.log(JSON.stringify(d));
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
           var dt = new Date(Date.parse(obj.date));
           if(dt > oneWeekAgo){
+            var slot = dt.getDate() - oneWeekAgo.getDate();
+            if(slot < 0)
+              slot = slot * (-1);
             console.log(dt.getDay());
-            rows[dt.getDay()][1] = parseInt(obj.distance, 10);
+            rows[slot][0] = dt.getDate().toString();
+            rows[slot][1] = parseInt(obj.distance, 10);
+            //rows[dt.getDay()][1] = parseInt(obj.distance, 10);
           }
       }
       console.log(rows);
