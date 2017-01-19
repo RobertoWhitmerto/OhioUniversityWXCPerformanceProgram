@@ -165,6 +165,10 @@ router.post('/changepass', function(req, res) {
 
 	console.log(req.body);
 
+	queries.change_password({user: req.user.id, pass: req.body.pass}, function(err, result){
+		console.log(result);
+	});
+
 });
 
 

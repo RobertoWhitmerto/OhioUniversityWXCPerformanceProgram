@@ -96,6 +96,11 @@ function get_query(query, input, queryString) {
  				surface="${input.surface}", 
  				notes="${input.mynotes}" `;
 	}
+	else if(query == "changepass")
+	{
+		string = `UPDATE user`;
+		string += ` SET password="${input.pass}" WHERE username="${input.user}"`;
+	}
 	else
 	{
 		console.log("error, could not find query");
@@ -241,6 +246,18 @@ function remove_workout(input, done){
  }
 
 
+ function change_password(input, done){
+	
+	exec_query("changepass", input, function(err, rows, fields) {
+
+		if(err) { return done(err);}
+		if(rows.length == 0){return done({message: "Could not change password"})}
+	done(null, rows);
+	})
+
+}
+
+
  function month_lookup(month){
 
  	if(month == "January")
@@ -304,3 +321,4 @@ module.exports.add_team = add_team;
 module.exports.remove_workout = remove_workout;
 module.exports.edit_workout = edit_workout;
 module.exports.list_users = list_users;
+module.exports.change_password = change_password;
