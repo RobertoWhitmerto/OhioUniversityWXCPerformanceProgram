@@ -167,6 +167,7 @@ router.post('/changepass', function(req, res) {
 
 });
 
+
 router.post('/getdatadumpind', function(req, res) {
 	console.log(req.body);
 	
@@ -317,7 +318,25 @@ router.post("/admin_remove_user_form", function(req, res){
 
   res.redirect('/admin_add_user');
 });
+/*
+router.post("/changepass", function(req, res){
+	if(req.isAuthenticated()){
+		// Add db query here to store new password
+	} else {
+		res.redirect('/');
+	}
+});
+*/
 
+/*
+router.post("/bugreport", function(req, res){
+	if(req.isAuthenticated()){
+		// Add database query or js email
+	} else {
+		res.redirect('/');
+	}
+});
+*/
 
 router.post("/myworkouts", function(req, res){
 		if(req.isAuthenticated()){
