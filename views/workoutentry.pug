@@ -234,15 +234,7 @@ html
                         input#opt0(name='sleephours', type='range', min='0', max='14', value='0', step='0.5')
                       br
                       br
-                      label Health status
-                      select.browser-default(name='healthstatus')
-                        option(name='healthstatus', value='healthy') Healthy
-                        option(name='healthstatus', value='fatigued') Fatigued
-                        option(name='healthstatus', value='illness') Illness
-                        option(name='healthstatus', value='injured') Injured
-                      br
-                      br
-                      label Illness
+                      label General Health
                       select.browser-default(name='illness')
                         option(name='illness', value='n/a') N/A
                         option(name='illness', value='fever') Fever
@@ -256,12 +248,12 @@ html
                         option(name='illness', value='chronic soreness') Chronic Soreness
                       br
                       br
-                      label Injury
+                      label Irritation/Pain
                       select.browser-default(name='injury')
                         option(name='injury', value='n/a') N/A
                         option(name='injury', value='foot arch') Foot Arch
                         option(name='injury', value='Heel') Heel
-                        option(name='injury', value='tibia') Tibia
+                        option(name='injury', value='shin') Shin
                         option(name='injury', value='knee') Knee
                         option(name='injury', value='it band') IT Band
                         option(name='injury', value='hip') Hip
@@ -270,9 +262,69 @@ html
                         option(name='injury', value='rib') Rib
                       br
                       br
-                      label % of full health
+                      label Wellness Score
+                      br
+                      label (100% = Full Health, 0% = Not able to Workout)
                       p.range-field.white
                         input#opt0(name='myhealth', type='range', min='0', max='100', value='0', step='10')
+                      br
+                      br
+                      label RPE Information
+                      select#rpeinfo.browser-default(name='rpeinfo')
+                        option(name='rpeinfo', value='unknown') ----
+                        option(name='rpeinfo', value='aerobic') Zone 1: Aerobic
+                        option(name='rpeinfo', value='threshold') Zone 2: Threshold
+                        option(name='rpeinfo', value='interval') Zone 3: Interval
+                        option(name='rpeinfo', value='crosstraining') Cross Training
+                        option(name='rpeinfo', value='strengthandconditioning') Strength and Conditioning
+                      label RPE (6-20)
+                      select.browser-default(name='rpeval')
+                        option(name='rpeval', value='rpeinvalid') --
+                        option(name='rpeval', value='6') 6 - Rest
+                        option(name='rpeval', value='7') 7 - Extremely Light
+                        option(name='rpeval', value='8') 8 -
+                        option(name='rpeval', value='9') 9 - Very Light
+                        option(name='rpeval', value='10') 10 -
+                        option(name='rpeval', value='11') 11 - Light
+                        option(name='rpeval', value='12') 12 -
+                        option(name='rpeval', value='13') 13 - Somewhat Hard
+                        option(name='rpeval', value='14') 14 -
+                        option(name='rpeval', value='15') 15 - Hard
+                        option(name='rpeval', value='16') 16 -
+                        option(name='rpeval', value='17') 17 - Very Hard
+                        option(name='rpeval', value='18') 18 -
+                        option(name='rpeval', value='19') 19 - Extremely Hard
+                        option(name='rpeval', value='20') 20 - Maximal Exertion
+                      br
+                      br
+                      label Time of workout (minutes)
+                      p.range-field.white
+                        input(name='time', type='range', min='1', max='360', value='0', step='1')
+                      br
+                      br
+                      //
+                        <label>Distance (miles)</label>
+                        <p class="range-field white">
+                        <input name="distance" type="range" min="1" max="25" value="0" step="0.125">
+                        </p><br><br>
+                      label Distance (miles)
+                      input(type='text', name='distance')
+                      br
+                      br
+                      label 24-hour Hunger Score
+                      select.browser-default(name='hungry')
+                        option(name='hungry', value='unknown') --
+                        option(name='hungry', value='0') 0 - Empty
+                        option(name='hungry', value='1') 1 - Ravenous
+                        option(name='hungry', value='2') 2 - Very Hungry
+                        option(name='hungry', value='3') 3 - Lightly Hungry
+                        option(name='hungry', value='4') 4 - Lightly Hungry
+                        option(name='hungry', value='5') 5 - Neutral
+                        option(name='hungry', value='6') 6 - Lightly Full; Satisfied
+                        option(name='hungry', value='7') 7 - Lightly Full; Satisfied
+                        option(name='hungry', value='8') 8 - Full
+                        option(name='hungry', value='9') 9 - Stuffed
+                        option(name='hungry', value='10') 10 - Sick
                       br
                       br
                       label Start of cycle
@@ -283,45 +335,6 @@ html
                       label(name='cycle', for='opt2') Yes
                       br
                       br
-                      label RPE (6-20)
-                      select.browser-default(name='rpeval')
-                        option(name='rpeval', value='rpeinvalid') --
-                        option(name='rpeval', value='6') 6
-                        option(name='rpeval', value='7') 7
-                        option(name='rpeval', value='8') 8
-                        option(name='rpeval', value='9') 9
-                        option(name='rpeval', value='10') 10
-                        option(name='rpeval', value='11') 11
-                        option(name='rpeval', value='12') 12
-                        option(name='rpeval', value='13') 13
-                        option(name='rpeval', value='14') 14
-                        option(name='rpeval', value='15') 15
-                        option(name='rpeval', value='16') 16
-                        option(name='rpeval', value='17') 17
-                        option(name='rpeval', value='18') 18
-                        option(name='rpeval', value='19') 19
-                        option(name='rpeval', value='20') 20
-                      br
-                      br
-                      label Time of workout (minutes):
-                      p.range-field.white
-                        input(name='time', type='range', min='1', max='120', value='0', step='1')
-                      br
-                      br
-                      label Distance (miles):
-                      input(type='text', placeholder='8.03', name='distance')
-                      br
-                      br
-                      label Surface:
-                      select.browser-default(name='surface')
-                        option(name='surface', value='unknown') --
-                        option(name='surface', value='track') Track
-                        option(name='surface', value='trail') Trail
-                        option(name='surface', value='dirt') Dirt
-                        option(name='surface', value='grass') Grass
-                        option(name='surface', value='concrete/asphalt') Concrete/Asphalt
-                      br
-                      br
                       br
               .row
                 .col.s12.m12
@@ -330,7 +343,7 @@ html
                       span.card-title Extra Information:
                       .row
                         .input-field.col.s12
-                          textarea#textarea1.materialize-textarea(length='256', name='mynotes')
+                          textarea#textarea1.materialize-textarea(length='1024', name='mynotes')
                           label(name='notes', for='textarea1') My Notes
                       br
                       br
