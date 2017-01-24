@@ -27,8 +27,8 @@ html
       // Set a callback to run when the Google Visualization API is loaded [A].
       google.charts.setOnLoadCallback(sleepy);
       google.charts.setOnLoadCallback(dist);
-      google.charts.setOnLoadCallback(pace);
-      google.charts.setOnLoadCallback(rtime);
+      google.charts.setOnLoadCallback(tload_dist);
+      google.charts.setOnLoadCallback(tload_time);
       //Identifying Functions [B]
       
       // ****************************** SLEEP CHART *************************************
@@ -76,16 +76,16 @@ html
       data.addRows(rows);
       // Set chart options
       var options = {'title':'Weekly Sleep Pattern',
-      'width':450,
-      'height':150,
+      'width':700,
+      'height':200,
       legend: 'none',
-      curveType: 'function',
+      lineWidth: 3,
       backgroundColor: '#ffffff',
       vAxis: {
       title: "Hours of Sleep",
       viewWindowMode:'explicit'
       },
-      colors: ['#00d8ff'],
+      colors: ['#006400'],
       };
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
@@ -139,27 +139,27 @@ html
       data.addRows(rows);
       // Set chart options
       var options = {'title':'Distance Ran',
-      'width':450,
-      'height':150,
+      'width':700,
+      'height':200,
       vAxis: {
       title: "Distance",
       viewWindowMode:'explicit'
       },
       legend: 'none',
       lineWidth: 3,
-      colors: ['#c41616'],
+      colors: ['#006400'],
       backgroundColor: '#ffffff'
       };
       // Instantiate and draw our chart, passing in some options.
       var chart2 = new google.visualization.LineChart(document.getElementById('distancechart'));
       chart2.draw(data, options);
       }
-      //********************* PACE CHART ***********************************
-      function pace() {
+      //********************* tload_dist CHART ***********************************
+      function tload_dist() {
       // Create the data table.
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
-      data.addColumn('number', 'Pace (Minutes/mile)');
+      data.addColumn('number', '(RPE x Distance)');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       console.log(oneWeekAgo);
@@ -192,32 +192,32 @@ html
               slot = slot * (-1);
             console.log(dt.getDay());
             rows[slot][0] = dt.getDate().toString();
-            rows[slot][1] = parseFloat(obj.time, 10)/parseInt(obj.distance, 10);
+            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
             //rows[dt.getDay()][1] = parseFloat(obj.time, 10)/parseInt(obj.distance, 10);
           }
       }
       console.log(rows);
       data.addRows(rows);
       // Set chart options
-      var options = {'title':'Pace',
-      'width':450,
-      'height':150,
+      var options = {'title':'Training Load - Distance',
+      'width':700,
+      'height':200,
       vAxis: {
-      title: "Pace",
+      title: "Load",
       viewWindowMode:'explicit'
       },
       legend: 'none',
       lineWidth: 3,
-      colors: ['#c41616'],
+      colors: ['#006400'],
       backgroundColor: '#ffffff'
       };
       // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.ColumnChart(document.getElementById('pacechart'));
+      var chart = new google.visualization.LineChart(document.getElementById('tload_distchart'));
       chart.draw(data, options);
       }
       
-      // ************************* TRAINING LOAD CHART ******************************************
-      function rtime() {
+      // ************************* TRAINING LOAD TIME CHART ******************************************
+      function tload_time() {
       // Create the data table.
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
@@ -262,17 +262,17 @@ html
       //console.log(rows);
       data.addRows(rows);
       // Set chart options
-      var options = {'title':'Training Load',
+      var options = {'title':'Training Load - Time',
       'width':700,
       'height':200,
       legend: 'none',
-      curveType: 'function',
       backgroundColor: '#ffffff',
       vAxis: {
       title: "RPE x Time",
       viewWindowMode:'explicit'
       },
-      colors: ['#00d8ff'],
+      colors: ['#006400'],
+      lineWidth: 3,
       };
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(document.getElementById('rpextimechart'));
@@ -435,6 +435,44 @@ html
       font(color='cyan')
         center
           h1
+            b Weekly Charts:
+          p
+    // Div that will hold the pie chart [C]
+    .ez2
+      br
+      a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
+      br
+      br
+      #demo1.collapse
+        #sleepchart
+        br
+      a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
+      br
+      br
+      #demo2.collapse
+        #distancechart
+      a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Training Load - Distance
+      br
+      br
+      #demo3.collapse
+        #tload_distchart
+        br
+      a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load - Time
+      br
+      br
+      #demo5.collapse
+        #rpextimechart
+      br
+      br
+    br
+    hr
+    // END OF CHARTS   
+    center
+      .ez
+        font(color='cyan')
+          p.fonts
+          // ****************************** DISPLAYING TRAINING LOG ******************************
+          h1
             b Training Log:
           br
           - if (typeof(data) !== 'undefined'){  
@@ -479,42 +517,6 @@ html
           -}
     br
     br
-    br
-    hr
-    center
-      .ez
-        font(color='cyan')
-          p.fonts
-          h1
-            b Weekly Charts:
-          p
-    // Div that will hold the pie chart [C]
-    .ez2
-      br
-      a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
-      br
-      br
-      #demo1.collapse
-        #sleepchart
-        br
-      a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
-      br
-      br
-      #demo2.collapse
-        #distancechart
-      a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Pace
-      br
-      br
-      #demo3.collapse
-        #pacechart
-        br
-      a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load
-      br
-      br
-      #demo5.collapse
-        #rpextimechart
-      br
-      br
     br
     hr
     // Materialize CSS imports [body]
