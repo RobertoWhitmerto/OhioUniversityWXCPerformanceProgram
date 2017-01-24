@@ -96,6 +96,10 @@ function get_query(query, input, queryString) {
  				surface="${input.surface}", 
  				notes="${input.mynotes}" `;
 	}
+	else if(query == "listUsers")
+	{
+		string = `SELECT * FROM user WHERE team="${input.team}"`;
+	}
 	else if(query == "changepass")
 	{
 		string = `UPDATE user`;
@@ -225,7 +229,7 @@ function remove_workout(input, done){
  	}
  	else
  	{
-		db.query(queryString, function(err, rows, fields) {
+		exec_query("listUsers", function(err, rows, fields) {
         	if (err){return done(err);}
         	if(rows.length == 0){return done({message: "no user's found"})}
 			done(null, rows);
