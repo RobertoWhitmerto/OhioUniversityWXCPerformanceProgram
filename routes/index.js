@@ -136,6 +136,16 @@ router.get('/buggy',
 			}
 });
 
+// Coach/Trainer Page
+router.get('/coaches',
+        function(req, res){
+			if(req.isAuthenticated()){
+				res.render('coaches.pug');
+			} else {
+				res.redirect('/');
+			}
+});
+
 // Data Dump Individual
 router.get('/datadumpindividual', function(req, res){
 			if(req.isAuthenticated()){

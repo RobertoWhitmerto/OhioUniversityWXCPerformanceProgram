@@ -1,8 +1,17 @@
 doctype html
 html
   head
-    title PPA - Remove a User
-    // Materialize CSS imports [head]
+    title OU WxC - Coaches/Trainers
+    // Compiled and minified CSS
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css')
+    // Compiled and minified JavaScript
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js')
+    // Bootstrap
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    // Let browser know website is optimized for mobile
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
     // Import Google Icon Font
     link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
     // Import materialize.css
@@ -10,17 +19,15 @@ html
     // Let browser know website is optimized for mobile
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
-    script.
-      $(document).ready(function(){
-      $(".dropdown-button").dropdown();
-      $(".button-collapse").sideNav();
-      });
+    // Load the AJAX API
+    script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+    
   body(background='/views/bg3.jpg')
     // Navbar up at the top
     nav
       .nav-wrapper.light-blue.darken-4
         a.brand-logo
-          font(color='cyan') PPA
+          font(color='cyan') OU WxC
         a.button-collapse(href='#', data-activates='mobile-demo')
           i.material-icons menu
         ul.right.hide-on-med-and-down
@@ -45,10 +52,10 @@ html
       // Drop down associations Non-Mobile
       ul#Athletes.dropdown-content
         li
-          a(href='/workoutentry') New Workout
+          a(href='/workoutentry') Enter a workout
         li.divider
         li
-          a(href='/myworkouts') Training Log
+          a(href='/myworkouts') View past workouts
       ul#CoachesTrainers.dropdown-content
         li
           a(href='/coaches') View Athletes
@@ -78,10 +85,10 @@ html
             h5 Athletes
         li.divider
         li
-          a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') New Workout
+          a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') Enter a Workout
         li.divider
         li
-          a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') Training Log
+          a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') View Past Workouts
         li.divider
         li
           font(color='blue')
@@ -124,53 +131,45 @@ html
           font(color='grey')
             h6
               center Team on a Cob 2016
+    style(type='text/css').
+      div.ez{
+      background: #01579b;
+      width:900px;
+      border: 3px solid #82b1ff;
+      margin: auto;
+      }
+    style(type='text/css').
+      div.ez2{
+      background: #304ffe;
+      width:900px;
+      border: 3px solid #82b1ff;
+      margin: auto;
+      }
     br
     br
     br
     br
     br
-    article
-      .row
-        .col.s12.m5.offset-m3
-          .card.indigo.accent-4
-            .card-content.cyan-text
-              span.card-title
-                center
-                  p.fonts
-                    font(color='cyan')
-                      b Remove a User:
-            .row
-              .col.s12.m12
-                .card.light-blue.darken-4
-                  .card-content.black-text
-                    font(color='cyan')
-                      form(action='/admin_remove_user_form', method='post')
-                        label
-                          font(color='cyan') Username:
-                        input(type='text', name='removeusername', required='')
-                        br
-                        br
-                        label
-                          font(color='cyan') User's Last Name:
-                        input(type='text', name='removelastname', required='')
+    body
+    font(color='cyan')
+      .container
+        .row
+          .col.s10.m10
+            .card.light-blue.darken-4
+              .card-content.white-text
+                span.card-title
+                  center Coaches/Trainers View Athletes
+                    .ez
+                      br
+                      li.btn.btn-info.red(href='#viewathletes', data-toggle='collapse') View Team
+                      br
+                      br
+                      #viewathletes.collapse
                         br
                         br
                         br
-                        | Note: 
-                        br
-                        | Please ensure you want to permanently remove this user, this process
-                        font(color='red')
-                          b  cannot
-                        |  be reversed.
-              center
-                button.btn.waves-effect.waves-light.red(type='submit', name='action')
-                  | Remove User
-                  i.material-icons.right send
-                br
-                br
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js
       script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
       script(type='text/javascript', src='js/materialize.min.js')
-
