@@ -229,9 +229,13 @@ html
                     .card-content.cyan-text
                       span.card-title Workout Information:
                       br
+                      //
+                        <label>Hours of sleep</label>
+                        <p class="range-field white">
+                        <input id="opt0" name="sleephours" type="range" min="0" max="14" value="0" step="0.5">
+                        </p><br><br>
                       label Hours of sleep
-                      p.range-field.white
-                        input#opt0(name='sleephours', type='range', min='0', max='14', value='0', step='0.5')
+                      input(type='number', name='sleephours', min='0', max='14')
                       br
                       br
                       label General Health
@@ -262,11 +266,16 @@ html
                         option(name='injury', value='rib') Rib
                       br
                       br
+                      //
+                        <label>Wellness Score</label><br>
+                        <label>(100% = Full Health, 0% = Not able to Workout)</label>
+                        <p class="range-field white">
+                        <input id="opt0" name="myhealth" type="range" min="0" max="100" value="0" step="10">
+                        </p><br><br>
                       label Wellness Score
                       br
                       label (100% = Full Health, 0% = Not able to Workout)
-                      p.range-field.white
-                        input#opt0(name='myhealth', type='range', min='0', max='100', value='0', step='10')
+                      input(type='number', min='0', max='100', step='10')
                       br
                       br
                       label RPE Information
@@ -297,9 +306,13 @@ html
                         option(name='rpeval', value='20') 20 - Maximal Exertion
                       br
                       br
+                      //
+                        <label>Time of workout (minutes)</label>
+                        <p class="range-field white">
+                        <input name="time" type="range" min="1" max="360" value="0" step="1">
+                        </p><br><br>
                       label Time of workout (minutes)
-                      p.range-field.white
-                        input(name='time', type='range', min='1', max='360', value='0', step='1')
+                      input(type='number', min='0', max='999')
                       br
                       br
                       //
@@ -307,8 +320,11 @@ html
                         <p class="range-field white">
                         <input name="distance" type="range" min="1" max="25" value="0" step="0.125">
                         </p><br><br>
+                      //
+                        <label>Distance (miles)</label>
+                        <input type="text" name="distance"><br><br>
                       label Distance (miles)
-                      input(type='text', name='distance')
+                      input(type='number', min='0.0', max='100.0')
                       br
                       br
                       label 24-hour Hunger Score
