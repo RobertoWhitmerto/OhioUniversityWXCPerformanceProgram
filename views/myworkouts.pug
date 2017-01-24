@@ -29,6 +29,7 @@ html
       google.charts.setOnLoadCallback(dist);
       google.charts.setOnLoadCallback(tload_dist);
       google.charts.setOnLoadCallback(tload_time);
+      google.charts.setOnLoadCallback(wellness);
       //Identifying Functions [B]
       
       // ****************************** SLEEP CHART *************************************
@@ -278,6 +279,68 @@ html
       var chart = new google.visualization.LineChart(document.getElementById('rpextimechart'));
       chart.draw(data, options);
       }
+      
+      //*********************** WELLNESS CHART *******************************
+      function wellness() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'hours');
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      
+      var oneWeekAgo_1 = new Date();
+      oneWeekAgo_1.setDate(oneWeekAgo + 1);
+      var oneWeekAgo_2 = new Date();
+      oneWeekAgo_2.setDate(oneWeekAgo + 2);
+      var oneWeekAgo_3 = new Date();
+      oneWeekAgo_3.setDate(oneWeekAgo + 3);
+      var oneWeekAgo_4 = new Date();
+      oneWeekAgo_4.setDate(oneWeekAgo + 4);
+      var oneWeekAgo_5 = new Date();
+      oneWeekAgo_5.setDate(oneWeekAgo + 5);
+      var oneWeekAgo_6 = new Date();
+      oneWeekAgo_6.setDate(oneWeekAgo + 6);
+      var oneWeekAgo_7 = new Date();
+      oneWeekAgo_7.setDate(oneWeekAgo + 7);
+      
+      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      console.log(JSON.stringify(d));
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          var dt = new Date(Date.parse(obj.date));
+          if(dt > oneWeekAgo){
+            var slot = dt.getDate() - oneWeekAgo.getDate();
+            if(slot < 0)
+              slot = slot * (-1);
+            console.log(dt.getDay());
+            rows[slot][0] = dt.getDate().toString();
+            rows[slot][1] = parseInt(obj.percent_health, 10);
+            //rows[dt.getDay()][1] = parseInt(obj.sleep, 10);
+          }
+      }
+      console.log(rows);
+      data.addRows(rows);
+      // Set chart options
+      var options = {'title':'Weekly Wellness',
+      'width':700,
+      'height':200,
+      legend: 'none',
+      lineWidth: 3,
+      backgroundColor: '#ffffff',
+      vAxis: {
+      title: "Wellness %",
+      viewWindowMode:'explicit'
+      },
+      colors: ['#006400'],
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('wellnesschart'));
+      chart.draw(data, options);
+      }
+      
     script.
       $(document).ready(function(){
       $(".dropdown-button").dropdown();
@@ -462,6 +525,13 @@ html
       br
       #demo5.collapse
         #rpextimechart
+        br
+      a.btn.btn-info.green(href='#demo6', data-toggle='collapse') Wellness
+      br
+      br
+      #demo6.collapse
+        #wellnesschart
+        br  
       br
       br
     br
