@@ -131,41 +131,46 @@ html
     br
     article
       .row
-        .col.s12.m6.offset-m3
-          .card.light-blue.darken-4
-            .card-content.black-text
+        .col.s12.m5.offset-m3
+          .card.indigo.accent-4
+            .card-content.cyan-text
               span.card-title
                 center
                   p.fonts
-                    font(color='white')
-                      b Remove an existing user:
-              b
-                font(color='red')
-                  | Note: This CANNOT be undone, please ensure you are correctly removing the correct person.
-              .row
-                .col.s12.m12
-                  .card.indigo.accent-4
-                    br
-                    center
-                      font(color='cyan')
-                        form(action='/admin_remove_user_form', method='post')
-                          | Username:
-                          input(type='text', name='removeusername', required='')
-                          br
-                          br
-                          | 					User's Last Name:
-                          input(type='text', name='removelastname', required='')
-                          br
-                          br
-                          br
-                          br
-                          br
-                          button.btn.waves-effect.waves-light.red(type='submit', name='action')
-                            | Remove User
-                            i.material-icons.right send
+                    font(color='cyan')
+                      b Remove a User:
+            .row
+              .col.s12.m12
+                .card.light-blue.darken-4
+                  .card-content.black-text
+                    font(color='cyan')
+                      form(action='/admin_remove_user_form', method='post')
+                        label
+                          font(color='cyan') Username:
+                        input(type='text', name='removeusername', required='')
                         br
+                        br
+                        label
+                          font(color='cyan') User's Last Name:
+                        input(type='text', name='removelastname', required='')
+                        br
+                        br
+                        br
+                        | Note: 
+                        br
+                        | Please ensure you want to permanently remove this user, this process
+                        font(color='red')
+                          b cannot
+                        |  be reversed.
+              center
+                button.btn.waves-effect.waves-light.red(type='submit', name='action')
+                  | Remove User
+                  i.material-icons.right send
+                br
+                br
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js
       script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
       script(type='text/javascript', src='js/materialize.min.js')
+
