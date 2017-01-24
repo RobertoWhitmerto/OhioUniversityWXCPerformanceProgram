@@ -131,76 +131,93 @@ html
     br
     article
       .row
-        .col.s12.m6.offset-m3
-          .card.dark-green.accent-2
-            .card-content.black-text
+        .col.s12.m5.offset-m3
+          .card.indigo.accent-4
+            .card-content.cyan-text
               span.card-title
                 center
                   p.fonts
-                    b Create a new user:
-              center
-                .row
-                  .col.s12.m12
-                    .card.blue.accent-4
-                      .card-content.white-text
-                        form(action='/admin_add_user_form', method='post')
-                          | New username:
-                          input(type='text', name='newusername', required='')
+                    b Create a New User:
+            .row
+              .col.s12.m12
+                .card.light-blue.darken-4
+                  .card-content.white-text
+                    form(action='/admin_add_user_form', method='post')
+                      label
+                        font(color='cyan') New username:
+                        font(color='red') *
+                      input(type='text', name='newusername', required='')
+                      br
+                      br
+                      label
+                        font(color='cyan') New user's password:
+                        font(color='cyan')
+                      br
+                      label
+                        b This is the unchangable, default password for all users.
+                      input(type='text', name='newuserpw', value='password', readonly='')
+                      br
+                      br
+                      label
+                        font(color='cyan') New user's email:
+                      input(type='text', name='newuseremail')
+                      br
+                      br
+                      label
+                        font(color='cyan') New user's first name:
+                        font(color='red') *
+                      input(type='text', name='newuserfirst', required='')
+                      br
+                      br
+                      label
+                        font(color='cyan') New user's last name:
+                        font(color='red') *
+                      input(type='text', name='newuserlast', required='')
+                      br
+                      br
+                      label
+                        font(color='cyan') New user's team association:
+                        font(color='red') *
+                      input(type='text', name='newuserteam', required='')
+                      br
+                      br
+                      | Note: Fields with 
+                      font(color='red')  * 
+                      |  are a required field.
+                      font(color='cyan')
+                        h5 Role Level:
+                      .row
+                        .col.s12.m12
+                          .card.indigo.accent-3
+                            .card-content.black-text
+                              input#opt1.with-gap(name='userrole', type='radio', checked='', value='Athlete')
+                              label(name='userrole', for='opt1')
+                                a.btn.green.tooltipped(data-position='right', data-delay='50', data-tooltip='- Enter workouts, view past workouts')
+                                  p.fonts Athlete
+                              br
+                              br
+                              br
+                              input#opt2.with-gap(name='userrole', type='radio', value='Trainer')
+                              label(name='userrole', for='opt2')
+                                a.btn.blue.tooltipped(data-position='right', data-delay='50', data-tooltip='- View team status')
+                                  p.fonts Trainer
+                              br
+                              br
+                              br
+                              input#opt3.with-gap(name='userrole', type='radio', value='Admin')
+                              label(name='userrole', for='opt3')
+                                a.btn.red.tooltipped(data-position='right', data-delay='50', data-tooltip='- CSV data dumps, add/remove users to/from the system')
+                                  p.fonts Admin
+                              br
+                              br
                           br
-                          br
-                          | 					New user's password:
-                          input(type='text', name='newuserpw', required='')
-                          br
-                          br
-                          | 					New user's email:
-                          input(type='text', name='newuseremail', required='')
-                          br
-                          br
-                          | 					New user's first name:
-                          input(type='text', name='newuserfirst', required='')
-                          br
-                          br
-                          | 					New user's last name:
-                          input(type='text', name='newuserlast', required='')
-                          br
-                          br
-                          | 					New user's team association:
-                          input(type='text', name='newuserteam', required='')
-                          br
-                          br
-                          .row
-                            .col.s12.m12
-                              .card.blue.accent-1
-                                .card-content.black-text
-                                  label
-                                    font(color='black') Users Role Level:
-                                  br
-                                  input#opt1.with-gap(name='userrole', type='radio', checked='', value='Athlete')
-                                  label(name='userrole', for='opt1')
-                                    a.btn.green.tooltipped(data-position='right', data-delay='50', data-tooltip='- Enter workouts, view past workouts')
-                                      p.fonts Athlete
-                                  br
-                                  br
-                                  br
-                                  input#opt2.with-gap(name='userrole', type='radio', value='Trainer')
-                                  label(name='userrole', for='opt2')
-                                    a.btn.blue.tooltipped(data-position='right', data-delay='50', data-tooltip='- View team status')
-                                      p.fonts Trainer
-                                  br
-                                  br
-                                  br
-                                  input#opt3.with-gap(name='userrole', type='radio', value='Admin')
-                                  label(name='userrole', for='opt3')
-                                    a.btn.red.tooltipped(data-position='right', data-delay='50', data-tooltip='- CSV data dumps, add/remove users to/from the system')
-                                      p.fonts Admin
-                                  br
-                                  br
-                                  br
-                            button.btn.waves-effect.waves-light.green(type='submit', name='action')
-                              | Create User
-                              i.material-icons.right send
+                        center
+                          button.btn.waves-effect.waves-light.green(type='submit', name='action')
+                            | Create User
+                            i.material-icons.right send
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js
       script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
       script(type='text/javascript', src='js/materialize.min.js')
+
