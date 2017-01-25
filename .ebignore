@@ -13,3 +13,5 @@ LICENSE
 *.sh
 
 *.pdf
+
+npm-debug.log
