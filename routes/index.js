@@ -137,13 +137,16 @@ router.get('/buggy',
 });
 
 // Coach/Trainer Page
-router.get('/coaches',
-        function(req, res){
-			if(req.isAuthenticated()){
-				res.render('coaches.pug');
-			} else {
-				res.redirect('/');
-			}
+router.get('/coaches', function(req, res){
+	if(req.isAuthenticated()){
+		if(req.user.role == 'athlete'){
+			res.redirect(req.get('referer'));
+		} else {
+			res.render('coaches.pug');
+		}
+	} else {
+		res.redirect('/');
+	}
 });
 
 // Data Dump Individual
@@ -294,8 +297,7 @@ router.post('/', passport.authenticate('local'), function(req, res){
 		if(req.user.role == 'Athlete'){
 			res.redirect('/workoutentry');
 		} else {
-			// Needs to be updated to coaches/admin view athletes once page gets added
-			res.redirect('/workoutentry');
+			res.redirect('/coaches');
 		}
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
