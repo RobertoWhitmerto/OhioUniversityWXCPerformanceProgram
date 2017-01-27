@@ -154,6 +154,9 @@ html
                         var m = d.getMonth();
                         document.getElementById("month").selectedIndex = m + 1;
                         document.getElementById("day").selectedIndex = n;
+                        var p = new Date();
+                        var y = p.getFullYear();
+                        document.getElementById("currentyear").selectedIndex = y-2016;
                         }
                       label Month
                       select#month.browser-default(name='month')
@@ -223,23 +226,90 @@ html
                         var p = new Date();
                         var y = p.getFullYear();
                         document.getElementById("currentyear").selectedIndex = y-2016;
+              // Form Selector
+              .col.s12.m12
+                .card.light-blue.darken-4
+                  .card-content.cyan-text
+                    span.card-title Form Style:
+                    br
+                    input#f1.with-gap(name='fstyle', type='radio', onclick='formselection()', checked='')
+                    label(name='fstyle', for='f1')
+                      font(color='white') First Workout Mode
+                    br
+                    br
+                    input#f2.with-gap(name='fstyle', type='radio', onclick='formselection()')
+                    label(name='fstyle', for='f2')
+                      font(color='white') Interval Mode
+              script.
+                function formselection(){
+                if(document.getElementById("f1").checked == true){
+                document.getElementById("sleephours").disabled = false;
+                document.getElementById("sleephours").type="number";
+                document.getElementById("sleeplabel").innerHTML="<label>Hours of sleep</label>";
+                document.getElementById("illness").disabled = false;
+                document.getElementById("illness").style.visibility = "visible";
+                document.getElementById("illnesslabel").innerHTML="<label>General Health</label>";
+                document.getElementById("injury").disabled = false;
+                document.getElementById("injury").style.visibility = "visible";
+                document.getElementById("injurylabel").innerHTML="<label>Irritation/Pain</label>";
+                document.getElementById("percent_health").disabled = false;
+                document.getElementById("percent_health").type = "number";
+                document.getElementById("wellnesslabel").innerHTML = "<label>Wellness Score</label><br><label>(100% = Full Health, 0% = Not able to Workout)</label>";
+                document.getElementById("hungry").disabled = false;
+                document.getElementById("hungry").style.visibility = "visible";
+                document.getElementById("hungrylabel").innerHTML ="<label>24-hour Hunger Score</label>";
+                document.getElementById("opta").disabled = false;
+                document.getElementById("opta").style.display = "block";
+                document.getElementById("optb").disabled = false;
+                document.getElementById("optb").style.display = "block";
+                document.getElementById("cyclelabel").innerHTML ="<label>Start of cycle</label><br>";
+                document.getElementById("textarea1").disabled = false;
+                document.getElementById("spacer1").innerHTML="<br><br>";
+                document.getElementById("spacer2").innerHTML="<br><br>";
+                document.getElementById("spacer3").innerHTML="<br><br>";
+                document.getElementById("spacer4").innerHTML="<br><br>";
+                document.getElementById("spacer5").innerHTML="<br><br>";
+                }
+                if(document.getElementById("f2").checked == true){
+                document.getElementById("sleephours").disabled = true;
+                document.getElementById("sleephours").type = "hidden";
+                document.getElementById("sleeplabel").innerHTML="";
+                document.getElementById("illness").disabled = true;
+                document.getElementById("illness").style.visibility = "hidden";
+                document.getElementById("illnesslabel").innerHTML="";
+                document.getElementById("injury").disabled = true;
+                document.getElementById("injury").style.visibility = "hidden";
+                document.getElementById("injurylabel").innerHTML="";
+                document.getElementById("percent_health").disabled = true;
+                document.getElementById("percent_health").type = "hidden";
+                document.getElementById("wellnesslabel").innerHTML="";
+                document.getElementById("hungry").disabled = true;
+                document.getElementById("hungry").style.visibility = "hidden";
+                document.getElementById("hungrylabel").innerHTML = "";
+                document.getElementById("opta").disabled = true;
+                document.getElementById("opta").style.display = "none";
+                document.getElementById("optb").disabled = true;
+                document.getElementById("optb").style.display = "none";
+                document.getElementById("cyclelabel").innerHTML ="";
+                document.getElementById("textarea1").disabled = true;
+                document.getElementById("spacer1").innerHTML="";
+                document.getElementById("spacer2").innerHTML="";
+                document.getElementById("spacer3").innerHTML="";
+                document.getElementById("spacer4").innerHTML="";
+                document.getElementById("spacer5").innerHTML="";
+                }
+                }
               .row
                 .col.s12.m12
                   .card.light-blue.darken-4
                     .card-content.cyan-text
                       span.card-title Workout Information:
                       br
-                      //
-                        <label>Hours of sleep</label>
-                        <p class="range-field white">
-                        <input id="opt0" name="sleephours" type="range" min="0" max="14" value="0" step="0.5">
-                        </p><br><br>
-                      label Hours of sleep
-                      input(type='number', name='sleephours', min='0', max='14')
-                      br
-                      br
-                      label General Health
-                      select.browser-default(name='illness')
+                      p#sleeplabel
+                      input#sleephours(type='number', name='sleephours', min='0', max='14')
+                      p#spacer1
+                      p#illnesslabel
+                      select#illness.browser-default(name='illness')
                         option(name='illness', value='n/a') N/A
                         option(name='illness', value='fever') Fever
                         option(name='illness', value='gi_distress') GI Distress
@@ -250,10 +320,9 @@ html
                         option(name='illness', value='decreased motivation') Decreased Motivation
                         option(name='illness', value='weight loss') Weight Loss
                         option(name='illness', value='chronic soreness') Chronic Soreness
-                      br
-                      br
-                      label Irritation/Pain
-                      select.browser-default(name='injury')
+                      p#spacer2
+                      p#injurylabel
+                      select#injury.browser-default(name='injury')
                         option(name='injury', value='n/a') N/A
                         option(name='injury', value='foot arch') Foot Arch
                         option(name='injury', value='Heel') Heel
@@ -264,20 +333,10 @@ html
                         option(name='injury', value='low back') Low Back
                         option(name='injury', value='pelvis') Pelvis
                         option(name='injury', value='rib') Rib
-                      br
-                      br
-                      //
-                        <label>Wellness Score</label><br>
-                        <label>(100% = Full Health, 0% = Not able to Workout)</label>
-                        <p class="range-field white">
-                        <input id="opt0" name="myhealth" type="range" min="0" max="100" value="0" step="10">
-                        </p><br><br>
-                      label Wellness Score
-                      br
-                      label (100% = Full Health, 0% = Not able to Workout)
-                      input(name='percent_health', type='number', min='0', max='100', step='10')
-                      br
-                      br
+                      p#spacer3
+                      p#wellnesslabel
+                      input#percent_health(name='percent_health', type='number', min='0', max='100', step='10')
+                      p#spacer5
                       label RPE Information
                       select#rpeinfo.browser-default(name='rpeinfo')
                         option(name='rpeinfo', value='unknown') ----
@@ -286,6 +345,8 @@ html
                         option(name='rpeinfo', value='interval') Zone 3: Interval
                         option(name='rpeinfo', value='crosstraining') Cross Training
                         option(name='rpeinfo', value='strengthandconditioning') Strength and Conditioning
+                      br
+                      br
                       label RPE (6-20)
                       select.browser-default(name='rpeval')
                         option(name='rpeval', value='rpeinvalid') --
@@ -306,29 +367,16 @@ html
                         option(name='rpeval', value='20') 20 - Maximal Exertion
                       br
                       br
-                      //
-                        <label>Time of workout (minutes)</label>
-                        <p class="range-field white">
-                        <input name="time" type="range" min="1" max="360" value="0" step="1">
-                        </p><br><br>
                       label Time of workout (minutes)
                       input(name='time', type='number', min='0', max='999')
                       br
                       br
-                      //
-                        <label>Distance (miles)</label>
-                        <p class="range-field white">
-                        <input name="distance" type="range" min="1" max="25" value="0" step="0.125">
-                        </p><br><br>
-                      //
-                        <label>Distance (miles)</label>
-                        <input type="text" name="distance"><br><br>
                       label Distance (miles)
                       input(name='distance', type='number', min='0.0', max='100.0')
                       br
                       br
-                      label 24-hour Hunger Score
-                      select.browser-default(name='hungry')
+                      p#hungrylabel
+                      select#hungry.browser-default(name='hungry')
                         option(name='hungry', value='unknown') --
                         option(name='hungry', value='0') 0 - Empty
                         option(name='hungry', value='1') 1 - Ravenous
@@ -341,17 +389,12 @@ html
                         option(name='hungry', value='8') 8 - Full
                         option(name='hungry', value='9') 9 - Stuffed
                         option(name='hungry', value='10') 10 - Sick
-                      br
-                      br
-                      label Start of cycle
-                      br
+                      p#spacer4
+                      p#cyclelabel
                       input#opt1.with-gap(name='cycle', type='radio', checked='', value='no')
-                      label(name='cycle', for='opt1') No
+                      label#opta(name='cycle', for='opt1') No
                       input#opt2.with-gap(name='cycle', type='radio', value='yes')
-                      label(name='cycle', for='opt2') Yes
-                      br
-                      br
-                      br
+                      label#optb(name='cycle', for='opt2') Yes
               .row
                 .col.s12.m12
                   .card.light-blue.darken-4
@@ -368,7 +411,19 @@ html
                   | Submit My Workout
                   i.material-icons.right send
               br
-      p
+      // Initialize the Labels
+      script.
+        document.getElementById("sleeplabel").innerHTML="<label>Hours of sleep</label>";
+        document.getElementById("illnesslabel").innerHTML="<label>General Health</label>";
+        document.getElementById("injurylabel").innerHTML="<label>Irritation/Pain</label>";
+        document.getElementById("wellnesslabel").innerHTML = "<label>Wellness Score</label><br><label>(100% = Full Health, 0% = Not able to Workout)</label>";
+        document.getElementById("hungrylabel").innerHTML ="<label>24-hour Hunger Score</label>";
+        document.getElementById("cyclelabel").innerHTML ="<label>Start of cycle</label><br>";
+        document.getElementById("spacer1").innerHTML="<br><br>";
+        document.getElementById("spacer2").innerHTML="<br><br>";
+        document.getElementById("spacer3").innerHTML="<br><br>";
+        document.getElementById("spacer4").innerHTML="<br><br>";
+        document.getElementById("spacer5").innerHTML="<br><br>";
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js
