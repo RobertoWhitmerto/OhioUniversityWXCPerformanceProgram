@@ -80,22 +80,6 @@ function get_query(query, input, queryString) {
 		string = removeData;
 		string += ` WHERE workout_id="${input.wID}"`;
 	}
-	else if(query == "editWork")
-	{
-	string = `UPDATE athlete_data`;
- 	string += ` SET date="${date}", 
- 				sleep="${input.sleephours}", 
- 				health_status="${input.healthstatus}", 
- 				Illness="${input.illness}", 
- 				Injury="${input.injury}", 
- 				percent_health="${input.myhealth}", 
- 				cycle_start="${input.cycle}", 
- 				RPE="${input.rpeval}", 
- 				time="${input.time}", 
- 				distance="${input.distance}", 
- 				surface="${input.surface}", 
- 				notes="${input.mynotes}" `;
-	}
 	else if(query == "listUsers")
 	{
 		string = `SELECT * FROM user WHERE team="${input.team}"`;
