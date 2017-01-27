@@ -34,7 +34,7 @@ function get_query(query, input, queryString) {
 	if(query == "authenticate")
 	{
 		string = authQuery;
-		string += ` WHERE username="${input.user}" AND 	password="${input.pass}"`;
+		string += ` WHERE username="${input.user}" AND password="${input.pass}"`;
 	}
 	else if(query == "insertD")
 	{
@@ -79,22 +79,6 @@ function get_query(query, input, queryString) {
 	{
 		string = removeData;
 		string += ` WHERE workout_id="${input.wID}"`;
-	}
-	else if(query == "editWork")
-	{
-	string = `UPDATE athlete_data`;
- 	string += ` SET date="${date}", 
- 				sleep="${input.sleephours}", 
- 				health_status="${input.healthstatus}", 
- 				Illness="${input.illness}", 
- 				Injury="${input.injury}", 
- 				percent_health="${input.myhealth}", 
- 				cycle_start="${input.cycle}", 
- 				RPE="${input.rpeval}", 
- 				time="${input.time}", 
- 				distance="${input.distance}", 
- 				surface="${input.surface}", 
- 				notes="${input.mynotes}" `;
 	}
 	else if(query == "listUsers")
 	{
@@ -314,6 +298,7 @@ function remove_workout(input, done){
  	}
  }
 
+module.exports.get_query = get_query;
 module.exports.exec_query = exec_query;
 module.exports.authenticate = authenticate;
 module.exports.get_user = get_user;

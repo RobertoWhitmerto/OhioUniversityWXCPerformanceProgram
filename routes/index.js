@@ -15,15 +15,17 @@ router.get('/', function(req, res){
 	res.render('site.pug');
 });
 /*
-// Home Page
 router.get('/home', function(req, res){
 	if(req.isAuthenticated()){
-		res.render('signin.pug');
+		if(req.user.role == 'Athlete'){
+			res.redirect('/workoutentry');
+		} else {
+			res.redirect('/coaches');
+		}
 	} else {
 		res.redirect('/');
 	}
 });
-
 */
 
 // Logout
@@ -292,7 +294,7 @@ passport.deserializeUser(function(id, done){
 });
 
 
-router.post('/', passport.authenticate('local'), function(req, res){
+router.post('/', passport.authenticate('local', {failureRedirect: '/'}), function(req, res){
 		console.log(req.user);
 		if(req.user.role == 'Athlete'){
 			res.redirect('/workoutentry');
