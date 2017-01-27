@@ -1,0 +1,15 @@
+
+> OUWXCPP@0.2.0 test /Users/pessman/Documents/School Documents/Spring17/CS4561/OhioUniversityWXCPerformanceProgram
+> mocha
+
+
+
+  login attempt
+    ✓ admin successfully login (214ms)
+    ✓ admin failed login (210ms)
+    ✓ athelete successfuly login (197ms)
+    ✓ athelete failed login (194ms)
+
+
+  4 passing (827ms)
+

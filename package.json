@@ -4,11 +4,13 @@
   "description": "Ohio University Women's Cross Country data log app",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+	"test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
     "bcryptjs": "*",
     "body-parser": "*",
+    "chai": "^3.5.0",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
     "express": "*",
@@ -17,11 +19,13 @@
     "express-session": "*",
     "express-validator": "*",
     "jade": "^1.11.0",
+    "mocha": "^3.2.0",
     "mysql": "^2.11.1",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
-    "pug": "^2.0.0-beta6"
+    "pug": "^2.0.0-beta6",
+    "supertest": "^2.0.1"
   },
   "engines": {
     "node": "4.0.0"
