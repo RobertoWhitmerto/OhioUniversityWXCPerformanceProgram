@@ -74,7 +74,7 @@ html
               slot = slot * (-1);
             console.log(dt.getDate() + 1);
             var dt_fixed = dt.getDate() + 1;
-            rows[slot][0] = dt.getDate().toString();
+            rows[slot][0] = dt_fixed.toString();
             rows[slot][1] = parseInt(obj.sleep, 10);
             //rows[dt.getDay()][1] = parseInt(obj.sleep, 10);
           }
@@ -143,7 +143,7 @@ html
               slot = slot * (-1);
             console.log(dt.getDate() + 1);
             var dt_fixed = dt.getDate() + 1;
-            rows[slot][0] = dt.getDate().toString();
+            rows[slot][0] = dt_fixed.toString();
             rows[slot][1] += parseInt(obj.distance, 10);
             //rows[dt.getDay()][1] = parseInt(obj.distance, 10);
           }
@@ -210,7 +210,7 @@ html
               slot = slot * (-1);
             console.log(dt.getDate() + 1);
             var dt_fixed = dt.getDate() + 1;
-            rows[slot][0] = dt.getDate().toString();
+            rows[slot][0] = dt_fixed.toString();
             rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
             //rows[dt.getDay()][1] = parseFloat(obj.time, 10)/parseInt(obj.distance, 10);
           }
@@ -267,18 +267,23 @@ html
           console.log("DATE: ");
           console.log(obj.date);
           var dt = new Date(Date.parse(obj.date));
-          console.log(dt+1);
+          console.log(dt.getDate());
           console.log(oneWeekAgo);
           if(dt.getDate() >= oneWeekAgo.getDate()){
 
             var slot = dt.getDate() - oneWeekAgo.getDate();
+            var count = [0,0,0,0,0,0,0]; 
             if(slot < 0)
               slot = slot * (-1);
             console.log(dt.getDate() + 1);
             var dt_fixed = dt.getDate() + 1;
-            rows[slot][0] = dt.getDate().toString();
-            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+            rows[slot][0] = dt_fixed.toString();
+            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+            count[slot]++;
           }
+      }
+      for(var i = 0; i < 7; i++) {
+        //rows[i][1] = rows[i][1]/count[i]
       }
       //console.log(rows);
       data.addRows(rows);
@@ -329,20 +334,20 @@ html
         oneWeekAgo_7.setDate(oneWeekAgo + 1);
         
         var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
-        console.log(JSON.stringify(d));
+        //console.log(JSON.stringify(d));
         for(var i = 0; i < d.length; i++) {
             var obj = d[i];
-            console.log("DATE: ");
-            console.log(obj.date);
+            //console.log("DATE: ");
+            //console.log(obj.date);
             var dt = new Date(Date.parse(obj.date));
-            console.log(dt+1);
-            console.log(oneWeekAgo);
+            //console.log(dt+1);
+            //console.log(oneWeekAgo);
             if(dt.getDate() >= oneWeekAgo.getDate()){
 
               var slot = dt.getDate() - oneWeekAgo.getDate();
               if(slot < 0)
                 slot = slot * (-1);
-              console.log(dt.getDate() + 1);
+              //console.log(dt.getDate() + 1);
               var dt_fixed = dt.getDate() + 1;
               rows[slot][0] = dt_fixed.toString();
               rows[slot][1] = parseInt(obj.percent_health, 10);
