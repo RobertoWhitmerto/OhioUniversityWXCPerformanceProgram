@@ -140,10 +140,19 @@ router.get('/buggy',
 
 // Coach/Trainer Page
 router.get('/coaches', function(req, res){
+
 	if(req.isAuthenticated()){
+
 		if(req.user.role == 'athlete'){
 			res.redirect(req.get('referer'));
 		} else {
+			console.log("this is the req.user " + req.user.team);
+			console.log(req.user);
+
+			queries.list_users({user: req.user.id, team: 					req.user.team}, function(err, result){
+					console.log(result);
+			});
+
 			res.render('coaches.pug');
 		}
 	} else {
@@ -295,7 +304,6 @@ passport.deserializeUser(function(id, done){
 
 
 router.post('/', passport.authenticate('local', {failureRedirect: '/'}), function(req, res){
-		console.log(req.user);
 		if(req.user.role == 'Athlete'){
 			res.redirect('/workoutentry');
 		} else {

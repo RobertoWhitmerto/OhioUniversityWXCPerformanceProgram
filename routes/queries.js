@@ -104,7 +104,6 @@ function exec_query(query, input, result) {
 
 	get_query(query, input, function(output){
 		queryString = output;
-		console.log(queryString);
 	});
 
 	db.query(queryString, function(err, rows, fields) {
@@ -132,7 +131,7 @@ function get_user(input, done){
 
 	exec_query("getU", input, function(err, rows, fields){
 		if(err) { return done(err); }
-		if(rows.length > 0) {return done(null, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role});
+		if(rows.length > 0) {return done(null, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role, team: rows[0].team});
 	}
 	})
 }
@@ -153,7 +152,6 @@ function add_user(input, done){
 
 	exec_query("insertU", input, function(err, rows, fields) {
 
-		console.log(rows);
 		if(err){ return done(err);}
 		if(rows.length == 0){return done(null, false, {message: 'could not insert user'}); }
 		return done(null, rows)
@@ -162,8 +160,6 @@ function add_user(input, done){
 
 //Add a workout to DB
 function add_workout(input, done){
-
-	console.log(input);
 
 	exec_query("insertD", input, function(err, rows, fields) {
 
@@ -207,18 +203,12 @@ function remove_workout(input, done){
 
  function list_users(input, done){
 
- 	if(input.team != null)
- 	{
- 		console.log("retrieve team here\n")
- 	}
- 	else
- 	{
-		exec_query("listUsers", function(err, rows, fields) {
+		exec_query("listUsers", input, function(err, rows, fields) {
+
         	if (err){return done(err);}
         	if(rows.length == 0){return done({message: "no user's found"})}
 			done(null, rows);
 		});
- 	}
  }
 
  function edit_workout(input, done){
