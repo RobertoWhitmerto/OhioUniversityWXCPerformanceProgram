@@ -6,6 +6,8 @@ var queries = require('./queries');
 var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
+var Analytics = require('analytics-node');
+var analytics = new Analytics('FxnpWh5svff5iUzr1N4NGFr9Wehhb9Ig');
 
 var athlete = false;
 
@@ -288,6 +290,15 @@ router.post('/workoutentry', function(req, res){
 			res.render('workoutentry.pug', {
 				message: 'Workout successfully added'
 			});
+
+			//keep track of workout entries
+			analytics.track({
+				userId: req.user.id,
+				event: 'Input Workout',
+				properties: {
+					time: new Date()
+				}
+			})
 		}
 	})
 });
@@ -323,6 +334,15 @@ router.post("/admin_add_user_form", function(req, res){
 		if(result.affectedRows > 0)
 		{
 			console.log("successfully added user");
+			analytics.identify({
+				userId: result.username,
+				traits: {
+					name: result.first + result.last,
+					email: result.email,
+					role: result.role,
+					team: result.team
+				}
+			})
 		}
 	})
 
