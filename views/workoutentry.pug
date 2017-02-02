@@ -230,7 +230,7 @@ html
               .col.s12.m12
                 .card.light-blue.darken-4
                   .card-content.cyan-text
-                    span.card-title Form Style:
+                    span.card-title Workout Entry Style:
                     br
                     input#f1.with-gap(name='fstyle', type='radio', onclick='formselection()', checked='')
                     label(name='fstyle', for='f1')
@@ -264,6 +264,7 @@ html
                 document.getElementById("optb").style.display = "block";
                 document.getElementById("cyclelabel").innerHTML ="<label>Start of cycle</label><br>";
                 document.getElementById("textarea1").disabled = false;
+                document.getElementById("et").style.display = "block";
                 document.getElementById("spacer1").innerHTML="<br><br>";
                 document.getElementById("spacer2").innerHTML="<br><br>";
                 document.getElementById("spacer3").innerHTML="<br><br>";
@@ -292,6 +293,7 @@ html
                 document.getElementById("optb").style.display = "none";
                 document.getElementById("cyclelabel").innerHTML ="";
                 document.getElementById("textarea1").disabled = true;
+                document.getElementById("et").style.display = "none";
                 document.getElementById("spacer1").innerHTML="";
                 document.getElementById("spacer2").innerHTML="";
                 document.getElementById("spacer3").innerHTML="";
@@ -395,17 +397,18 @@ html
                       label#opta(name='cycle', for='opt1') No
                       input#opt2.with-gap(name='cycle', type='radio', value='yes')
                       label#optb(name='cycle', for='opt2') Yes
-              .row
-                .col.s12.m12
-                  .card.light-blue.darken-4
-                    .card-content.cyan-text
-                      span.card-title Extra Information:
-                      .row
-                        .input-field.col.s12
-                          textarea#textarea1.materialize-textarea(length='1024', name='mynotes')
-                          label(name='notes', for='textarea1') My Notes
-                      br
-                      br
+              #et
+                .row
+                  .col.s12.m12
+                    .card.light-blue.darken-4
+                      .card-content.cyan-text
+                        span.card-title Extra Information:
+                        .row
+                          .input-field.col.s12
+                            textarea#textarea1.materialize-textarea(length='1024', name='mynotes')
+                            label(name='notes', for='textarea1') My Notes
+                        br
+                        br
               center
                 button.btn.waves-effect.waves-light.light-blue.lighten-1(type='submit', name='action')
                   | Submit My Workout
