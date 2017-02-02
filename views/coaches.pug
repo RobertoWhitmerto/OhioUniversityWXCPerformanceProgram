@@ -21,7 +21,13 @@ html
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     // Load the AJAX API
     script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+    script(type='text/javascript').
     
+    script.
+      $(document).ready(function(){
+      $(".dropdown-button").dropdown();
+      $(".button-collapse").sideNav();
+      });
   body(background='/views/bg3.jpg')
     // Navbar up at the top
     nav
@@ -131,6 +137,8 @@ html
           font(color='grey')
             h6
               center Team on a Cob 2016
+    br
+    hr
     style(type='text/css').
       div.ez{
       background: #01579b;
@@ -168,8 +176,8 @@ html
                         #showathletes
                         br
                         br
-      // Materialize CSS imports [body]
-      // put this at the end of the body
-      // Import jQuery before materialize.js
-      script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
-      script(type='text/javascript', src='js/materialize.min.js')
+    // Materialize CSS imports [body]
+    // put this at the end of the body
+    // Import jQuery before materialize.js
+    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(type='text/javascript', src='js/materialize.min.js')
