@@ -6,14 +6,16 @@ var queries = require('./queries');
 var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
-var Analytics = require('analytics-node');
-var analytics = new Analytics('FxnpWh5svff5iUzr1N4NGFr9Wehhb9Ig');
+var ua = require('universal-analytics');
+var analytics = ua('UA-91318722-1');
+
 
 var athlete = false;
 
 
 // Get Login Page
 router.get('/', function(req, res){
+	analytics.pageview("/").send();
 	res.render('site.pug');
 });
 /*
@@ -32,6 +34,7 @@ router.get('/home', function(req, res){
 
 // Logout
 router.get('/logout', function(req, res){
+	analytics.pageview("/logout").send();
 	if(req.isAuthenticated()){
 		req.logout();
 		res.redirect('/');
@@ -42,6 +45,7 @@ router.get('/logout', function(req, res){
 
 // Workout Entry
 router.get('/workoutentry', function(req, res){
+	analytics.pageview("/workoutentry").send();
 	if(req.isAuthenticated()){
 		res.render('workoutentry.pug');
 	} else {
@@ -51,8 +55,8 @@ router.get('/workoutentry', function(req, res){
 
 // View my workouts
 router.get('/myworkouts', function(req, res){
+	analytics.pageview("/myworkouts").send();
 	if(req.isAuthenticated()){
-
 		//access workout info through [] index operator, rows of query returned
 		var workouts;
 
@@ -68,6 +72,7 @@ router.get('/myworkouts', function(req, res){
 
 // View Athletes
 router.get('/admin_athlete_vis', function(req, res){
+	analytics.pageview("/admin_athlete_vis").send();
 
 	if(req.isAuthenticated()){
 		if(req.user.role == 'admin' || admin.user.role == 'coach'){
@@ -86,6 +91,7 @@ router.get('/admin_athlete_vis', function(req, res){
 
 // Add User
 router.get('/admin_add_user', function(req, res){
+	analytics.pageview("/admin_add_user").send();
 	if(req.isAuthenticated()){
 		if(req.user.role == 'admin'){
 			res.render('admin_add_user.pug');
@@ -99,6 +105,7 @@ router.get('/admin_add_user', function(req, res){
 
 // Remove User
 router.get('/admin_remove_user', function(req, res){
+	analytics.pageview("/admin_remove_user").send();
 	if(req.isAuthenticated()){
 		if(req.user.role == 'admin'){
 			res.render('admin_remove_user.pug');
@@ -113,6 +120,7 @@ router.get('/admin_remove_user', function(req, res){
 // About Page
 router.get('/about',
         function(req, res){
+        	analytics.pageview("/about").send();
 			if(req.isAuthenticated()){
 				res.render('about.pug');
 			} else {
@@ -123,6 +131,7 @@ router.get('/about',
 // Change Pass
 router.get('/changepassword',
         function(req, res){
+        	analytics.pageview("/changepassword").send();
 			if(req.isAuthenticated()){
 				res.render('changepassword.pug');
 			} else {
@@ -133,6 +142,7 @@ router.get('/changepassword',
 // Submit a Bug
 router.get('/buggy',
         function(req, res){
+        	analytics.pageview("/buggy").send();
 			if(req.isAuthenticated()){
 				res.render('buggy.pug');
 			} else {
@@ -142,6 +152,7 @@ router.get('/buggy',
 
 // Coach/Trainer Page
 router.get('/coaches', function(req, res){
+	analytics.pageview("/coaches").send();
 
 	if(req.isAuthenticated()){
 
@@ -164,6 +175,7 @@ router.get('/coaches', function(req, res){
 
 // Data Dump Individual
 router.get('/datadumpindividual', function(req, res){
+			analytics.pageview("/datadumpindividual").send();
 			if(req.isAuthenticated()){
 				if(req.user.role == 'admin'){
 					res.render('admin_data_dump_a.pug');
@@ -176,6 +188,7 @@ router.get('/datadumpindividual', function(req, res){
 });
 
 router.get('/datadumpTeam',function(req, res){
+	analytics.pageview("/datadumpTeam").send();
 	if(req.isAuthenticated()){
 		if(req.user.role == "admin"){
 			res.render('admin_data_dump_b.pug');
@@ -291,14 +304,6 @@ router.post('/workoutentry', function(req, res){
 				message: 'Workout successfully added'
 			});
 
-			//keep track of workout entries
-			analytics.track({
-				userId: req.user.id,
-				event: 'Input Workout',
-				properties: {
-					time: new Date()
-				}
-			})
 		}
 	})
 });
@@ -334,15 +339,6 @@ router.post("/admin_add_user_form", function(req, res){
 		if(result.affectedRows > 0)
 		{
 			console.log("successfully added user");
-			analytics.identify({
-				userId: result.username,
-				traits: {
-					name: result.first + result.last,
-					email: result.email,
-					role: result.role,
-					team: result.team
-				}
-			})
 		}
 	})
 
