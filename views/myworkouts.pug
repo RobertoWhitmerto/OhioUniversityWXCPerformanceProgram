@@ -261,6 +261,7 @@ html
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
       var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],[oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],[oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
+      var count = [0,0,0,0,0,0,0];
       //console.log(JSON.stringify(d));
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
@@ -272,7 +273,7 @@ html
           if(dt.getDate() >= oneWeekAgo.getDate()){
 
             var slot = dt.getDate() - oneWeekAgo.getDate();
-            var count = [0,0,0,0,0,0,0]; 
+             
             if(slot < 0)
               slot = slot * (-1);
             console.log(dt.getDate() + 1);
@@ -282,10 +283,13 @@ html
             count[slot]++;
           }
       }
-      for(var i = 0; i < 7; i++) {
-        //rows[i][1] = rows[i][1]/count[i]
+      for(var i = 0; i <= 7; i++) {
+        if (typeof rows[i] != 'undefined'){
+          rows[i][1] /= count[i];
+        }
       }
-      //console.log(rows);
+      console.log(rows);
+      console.log(count);
       data.addRows(rows);
       // Set chart options
       var options = {'title':'Training Load - Time',
