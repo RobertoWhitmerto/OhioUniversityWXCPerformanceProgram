@@ -519,16 +519,16 @@ html
       margin: auto;
       }
     style.
-      .editableTable {
+      .table {
       border: 3.5px solid #03a9f4;
       border-radius: 5px;
       }
-      .editableTable > thead > tr > th,
-      .editableTable > tbody > tr > th,
-      .editableTable > tfoot > tr > th,
-      .editableTable > thead > tr > td,
-      .editableTable > tbody > tr > td,
-      .editableTable > tfoot > tr > td {
+      .table-bordered > thead > tr > th,
+      .table-bordered > tbody > tr > th,
+      .table-bordered > tfoot > tr > th,
+      .table-bordered > thead > tr > td,
+      .table-bordered > tbody > tr > td,
+      .table-bordered > tfoot > tr > td {
       border: 3px solid #03a9f4;
       border-radius: 5px;
       }
@@ -595,7 +595,7 @@ html
             b Training Log:
           br
           - if (typeof(data) !== 'undefined'){  
-          table.editableTable
+          table.table.table-bordered
             thead
               tr
                 th Date
