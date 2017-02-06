@@ -28,6 +28,10 @@ html
       $(".dropdown-button").dropdown();
       $(".button-collapse").sideNav();
       });
+    script(type='text/javascript').
+      var users = data;
+      console.log(users);
+      
   body(background='/views/bg3.jpg')
     // Navbar up at the top
     nav
@@ -174,8 +178,28 @@ html
                       br
                       #viewathletes.collapse
                         #showathletes
+                        - console.log("hey there\nhey there");
+                        - console.log(data_u);
+                        - if (typeof(data_u) !== 'undefined'){
+                        table.table.table-bordered
+                        thead
+                          tr
+                            th Username
+                            th First
+                            th Last
+                        tbody
+                          for user in data_u
+                            tr
+                              form(action='/coaches', method='post')
+                                input(type='hidden', value=user['username'], name='username', required='')
+            
+                                td.utag= user['username']
+                                td.ftag= user['first']
+                                td.ltag= user['last']
+                                td
                         br
                         br
+                        -}
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js

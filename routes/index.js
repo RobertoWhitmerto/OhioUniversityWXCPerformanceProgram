@@ -153,20 +153,21 @@ router.get('/buggy',
 // Coach/Trainer Page
 router.get('/coaches', function(req, res){
 	analytics.pageview("/coaches").send();
-
+	
 	if(req.isAuthenticated()){
-
+		console.log("memes2\nmemes2");
 		if(req.user.role == 'athlete'){
 			res.redirect(req.get('referer'));
 		} else {
 			console.log("this is the req.user " + req.user.team);
 			console.log(req.user);
-
-			queries.list_users({user: req.user.id, team: 					req.user.team}, function(err, result){
+			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
+					var users = result;
 					console.log(result);
+					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users });
 			});
 
-			res.render('coaches.pug');
+			
 		}
 	} else {
 		res.redirect('/');
@@ -397,6 +398,26 @@ router.post("/myworkouts", function(req, res){
 		});
 	} else {
 	 	res.redirect('/');
+	}
+});
+
+router.post("/coaches", function(req, res){
+		if(req.isAuthenticated()){
+		console.log("memes\nmemes");
+		if(req.user.role == 'athlete'){
+			res.redirect(req.get('referer'));
+		} else {
+			console.log("this is the req.user " + req.user.team);
+			console.log(req.user);
+			var users;
+			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
+					users = result;
+					console.log(result);
+					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users });
+			});
+		}
+	} else {
+		res.redirect('/');
 	}
 });
 
