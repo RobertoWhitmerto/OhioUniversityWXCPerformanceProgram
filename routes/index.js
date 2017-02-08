@@ -164,7 +164,7 @@ router.get('/coaches', function(req, res){
 			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
 					var users = result;
 					console.log(result);
-					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users });
+					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
 			});
 
 			
@@ -413,7 +413,7 @@ router.post("/coaches", function(req, res){
 			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
 					users = result;
 					console.log(result);
-					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users });
+					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(req.user.team) });
 			});
 		}
 	} else {

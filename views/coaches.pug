@@ -23,15 +23,371 @@ html
     script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
     script(type='text/javascript').
     
-    script.
-      $(document).ready(function(){
-      $(".dropdown-button").dropdown();
-      $(".button-collapse").sideNav();
-      });
     script(type='text/javascript').
-      var users = data;
-      console.log(users);
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded [A].
+      google.charts.setOnLoadCallback(sleepy);
+      google.charts.setOnLoadCallback(dist);
+      google.charts.setOnLoadCallback(tload_dist);
+      google.charts.setOnLoadCallback(tload_time);
+      google.charts.setOnLoadCallback(wellness);
+      //Identifying Functions [B]
       
+      // ****************************** SLEEP CHART *************************************
+      function sleepy() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'hours');
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      
+      var oneWeekAgo_1 = new Date();
+      oneWeekAgo_1.setDate(oneWeekAgo + 1);
+      var oneWeekAgo_2 = new Date();
+      oneWeekAgo_2.setDate(oneWeekAgo + 2);
+      var oneWeekAgo_3 = new Date();
+      oneWeekAgo_3.setDate(oneWeekAgo + 3);
+      var oneWeekAgo_4 = new Date();
+      oneWeekAgo_4.setDate(oneWeekAgo + 4);
+      var oneWeekAgo_5 = new Date();
+      oneWeekAgo_5.setDate(oneWeekAgo + 5);
+      var oneWeekAgo_6 = new Date();
+      oneWeekAgo_6.setDate(oneWeekAgo + 6);
+      var oneWeekAgo_7 = new Date();
+      oneWeekAgo_7.setDate(oneWeekAgo + 7);
+      
+      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      console.log(JSON.stringify(d));
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          console.log("DATE: ");
+          console.log(obj.date);
+          var dt = new Date(Date.parse(obj.date));
+          console.log(dt+1);
+          console.log(oneWeekAgo);
+          if(dt.getDate() >= oneWeekAgo.getDate()){
+                var slot = dt.getDate() - oneWeekAgo.getDate();
+            if(slot < 0)
+              slot = slot * (-1);
+            console.log(dt.getDate() + 1);
+            var dt_fixed = dt.getDate() + 1;
+            rows[slot][0] = dt_fixed.toString();
+            rows[slot][1] = parseInt(obj.sleep, 10);
+            //rows[dt.getDay()][1] = parseInt(obj.sleep, 10);
+          }
+      }
+      console.log(rows);
+      data.addRows(rows);
+      // Set chart options
+      var options = {'title':'Weekly Sleep Pattern',
+      'width':700,
+      'height':200,
+      legend: 'none',
+      lineWidth: 3,
+      backgroundColor: '#ffffff',
+      vAxis: {
+      title: "Hours of Sleep",
+      viewWindowMode:'explicit'
+      },
+      colors: ['#006400'],
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
+      chart.draw(data, options);
+      }
+      
+      //************************** DISTANCE CHART *********************************************
+      function dist() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'Distance (miles)');
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      
+      
+      var oneWeekAgo_1 = new Date();
+      oneWeekAgo_1.setDate(oneWeekAgo + 1);
+      var oneWeekAgo_2 = new Date();
+      oneWeekAgo_2.setDate(oneWeekAgo + 2);
+      var oneWeekAgo_3 = new Date();
+      oneWeekAgo_3.setDate(oneWeekAgo + 3);
+      var oneWeekAgo_4 = new Date();
+      oneWeekAgo_4.setDate(oneWeekAgo + 4);
+      var oneWeekAgo_5 = new Date();
+      oneWeekAgo_5.setDate(oneWeekAgo + 5);
+      var oneWeekAgo_6 = new Date();
+      oneWeekAgo_6.setDate(oneWeekAgo + 6);
+      var oneWeekAgo_7 = new Date();
+      oneWeekAgo_7.setDate(oneWeekAgo + 7);
+      
+      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      
+      console.log(JSON.stringify(d));
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          console.log("DATE: ");
+          console.log(obj.date);
+          var dt = new Date(Date.parse(obj.date));
+          console.log(dt+1);
+          console.log(oneWeekAgo);
+          if(dt.getDate() >= oneWeekAgo.getDate()){
+                var slot = dt.getDate() - oneWeekAgo.getDate();
+            if(slot < 0)
+              slot = slot * (-1);
+            console.log(dt.getDate() + 1);
+            var dt_fixed = dt.getDate() + 1;
+            rows[slot][0] = dt_fixed.toString();
+            rows[slot][1] += parseInt(obj.distance, 10);
+            //rows[dt.getDay()][1] = parseInt(obj.distance, 10);
+          }
+      }
+      console.log(rows);
+      data.addRows(rows);
+      // Set chart options
+      var options = {'title':'Distance Ran',
+      'width':700,
+      'height':200,
+      vAxis: {
+      title: "Distance",
+      viewWindowMode:'explicit'
+      },
+      legend: 'none',
+      lineWidth: 3,
+      colors: ['#006400'],
+      backgroundColor: '#ffffff'
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart2 = new google.visualization.LineChart(document.getElementById('distancechart'));
+      chart2.draw(data, options);
+      }
+      //********************* tload_dist CHART ***********************************
+      function tload_dist() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', '(RPE x Distance)');
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      
+      var oneWeekAgo_1 = new Date();
+      oneWeekAgo_1.setDate(oneWeekAgo + 1);
+      var oneWeekAgo_2 = new Date();
+      oneWeekAgo_2.setDate(oneWeekAgo + 2);
+      var oneWeekAgo_3 = new Date();
+      oneWeekAgo_3.setDate(oneWeekAgo + 3);
+      var oneWeekAgo_4 = new Date();
+      oneWeekAgo_4.setDate(oneWeekAgo + 4);
+      var oneWeekAgo_5 = new Date();
+      oneWeekAgo_5.setDate(oneWeekAgo + 5);
+      var oneWeekAgo_6 = new Date();
+      oneWeekAgo_6.setDate(oneWeekAgo + 6);
+      var oneWeekAgo_7 = new Date();
+      oneWeekAgo_7.setDate(oneWeekAgo + 7);
+      
+      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      //var rows = [['Sun.',0.0],['Mon.',0.0],['Tues.',0.0],['Wed.',0.0],['Th.',0.0],['Fri.',0.0],['Sat.',0.0]];
+      console.log(JSON.stringify(d));
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          console.log("DATE: ");
+          console.log(obj.date);
+          var dt = new Date(Date.parse(obj.date));
+          console.log(dt+1);
+          console.log(oneWeekAgo);
+          if(dt.getDate() >= oneWeekAgo.getDate()){
+                var slot = dt.getDate() - oneWeekAgo.getDate();
+            if(slot < 0)
+              slot = slot * (-1);
+            console.log(dt.getDate() + 1);
+            var dt_fixed = dt.getDate() + 1;
+            rows[slot][0] = dt_fixed.toString();
+            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
+            //rows[dt.getDay()][1] = parseFloat(obj.time, 10)/parseInt(obj.distance, 10);
+          }
+      }
+      console.log(rows);
+      data.addRows(rows);
+      // Set chart options
+      var options = {'title':'Training Load - Distance',
+      'width':700,
+      'height':200,
+      vAxis: {
+      title: "Load",
+      viewWindowMode:'explicit'
+      },
+      legend: 'none',
+      lineWidth: 3,
+      colors: ['#006400'],
+      backgroundColor: '#ffffff'
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('tload_distchart'));
+      chart.draw(data, options);
+      }
+      
+      // ************************* TRAINING LOAD TIME CHART ******************************************
+      function tload_time() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'Load');
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      var oneWeekAgo_1 = new Date();
+      oneWeekAgo_1.setDate(oneWeekAgo + 1);
+      var oneWeekAgo_2 = new Date();
+      oneWeekAgo_2.setDate(oneWeekAgo + 2);
+      var oneWeekAgo_3 = new Date();
+      oneWeekAgo_3.setDate(oneWeekAgo + 3);
+      var oneWeekAgo_4 = new Date();
+      oneWeekAgo_4.setDate(oneWeekAgo + 4);
+      var oneWeekAgo_5 = new Date();
+      oneWeekAgo_5.setDate(oneWeekAgo + 5);
+      var oneWeekAgo_6 = new Date();
+      oneWeekAgo_6.setDate(oneWeekAgo + 6);
+      var oneWeekAgo_7 = new Date();
+      oneWeekAgo_7.setDate(oneWeekAgo + 7);
+      
+      var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],[oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],[oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
+      var count = [0,0,0,0,0,0,0];
+      //console.log(JSON.stringify(d));
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          console.log("DATE: ");
+          console.log(obj.date);
+          var dt = new Date(Date.parse(obj.date));
+          console.log(dt.getDate());
+          console.log(oneWeekAgo);
+          if(dt.getDate() >= oneWeekAgo.getDate()){
+                var slot = dt.getDate() - oneWeekAgo.getDate();
+             
+            if(slot < 0)
+              slot = slot * (-1);
+            console.log(dt.getDate() + 1);
+            var dt_fixed = dt.getDate() + 1;
+            rows[slot][0] = dt_fixed.toString();
+            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+            count[slot]++;
+          }
+      }
+      for(var i = 0; i <= 7; i++) {
+        if (typeof rows[i] != 'undefined'){
+          rows[i][1] /= count[i];
+        }
+      }
+      console.log(rows);
+      console.log(count);
+      data.addRows(rows);
+      // Set chart options
+      var options = {'title':'Training Load - Time',
+      'width':700,
+      'height':200,
+      legend: 'none',
+      backgroundColor: '#ffffff',
+      vAxis: {
+      title: "RPE x Time",
+      viewWindowMode:'explicit'
+      },
+      colors: ['#006400'],
+      lineWidth: 3,
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('rpextimechart'));
+      chart.draw(data, options);
+      }
+      
+      //*********************** WELLNESS CHART *******************************
+      function wellness() {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'day');
+      data.addColumn('number', 'Wellness score');
+      var oneWeekAgo = new Date();
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      console.log(oneWeekAgo);
+      var d = !{data_w};
+      
+      if(Object.keys(d).length > 0){
+      
+        var oneWeekAgo_1 = new Date();
+        oneWeekAgo_1.setDate(oneWeekAgo + 1);
+        var oneWeekAgo_2 = new Date();
+        oneWeekAgo_2.setDate(oneWeekAgo + 1);
+        var oneWeekAgo_3 = new Date();
+        oneWeekAgo_3.setDate(oneWeekAgo + 1);
+        var oneWeekAgo_4 = new Date();
+        oneWeekAgo_4.setDate(oneWeekAgo + 1);
+        var oneWeekAgo_5 = new Date();
+        oneWeekAgo_5.setDate(oneWeekAgo + 1);
+        var oneWeekAgo_6 = new Date();
+        oneWeekAgo_6.setDate(oneWeekAgo + 1);
+        var oneWeekAgo_7 = new Date();
+        oneWeekAgo_7.setDate(oneWeekAgo + 1);
+        
+        var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+        //console.log(JSON.stringify(d));
+        for(var i = 0; i < d.length; i++) {
+            var obj = d[i];
+            //console.log("DATE: ");
+            //console.log(obj.date);
+            var dt = new Date(Date.parse(obj.date));
+            //console.log(dt+1);
+            //console.log(oneWeekAgo);
+            if(dt.getDate() >= oneWeekAgo.getDate()){
+                  var slot = dt.getDate() - oneWeekAgo.getDate();
+              if(slot < 0)
+                slot = slot * (-1);
+              //console.log(dt.getDate() + 1);
+              var dt_fixed = dt.getDate() + 1;
+              rows[slot][0] = dt_fixed.toString();
+              rows[slot][1] = parseInt(obj.percent_health, 10);
+              //rows[dt.getDay()][1] = parseInt(obj.sleep, 10);
+            }
+        }
+      }
+      else{
+        var dt = new Date();
+        dt.setDate(dt.getDate());
+        var rows = [["No workouts this week", 0]];
+      }
+      console.log("ROWS");
+      console.log(rows);
+      data.addRows(rows);
+      // Set chart options
+      var options = {'title':'Weekly Wellness',
+      'width':700,
+      'height':200,
+      legend: 'none',
+      lineWidth: 3,
+      backgroundColor: '#ffffff',
+      vAxis: {
+      title: "Wellness %",
+      viewWindowMode:'explicit'
+      },
+      colors: ['#006400'],
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.LineChart(document.getElementById('wellnesschart'));
+      chart.draw(data, options);
+      }
+  
+  script.
+    $(document).ready(function(){
+    $(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();
+    });
+    
   body(background='/views/bg3.jpg')
     // Navbar up at the top
     nav
@@ -174,6 +530,10 @@ html
                     .ez
                       br
                       li.btn.btn-info.red(href='#viewathletes', data-toggle='collapse') View Team
+                      - if (typeof(team) !== 'undefined'){
+                      for x in team
+                        p= x
+                      -}
                       br
                       br
                       #viewathletes.collapse
@@ -182,24 +542,76 @@ html
                         - console.log(data_u);
                         - if (typeof(data_u) !== 'undefined'){
                         table.table.table-bordered
-                        thead
-                          tr
-                            th Username
-                            th First
-                            th Last
-                        tbody
-                          for user in data_u
+                          thead
                             tr
-                              form(action='/coaches', method='post')
-                                input(type='hidden', value=user['username'], name='username', required='')
-            
-                                td.utag= user['username']
-                                td.ftag= user['first']
-                                td.ltag= user['last']
-                                td
+                              th Username
+                              th First
+                              th Last
+                              th
+                          tbody
+                            for user in data_u
+                              tr
+                                form(action='/coaches', method='post')
+                                  input(type='hidden', value=user['username'], name='username', required='')
+              
+                                  td.utag= user['username']
+                                  td.ftag= user['first']
+                                  td.ltag= user['last']
+                                  td
+                                    center
+                                      // Button trigger modal
+                                      button.btn.cyan.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#editModal')
+                                        | View Charts
                         br
                         br
                         -}
+                        
+    style.
+      .modal-body {
+      background-color: #01579b;
+      }
+      .modal-header {
+      background-color: #304ffe;
+      }
+      .modal-content {
+      background-color: #01579b;
+      }
+    // Modal
+    #editModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4#myModalLabel.modal-title
+              center
+                font(color='cyan') Weekly Charts:
+                  .ez2
+                    br
+                    a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
+                    br
+                    #demo1.collapse
+                      #sleepchart
+                      br
+                    a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
+                    br
+                    #demo2.collapse
+                      #distancechart
+                    a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Training Load - Distance
+                    br
+                    #demo3.collapse
+                      #tload_distchart
+                      br
+                    a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load - Time
+                    br
+                    #demo5.collapse
+                      #rpextimechart
+                      br
+                    a.btn.btn-info.green(href='#demo6', data-toggle='collapse') Wellness
+                    br
+                    #demo6.collapse
+                      #wellnesschart
+                      br
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js
