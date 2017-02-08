@@ -529,10 +529,8 @@ html
                   center Coaches/Trainers View Athletes
                     .ez
                       br
-                      li.btn.btn-info.red(href='#viewathletes', data-toggle='collapse') View Team
                       - if (typeof(team) !== 'undefined'){
-                      for x in team
-                        p= x
+                      li.btn.btn-info.red(href='#viewathletes', data-toggle='collapse') View Team - !{team}
                       -}
                       br
                       br
