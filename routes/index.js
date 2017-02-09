@@ -7,7 +7,9 @@ var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
 var ua = require('universal-analytics');
-var analytics = ua('UA-91318722-1');
+
+
+router.use(ua.middleware("UA-91318722-1", {cookieName: '_ga'}));
 
 
 var athlete = false;
@@ -15,7 +17,8 @@ var athlete = false;
 
 // Get Login Page
 router.get('/', function(req, res){
-	analytics.pageview("/").send();
+	console.log(process.platform);
+	req.visitor.pageview("/", "http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com/", "Login").send();
 	res.render('site.pug');
 });
 /*
@@ -34,8 +37,9 @@ router.get('/home', function(req, res){
 
 // Logout
 router.get('/logout', function(req, res){
-	analytics.pageview("/logout").send();
+	req.visitor.pageview("/logout").send();
 	if(req.isAuthenticated()){
+		req.visitor.event("Sign in event", "User Logging out").send();
 		req.logout();
 		res.redirect('/');
 	} else {
@@ -45,7 +49,7 @@ router.get('/logout', function(req, res){
 
 // Workout Entry
 router.get('/workoutentry', function(req, res){
-	analytics.pageview("/workoutentry").send();
+	req.visitor.pageview("/workoutentry").send();
 	if(req.isAuthenticated()){
 		res.render('workoutentry.pug');
 	} else {
@@ -55,7 +59,7 @@ router.get('/workoutentry', function(req, res){
 
 // View my workouts
 router.get('/myworkouts', function(req, res){
-	analytics.pageview("/myworkouts").send();
+	req.visitor.pageview("/myworkouts").send();
 	if(req.isAuthenticated()){
 		//access workout info through [] index operator, rows of query returned
 		var workouts;
@@ -72,7 +76,7 @@ router.get('/myworkouts', function(req, res){
 
 // View Athletes
 router.get('/admin_athlete_vis', function(req, res){
-	analytics.pageview("/admin_athlete_vis").send();
+	req.visitor.pageview("/admin_athlete_vis").send();
 
 	if(req.isAuthenticated()){
 		if(req.user.role == 'admin' || admin.user.role == 'coach'){
@@ -91,7 +95,7 @@ router.get('/admin_athlete_vis', function(req, res){
 
 // Add User
 router.get('/admin_add_user', function(req, res){
-	analytics.pageview("/admin_add_user").send();
+	req.visitor.pageview("/admin_add_user").send();
 	if(req.isAuthenticated()){
 		if(req.user.role == 'admin'){
 			res.render('admin_add_user.pug');
@@ -105,7 +109,7 @@ router.get('/admin_add_user', function(req, res){
 
 // Remove User
 router.get('/admin_remove_user', function(req, res){
-	analytics.pageview("/admin_remove_user").send();
+	req.visitor.pageview("/admin_remove_user").send();
 	if(req.isAuthenticated()){
 		if(req.user.role == 'admin'){
 			res.render('admin_remove_user.pug');
@@ -120,7 +124,7 @@ router.get('/admin_remove_user', function(req, res){
 // About Page
 router.get('/about',
         function(req, res){
-        	analytics.pageview("/about").send();
+        	req.visitor.pageview("/about").send();
 			if(req.isAuthenticated()){
 				res.render('about.pug');
 			} else {
@@ -131,7 +135,7 @@ router.get('/about',
 // Change Pass
 router.get('/changepassword',
         function(req, res){
-        	analytics.pageview("/changepassword").send();
+        	req.visitor.pageview("/changepassword").send();
 			if(req.isAuthenticated()){
 				res.render('changepassword.pug');
 			} else {
@@ -142,7 +146,7 @@ router.get('/changepassword',
 // Submit a Bug
 router.get('/buggy',
         function(req, res){
-        	analytics.pageview("/buggy").send();
+        	req.visitor.pageview("/buggy").send();
 			if(req.isAuthenticated()){
 				res.render('buggy.pug');
 			} else {
@@ -152,7 +156,7 @@ router.get('/buggy',
 
 // Coach/Trainer Page
 router.get('/coaches', function(req, res){
-	analytics.pageview("/coaches").send();
+	req.visitor.pageview("/coaches").send();
 	
 	if(req.isAuthenticated()){
 		console.log("memes2\nmemes2");
@@ -176,7 +180,7 @@ router.get('/coaches', function(req, res){
 
 // Data Dump Individual
 router.get('/datadumpindividual', function(req, res){
-			analytics.pageview("/datadumpindividual").send();
+			req.visitor.pageview("/datadumpindividual").send();
 			if(req.isAuthenticated()){
 				if(req.user.role == 'admin'){
 					res.render('admin_data_dump_a.pug');
@@ -189,7 +193,7 @@ router.get('/datadumpindividual', function(req, res){
 });
 
 router.get('/datadumpTeam',function(req, res){
-	analytics.pageview("/datadumpTeam").send();
+	req.visitor.pageview("/datadumpTeam").send();
 	if(req.isAuthenticated()){
 		if(req.user.role == "admin"){
 			res.render('admin_data_dump_b.pug');
@@ -207,6 +211,16 @@ router.post('/changepass', function(req, res) {
 
 	queries.change_password({user: req.user.id, pass: req.body.pass}, function(err, result){
 		console.log(result);
+
+		if(err)
+		{
+			req.visitor.event("FAILURE", "User failed to change Password").send();
+		}
+		else
+		{
+			req.visitor.event("SUCCESS", "User changed password").send();
+		}
+
 	});
 
 });
@@ -223,6 +237,12 @@ router.post('/getdatadumpind', function(req, res) {
 		console.log(result);
 		workouts = result;
 		dump(false, workouts, res);
+
+		if(err)
+		{
+			req.visitor.event("FAILURE", "Failed to dump data ind").send();
+		}
+
 	});
 	/*else
 	{
@@ -241,6 +261,11 @@ router.post('/getdatadumpteam', function(req, res) {
 	queries.get_workouts({team: req.body.datadumpteam}, function(err, result){
 		workouts = result;
 		dump(true, workouts, res);
+
+		if(err)
+		{
+			req.visitor.event("FAILURE", "Failed to dump data team");
+		}
 	});
 
 });
@@ -263,6 +288,8 @@ router.post('/register', function(req, res){
 	var errors = req.validationErrors();
 
 	if(errors){
+		req.visitor.event("FAILURE", "Failed to create user").send();
+
 		res.render('admin_add_user.pug', {
 			message: 'Error! User not added.',
 			errors: errors
@@ -301,6 +328,8 @@ router.post('/workoutentry', function(req, res){
 		console.log("Affected Rows: " + result.affectedRows);
 		if(result.affectedRows > 0)
 		{
+			req.visitor.event("Athlete", "Posting workout").send();
+
 			res.render('workoutentry.pug', {
 				message: 'Workout successfully added'
 			});
@@ -321,11 +350,17 @@ passport.deserializeUser(function(id, done){
 
 
 router.post('/', passport.authenticate('local', {failureRedirect: '/'}), function(req, res){
+
+
 		if(req.user.role == 'Athlete'){
+			req.visitor.event("Sign in", "Athlete Logging in").send();
 			res.redirect('/workoutentry');
 		} else {
+			req.visitor.event("Sign in", "Coach Logging in").send();
 			res.redirect('/coaches');
 		}
+		req.visitor.set("Operating System", process.platform);
+
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
 		console.log(req.user);
@@ -356,6 +391,7 @@ router.post("/admin_remove_user_form", function(req, res){
 		if(result.affectedRows > 0)
 		{
 			console.log("successfully removed user");
+			req.visitor.event("Admin", "User was removed").send();
 		}
 	})
 
