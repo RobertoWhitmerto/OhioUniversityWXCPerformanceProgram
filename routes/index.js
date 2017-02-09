@@ -66,7 +66,7 @@ router.get('/myworkouts', function(req, res){
 
 		queries.get_workouts({user: req.user.id}, function(err, result){
 			workouts = result;
-			//console.log(workouts);
+			console.log(workouts);
 			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
 		});
 	} else {
