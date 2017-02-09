@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-	"test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha"
   },
   "dependencies": {
-    "bcryptjs": "*",
+    "bcryptjs": "^2.4.0",
     "body-parser": "*",
     "chai": "^3.5.0",
     "connect-flash": "*",

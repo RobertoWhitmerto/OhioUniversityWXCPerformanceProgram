@@ -4,6 +4,7 @@
 
 
 var db = require("./db");
+var bcrypt = require('bcryptjs');
 
 var authQuery = `SELECT * FROM OUWXC.user`;
 var insertData = `INSERT INTO OUWXC.athlete_data (
@@ -45,7 +46,11 @@ function get_query(query, input, queryString) {
 	else if(query == "insertU")
 	{
 		string = insertUser;
-		string += ` VALUES ( "${input.newusername}", "${input.newuseremail}", "${input.newuserpw}", "${input.newuserfirst}", "${input.newuserlast}", NOW(), "${input.newuserteam}", "${input.userrole}" )`;
+		bcrypt.genSalt(10, function(err, salt){
+			bcrypt.hash(input.newuserpw, salt, function(err, hash){
+				string += ` VALUES ( "${input.newusername}", "${input.newuseremail}", "${hash}", "${input.newuserfirst}", "${input.newuserlast}", NOW(), "${input.newuserteam}", "${input.userrole}" )`;
+			})
+		})
 	}
 	else if(query == "remove")
 	{
@@ -117,11 +122,16 @@ function exec_query(query, input, result) {
 //authenticate a user
 function authenticate(input, done){
 	
-      exec_query("authenticate", input, function(err, rows, fields) {
+      exec_query("getU", input, function(err, rows, fields) {
 
       	if (err) { return done(err); }
-      	if (rows.length <= 0) {return done(null, false, {message: 'Username or password is incorrect'})}; 
-      	done(null, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role, team: rows[0].team});
+		if (rows.length <= 0) {return done(null, false, {message: 'Username is invalid'})}; 
+		bcrypt.compare(input.password, rows[0].password, function(err, res){
+			if(res){
+				done(null, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role, team: rows[0].team});
+			} else {
+				return done(null, false, {message: 'Username is invalid'});
+			}
       });
 
 }

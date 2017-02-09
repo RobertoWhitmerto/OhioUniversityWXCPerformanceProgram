@@ -6,6 +6,7 @@ var queries = require('./queries');
 var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
+var bcrypt = require('bcryptjs');
 
 var athlete = false;
 
@@ -269,11 +270,6 @@ passport.use(new LocalStrategy( function(username, password, done){
 	queries.authenticate({user: username, pass: password}, function(err, result){
 		console.log(result);
 		done(null,result);
-
-		if(result.role == "Athlete")
-		{
-			athlete = true;
-		}
 	})
 }));
 
