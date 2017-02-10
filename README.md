@@ -22,14 +22,14 @@ Project Code Locations:
 All code for the project is stored in the github repository that houses this README file.
 
 Project Directory Description:
-Main Directory - houses configuration files for the database and application.  It also contains ignore files for git and ebcli.
-|__Demos__ contains demo documents from first semester. Likely to be removed/trimmed prior to end of project.
-|__ExtraDocuments__ directory that contains testing information, presentations to fulfill course assignments.  Also contains documents to track individual goals for sprints.
-|__node_modules__ directory containing the nodejs modules the application needs to function.
-|__public__ contains css and javascript code relating to materialize which is used in our html/pug code.
-|__routes__ directory that holds code that determines how we handle user requests from the web application. It also contains code for queries needed for the application to function.
-|__test__ contains unit test code utilized by Mocha/Chai modules to test our code base.
-|__views__ directory that houses our applications front end jade/pug code
+Main Directory - houses configuration files for the database and application.  It also contains ignore files for git and ebcli.  
+|__Demos__ contains demo documents from first semester. Likely to be removed/trimmed prior to end of project.  
+|__ExtraDocuments__ directory that contains testing information, presentations to fulfill course assignments.  Also contains documents to track individual goals for sprints.  
+|__node_modules__ directory containing the nodejs modules the application needs to function.  
+|__public__ contains css and javascript code relating to materialize which is used in our html/pug code.  
+|__routes__ directory that holds code that determines how we handle user requests from the web application. It also contains code for queries needed for the application to function.  
+|__test__ contains unit test code utilized by Mocha/Chai modules to test our code base.  
+|__views__ directory that houses our applications front end jade/pug code   
 
 Team on a Cob members:
 
