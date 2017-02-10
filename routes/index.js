@@ -168,10 +168,15 @@ router.get('/coaches', function(req, res){
 			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
 					var users = result;
 					console.log(result);
-					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
+					//res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
+		queries.get_workouts({team: req.user.team}, function(err, result){
+			var workouts = result;
+			console.log(workouts);
+			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team, data_x: JSON.stringify(workouts), data: workouts });
+		});
+				
+				
 			});
-
-			
 		}
 	} else {
 		res.redirect('/');
