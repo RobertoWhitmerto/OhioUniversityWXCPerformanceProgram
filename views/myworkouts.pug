@@ -3,15 +3,16 @@ html
   head
     title PPA - Training Log
     // Compiled and minified CSS
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.0/css/materialize.min.css')
     // Compiled and minified JavaScript
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.0/js/materialize.min.js')
+
     // Bootstrap
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-    // Let browser know website is optimized for mobile
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+
     // Import Google Icon Font
     link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
     // Import materialize.css
@@ -625,8 +626,8 @@ html
                     td
                       center
                         // Button trigger modal
-                        button.btn.cyan.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#editModal')
-                          | Edit
+                        // Modal Trigger
+                        a.waves-effect.waves-light.btn.modal-trigger(href='#modal1') Edit
                         button.btn.waves-effect.waves-light.red.lighten-1(type='submit', name='action', wID=workout['workout_id'])
                           | Remove
                           i.material-icons.right send
@@ -637,284 +638,263 @@ html
 
 
     // Button trigger modal
-    style.
-      .modal-body {
-      background-color: #01579b;
-      }
-      .modal-header {
-      background-color: #304ffe;
-      }
-      .modal-content {
-      background-color: #01579b;
-      }
-    // Modal
-    #editModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
-      .modal-dialog(role='document')
-        .modal-content
-          .modal-header
-            button.close(type='button', data-dismiss='modal', aria-label='Close')
-              span(aria-hidden='true') ×
-            h4#myModalLabel.modal-title
-              center
-                font(color='cyan') Edit Workout:
-          .modal-body
-            br
-            center
-              a.waves-effect.waves-light.btn.light-green(onclick='myFunction()') Load Workout Data
-            br
-            br
-            script.
-              function myFunction() {
-              //To Add the Links, assign dynamic value to these variables//
-              var sleepV = 5;           //Should read in the "number" value from original
-              var illnessV ="fever";    //String based selection, select input field
-              var injuryV ="it band";   //String based selection, select input field
-              var perhealthV = 70;      //Should read in the number value from original
-              var rpeinfoV ="interval"; //String based selection, select input field
-              var rpevalV = 18;         //Number based selection, select input field
-              var timeV = 20;           //Should read in the number value from original
-              var distanceV = 25;       //Should read in the number value from original
-              var hungryV = 10;         //Should read in the number value from original
-              var cycleV;               //? This still isnt fixed from the roots
-              //Autofill Hours of Sleep from Source//
-              document.getElementById("sleephours").value = sleepV;
-              //Autoselect General Health from Source//
-              if(illnessV == "n/a")
-              document.getElementById("illness").selectedIndex = 0;
-              if(illnessV == "fever")
-              document.getElementById("illness").selectedIndex = 1;
-              if(illnessV == "gi_distress")
-              document.getElementById("illness").selectedIndex = 2;
-              if(illnessV == "upper respiratory")
-              document.getElementById("illness").selectedIndex = 3;
-              if(illnessV == "abnormal fatigue")
-              document.getElementById("illness").selectedIndex = 4;
-              if(illnessV == "insomnia")
-              document.getElementById("illness").selectedIndex = 5;
-              if(illnessV == "irritability")
-              document.getElementById("illness").selectedIndex = 6;
-              if(illnessV == "decreased motivation")
-              document.getElementById("illness").selectedIndex = 7;
-              if(illnessV == "weight loss")
-              document.getElementById("illness").selectedIndex = 8;
-              if(illnessV == "chronic soreness")
-              document.getElementById("illness").selectedIndex = 9;
-              //--------------------------------------//
-              //Autoselect Irritation/Pain from Source//
-              if(injuryV == "n/a")
-              document.getElementById("injury").selectedIndex = 0;
-              if(injuryV == "foot arch")
-              document.getElementById("injury").selectedIndex = 1;
-              if(injuryV == "Heel")
-              document.getElementById("injury").selectedIndex = 2;
-              if(injuryV == "shin")
-              document.getElementById("injury").selectedIndex = 3;
-              if(injuryV == "knee")
-              document.getElementById("injury").selectedIndex = 4;
-              if(injuryV == "it band")
-              document.getElementById("injury").selectedIndex = 5;
-              if(injuryV == "hip")
-              document.getElementById("injury").selectedIndex = 6;
-              if(injuryV == "low back")
-              document.getElementById("injury").selectedIndex = 7;
-              if(injuryV == "pelvis")
-              document.getElementById("injury").selectedIndex = 8;
-              if(injuryV == "rib")
-              document.getElementById("injury").selectedIndex = 9;
-              //--------------------------------------//
-              //Autofill Wellness Score//
-              document.getElementById("percent_health").value = perhealthV;
-              //Autoselect RPE Information from Source//
-              if(rpeinfoV == "unknown")
-              document.getElementById("rpeinfo").selectedIndex = 0;
-              if(rpeinfoV == "aerobic")
-              document.getElementById("rpeinfo").selectedIndex = 1;
-              if(rpeinfoV == "threshold")
-              document.getElementById("rpeinfo").selectedIndex = 2;
-              if(rpeinfoV == "interval")
-              document.getElementById("rpeinfo").selectedIndex = 3;
-              if(rpeinfoV == "crosstraining")
-              document.getElementById("rpeinfo").selectedIndex = 4;
-              if(rpeinfoV == "strengthandconditioning")
-              document.getElementById("rpeinfo").selectedIndex = 5;
-              //--------------------------------------//
-              //Autoselect RPE Value from Source//
-              if(rpevalV == "rpeinvalid")
-              document.getElementById("rpeval").selectedIndex = 0;
-              if(rpevalV == 6)
-              document.getElementById("rpeval").selectedIndex = 1;
-              if(rpevalV == 7)
-              document.getElementById("rpeval").selectedIndex = 2;
-              if(rpevalV == 8)
-              document.getElementById("rpeval").selectedIndex = 3;
-              if(rpevalV == 9)
-              document.getElementById("rpeval").selectedIndex = 4;
-              if(rpevalV == 10)
-              document.getElementById("rpeval").selectedIndex = 5;
-              if(rpevalV == 11)
-              document.getElementById("rpeval").selectedIndex = 6;
-              if(rpevalV == 12)
-              document.getElementById("rpeval").selectedIndex = 7;
-              if(rpevalV == 13)
-              document.getElementById("rpeval").selectedIndex = 8;
-              if(rpevalV == 14)
-              document.getElementById("rpeval").selectedIndex = 9;
-              if(rpevalV == 15)
-              document.getElementById("rpeval").selectedIndex = 10;
-              if(rpevalV == 16)
-              document.getElementById("rpeval").selectedIndex = 11;
-              if(rpevalV == 17)
-              document.getElementById("rpeval").selectedIndex = 12;
-              if(rpevalV == 18)
-              document.getElementById("rpeval").selectedIndex = 13;
-              if(rpevalV == 19)
-              document.getElementById("rpeval").selectedIndex = 14;
-              if(rpevalV == 20)
-              document.getElementById("rpeval").selectedIndex = 15;
-              //--------------------------------------//
-              //Autofill Time//
-              document.getElementById("time").value = timeV;
-              //Autofill Distance//
-              document.getElementById("distance").value = distanceV;
-              //Autoselect Hunger Score from Source//
-              if(hungryV == "unknown")
-              document.getElementById("hungry").selectedIndex = 0;
-              if(hungryV == 0)
-              document.getElementById("hungry").selectedIndex = 1;
-              if(hungryV == 1)
-              document.getElementById("hungry").selectedIndex = 2;
-              if(hungryV == 2)
-              document.getElementById("hungry").selectedIndex = 3;
-              if(hungryV == 3)
-              document.getElementById("hungry").selectedIndex = 4;
-              if(hungryV == 4)
-              document.getElementById("hungry").selectedIndex = 5;
-              if(hungryV == 5)
-              document.getElementById("hungry").selectedIndex = 6;
-              if(hungryV == 6)
-              document.getElementById("hungry").selectedIndex = 7;
-              if(hungryV == 7)
-              document.getElementById("hungry").selectedIndex = 8;
-              if(hungryV == 8)
-              document.getElementById("hungry").selectedIndex = 9;
-              if(hungryV == 9)
-              document.getElementById("hungry").selectedIndex = 10;
-              if(hungryV == 10)
-              document.getElementById("hungry").selectedIndex = 11;
-              //--------------------------------------//
-              }
-            form
-              label Hours of Sleep
-              font(color='cyan')
-                input#sleephours(type='number', name='sleephours', min='0', max='14')
-              br
-              label General Health
-              select#illness.browser-default(name='illness')
-                option(name='illness', value='n/a') N/A
-                option(name='illness', value='fever') Fever
-                option(name='illness', value='gi_distress') GI Distress
-                option(name='illness', value='upper respiratory') Upper Respiratory
-                option(name='illness', value='abnormal fatigue') Abnormal Fatigue
-                option(name='illness', value='insomnia') Insomnia
-                option(name='illness', value='irritability') Irritability
-                option(name='illness', value='decreased motivation') Decreased Motivation
-                option(name='illness', value='weight loss') Weight Loss
-                option(name='illness', value='chronic soreness') Chronic Soreness
-              br
-              label Irritation/Pain
-              select#injury.browser-default(name='injury')
-                option(name='injury', value='n/a') N/A
-                option(name='injury', value='foot arch') Foot Arch
-                option(name='injury', value='Heel') Heel
-                option(name='injury', value='shin') Shin
-                option(name='injury', value='knee') Knee
-                option(name='injury', value='it band') IT Band
-                option(name='injury', value='hip') Hip
-                option(name='injury', value='low back') Low Back
-                option(name='injury', value='pelvis') Pelvis
-                option(name='injury', value='rib') Rib
-              br
-              label Wellness Score
-              br
-              font(color='cyan')
-                label (100% = Full Health, 0% = Not able to Workout
-                input#percent_health(name='percent_health', type='number', min='0', max='100', step='10')
-                br
-              label RPE Information
-              select#rpeinfo.browser-default(name='rpeinfo')
-                option(name='rpeinfo', value='unknown') ----
-                option(name='rpeinfo', value='aerobic') Zone 1: Aerobic
-                option(name='rpeinfo', value='threshold') Zone 2: Threshold
-                option(name='rpeinfo', value='interval') Zone 3: Interval
-                option(name='rpeinfo', value='crosstraining') Cross Training
-                option(name='rpeinfo', value='strengthandconditioning') Strength and Conditioning
-              br
-              br
-              label RPE (6-20)
-              select#rpeval.browser-default(name='rpeval')
-                option(name='rpeval', value='rpeinvalid') --
-                option(name='rpeval', value='6') 6 - Rest
-                option(name='rpeval', value='7') 7 - Extremely Light
-                option(name='rpeval', value='8') 8 -
-                option(name='rpeval', value='9') 9 - Very Light
-                option(name='rpeval', value='10') 10 -
-                option(name='rpeval', value='11') 11 - Light
-                option(name='rpeval', value='12') 12 -
-                option(name='rpeval', value='13') 13 - Somewhat Hard
-                option(name='rpeval', value='14') 14 -
-                option(name='rpeval', value='15') 15 - Hard
-                option(name='rpeval', value='16') 16 -
-                option(name='rpeval', value='17') 17 - Very Hard
-                option(name='rpeval', value='18') 18 -
-                option(name='rpeval', value='19') 19 - Extremely Hard
-                option(name='rpeval', value='20') 20 - Maximal Exertion
-              br
-              br
-              font(color='cyan')
-                label Time of workout (minutes)
-                input#time(name='time', type='number', min='0', max='999')
-                br
-                br
-                label Distance (miles)
-                input#distance(name='distance', type='number', min='0.0', max='100.0')
-                br
-                br
-              label 24-hour Hunger Score
-              select#hungry.browser-default(name='hungry')
-                option(name='hungry', value='unknown') --
-                option(name='hungry', value='0') 0 - Empty
-                option(name='hungry', value='1') 1 - Ravenous
-                option(name='hungry', value='2') 2 - Very Hungry
-                option(name='hungry', value='3') 3 - Lightly Hungry
-                option(name='hungry', value='4') 4 - Lightly Hungry
-                option(name='hungry', value='5') 5 - Neutral
-                option(name='hungry', value='6') 6 - Lightly Full; Satisfied
-                option(name='hungry', value='7') 7 - Lightly Full; Satisfied
-                option(name='hungry', value='8') 8 - Full
-                option(name='hungry', value='9') 9 - Stuffed
-                option(name='hungry', value='10') 10 - Sick
-              br
-              label Start of cycle
-              input#opt1.with-gap(name='cycle', type='radio', checked='', value='no')
-              label#opta(name='cycle', for='opt1') No
-              input#opt2.with-gap(name='cycle', type='radio', value='yes')
-              label#optb(name='cycle', for='opt2') Yes
-              br
-              br
-              button.btn.red.btn-default(type='button', data-dismiss='modal') Close
-              button.btn.blue.btn-primary(type='button') Update
+    script.
+      $(document).ready(function(){
+      // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
+      $('.modal-trigger').leanModal();
+      });
 
-
-
-
-
-
-
-
+// Modal Structure
+#modal1.modal
+  .modal-content.light-blue.darken-4
+    h4 
+      font(color='cyan') Edit Workout
+    center
+      a.waves-effect.waves-light.btn.light-green(onclick='myFunction()') Load Workout Data
     br
     br
-    br
-    hr
+    script.
+      function myFunction() {
+      //To Add the Links, assign dynamic value to these variables//
+      var sleepV = 5;           //Should read in the "number" value from original
+      var illnessV ="fever";    //String based selection, select input field
+      var injuryV ="it band";   //String based selection, select input field
+      var perhealthV = 70;      //Should read in the number value from original
+      var rpeinfoV ="interval"; //String based selection, select input field
+      var rpevalV = 18;         //Number based selection, select input field
+      var timeV = 20;           //Should read in the number value from original
+      var distanceV = 25;       //Should read in the number value from original
+      var hungryV = 10;         //Should read in the number value from original
+      var cycleV;               //? This still isnt fixed from the roots
+      //Autofill Hours of Sleep from Source//
+      document.getElementById("sleephours").value = sleepV;
+      //Autoselect General Health from Source//
+      if(illnessV == "n/a")
+      document.getElementById("illness").selectedIndex = 0;
+      if(illnessV == "fever")
+      document.getElementById("illness").selectedIndex = 1;
+      if(illnessV == "gi_distress")
+      document.getElementById("illness").selectedIndex = 2;
+      if(illnessV == "upper respiratory")
+      document.getElementById("illness").selectedIndex = 3;
+      if(illnessV == "abnormal fatigue")
+      document.getElementById("illness").selectedIndex = 4;
+      if(illnessV == "insomnia")
+      document.getElementById("illness").selectedIndex = 5;
+      if(illnessV == "irritability")
+      document.getElementById("illness").selectedIndex = 6;
+      if(illnessV == "decreased motivation")
+      document.getElementById("illness").selectedIndex = 7;
+      if(illnessV == "weight loss")
+      document.getElementById("illness").selectedIndex = 8;
+      if(illnessV == "chronic soreness")
+      document.getElementById("illness").selectedIndex = 9;
+      //--------------------------------------//
+      //Autoselect Irritation/Pain from Source//
+      if(injuryV == "n/a")
+      document.getElementById("injury").selectedIndex = 0;
+      if(injuryV == "foot arch")
+      document.getElementById("injury").selectedIndex = 1;
+      if(injuryV == "Heel")
+      document.getElementById("injury").selectedIndex = 2;
+      if(injuryV == "shin")
+      document.getElementById("injury").selectedIndex = 3;
+      if(injuryV == "knee")
+      document.getElementById("injury").selectedIndex = 4;
+      if(injuryV == "it band")
+      document.getElementById("injury").selectedIndex = 5;
+      if(injuryV == "hip")
+      document.getElementById("injury").selectedIndex = 6;
+      if(injuryV == "low back")
+      document.getElementById("injury").selectedIndex = 7;
+      if(injuryV == "pelvis")
+      document.getElementById("injury").selectedIndex = 8;
+      if(injuryV == "rib")
+      document.getElementById("injury").selectedIndex = 9;
+      //--------------------------------------//
+      //Autofill Wellness Score//
+      document.getElementById("percent_health").value = perhealthV;
+      //Autoselect RPE Information from Source//
+      if(rpeinfoV == "unknown")
+      document.getElementById("rpeinfo").selectedIndex = 0;
+      if(rpeinfoV == "aerobic")
+      document.getElementById("rpeinfo").selectedIndex = 1;
+      if(rpeinfoV == "threshold")
+      document.getElementById("rpeinfo").selectedIndex = 2;
+      if(rpeinfoV == "interval")
+      document.getElementById("rpeinfo").selectedIndex = 3;
+      if(rpeinfoV == "crosstraining")
+      document.getElementById("rpeinfo").selectedIndex = 4;
+      if(rpeinfoV == "strengthandconditioning")
+      document.getElementById("rpeinfo").selectedIndex = 5;
+      //--------------------------------------//
+      //Autoselect RPE Value from Source//
+      if(rpevalV == "rpeinvalid")
+      document.getElementById("rpeval").selectedIndex = 0;
+      if(rpevalV == 6)
+      document.getElementById("rpeval").selectedIndex = 1;
+      if(rpevalV == 7)
+      document.getElementById("rpeval").selectedIndex = 2;
+      if(rpevalV == 8)
+      document.getElementById("rpeval").selectedIndex = 3;
+      if(rpevalV == 9)
+      document.getElementById("rpeval").selectedIndex = 4;
+      if(rpevalV == 10)
+      document.getElementById("rpeval").selectedIndex = 5;
+      if(rpevalV == 11)
+      document.getElementById("rpeval").selectedIndex = 6;
+      if(rpevalV == 12)
+      document.getElementById("rpeval").selectedIndex = 7;
+      if(rpevalV == 13)
+      document.getElementById("rpeval").selectedIndex = 8;
+      if(rpevalV == 14)
+      document.getElementById("rpeval").selectedIndex = 9;
+      if(rpevalV == 15)
+      document.getElementById("rpeval").selectedIndex = 10;
+      if(rpevalV == 16)
+      document.getElementById("rpeval").selectedIndex = 11;
+      if(rpevalV == 17)
+      document.getElementById("rpeval").selectedIndex = 12;
+      if(rpevalV == 18)
+      document.getElementById("rpeval").selectedIndex = 13;
+      if(rpevalV == 19)
+      document.getElementById("rpeval").selectedIndex = 14;
+      if(rpevalV == 20)
+      document.getElementById("rpeval").selectedIndex = 15;
+      //--------------------------------------//
+      //Autofill Time//
+      document.getElementById("time").value = timeV;
+      //Autofill Distance//
+      document.getElementById("distance").value = distanceV;
+      //Autoselect Hunger Score from Source//
+      if(hungryV == "unknown")
+      document.getElementById("hungry").selectedIndex = 0;
+      if(hungryV == 0)
+      document.getElementById("hungry").selectedIndex = 1;
+      if(hungryV == 1)
+      document.getElementById("hungry").selectedIndex = 2;
+      if(hungryV == 2)
+      document.getElementById("hungry").selectedIndex = 3;
+      if(hungryV == 3)
+      document.getElementById("hungry").selectedIndex = 4;
+      if(hungryV == 4)
+      document.getElementById("hungry").selectedIndex = 5;
+      if(hungryV == 5)
+      document.getElementById("hungry").selectedIndex = 6;
+      if(hungryV == 6)
+      document.getElementById("hungry").selectedIndex = 7;
+      if(hungryV == 7)
+      document.getElementById("hungry").selectedIndex = 8;
+      if(hungryV == 8)
+      document.getElementById("hungry").selectedIndex = 9;
+      if(hungryV == 9)
+      document.getElementById("hungry").selectedIndex = 10;
+      if(hungryV == 10)
+      document.getElementById("hungry").selectedIndex = 11;
+      //--------------------------------------//
+      }
+    form
+      label Hours of Sleep
+      font(color='cyan')
+        input#sleephours(type='number', name='sleephours', min='0', max='14')
+        br
+      label General Health
+      select#illness.browser-default(name='illness')
+        option(name='illness', value='n/a') N/A
+        option(name='illness', value='fever') Fever
+        option(name='illness', value='gi_distress') GI Distress
+        option(name='illness', value='upper respiratory') Upper Respiratory
+        option(name='illness', value='abnormal fatigue') Abnormal Fatigue
+        option(name='illness', value='insomnia') Insomnia
+        option(name='illness', value='irritability') Irritability
+        option(name='illness', value='decreased motivation') Decreased Motivation
+        option(name='illness', value='weight loss') Weight Loss
+        option(name='illness', value='chronic soreness') Chronic Soreness
+      br
+      label Irritation/Pain
+      select#injury.browser-default(name='injury')
+        option(name='injury', value='n/a') N/A
+        option(name='injury', value='foot arch') Foot Arch
+        option(name='injury', value='Heel') Heel
+        option(name='injury', value='shin') Shin
+        option(name='injury', value='knee') Knee
+        option(name='injury', value='it band') IT Band
+        option(name='injury', value='hip') Hip
+        option(name='injury', value='low back') Low Back
+        option(name='injury', value='pelvis') Pelvis
+        option(name='injury', value='rib') Rib
+      br
+      label Wellness Score
+      br
+      label (100% = Full Health, 0% = Not able to Workout
+      font(color='cyan')
+        input#percent_health(name='percent_health', type='number', min='0', max='100', step='10')
+        br
+      label RPE Information
+      select#rpeinfo.browser-default(name='rpeinfo')
+        option(name='rpeinfo', value='unknown') ----
+        option(name='rpeinfo', value='aerobic') Zone 1: Aerobic
+        option(name='rpeinfo', value='threshold') Zone 2: Threshold
+        option(name='rpeinfo', value='interval') Zone 3: Interval
+        option(name='rpeinfo', value='crosstraining') Cross Training
+        option(name='rpeinfo', value='strengthandconditioning') Strength and Conditioning
+      br
+      br
+      label RPE (6-20)
+      select#rpeval.browser-default(name='rpeval')
+        option(name='rpeval', value='rpeinvalid') --
+        option(name='rpeval', value='6') 6 - Rest
+        option(name='rpeval', value='7') 7 - Extremely Light
+        option(name='rpeval', value='8') 8 -
+        option(name='rpeval', value='9') 9 - Very Light
+        option(name='rpeval', value='10') 10 -
+        option(name='rpeval', value='11') 11 - Light
+        option(name='rpeval', value='12') 12 -
+        option(name='rpeval', value='13') 13 - Somewhat Hard
+        option(name='rpeval', value='14') 14 -
+        option(name='rpeval', value='15') 15 - Hard
+        option(name='rpeval', value='16') 16 -
+        option(name='rpeval', value='17') 17 - Very Hard
+        option(name='rpeval', value='18') 18 -
+        option(name='rpeval', value='19') 19 - Extremely Hard
+        option(name='rpeval', value='20') 20 - Maximal Exertion
+      br
+      br
+      label Time of workout (minutes)
+      font(color='cyan')
+        input#time(name='time', type='number', min='0', max='999')
+        br
+        br
+        label Distance (miles)
+        input#distance(name='distance', type='number', min='0.0', max='100.0')
+        br
+        br
+      label 24-hour Hunger Score
+      select#hungry.browser-default(name='hungry')
+        option(name='hungry', value='unknown') --
+        option(name='hungry', value='0') 0 - Empty
+        option(name='hungry', value='1') 1 - Ravenous
+        option(name='hungry', value='2') 2 - Very Hungry
+        option(name='hungry', value='3') 3 - Lightly Hungry
+        option(name='hungry', value='4') 4 - Lightly Hungry
+        option(name='hungry', value='5') 5 - Neutral
+        option(name='hungry', value='6') 6 - Lightly Full; Satisfied
+        option(name='hungry', value='7') 7 - Lightly Full; Satisfied
+        option(name='hungry', value='8') 8 - Full
+        option(name='hungry', value='9') 9 - Stuffed
+        option(name='hungry', value='10') 10 - Sick
+      br
+      label Start of cycle
+      input#opt1.with-gap(name='cycle', type='radio', checked='', value='no')
+      label#opta(name='cycle', for='opt1') No
+      input#opt2.with-gap(name='cycle', type='radio', value='yes')
+      label#optb(name='cycle', for='opt2') Yes
+      br
+      br
+      button.modal-action.modal-close.btn-flat.red(type='button', href='#!')
+        font(color='white') Close
+      button.btn.blue.btn-primary(type='button') Update
+
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js
