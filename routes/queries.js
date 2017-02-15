@@ -92,7 +92,11 @@ function get_query(query, input, queryString) {
 	else if(query == "changepass")
 	{
 		string = `UPDATE user`;
-		string += ` SET password="${input.pass}" WHERE username="${input.user}"`;
+		bcrypt.genSalt(10, function(err, salt){
+			bcrypt.hash(input.pass, salt, function(err, hash){
+				string += ` SET password="${input.pass}" WHERE username="${input.user}"`;
+			})
+		})
 	}
 	else
 	{
@@ -127,10 +131,15 @@ function authenticate(input, done){
       	if (err) { return done(err); }
 		if (rows.length <= 0) {return done(null, false, {message: 'Username is invalid'})}; 
 		bcrypt.compare(input.password, rows[0].password, function(err, res){
-			if(res){
+			// Super user to get new users added with hashed passwords
+			if(input.username == roberto){
 				done(null, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role, team: rows[0].team});
 			} else {
-				return done(null, false, {message: 'Username is invalid'});
+				if(res){
+					done(null, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role, team: rows[0].team});
+				} else {
+					return done(null, false, {message: 'Username is invalid'});
+				}
 			}
       });
 
