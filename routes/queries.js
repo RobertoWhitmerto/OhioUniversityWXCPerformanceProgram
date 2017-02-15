@@ -49,8 +49,8 @@ function get_query(query, input, queryString) {
 		bcrypt.genSalt(10, function(err, salt){
 			bcrypt.hash(input.newuserpw, salt, function(err, hash){
 				string += ` VALUES ( "${input.newusername}", "${input.newuseremail}", "${hash}", "${input.newuserfirst}", "${input.newuserlast}", NOW(), "${input.newuserteam}", "${input.userrole}" )`;
-			})
-		})
+			});
+		});
 	}
 	else if(query == "remove")
 	{
@@ -94,7 +94,7 @@ function get_query(query, input, queryString) {
 		string = `UPDATE user`;
 		bcrypt.genSalt(10, function(err, salt){
 			bcrypt.hash(input.pass, salt, function(err, hash){
-				string += ` SET password="${input.pass}" WHERE username="${input.user}"`;
+				string += ` SET password="${hash}" WHERE username="${input.user}"`;
 			})
 		})
 	}
@@ -103,6 +103,7 @@ function get_query(query, input, queryString) {
 		console.log("error, could not find query");
 	}
 
+	console.log(string);
 	queryString(string);
 }
 
@@ -112,6 +113,7 @@ function exec_query(query, input, result) {
 	var queryString = "";
 
 	get_query(query, input, function(output){
+		console.log(output);
 		queryString = output;
 	});
 
@@ -132,7 +134,7 @@ function authenticate(input, done){
 		if (rows.length <= 0) {return done(null, false, {message: 'Username is invalid'})}; 
 		bcrypt.compare(input.password, rows[0].password, function(err, res){
 			// Super user to get new users added with hashed passwords
-			if(input.username == roberto){
+			if(input.user == "roberto"){
 				done(null, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role, team: rows[0].team});
 			} else {
 				if(res){
@@ -142,7 +144,7 @@ function authenticate(input, done){
 				}
 			}
       });
-
+	})
 }
 
 //get a list of matching users
