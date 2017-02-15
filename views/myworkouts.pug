@@ -627,7 +627,7 @@ html
                       center
                         // Button trigger modal
                         // Modal Trigger
-                        a.waves-effect.waves-light.btn.modal-trigger(href='#modal1') Edit
+                        a.waves-effect.waves-light.btn.modal-trigger(href='#modal1', data-id=workout['workout_id']) Edit
                         button.btn.waves-effect.waves-light.red.lighten-1(type='submit', name='action', wID=workout['workout_id'])
                           | Remove
                           i.material-icons.right send
@@ -641,7 +641,28 @@ html
     script.
       $(document).ready(function(){
       // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
-      $('.modal-trigger').leanModal();
+      $(document).on("click", ".modal-trigger", function (e) {
+      
+          e.preventDefault();
+      
+          var _self = $(this);
+      
+          var wID = _self.data('id');
+          $("#workoutID").val(wID);
+          $('.modal-trigger').leanModal();
+          //$(_self.attr('href')).modal('show');
+      });
+      //$('.modal-trigger').leanModal();
+      });
+      
+    //script. 
+      $('#modal1').on('modal-trigger', function(x) {
+      //get data-id attribute of the clicked element
+      var workoutId = $(x.relatedTarget).data('wID');
+      console.log("THIS\nIS\nIMPORTANT");
+      console.log(workoutId);
+      //populate the textbox
+      //$(e.currentTarget).find('input[name="bookId"]').val(bookId);
       });
 
 // Modal Structure
@@ -667,7 +688,7 @@ html
       var hungryV = 10;         //Should read in the number value from original
       var cycleV;               //? This still isnt fixed from the roots
       //Autofill Hours of Sleep from Source//
-      document.getElementById("sleephours").value = sleepV;
+      document.getElementById("sleephours").value =  '#{workoutID}';
       //Autoselect General Health from Source//
       if(illnessV == "n/a")
       document.getElementById("illness").selectedIndex = 0;
