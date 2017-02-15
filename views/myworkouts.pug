@@ -627,7 +627,7 @@ html
                       center
                         // Button trigger modal
                         // Modal Trigger
-                        a.waves-effect.waves-light.btn.modal-trigger(href='#modal1', data-id=workout['workout_id']) Edit
+                        a.waves-effect.waves-light.btn.modal-trigger(href='#modal1', data-id=workout['workout_id'], data-id2=workout['sleep'], data-id3=workout['Illness'], data-id4=workout['Injury'], data-id5=workout['percent_health'], data-id6=workout['cycle_start'], data-id7=workout['RPE'], data-id8=workout['time'], data-id9=workout['distance'], data-id10=workout['notes']) Edit
                         button.btn.waves-effect.waves-light.red.lighten-1(type='submit', name='action', wID=workout['workout_id'])
                           | Remove
                           i.material-icons.right send
@@ -648,7 +648,26 @@ html
           var _self = $(this);
       
           var wID = _self.data('id');
-          $("#workoutID").val(wID);
+          var sleep = _self.data('id2');
+          var illness = _self.data('id3');
+          var injury = _self.data('id4');
+          var percent_health = _self.data('id5');
+          var cycle_start = _self.data('id6');
+          var RPE = _self.data('id7');
+          var time = _self.data('id8');
+          var distance = _self.data('id9');
+          var notes = _self.data('id10');
+          //$("#workoutID") = wID;
+          $workoutID = wID;
+          $sleep = sleep;
+          $illness = illness;
+          $injury = injury;
+          $percent_health = percent_health;
+          $cycle_start = cycle_start;
+          $RPE = RPE;
+          $time = time
+          $distance = distance;
+          $notes = notes;
           $('.modal-trigger').leanModal();
           //$(_self.attr('href')).modal('show');
       });
@@ -676,19 +695,31 @@ html
     br
     script.
       function myFunction() {
+      console.log("HEY YO LOOK OVER HERE\n");
+      var test = $workoutID;
+      var sleep = $sleep;
+      var illness = $illness;
+      var injury = $injury;
+      var percent_health = $percent_health;
+      var cycle_start = $cycle_start;
+      var RPE = $RPE;
+      var time = $time;
+      var distance = $distance;
+      var notes = $notes;
+      console.log(test);
       //To Add the Links, assign dynamic value to these variables//
-      var sleepV = 5;           //Should read in the "number" value from original
-      var illnessV ="fever";    //String based selection, select input field
-      var injuryV ="it band";   //String based selection, select input field
-      var perhealthV = 70;      //Should read in the number value from original
+      var sleepV = sleep;           //Should read in the "number" value from original
+      var illnessV =illness;    //String based selection, select input field
+      var injuryV =injury;   //String based selection, select input field
+      var perhealthV = percent_health;      //Should read in the number value from original
       var rpeinfoV ="interval"; //String based selection, select input field
-      var rpevalV = 18;         //Number based selection, select input field
-      var timeV = 20;           //Should read in the number value from original
-      var distanceV = 25;       //Should read in the number value from original
+      var rpevalV = RPE;         //Number based selection, select input field
+      var timeV = time;           //Should read in the number value from original
+      var distanceV = distance;       //Should read in the number value from original
       var hungryV = 10;         //Should read in the number value from original
-      var cycleV;               //? This still isnt fixed from the roots
+      var cycleV = cycle_start;               //? This still isnt fixed from the roots
       //Autofill Hours of Sleep from Source//
-      document.getElementById("sleephours").value =  '#{workoutID}';
+      document.getElementById("sleephours").value =  sleep;
       //Autoselect General Health from Source//
       if(illnessV == "n/a")
       document.getElementById("illness").selectedIndex = 0;
@@ -786,7 +817,7 @@ html
       //Autofill Time//
       document.getElementById("time").value = timeV;
       //Autofill Distance//
-      document.getElementById("distance").value = distanceV;
+      document.getElementById("distance").value = 20;
       //Autoselect Hunger Score from Source//
       if(hungryV == "unknown")
       document.getElementById("hungry").selectedIndex = 0;
