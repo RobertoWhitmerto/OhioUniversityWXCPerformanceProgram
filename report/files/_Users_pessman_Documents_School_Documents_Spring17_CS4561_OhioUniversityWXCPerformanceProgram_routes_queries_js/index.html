@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - /Users/pessman/Documents/School Documents/Spring17/CS4561/OhioUniversityWXCPerformanceProgram/routes/queries.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>/Users/pessman/Documents/School Documents/Spring17/CS4561/OhioUniversityWXCPerformanceProgram/routes/queries.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">67.89</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">303</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">33.23</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">2.52</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">// Database interface for interacting with the OUWXC database
+// TODO: restructure to ask for specific values rather than an entire input value.
+// TODO: reformat queries to be more general and used for different things
+
+
+var db = require(&quot;./db&quot;);
+
+var authQuery = `SELECT * FROM OUWXC.user`;
+var insertData = `INSERT INTO OUWXC.athlete_data (
+			athlete, 
+			date, 
+			sleep, 
+			Illness, 
+			Injury, 
+			percent_health, 
+			cycle_start, 
+			RPE,
+			rpeinfo,
+			time,
+			distance,
+			hungry,
+			notes)`;
+var removeData = `DELETE FROM OUWXC.athlete_data`;
+var insertUser = `INSERT IGNORE INTO OUWXC.user(username, email, password, first, last, create_time, team, role)`;
+var deleteUser = `DELETE FROM OUWXC.user`;
+var getUser = `SELECT * FROM OUWXC.user`;
+var selectWorkouts = `SELECT * FROM OUWXC.athlete_data`;
+var updateData = `UPDATE OUWXC.user`;
+
+//fill out the query with the input data
+function get_query(query, input, queryString) {
+	var string = &quot;&quot;;
+
+	if(query == &quot;authenticate&quot;)
+	{
+		string = authQuery;
+		string += ` WHERE username=&quot;${input.user}&quot; AND password=&quot;${input.pass}&quot;`;
+	}
+	else if(query == &quot;insertD&quot;)
+	{
+		string = insertData;
+		var date = input.currentyear+&quot;-&quot;+month_lookup(input.month)+&quot;-&quot;+input.day+&quot; 00:00:01&quot;;
+		string += ` VALUES ( &quot;${input.user}&quot;, &quot;${date}&quot;, &quot;${input.sleephours}&quot;, &quot;${input.illness}&quot;, &quot;${input.injury}&quot;, &quot;${input.percent_health}&quot;, &quot;${input.cycle}&quot;, &quot;${input.rpeval}&quot;, &quot;${input.rpeinfo}&quot;, &quot;${input.time}&quot;, &quot;${input.distance}&quot;, &quot;${input.hungry}&quot;, &quot;${input.mynotes}&quot;)`;
+	}
+	else if(query == &quot;insertU&quot;)
+	{
+		string = insertUser;
+		string += ` VALUES ( &quot;${input.newusername}&quot;, &quot;${input.newuseremail}&quot;, &quot;${input.newuserpw}&quot;, &quot;${input.newuserfirst}&quot;, &quot;${input.newuserlast}&quot;, NOW(), &quot;${input.newuserteam}&quot;, &quot;${input.userrole}&quot; )`;
+	}
+	else if(query == &quot;remove&quot;)
+	{
+		string = deleteUser;
+		string += ` WHERE username=&quot;${input.removeusername}&quot; AND last=&quot;${input.removelastname}&quot;`;
+	}
+	else if(query == &quot;getU&quot;)
+	{
+		string = getUser;
+		string += ` WHERE username=&quot;${input.user}&quot;`;
+	}
+	else if(query == &quot;getW&quot;)
+	{
+		if(input.team == null)
+		{
+			string = selectWorkouts;
+			string += ` WHERE athlete=&quot;${input.user}&quot; ORDER BY date DESC`;
+		}
+		else if(input.team != null)
+		{
+			string = selectWorkouts;
+			string += ` JOIN OUWXC.user on user.username=athlete_data.athlete AND user.team=&quot;${input.team}&quot; ORDER BY athlete_data.date DESC`;
+		}
+	}
+	else if(query == &quot;addteam&quot;)
+	{
+		string = updateData;
+		string += ` SET team = &quot;${input.team}&quot; WHERE username=&quot;${input.username}&quot;`;
+	}
+	else if(query == &quot;remWork&quot;)
+	{
+		string = removeData;
+		string += ` WHERE workout_id=&quot;${input.wID}&quot;`;
+	}
+	else if(query == &quot;listUsers&quot;)
+	{
+		string = `SELECT * FROM user WHERE team=&quot;${input.team}&quot;`;
+	}
+	else if(query == &quot;changepass&quot;)
+	{
+		string = `UPDATE user`;
+		string += ` SET password=&quot;${input.pass}&quot; WHERE username=&quot;${input.user}&quot;`;
+	}
+	else
+	{
+		console.log(&quot;error, could not find query&quot;);
+	}
+
+	queryString(string);
+}
+
+//execute any query
+function exec_query(query, input, result) {
+
+	var queryString = &quot;&quot;;
+
+	get_query(query, input, function(output){
+		queryString = output;
+	});
+
+	db.query(queryString, function(err, rows, fields) {
+        if (err) throw err;
+		else {
+			result(err, rows, fields);
+		}
+	});
+}
+
+//authenticate a user
+function authenticate(input, done){
+	
+      exec_query(&quot;authenticate&quot;, input, function(err, rows, fields) {
+
+      	if (err) { return done(err); }
+      	if (rows.length &lt;= 0) {return done(null, false, {message: &#039;Username or password is incorrect&#039;})}; 
+      	done(null, {id: rows[0].username, name: rows[0].first + &#039; &#039; + rows[0].last, role: rows[0].role, team: rows[0].team});
+      });
+
+}
+
+//get a list of matching users
+function get_user(input, done){
+
+	exec_query(&quot;getU&quot;, input, function(err, rows, fields){
+		if(err) { return done(err); }
+		if(rows.length &gt; 0) {return done(null, {id: rows[0].username, name: rows[0].first + &#039; &#039; + rows[0].last, role: rows[0].role, team: rows[0].team});
+	}
+	});
+}
+
+//Remove a user from DB
+function remove_user(input, done){
+	
+	exec_query(&quot;remove&quot;, input, function(err, rows, fields) {
+
+	  if (err) { return done(err); }
+	  if (rows.length == 0) {return done(null, false, {message: &#039;could not delete user&#039;}); }
+	  return done(null, rows);
+	});
+}
+
+//Add a user to DB
+function add_user(input, done){
+
+	exec_query(&quot;insertU&quot;, input, function(err, rows, fields) {
+
+		if(err){ return done(err);}
+		if(rows.length == 0){return done(null, false, {message: &#039;could not insert user&#039;}); }
+		return done(null, rows);
+	})
+}
+
+//Add a workout to DB
+function add_workout(input, done){
+
+	exec_query(&quot;insertD&quot;, input, function(err, rows, fields) {
+
+		if(err){ return done(err);}
+		if(rows.length == 0){return done({message: &quot;could not insert data&quot;})}
+		done(null, rows);	
+	});
+}
+
+//get a list of workouts from db
+function get_workouts(input, done){
+
+	exec_query(&quot;getW&quot;, input, function(err, rows, fields) {
+
+		if(err) { return done(err);}
+		if(rows.length == 0){return done({message: &quot;No Data found&quot;})}
+		done(null, rows);
+	});
+}
+
+//add a team association to a user
+function add_team(input, done){
+
+	exec_query(&quot;addteam&quot;, input, function(err, rows, fields) {
+
+		if(err) { return done(err);}
+		if(rows.length == 0){return done({message: &quot;Could not add team&quot;})}
+		done(null, rows);
+	});
+}
+
+function remove_workout(input, done){
+
+	exec_query(&quot;remWork&quot;, input, function(err, rows, fields) {
+
+		if(err) { return done(err);}
+		if(rows.length == 0){return done({message: &quot;Could not remove workout&quot;})}
+        done(null, rows);
+	});
+}
+
+ function list_users(input, done){
+
+		exec_query(&quot;listUsers&quot;, input, function(err, rows, fields) {
+
+        	if (err){return done(err);}
+        	if(rows.length == 0){return done({message: &quot;no user&#039;s found&quot;})}
+			done(null, rows);
+		});
+ }
+
+ function edit_workout(input, done){
+
+	exec_query(&quot;editWork&quot;, input, function(err, rows, fields) {
+
+		if(err) { return done(err);}
+		if(rows.length == 0){return done({message: &quot;Could not edit workout&quot;})}
+        done(null, rows);
+	});
+
+
+ }
+
+
+ function change_password(input, done){
+	
+	exec_query(&quot;changepass&quot;, input, function(err, rows, fields) {
+
+		if(err) { return done(err);}
+		if(rows.length == 0){return done({message: &quot;Could not change password&quot;})}
+	done(null, rows);
+	});
+
+}
+
+
+ function month_lookup(month){
+
+ 	if(month == &quot;January&quot;)
+ 	{
+ 		return &quot;01&quot;;
+ 	}
+ 	else if(month == &quot;February&quot;)
+ 	{
+ 		return &quot;02&quot;;
+ 	}
+  	else if(month == &quot;March&quot;)
+ 	{
+ 		return &quot;03&quot;;
+ 	}
+ 	else if(month == &quot;April&quot;)
+ 	{
+ 		return &quot;04&quot;;
+ 	}
+  	else if(month == &quot;May&quot;)
+ 	{
+ 		return &quot;05&quot;;
+ 	}
+ 	else if(month == &quot;June&quot;)
+ 	{
+ 		return &quot;06&quot;;
+ 	}
+ 	else if(month == &quot;July&quot;)
+ 	{
+ 		return &quot;07&quot;;
+ 	}
+ 	else if(month == &quot;August&quot;)
+ 	{
+ 		return &quot;08&quot;;
+ 	}
+  	else if(month == &quot;September&quot;)
+ 	{
+ 		return &quot;09&quot;;
+ 	}
+  	else if(month == &quot;October&quot;)
+ 	{
+ 		return &quot;10&quot;;
+ 	}
+  	else if(month == &quot;November&quot;)
+ 	{
+ 		return &quot;11&quot;;
+ 	}
+  	else if(month == &quot;December&quot;)
+ 	{
+ 		return &quot;12&quot;;
+ 	}
+ }
+
+module.exports.get_query = get_query;
+module.exports.exec_query = exec_query;
+module.exports.authenticate = authenticate;
+module.exports.get_user = get_user;
+module.exports.remove_user = remove_user;
+module.exports.add_user = add_user;
+module.exports.add_workout = add_workout;
+module.exports.get_workouts = get_workouts;
+module.exports.add_team = add_team;
+module.exports.remove_workout = remove_workout;
+module.exports.edit_workout = edit_workout;
+module.exports.list_users = list_users;
+module.exports.change_password = change_password;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
