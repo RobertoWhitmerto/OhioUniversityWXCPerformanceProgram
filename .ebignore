@@ -15,3 +15,5 @@ LICENSE
 *.pdf
 
 npm-debug.log
+
+report/
