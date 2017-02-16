@@ -92,7 +92,7 @@ html
       title: "Hours of Sleep",
       viewWindowMode:'explicit'
       },
-      colors: ['#006400'],
+      colors: ['#006400']
       };
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
@@ -302,7 +302,7 @@ html
       viewWindowMode:'explicit'
       },
       colors: ['#006400'],
-      lineWidth: 3,
+      lineWidth: 3
       };
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(document.getElementById('rpextimechart'));
@@ -378,7 +378,7 @@ html
       title: "Wellness %",
       viewWindowMode:'explicit'
       },
-      colors: ['#006400'],
+      colors: ['#006400']
       };
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(document.getElementById('wellnesschart'));
@@ -665,7 +665,7 @@ html
           $percent_health = percent_health;
           $cycle_start = cycle_start;
           $RPE = RPE;
-          $time = time
+          $time = time;
           $distance = distance;
           $notes = notes;
           $('.modal-trigger').leanModal();
@@ -821,7 +821,7 @@ html
       //Autoselect Hunger Score from Source//
       if(hungryV == "unknown")
       document.getElementById("hungry").selectedIndex = 0;
-      if(hungryV == 0)
+      if(hungryV === 0)
       document.getElementById("hungry").selectedIndex = 1;
       if(hungryV == 1)
       document.getElementById("hungry").selectedIndex = 2;
