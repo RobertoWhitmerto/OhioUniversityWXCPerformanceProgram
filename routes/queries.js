@@ -133,7 +133,7 @@ function get_user(input, done){
 		if(err) { return done(err); }
 		if(rows.length > 0) {return done(null, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role, team: rows[0].team});
 	}
-	})
+	});
 }
 
 //Remove a user from DB
@@ -154,7 +154,7 @@ function add_user(input, done){
 
 		if(err){ return done(err);}
 		if(rows.length == 0){return done(null, false, {message: 'could not insert user'}); }
-		return done(null, rows)
+		return done(null, rows);
 	})
 }
 
@@ -166,7 +166,7 @@ function add_workout(input, done){
 		if(err){ return done(err);}
 		if(rows.length == 0){return done({message: "could not insert data"})}
 		done(null, rows);	
-	})
+	});
 }
 
 //get a list of workouts from db
@@ -188,7 +188,7 @@ function add_team(input, done){
 		if(err) { return done(err);}
 		if(rows.length == 0){return done({message: "Could not add team"})}
 		done(null, rows);
-	})
+	});
 }
 
 function remove_workout(input, done){
@@ -198,7 +198,7 @@ function remove_workout(input, done){
 		if(err) { return done(err);}
 		if(rows.length == 0){return done({message: "Could not remove workout"})}
         done(null, rows);
-	})
+	});
 }
 
  function list_users(input, done){
@@ -218,7 +218,7 @@ function remove_workout(input, done){
 		if(err) { return done(err);}
 		if(rows.length == 0){return done({message: "Could not edit workout"})}
         done(null, rows);
-	})
+	});
 
 
  }
@@ -231,7 +231,7 @@ function remove_workout(input, done){
 		if(err) { return done(err);}
 		if(rows.length == 0){return done({message: "Could not change password"})}
 	done(null, rows);
-	})
+	});
 
 }
 

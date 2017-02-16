@@ -303,7 +303,7 @@ router.post('/register', function(req, res){
 	} else {
 		queries.add_user(req.body, function(err, result){
 			console.log(result);
-		})
+		});
 
 		res.render('admin_add_user.pug', {
 			message: 'User successfully added!'
@@ -322,7 +322,7 @@ passport.use(new LocalStrategy( function(username, password, done){
 		{
 			athlete = true;
 		}
-	})
+	});
 }));
 
 router.post('/workoutentry', function(req, res){
@@ -340,7 +340,7 @@ router.post('/workoutentry', function(req, res){
 			});
 
 		}
-	})
+	});
 });
 
 passport.serializeUser(function(user, done){
@@ -350,7 +350,7 @@ passport.serializeUser(function(user, done){
 passport.deserializeUser(function(id, done){
 	queries.get_user({user: id}, function(err, result){
 		done(null, result);
-	})
+	});
 });
 
 
@@ -373,7 +373,7 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 });
 
 router.post("/admin_add_user_form", function(req, res){
-  console.log(req.body)
+  console.log(req.body);
 
   queries.add_user(req.body, function(err, result){
 		console.log(result);
@@ -381,15 +381,15 @@ router.post("/admin_add_user_form", function(req, res){
 		{
 			console.log("successfully added user");
 		}
-	})
+	});
 
   res.redirect('/admin_add_user');
 });
 
 //ADMIN REMOVE USER FORM PARSER
 router.post("/admin_remove_user_form", function(req, res){
-  console.log(req.body.removeusername)
-  console.log(req.body.removelastname)
+  console.log(req.body.removeusername);
+  console.log(req.body.removelastname);
 
   	queries.remove_user(req.body, function(err, result){
 		console.log("Affected Rows: " + result.affectedRows);
@@ -398,7 +398,7 @@ router.post("/admin_remove_user_form", function(req, res){
 			console.log("successfully removed user");
 			req.visitor.event("Admin", "User was removed").send();
 		}
-	})
+	});
 
   res.redirect('/admin_add_user');
 });
@@ -427,7 +427,7 @@ router.post("/myworkouts", function(req, res){
 
 		queries.remove_workout(req.body, function(err, result){
 			console.log(result);
-		})
+		});
 
 		//access workout info through [] index operator, rows of query returned
 		var workouts;
