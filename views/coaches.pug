@@ -3,9 +3,9 @@ html
   head
     title PPA - Coaches/Trainers
     // Compiled and minified CSS
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.0/css/materialize.min.css')
     // Compiled and minified JavaScript
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.0/js/materialize.min.js')
     // Bootstrap
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
@@ -601,8 +601,12 @@ html
       .modal-content {
       background-color: #01579b;
       }
+      script.
+       $(document).ready(function(){
+       // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
+       $('.modal-trigger').leanModal();
     // Modal
-    #editModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+    #editModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel').light-blue.darken-4
       .modal-dialog(role='document')
         .modal-content
           .modal-header
@@ -617,7 +621,6 @@ html
                     br
                     #demo1.collapse
                       #sleepchart
-                      br
                     a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
                     br
                     #demo2.collapse
@@ -626,17 +629,15 @@ html
                     br
                     #demo3.collapse
                       #tload_distchart
-                      br
                     a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load - Time
                     br
                     #demo5.collapse
                       #rpextimechart
-                      br
                     a.btn.btn-info.green(href='#demo6', data-toggle='collapse') Wellness
                     br
                     #demo6.collapse
                       #wellnesschart
-                      br
+                    br
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js
