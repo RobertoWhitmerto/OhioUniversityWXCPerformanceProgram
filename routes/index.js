@@ -154,6 +154,17 @@ router.get('/buggy',
 			}
 });
 
+// Link a Team
+router.get('/admin_add_team',
+        function(req, res){
+        	req.visitor.pageview("/admin_add_team").send();
+			if(req.isAuthenticated()){
+				res.render('admin_add_team.pug');
+			} else {
+				res.redirect('/');
+			}
+});
+
 // Coach/Trainer Page
 router.get('/coaches', function(req, res){
 	req.visitor.pageview("/coaches").send();
