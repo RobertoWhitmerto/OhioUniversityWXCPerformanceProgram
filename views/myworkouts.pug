@@ -39,6 +39,7 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'hours');
+      data.addColumn('number', 'rolling_hours');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       console.log(oneWeekAgo);
@@ -59,7 +60,9 @@ html
       var oneWeekAgo_7 = new Date();
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      var rows = [[oneWeekAgo_1.toString(),0.0,100],[oneWeekAgo_2.toString(),0.0,100],
+                  [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
+                  [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
       console.log(JSON.stringify(d));
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
@@ -88,11 +91,12 @@ html
       legend: 'none',
       lineWidth: 3,
       backgroundColor: '#ffffff',
+      legend: { position: 'bottom' },
       vAxis: {
       title: "Hours of Sleep",
       viewWindowMode:'explicit'
       },
-      colors: ['#006400'],
+      colors: ['#006400','#32cd32']
       };
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
