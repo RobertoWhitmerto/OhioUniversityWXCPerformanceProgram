@@ -211,7 +211,7 @@ html
             console.log(dt.getDate() + 1);
             var dt_fixed = dt.getDate() + 1;
             rows[slot][0] = dt_fixed.toString();
-            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
+            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
             //rows[dt.getDay()][1] = parseFloat(obj.time, 10)/parseInt(obj.distance, 10);
           }
       }
@@ -283,11 +283,11 @@ html
           }
       }
       //need to wait to talk to client about this calculation
-      for(var i = 0; i <= 7; i++) {
-        if (typeof rows[i] != 'undefined'){
-          ; //rows[i][1] /= count[i];
-        }
-      }
+      //for(var i = 0; i <= 7; i++) {
+      //  if (typeof rows[i] != 'undefined'){
+      //    ; //rows[i][1] /= count[i];
+      //  }
+      //}
       console.log(rows);
       console.log(count);
       data.addRows(rows);
