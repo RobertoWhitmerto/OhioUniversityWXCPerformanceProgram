@@ -154,6 +154,17 @@ router.get('/buggy',
 			}
 });
 
+// Link a Team
+router.get('/admin_add_team',
+        function(req, res){
+        	req.visitor.pageview("/admin_add_team").send();
+			if(req.isAuthenticated()){
+				res.render('admin_add_team.pug');
+			} else {
+				res.redirect('/');
+			}
+});
+
 // Coach/Trainer Page
 router.get('/coaches', function(req, res){
 	req.visitor.pageview("/coaches").send();
@@ -229,6 +240,19 @@ router.post('/changepass', function(req, res) {
 	});
 
 });
+
+router.post('/admin_add_team', function(req, res) {
+
+	queries.add_userteam(req.body, function(err, result){
+
+		if(err)
+		{
+			req.visitor.event("FAILURE", "User failed to link team").send();
+		}
+	});
+
+	res.redirect('/admin_add_team');
+})
 
 
 router.post('/getdatadumpind', function(req, res) {
@@ -444,16 +468,14 @@ router.post("/myworkouts", function(req, res){
 
 router.post("/coaches", function(req, res){
 		if(req.isAuthenticated()){
-		console.log("memes\nmemes");
 		if(req.user.role == 'athlete'){
 			res.redirect(req.get('referer'));
 		} else {
-			console.log("this is the req.user " + req.user.team);
-			console.log(req.user);
 			var users;
+
+			console.log("req.user is " + req.user);
 			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
 					users = result;
-					console.log(result);
 					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(req.user.team) });
 			});
 		}
@@ -479,7 +501,6 @@ function dump(team,objArray, res)
                 }
                 str += line + '\r\n';
             }
-            console.log(str);
             filesystem.writeFile('datadump.csv', str, function (err) {
 			  if (err) throw err;
 			  console.log('It\'s saved!');

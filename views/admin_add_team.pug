@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title PPA - Remove a User
+    title PPA - Link a Team
     // Materialize CSS imports [head]
     // Import Google Icon Font
     link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
@@ -143,33 +143,27 @@ html
                 center
                   p.fonts
                     font(color='cyan')
-                      b Remove a User:
+                      b Link a Team to a User
             .row
               .col.s12.m12
                 .card.light-blue.darken-4
                   .card-content.black-text
                     font(color='cyan')
-                      form(action='/admin_remove_user_form', method='post')
+                      form(action='/admin_add_team_form', method='post')
                         label
                           font(color='cyan') Username:
-                        input(type='text', name='removeusername', required='')
+                        input(type='text', name='username', required='')
                         br
                         br
                         label
-                          font(color='cyan') User's Last Name:
-                        input(type='text', name='removelastname', required='')
+                          font(color='cyan') Team Name:
+                        input(type='text', name='team_name', required='')
                         br
                         br
                         br
-                        | Note: 
-                        br
-                        | Please ensure you want to permanently remove this user, this process
-                        font(color='red')
-                          b  cannot
-                        |  be reversed.
               center
-                button.btn.waves-effect.waves-light.red(type='submit', name='action')
-                  | Remove User
+                button.btn.waves-effect.waves-light.green(type='submit', name='action')
+                  | Link Team
                   i.material-icons.right send
                 br
                 br
