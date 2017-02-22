@@ -22,7 +22,6 @@ html
     // Load the AJAX API
     script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
     script(type='text/javascript').
-    
     script(type='text/javascript').
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
@@ -610,41 +609,47 @@ html
        $(document).ready(function(){
        // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
        $('.modal-trigger').leanModal();
+       
     // Modal
-    #editModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel').light-blue.darken-4
-      .modal-dialog(role='document')
-        .modal-content
-          .modal-header
-            button.close(type='button', data-dismiss='modal', aria-label='Close')
-              span(aria-hidden='true') ×
-            h4#myModalLabel.modal-title
-              center
-                font(color='cyan') Weekly Charts:
-                  .ez2
-                    br
-                    a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
-                    br
-                    #demo1.collapse
-                      #sleepchart
-                    a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
-                    br
-                    #demo2.collapse
-                      #distancechart
-                    a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Training Load - Distance
-                    br
-                    #demo3.collapse
-                      #tload_distchart
-                    a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load - Time
-                    br
-                    #demo5.collapse
-                      #rpextimechart
-                    a.btn.btn-info.green(href='#demo6', data-toggle='collapse') Wellness
-                    br
-                    #demo6.collapse
-                      #wellnesschart
-                    br
+    #editModal.modal
+      .modal-content.light-blue.darken-4
+        h4
+          font(color='cyan') Weekly Charts:
+        button.close(type='button', data-dismiss='modal', aria-label='Close')
+        span(aria-hidden='true') .
+        center
+          .ez2
+            br
+            a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
+            br
+            #demo1.collapse
+              #sleepchart
+            br
+            a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
+            br
+            #demo2.collapse
+              #distancechart
+            br
+            a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Training Load - Distance
+            br
+            #demo3.collapse
+              #tload_distchart
+            br
+            a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load - Time
+            br
+            #demo5.collapse
+              #rpextimechart
+            br
+            a.btn.btn-info.green(href='#demo6', data-toggle='collapse') Wellness
+            br
+            #demo6.collapse
+              #wellnesschart
+            br
+            br
+            br
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js
     script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
     script(type='text/javascript', src='js/materialize.min.js')
+    
