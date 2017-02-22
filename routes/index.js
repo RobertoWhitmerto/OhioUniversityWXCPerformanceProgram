@@ -7,13 +7,11 @@ var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
 var ua = require('universal-analytics');
-
+var bcrypt = require('bcryptjs');
 
 router.use(ua.middleware("UA-91318722-1", {cookieName: '_ga'}));
 
-
 var athlete = false;
-
 
 // Get Login Page
 router.get('/', function(req, res){
@@ -225,20 +223,29 @@ router.post('/changepass', function(req, res) {
 
 	console.log(req.body);
 
-	queries.change_password({user: req.user.id, pass: req.body.pass}, function(err, result){
-		console.log(result);
-
-		if(err)
-		{
-			req.visitor.event("FAILURE", "User failed to change Password").send();
+	bcrypt.genSalt(10, function(err, salt) {
+		if(err) {
+			console.log(err);
 		}
-		else
-		{
-			req.visitor.event("SUCCESS", "User changed password").send();
-		}
+		bcrypt.hash(req.body.pass, salt, function(err, hash) {
+			if(err) {
+				console.log(err);
+			}
+			
+			queries.change_password({user: req.user.id, pass: hash}, function(err, result){
+				console.log(result);
 
+				if(err)
+				{
+					req.visitor.event("FAILURE", "User failed to change Password").send();
+				}
+				else
+				{
+					req.visitor.event("SUCCESS", "User changed password").send();
+				}
+			});
+		});
 	});
-
 });
 
 router.post('/admin_add_team', function(req, res) {
@@ -338,14 +345,13 @@ router.post('/register', function(req, res){
 });
 
 passport.use(new LocalStrategy( function(username, password, done){
-	queries.authenticate({user: username, pass: password}, function(err, result){
+	queries.authenticate({user: username}, function(err, user, teams){
 		console.log(result);
-		done(null,result);
-
-		if(result.role == "Athlete")
-		{
-			athlete = true;
+		if(err) {
+			return done(err);
 		}
+		if(user.length <= 0) {return done(null, false, {message: 'Username or password is incorrect'})};
+		done(null, {id: user[0].username, name: user[0].first + ' ' + user[0].last, role: user[0].role, team: teams});
 	});
 }));
 
@@ -398,6 +404,7 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 
 router.post("/admin_add_user_form", function(req, res){
   console.log(req.body);
+
 
   queries.add_user(req.body, function(err, result){
 		console.log(result);
