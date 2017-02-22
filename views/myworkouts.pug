@@ -42,7 +42,8 @@ html
       data.addColumn('number', 'rolling_hours');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      console.log(oneWeekAgo);
+      var oneMonthAgo = new Date();
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
       var d = !{data_w};
       
       var oneWeekAgo_1 = new Date();
@@ -74,6 +75,19 @@ html
             var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
+            var rolling_total=0;
+            var avg_count=0;
+            for(var j = 0; j < d.length; j++){
+              var wrk = d[j];
+              var wrk_dt = new Date(Date.parse(wrk.date));
+              if(wrk_dt > oneMonthAgo && wrk_dt < dt){
+                rolling_total += parseInt(wrk.sleep, 10);
+                avg_count++;
+              }
+            }
+            rolling_total /= avg_count;
+            console.log("rolling average for sleep: ");
+            console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
             var dt_fixed = dt.getDate() + 1;
