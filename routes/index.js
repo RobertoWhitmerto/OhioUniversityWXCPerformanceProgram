@@ -154,6 +154,28 @@ router.get('/buggy',
 			}
 });
 
+// Admin Team Creation
+router.get('/admin_create_team',
+        function(req, res){
+        	req.visitor.pageview("/admin_create_team").send();
+			if(req.isAuthenticated()){
+				res.render('admin_create_team.pug');
+			} else {
+				res.redirect('/');
+			}
+});
+
+// Admin Remove User From Team
+router.get('/admin_remove_user_team',
+        function(req, res){
+        	req.visitor.pageview("/admin_remove_user_team").send();
+			if(req.isAuthenticated()){
+				res.render('admin_remove_user_team.pug');
+			} else {
+				res.redirect('/');
+			}
+});
+
 // Link a Team
 router.get('/admin_add_team',
         function(req, res){

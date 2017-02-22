@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title PPA - About
+    title PPA - Create a Team
     // Materialize CSS imports [head]
     // Import Google Icon Font
     link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
@@ -140,71 +140,40 @@ html
             h6
               center Team on a Cob 2016
     br
-    body
-      font(color='white')
-        h3 Welcome to the Personal Performance Application! 
-        br
-        | This application was a result of the Computer Science (CS) 4560 / 4561 course. 
-        br
-        br
-        | This project is open source and available on github at:
-        br
-        | https://github.com/RobertoWhitmerto/OhioUniversityWXCPerformanceProgram
-        br
-        br
-        | With this application, athletes should be able to track their physiological data as they workout. 
-        br
-        | Trainers and coaches of those athletes can monitor progress, while administrators 
-        br
-        | control data dumps and adding/removing users from the system.
-        br
-        br
-        br
-        | Here is a brief listing of some functionality that is included within this web application: 
-        br
-        br
-        font(color='green') Athletes:
-        br
-        | - Add workouts into the system
-        br
-        | - Edit their previous workouts incase of error or manual removal
-        br
-        | - View past workouts  
-        br
-        br
-        font(color='blue') Trainers:
-        br
-        | - View their teams physiological statistics 
-        br
-        br
-        font(color='red') Administrators:
-        br
-        | - Add a user into the system 
-        br
-        | - Remove a user from the system
-        br
-        | - View athletes and workouts
-        br
-        br
-        | Disclaimer: Analytical data will be collected which tracks site usage statistics.
-        br
-        br
-        | Need further help? Please contact Michael Clevidence at cleviden@ohio.edu 
-        br
-        br
-        br
-        br
-        br
-        footer
-          h6
-            center
-              font(color='grey')
-                | Team on a Cob 2016, 
+    br
+    br
+    br
+    br
+    article
+      .row
+        .col.s12.m5.offset-m3
+          .card.indigo.accent-4
+            .card-content.cyan-text
+              span.card-title
+                center
+                  p.fonts
+                    font(color='cyan')
+                      b Create a New Team
+            .row
+              .col.s12.m12
+                .card.light-blue.darken-4
+                  .card-content.black-text
+                    font(color='cyan')
+                      form(action='/admin_create_team_form', method='post')
+                        label
+                          font(color='cyan') New Team Name:
+                        input(type='text', name='newteam', required='')
+                        br
+                        br
+              center
+                button.btn.waves-effect.waves-light.green(type='submit', name='action')
+                  | Create Team
+                  i.material-icons.right send
                 br
-                | |Robert Whitmer|Andrew Leach|Peter Essman|Brent Gruber|Lucas Nation|
-    // Materialize CSS imports [body]
-    // put this at the end of the body
-    // Import jQuery before materialize.js
-    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
-    script(type='text/javascript', src='js/materialize.min.js')
+                br
+      // Materialize CSS imports [body]
+      // put this at the end of the body
+      // Import jQuery before materialize.js
+      script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+      script(type='text/javascript', src='js/materialize.min.js')
 
