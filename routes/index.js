@@ -21,19 +21,7 @@ router.get('/', function(req, res){
 	req.visitor.pageview("/", "http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com/", "Login").send();
 	res.render('site.pug');
 });
-/*
-router.get('/home', function(req, res){
-	if(req.isAuthenticated()){
-		if(req.user.role == 'Athlete'){
-			res.redirect('/workoutentry');
-		} else {
-			res.redirect('/coaches');
-		}
-	} else {
-		res.redirect('/');
-	}
-});
-*/
+
 
 // Logout
 router.get('/logout', function(req, res){
@@ -51,7 +39,8 @@ router.get('/logout', function(req, res){
 router.get('/workoutentry', function(req, res){
 	req.visitor.pageview("/workoutentry").send();
 	if(req.isAuthenticated()){
-		res.render('workoutentry.pug');
+    var role = req.user.role;    
+		res.render('workoutentry.pug',{role});
 	} else {
 		res.redirect('/');
 	}
@@ -66,32 +55,15 @@ router.get('/myworkouts', function(req, res){
 
 		queries.get_workouts({user: req.user.id}, function(err, result){
 			workouts = result;
+      var role = req.user.role;    
 			console.log(workouts);
-			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
+			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts, role });
 		});
 	} else {
 	 	res.redirect('/');
 	}
 });
 
-// View Athletes
-router.get('/admin_athlete_vis', function(req, res){
-	req.visitor.pageview("/admin_athlete_vis").send();
-
-	if(req.isAuthenticated()){
-		if(req.user.role == 'admin' || admin.user.role == 'coach'){
-			queries.get_workouts({user: req.user.id}, function(err, result){
-			var users = result;
-			console.log(users);
-			res.render('admin_athlete_vis.pug', {  data: users });
-		});
-		} else {
-			res.redirect(req.get('referer'));
-		}
-	} else {
-		res.redirect('/');
-	}
-});
 
 // Add User
 router.get('/admin_add_user', function(req, res){
@@ -126,7 +98,8 @@ router.get('/about',
         function(req, res){
         	req.visitor.pageview("/about").send();
 			if(req.isAuthenticated()){
-				res.render('about.pug');
+        var role = req.user.role;
+				res.render('about.pug',{role});
 			} else {
 				res.redirect('/');
 			}
@@ -137,7 +110,8 @@ router.get('/changepassword',
         function(req, res){
         	req.visitor.pageview("/changepassword").send();
 			if(req.isAuthenticated()){
-				res.render('changepassword.pug');
+        var role = req.user.role;    
+				res.render('changepassword.pug', {role});
 			} else {
 				res.redirect('/');
 			}
@@ -148,7 +122,8 @@ router.get('/buggy',
         function(req, res){
         	req.visitor.pageview("/buggy").send();
 			if(req.isAuthenticated()){
-				res.render('buggy.pug');
+        var role = req.user.role;    
+				res.render('buggy.pug', {role});
 			} else {
 				res.redirect('/');
 			}
@@ -205,7 +180,8 @@ router.get('/coaches', function(req, res){
 		queries.get_workouts({team: req.user.team}, function(err, result){
 			var workouts = result;
 			console.log(workouts);
-			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team, data_x: JSON.stringify(workouts), data: workouts });
+          var role = req.user.role;    
+			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team, data_x: JSON.stringify(workouts), data: workouts, role });
 		});
 				
 				
