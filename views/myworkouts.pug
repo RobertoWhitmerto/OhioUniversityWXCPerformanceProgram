@@ -111,7 +111,7 @@ html
             rolling_total /= avg_count;
             console.log("rolling average for sleep: ");
             console.log(rolling_total);
-            rows[slot][0] = k.toString();
+            rows[slot][0] = k.getDate().toString();
             rows[slot][2] = rolling_total;
             slot++;
           }
@@ -143,11 +143,12 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'Distance (miles)');
+      data.addColumn('number', 'rolling_miles');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      console.log(oneWeekAgo);
+      var oneMonthAgo = new Date();
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
       var d = !{data_w};
-      
       
       var oneWeekAgo_1 = new Date();
       oneWeekAgo_1.setDate(oneWeekAgo + 1);
@@ -164,26 +165,59 @@ html
       var oneWeekAgo_7 = new Date();
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      var rows = [[oneWeekAgo_1.toString(),0.0,100],[oneWeekAgo_2.toString(),0.0,100],
+                  [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
+                  [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
       
-      console.log(JSON.stringify(d));
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
           console.log("DATE: ");
-          console.log(obj.date);
           var dt = new Date(Date.parse(obj.date));
-          console.log(dt+1);
-          console.log(oneWeekAgo);
+          var dt_fixed = dt.getDate() + 1;
+          //console.log(obj.date);
+          
+          //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
             var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
+            var rolling_total=0;
+            var avg_count=0;
+            
+            console.log("COUNT:" + avg_count);
+            rolling_total /= avg_count;
+            console.log("rolling average for sleep: ");
+            console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
-            var dt_fixed = dt.getDate() + 1;
-            rows[slot][0] = dt_fixed.toString();
-            rows[slot][1] += parseInt(obj.distance, 10);
-            //rows[dt.getDay()][1] = parseInt(obj.distance, 10);
+            rows[slot][1] = parseInt(obj.distance, 10);
+          }
+          var now = new Date();
+          now.setDate(now.getDate() - 1);
+          //loop through last week's dates to add rolling averages
+          var slot = 0;
+          for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
+            console.log("K: " + k.getDate());
+            if(slot < 0)
+              slot = slot * (-1);
+            console.log("SLOT: " + slot);
+            var rolling_total=0;
+            var avg_count=0;
+            for(var j = 0; j < d.length; j++){
+              var wrk = d[j];
+              var wrk_dt = new Date(Date.parse(wrk.date));
+              if(wrk_dt > oneMonthAgo && wrk_dt < k){
+                rolling_total += parseInt(wrk.distance, 10);
+                avg_count++;
+              }
+            }
+            console.log("COUNT:" + avg_count);
+            rolling_total /= avg_count;
+            console.log("rolling average for dist: ");
+            console.log(rolling_total);
+            rows[slot][0] = k.getDate().toString();
+            rows[slot][2] = rolling_total;
+            slot++;
           }
       }
       console.log(rows);
@@ -198,7 +232,7 @@ html
       },
       legend: 'none',
       lineWidth: 3,
-      colors: ['#006400'],
+      colors: ['#006400','#32cd32'],
       backgroundColor: '#ffffff'
       };
       // Instantiate and draw our chart, passing in some options.
