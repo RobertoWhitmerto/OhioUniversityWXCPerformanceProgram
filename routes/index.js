@@ -197,7 +197,11 @@ router.get('/datadumpindividual', function(req, res){
 			req.visitor.pageview("/datadumpindividual").send();
 			if(req.isAuthenticated()){
 				if(req.user.role == 'admin'){
+			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
+					var users = result;
+					console.log(result);
 					res.render('admin_data_dump_a.pug');
+});
 				} else {
 					res.redirect(req.get('referer'));
 				}
