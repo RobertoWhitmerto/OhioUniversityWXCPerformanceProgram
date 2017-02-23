@@ -101,6 +101,7 @@ function get_workout(input, done){
 
 	//check for all possible conditions passed in
 	if(input.athlete) conditions.push(`username="${input.username}"`);
+	if(input.team_name) conditions.push(`team_name="${input.team_name}"`);
 	if(input.date) conditions.push(`date="${input.date}"`);
 	if(input.sleep) conditions.push(`sleep="${input.sleep}"`);
 	if(input.Illness) conditions.push(`health="${input.Illness}"`);

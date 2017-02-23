@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var queries = require('./queries');
+var queries = require('./newq');
 var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
@@ -64,7 +64,7 @@ router.get('/myworkouts', function(req, res){
 		//access workout info through [] index operator, rows of query returned
 		var workouts;
 
-		queries.get_workouts({user: req.user.id}, function(err, result){
+		queries.get_workout({username: req.user.id}, function(err, result){
 			workouts = result;
 			console.log(workouts);
 			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
@@ -80,7 +80,7 @@ router.get('/admin_athlete_vis', function(req, res){
 
 	if(req.isAuthenticated()){
 		if(req.user.role == 'admin' || admin.user.role == 'coach'){
-			queries.get_workouts({user: req.user.id}, function(err, result){
+			queries.get_workout({username: req.user.id}, function(err, result){
 			var users = result;
 			console.log(users);
 			res.render('admin_athlete_vis.pug', {  data: users });
@@ -176,11 +176,11 @@ router.get('/coaches', function(req, res){
 		} else {
 			console.log("this is the req.user " + req.user.team);
 			console.log(req.user);
-			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
+			queries.get_userteam({team_name: req.user.team}, function(err, result){
 					var users = result;
 					console.log(result);
 					//res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
-		queries.get_workouts({team: req.user.team}, function(err, result){
+		queries.get_workout({team_name: req.user.team}, function(err, result){
 			var workouts = result;
 			console.log(workouts);
 			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team, data_x: JSON.stringify(workouts), data: workouts });
@@ -225,7 +225,7 @@ router.post('/changepass', function(req, res) {
 
 	console.log(req.body);
 
-	queries.change_password({user: req.user.id, pass: req.body.pass}, function(err, result){
+	queries.update_user({user: req.user.uid, password: req.body.pass}, function(err, result){
 		console.log(result);
 
 		if(err)
@@ -262,7 +262,7 @@ router.post('/getdatadumpind', function(req, res) {
 	var workouts;
 
 
-	queries.get_workouts({user: req.body.datadumpusr}, function(err, result){
+	queries.get_workout({username: req.body.datadumpusr}, function(err, result){
 		console.log(result);
 		workouts = result;
 		dump(false, workouts, res);
@@ -287,7 +287,7 @@ router.post('/getdatadumpteam', function(req, res) {
 
 	var workouts;
 
-	queries.get_workouts({team: req.body.datadumpteam}, function(err, result){
+	queries.get_workout({team_name: req.body.datadumpteam}, function(err, result){
 		workouts = result;
 		dump(true, workouts, res);
 
@@ -325,7 +325,7 @@ router.post('/register', function(req, res){
 		});
 		console.log(errors);
 	} else {
-		queries.add_user(req.body, function(err, result){
+		queries.insert_user(req.body, function(err, result){
 			console.log(result);
 		});
 
@@ -338,14 +338,12 @@ router.post('/register', function(req, res){
 });
 
 passport.use(new LocalStrategy( function(username, password, done){
-	queries.authenticate({user: username, pass: password}, function(err, result){
-		console.log(result);
-		done(null,result);
+	queries.get_user({username: username, password: password}, function(err, users){
+		queries.get_userteam({username: users[0].username}, function(err, teams){
 
-		if(result.role == "Athlete")
-		{
-			athlete = true;
-		}
+		console.log(teams)
+		done(null,{uid: users[0].uid, id: users[0].username, role: users[0].role_name, teams: "test"});
+	});
 	});
 }));
 
@@ -353,7 +351,7 @@ router.post('/workoutentry', function(req, res){
 	req.body.user = req.user.id;
 
 	console.log(req.body);
-	queries.add_workout(req.body, function(err, result){
+	queries.insert_workout(req.body, function(err, result){
 		console.log("Affected Rows: " + result.affectedRows);
 		if(result.affectedRows > 0)
 		{
@@ -372,8 +370,10 @@ passport.serializeUser(function(user, done){
 });
 
 passport.deserializeUser(function(id, done){
-	queries.get_user({user: id}, function(err, result){
-		done(null, result);
+	queries.get_user({username: id}, function(err, result){
+		queries.get_userteam({username: id}, function(err, teams){
+		done(null, {uid: result[0].uid, id: result[0].username, role: result[0].role_name, team: teams});
+	});
 	});
 });
 
@@ -399,7 +399,7 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 router.post("/admin_add_user_form", function(req, res){
   console.log(req.body);
 
-  queries.add_user(req.body, function(err, result){
+  queries.insert_user(req.body, function(err, result){
 		console.log(result);
 		if(result.affectedRows > 0)
 		{
@@ -456,7 +456,7 @@ router.post("/myworkouts", function(req, res){
 		//access workout info through [] index operator, rows of query returned
 		var workouts;
 
-		queries.get_workouts({user: req.user.id}, function(err, result){
+		queries.get_workout({username: req.user.id}, function(err, result){
 			workouts = result;
 			console.log(req.body);
 			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
@@ -474,9 +474,13 @@ router.post("/coaches", function(req, res){
 			var users;
 
 			console.log("req.user is " + req.user);
-			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
-					users = result;
+			queries.get_userteam({username: req.user.id}, function(err, result){
+					teams = result;
+					queries.get_userteam({team_name: teams[0]}, function(err, result){
+						users = result;
+
 					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(req.user.team) });
+				});
 			});
 		}
 	} else {
