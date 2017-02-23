@@ -44,21 +44,22 @@ function deletequery(table, condition, result){
 }
 
 //return a string that is an update query for a given table;
-function updatequery(table, updates, condition, result){
+function updatequery(table, updates, conditions, result){
 
 	if(table == null || updates == null || condition == null) throw err;
 
-	var string = util.format(update, table, updates, condition);
+	var string = util.format(update, table, updates, conditions);
+
 	return result(string);
 }
 
 //execute a query
 function exec_query(querystring, result){
-	console.log(querystring);
 	db.query(querystring, function(err, rows, fields) {
 		if(err) throw err;
+		if(rows.length<=0) result("query failed", rows);
 		else {
-			result(err, rows, fields);
+			result(null, rows);
 		}
 	});
 }
@@ -66,7 +67,7 @@ function exec_query(querystring, result){
 //find any users that match data passed in or default to all users
 //returns false if none found
 function get_user(input, done){
-	var table = "user_view";
+	var table = "User";
 	var columns = "*";
 	var conditions = [];
 
@@ -129,7 +130,7 @@ function get_workout(input, done){
 //find any teams in db that match data passed in, or default to all teams
 //returns false if none found
 function get_team(input, done){
-	var table = "team_view";
+	var table = "Teams";
 	var columns = "*";
 	var conditions = [];
 
@@ -151,82 +152,60 @@ function get_team(input, done){
 	});
 }
 
-function get_surfaces(done){
-	var table = "Surface";
+function get_userteam(input, done){
+	var table = "team_view";
+	var columns = "*";
+	var conditions = [];
 
+	if(input.username) conditions.push(`username="${input.username}"`);
+	if(input.team_name) conditions.push(`team_name="${input.team_name}"`);
+
+	var condition = conditions.join(' AND ');
+
+	selectquery(table, columns, condition, function(query){
+		exec_query(query, done);
+	});
+}
+
+function get_all(table, done){
 	//build and execute the query
 	selectquery(table, null, null, function(query){
 		exec_query(query, function(err, rows, fields){
 			if(err) {return done(err);}
-			if(rows.length <= 0) {return done("could not find any matching surfaces", false, false);}
+			if(rows.length <= 0) {return done("could not find any matches", false, false);}
 			return done(null, rows);
 		});
 	});
+}
+
+function get_surfaces(done){
+	var table = "Surface";
+	get_all(table, done);
 }
 
 function get_health(done){
 	var table = "Health";
-
-	//build and execute the query
-	selectquery(table, null, null, function(query){
-		exec_query(query, function(err, rows, fields){
-			if(err) {return done(err);}
-			if(rows.length <= 0) {return done("could not find any matching health entries", false, false);}
-			return done(null, rows);
-		});
-	});
+	get_all(table, done);
 }
 
 function get_hunger(done){
 	var table = "Hunger";
-
-	//build and execute the query
-	selectquery(table, null, null, function(query){
-		exec_query(query, function(err, rows, fields){
-			if(err) {return done(err);}
-			if(rows.length <= 0) {return done("could not find any matching hunger entries", false, false);}
-			return done(null, rows);
-		});
-	});
+	get_all(table, done);
 }
 
 function get_injury(done){
 	var table = "Injury";
-
-	//build and execute the query
-	selectquery(table, null, null, function(query){
-		exec_query(query, function(err, rows, fields){
-			if(err) {return done(err);}
-			if(rows.length <= 0) {return done("could not find any matching injury entries", false, false);}
-			return done(null, rows);
-		});
-	});
+	get_all(table, done);
 }
 
 function get_RPE(done){
 	var table = "RPE";
-
-	//build and execute the query
-	selectquery(table, null, null, function(query){
-		exec_query(query, function(err, rows, fields){
-			if(err) {return done(err);}
-			if(rows.length <= 0) {return done("could not find any matching RPE entries", false, false);}
-			return done(null, rows);
-		});
-	});
+	get_all(table, done);
 }
 
 function get_RPEInfo(done){
 	var table = "RPEinfo";
-
-	//build and execute the query
-	selectquery(table, null, null, function(query){
-		exec_query(query, function(err, rows, fields){
-			if(err) {return done(err);}
-			if(rows.length <= 0) {return done("could not find any matching RPEinfo entries", false, false);}
-			return done(null, rows);
-		});
-	});
+	get_all(table, done);
 }
 
 function insert_user(input, done){
@@ -260,7 +239,22 @@ function insert_team(input, done){
 function insert_userteam(input, done){
 	var table = "User_Teams";
 	var columns = "(uid, tid)";
-	var values = `("${input.user}", "${input.team}")`;
+	var values = `("${input.username}", "${input.team_name}")`;
+
+	var uid;
+	get_user(input, function(err, rows, fields){
+		if(err) throw err;
+		uid = rows[0].uid;
+
+	var tid;
+	get_team(input, function(err, rows, fields){
+		if(err) throw err;
+		tid = rows[0].tid;
+
+	console.log(tid);
+
+	values = `("${uid}", "${tid}")`;
+
 
 	insertquery(table, columns, values, function(query){
 		exec_query(query, function(err, rows, fields){
@@ -269,6 +263,8 @@ function insert_userteam(input, done){
 			return done(null, rows);
 		});
 	});
+});
+});
 }
 
 function insert_workout(input, done){
@@ -285,6 +281,105 @@ function insert_workout(input, done){
 }
 
 
+//remove a workout from the database given a workout id
+function remove_workout(input, done){
+	var table = "Workouts";
+	var cond = `wid="${input.workoutid}`;
+
+	deletequery(table, cond, function(query){
+		exec_query(query, done);
+	});
+}
+
+function remove_user(input, done){
+	var table = "User";
+	var cond = `username="${input.username}"`;
+
+	deletequery(table, cond, function(query){
+		exec_query(query, done);
+	});
+}
+
+function remove_team(input, done){
+	var table = "Teams";
+	var cond = `team_name="${input.team_name}"`;
+
+	deletequery(table, cond, function(query){
+		exec_query(query, done);
+	});
+}
+
+function remove_userteam(input, done){
+	var table = "User_Teams";
+	var cond = `username="${input.username}" AND team_name="${input.team_name}"`;
+
+	deletequery(table, cond, function(query){
+		exec_query(query, done);
+	});
+}
+
+function update_workout(input, done){
+	var table = "Workouts";
+	var updates = [];
+
+	//check for all possible conditions passed in
+	if(input.date) updates.push(`date="${input.date}"`);
+	if(input.sleep) updates.push(`sleep="${input.sleep}"`);
+	if(input.Illness) updates.push(`health="${input.Illness}"`);
+	if(input.Injury) updates.push(`injury="${input.Injury}"`);
+	if(input.percent_health) updates.push(`percent_health="${input.percent_health}"`);
+	if(input.cycle_start) updates.push(`cycle_start="${input.cycle_start}"`);
+	if(input.RPE) updates.push(`RPE="${input.RPE}"`);
+	if(input.time) updates.push(`time="${input.time}"`);
+	if(input.distance) updates.push(`distance="${input.distance}"`);
+	if(input.workout_id) updates.push(`workout_id="${input.workout_id}"`);
+	if(input.rpeinfo) updates.push(`RPEinfo="${input.rpeinfo}"`);
+	if(input.hungry) updates.push(`score="${input.hungry}"`);
+
+	var updstring = updates.join(', ');
+	var condition = `wid="${input.workoutid}"`;
+
+	updatequery(table, updstring, condition, function(query){
+		exec_query(query, done);
+	});
+}
+
+function update_user(input, done){
+	var table = "User";
+	var updates = [];
+
+		//add the conditions that were passed in
+	if(input.user) updates.push(`username="${input.user}"`);
+	if(input.pass) updates.push(`password="${input.pass}"`);
+	if(input.email) updates.push(`email="${input.email}"`);
+	if(input.first) updates.push(`first="${input.first}"`);
+	if(input.last) updates.push(`last="${input.last}"`);
+	if(input.role) updates.push(`role_name="${input.role}"`);
+
+	var updstring = updates.join(', ');
+	var condition = `uid="${input.uid}"`;
+
+	updatequery(table, updstring, condition, function(query){
+		exec_query(query, done);
+	});
+}
+
+function update_team(input, done){
+	var table = "Teams";
+	var updates = [];
+
+	//check for all possible conditions
+	if(input.team_name) updates.push(`team_name="${input.team_name}"`);
+	if(input.sport) updates.push(`sport="${input.sport}"`);
+	if(input.gender) updates.push(`gender="${input.gender}"`);
+
+	var updstring = updates.join(', ');
+	var condition = `team_name="${input.team_name}"`;
+
+	updatequery(table, updstring, condition, function(query){
+		exec_query(query, done);
+	});
+}
 
 
 function month_lookup(month){
@@ -339,4 +434,24 @@ function month_lookup(month){
  	}
  }
 
-insert_workout({username: "username", date: "testd", sleep: "3", health: "healthy", injury: "injured", percent_health: "75%", cycle_start: "yes", RPE: "6", RPEInfo: "zone 1", time: "30", distance: "2", hunger: "3", notes: "This is a note"});
+
+module.exports.get_user = get_user;
+module.exports.get_team = get_team;
+module.exports.get_workout = get_workout;
+module.exports.get_userteam = get_userteam;
+module.exports.get_surfaces = get_surfaces;
+module.exports.get_health = get_health;
+module.exports.get_RPEInfo = get_RPEInfo;
+module.exports.get_RPE = get_RPE;
+module.exports.get_hunger = get_injury;
+module.exports.insert_user = insert_user;
+module.exports.insert_team = insert_team;
+module.exports.insert_userteam = insert_userteam;
+module.exports.insert_workout = insert_workout;
+module.exports.remove_user = remove_user;
+module.exports.remove_userteam = remove_userteam;
+module.exports.remove_team = remove_team;
+module.exports.remove_workout = remove_workout;
+module.exports.update_user = update_user;
+module.exports.update_team = update_team;
+module.exports.update_workout = update_workout;
