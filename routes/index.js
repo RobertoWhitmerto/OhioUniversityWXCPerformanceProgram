@@ -231,6 +231,7 @@ router.post('/changepass', function(req, res) {
 			if(err) {
 				console.log(err);
 			}
+			console.log(hash);
 			
 			queries.change_password({user: req.user.id, pass: hash}, function(err, result){
 				console.log(result);
@@ -345,21 +346,22 @@ router.post('/register', function(req, res){
 });
 
 passport.use(new LocalStrategy( function(username, password, done){
-	queries.authenticate({user: username}, function(err, user, teams){
-		console.log(user);
-		console.log(teams);
+	queries.authenticate({user: username}, function(err, pass, user){
 		if(err) {
 			return done(err);
 		}
-		if(user.length <= 0) {
+		if(!user) {
 			return done(null, false, {message: "invalid username"});
 		}
-		bcrypt.compare(password, user[0].password, function(err, res) {
-			if(res === true) {
-				
+		bcrypt.compare(password, pass, function(err, res) {
+			if(res == true) {
+				console.log("we get here?");
+				return done(null, user);
 			} else {
+				console.log("we fail?");
 				return done(null, false, {message: "incorrect password"});
 			}
+		});
 	});
 }));
 
