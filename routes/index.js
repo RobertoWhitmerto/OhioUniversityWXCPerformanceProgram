@@ -77,7 +77,7 @@ router.get('/admin_athlete_vis', function(req, res){
 	req.visitor.pageview("/admin_athlete_vis").send();
 
 	if(req.isAuthenticated()){
-		if(req.user.role == 'admin' || admin.user.role == 'coach'){
+		if(req.user.role == 'Admin' || admin.user.role == 'Coach'){
 			queries.get_workout({username: req.user.id}, function(err, result){
 			var users = result;
 			res.render('admin_athlete_vis.pug', {  data: users });
@@ -109,7 +109,7 @@ router.get('/admin_add_user', function(req, res){
 router.get('/admin_remove_user', function(req, res){
 	req.visitor.pageview("/admin_remove_user").send();
 	if(req.isAuthenticated()){
-		if(req.user.role == 'admin'){
+		if(req.user.role == 'Admin'){
 			res.render('admin_remove_user.pug');
 		} else {
 			res.redirect(req.get('referer'));
@@ -191,7 +191,7 @@ router.get('/coaches', function(req, res){
 router.get('/datadumpindividual', function(req, res){
 			req.visitor.pageview("/datadumpindividual").send();
 			if(req.isAuthenticated()){
-				if(req.user.role == 'admin'){
+				if(req.user.role == 'Admin'){
 					res.render('admin_data_dump_a.pug');
 				} else {
 					res.redirect(req.get('referer'));
@@ -204,7 +204,7 @@ router.get('/datadumpindividual', function(req, res){
 router.get('/datadumpTeam',function(req, res){
 	req.visitor.pageview("/datadumpTeam").send();
 	if(req.isAuthenticated()){
-		if(req.user.role == "admin"){
+		if(req.user.role == "Admin"){
 			res.render('admin_data_dump_b.pug');
 		} else {
 			res.redirect(req.get('referer'));
@@ -273,12 +273,14 @@ router.post('/getdatadumpind', function(req, res) {
 
 
 router.post('/getdatadumpteam', function(req, res) {
-	var team = req.body;
+	var team = [];
+	team.push(req.body.datadumpteam);
+
 	console.log(req.body);
 
 	var workouts;
 
-	queries.get_workout({teams: [req.body.datadumpteam]}, function(err, result){
+	queries.get_workout({teams: team}, function(err, result){
 		workouts = result;
 		dump(true, workouts, res);
 
@@ -415,7 +417,7 @@ router.post("/admin_remove_user_form", function(req, res){
   console.log(req.body.removeusername);
   console.log(req.body.removelastname);
 
-  	queries.remove_user(req.body, function(err, result){
+  	queries.remove_user({username: req.body.removeusername, last: req.body.removelastname}, function(err, result){
 		console.log("Affected Rows: " + result.affectedRows);
 		if(result.affectedRows > 0)
 		{
@@ -468,7 +470,7 @@ router.post("/myworkouts", function(req, res){
 
 router.post("/coaches", function(req, res){
 		if(req.isAuthenticated()){
-		if(req.user.role == 'athlete'){
+		if(req.user.role == 'Athlete'){
 			res.redirect(req.get('referer'));
 		} else {
 			var users;
