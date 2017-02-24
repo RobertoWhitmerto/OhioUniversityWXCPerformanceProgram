@@ -17,7 +17,6 @@ var athlete = false;
 
 // Get Login Page
 router.get('/', function(req, res){
-	console.log(process.platform);
 	req.visitor.pageview("/", "http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com/", "Login").send();
 	res.render('site.pug');
 });
@@ -66,7 +65,6 @@ router.get('/myworkouts', function(req, res){
 
 		queries.get_workout({username: req.user.id}, function(err, result){
 			workouts = result;
-			console.log(workouts);
 			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
 		});
 	} else {
@@ -82,7 +80,6 @@ router.get('/admin_athlete_vis', function(req, res){
 		if(req.user.role == 'admin' || admin.user.role == 'coach'){
 			queries.get_workout({username: req.user.id}, function(err, result){
 			var users = result;
-			console.log(users);
 			res.render('admin_athlete_vis.pug', {  data: users });
 		});
 		} else {
@@ -97,7 +94,8 @@ router.get('/admin_athlete_vis', function(req, res){
 router.get('/admin_add_user', function(req, res){
 	req.visitor.pageview("/admin_add_user").send();
 	if(req.isAuthenticated()){
-		if(req.user.role == 'admin'){
+		console.log(req.user.role);
+		if(req.user.role == 'Admin'){
 			res.render('admin_add_user.pug');
 		} else {
 			res.redirect(req.get('referer'));
@@ -170,20 +168,15 @@ router.get('/coaches', function(req, res){
 	req.visitor.pageview("/coaches").send();
 	
 	if(req.isAuthenticated()){
-		console.log("memes2\nmemes2");
 		if(req.user.role == 'athlete'){
 			res.redirect(req.get('referer'));
 		} else {
-			console.log("this is the req.user " + req.user.team);
-			console.log(req.user);
-			queries.get_userteam({team_name: req.user.team}, function(err, result){
+			queries.get_userteam({teams: req.user.teams}, function(err, result){
 					var users = result;
-					console.log(result);
 					//res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
 		queries.get_workout({team_name: req.user.team}, function(err, result){
 			var workouts = result;
-			console.log(workouts);
-			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team, data_x: JSON.stringify(workouts), data: workouts });
+			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.teams, data_x: JSON.stringify(workouts), data: workouts });
 		});
 				
 				
@@ -223,10 +216,7 @@ router.get('/datadumpTeam',function(req, res){
 
 router.post('/changepass', function(req, res) {
 
-	console.log(req.body);
-
-	queries.update_user({user: req.user.uid, password: req.body.pass}, function(err, result){
-		console.log(result);
+	queries.update_user({username: req.user.id, password: req.body.pass}, function(err, result){
 
 		if(err)
 		{
@@ -243,7 +233,9 @@ router.post('/changepass', function(req, res) {
 
 router.post('/admin_add_team', function(req, res) {
 
-	queries.add_userteam(req.body, function(err, result){
+	console.log(req.body);
+
+	queries.insert_userteam(req.body, function(err, result){
 
 		if(err)
 		{
@@ -260,7 +252,6 @@ router.post('/getdatadumpind', function(req, res) {
 	
 	//access workout info through [] index operator, rows of query returned
 	var workouts;
-
 
 	queries.get_workout({username: req.body.datadumpusr}, function(err, result){
 		console.log(result);
@@ -287,7 +278,7 @@ router.post('/getdatadumpteam', function(req, res) {
 
 	var workouts;
 
-	queries.get_workout({team_name: req.body.datadumpteam}, function(err, result){
+	queries.get_workout({teams: [req.body.datadumpteam]}, function(err, result){
 		workouts = result;
 		dump(true, workouts, res);
 
@@ -316,6 +307,8 @@ router.post('/register', function(req, res){
 
 	var errors = req.validationErrors();
 
+	console.log(req.body.newusername);
+
 	if(errors){
 		req.visitor.event("FAILURE", "Failed to create user").send();
 
@@ -325,7 +318,7 @@ router.post('/register', function(req, res){
 		});
 		console.log(errors);
 	} else {
-		queries.insert_user(req.body, function(err, result){
+		queries.insert_user({username: req.body.newusername, email: req.body.newuseremail, first: req.body.newuserfirst, last: req.body.newuserlast, password: req.body.newuserpass}, function(err, result){
 			console.log(result);
 		});
 
@@ -333,16 +326,20 @@ router.post('/register', function(req, res){
 			message: 'User successfully added!'
 		});
 	}
-
-	console.log(req.body);
 });
 
 passport.use(new LocalStrategy( function(username, password, done){
 	queries.get_user({username: username, password: password}, function(err, users){
+		if(users.length <= 0) return done(null, false, {message: 'Username or password is incorrect'});
+
+		//get the user's teams
 		queries.get_userteam({username: users[0].username}, function(err, teams){
 
-		console.log(teams)
-		done(null,{uid: users[0].uid, id: users[0].username, role: users[0].role_name, teams: "test"});
+		var userteams = [];
+		for(var i=0; i<teams.length; i++){
+			userteams.push(teams[i].team_name);
+		}
+		done(null,{uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams});
 	});
 	});
 }));
@@ -350,17 +347,16 @@ passport.use(new LocalStrategy( function(username, password, done){
 router.post('/workoutentry', function(req, res){
 	req.body.user = req.user.id;
 
-	console.log(req.body);
 	queries.insert_workout(req.body, function(err, result){
-		console.log("Affected Rows: " + result.affectedRows);
 		if(result.affectedRows > 0)
 		{
 			req.visitor.event("Athlete", "Posting workout").send();
-
-			res.render('workoutentry.pug', {
-				message: 'Workout successfully added'
-			});
-
+			res.render('workoutentry.pug', {message: 'Workout successfully added'});
+		}
+		else
+		{
+			req.visitor.event("Athlete", "Failed to post workout").send();
+			res.render('workoutentry.pug', {message: 'Failed to add workout'});
 		}
 	});
 });
@@ -370,9 +366,13 @@ passport.serializeUser(function(user, done){
 });
 
 passport.deserializeUser(function(id, done){
-	queries.get_user({username: id}, function(err, result){
+	queries.get_user({username: id}, function(err, users){
 		queries.get_userteam({username: id}, function(err, teams){
-		done(null, {uid: result[0].uid, id: result[0].username, role: result[0].role_name, team: teams});
+		var userteams = [];
+		for(var i=0; i<teams.length; i++){
+			userteams.push(teams[i].team_name);
+		}
+		done(null,{uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams});
 	});
 	});
 });
@@ -399,7 +399,7 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 router.post("/admin_add_user_form", function(req, res){
   console.log(req.body);
 
-  queries.insert_user(req.body, function(err, result){
+  queries.insert_user({username: req.body.newusername, email: req.body.newuseremail, first: req.body.newuserfirst, last: req.body.newuserlast, password: req.body.newuserpass, role: req.body.userrole}, function(err, result){
 		console.log(result);
 		if(result.affectedRows > 0)
 		{
@@ -449,7 +449,7 @@ router.post("/bugreport", function(req, res){
 router.post("/myworkouts", function(req, res){
 		if(req.isAuthenticated()){
 
-		queries.remove_workout(req.body, function(err, result){
+		queries.remove_workout({wid: req.body.wID}, function(err, result){
 			console.log(result);
 		});
 
@@ -472,14 +472,17 @@ router.post("/coaches", function(req, res){
 			res.redirect(req.get('referer'));
 		} else {
 			var users;
+			var teams = [];
 
-			console.log("req.user is " + req.user);
 			queries.get_userteam({username: req.user.id}, function(err, result){
-					teams = result;
+					for(var i=0; i<result.length; i++){
+						console.log(result[i].team_name);
+						teams.push(result[i].team_name);
+					}
+					console.log("Teams = " + teams);
 					queries.get_userteam({team_name: teams[0]}, function(err, result){
 						users = result;
-
-					res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(req.user.team) });
+						res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(teams) });
 				});
 			});
 		}

@@ -67,13 +67,13 @@ function exec_query(querystring, result){
 //find any users that match data passed in or default to all users
 //returns false if none found
 function get_user(input, done){
-	var table = "User";
+	var table = "user_view";
 	var columns = "*";
 	var conditions = [];
 
 	//add the conditions that were passed in
-	if(input.user) conditions.push(`username="${input.user}"`);
-	if(input.pass) conditions.push(`password="${input.pass}"`);
+	if(input.username) conditions.push(`username="${input.username}"`);
+	if(input.password) conditions.push(`password="${input.password}"`);
 	if(input.email) conditions.push(`email="${input.email}"`);
 	if(input.first) conditions.push(`first="${input.first}"`);
 	if(input.last) conditions.push(`last="${input.last}"`);
@@ -84,11 +84,7 @@ function get_user(input, done){
 
 	//build and execute the query
 	selectquery(table, columns, condition, function(query){
-		exec_query(query, function(err, rows, fields){
-			if(err) {return done(err);}
-			if(rows.length <= 0) {return done("could not find any matching users", false, false);}
-			return done(null, rows);
-		});
+		exec_query(query, done);
 	});
 }
 
@@ -101,7 +97,7 @@ function get_workout(input, done){
 
 	//check for all possible conditions passed in
 	if(input.athlete) conditions.push(`username="${input.username}"`);
-	if(input.team_name) conditions.push(`team_name="${input.team_name}"`);
+	if(input.teams) conditions.push(joinor(teams, "team_name"));
 	if(input.date) conditions.push(`date="${input.date}"`);
 	if(input.sleep) conditions.push(`sleep="${input.sleep}"`);
 	if(input.Illness) conditions.push(`health="${input.Illness}"`);
@@ -157,15 +153,32 @@ function get_userteam(input, done){
 	var table = "team_view";
 	var columns = "*";
 	var conditions = [];
+	var users = "";
+	var teams = "";
 
-	if(input.username) conditions.push(`username="${input.username}"`);
-	if(input.team_name) conditions.push(`team_name="${input.team_name}"`);
+	if(input.users){
+		users = joinor(input.users, "username");
+		conditions.push(users);
+	}
+	if(input.teams){
+		teams = joinor(input.teams, "team_name");
+		conditions.push(teams);
+	}
 
 	var condition = conditions.join(' AND ');
 
 	selectquery(table, columns, condition, function(query){
 		exec_query(query, done);
 	});
+}
+
+function joinor(list, column){
+	var temp = [];
+	for(var i=0; i<list.length; i++){
+		temp.push(`"` + list[i] + `"`);
+	}
+	var joins = `(${column}=` + temp.join(` OR ${column}=`) + ")";
+	return joins;
 }
 
 function get_all(table, done){
@@ -212,7 +225,8 @@ function get_RPEInfo(done){
 function insert_user(input, done){
 	var table = "User";
 	var columns = "(username, password, email, first, last, rid, create_time, passflag)";
-	var values = `("${input.username}", "password", "${input.email}", "${input.first}", "${input.last}", "${input.userrole}", NOW(), "T")`;
+	var values = `("${input.username}", "password", "${input.email}", "${input.first}", "${input.last}", "${input.role}", NOW(), "T")`;
+	console.log(input);
 
 	insertquery(table, columns, values, function(query){
 		exec_query(query, function(err, rows, fields){
@@ -241,6 +255,8 @@ function insert_userteam(input, done){
 	var table = "User_Teams";
 	var columns = "(uid, tid)";
 	var values = `("${input.username}", "${input.team_name}")`;
+
+	console.log(input);
 
 	var uid;
 	get_user(input, function(err, rows, fields){
@@ -272,20 +288,19 @@ function insert_workout(input, done){
 	var table = "Workouts";
 	var columns = "(uid, date, sleep, health, Injury, percent_health, cycle_start, RPE, RPEInfo, time, distance, hunger, notes)";
 	var date = input.currentyear+"-"+month_lookup(input.month)+"-"+input.day;
-	var query = `INSERT INTO ${table} ${columns} SELECT User.uid, "${date}", "${input.sleep}", "${input.health}", "${input.injury}", "${input.percent_health}", "${input.cycle_start}", "${input.RPE}", "${input.RPEInfo}", "${input.time}", "${input.distance}", "${input.hunger}", "${input.notes}" FROM User WHERE username="${input.username}"`; 
+	var query = `INSERT INTO ${table} ${columns} SELECT User.uid, "${date}", "${input.sleephours}", "${input.illness}", "${input.injury}", "${input.percent_health}", "${input.cycle}", "${input.rpeval}", "${input.rpeinfo}", "${input.time}", "${input.distance}", "${input.hungry}", "${input.mynotes}" FROM User WHERE username="${input.user}"`; 
 
-	exec_query(query, function(err, rows, fields){
-		if(err) {return done(err);}
-		if(rows.length <= 0) {return done("could not insert user", false, false);}
-		return done(null, rows);
-	});
+	console.log(query);
+
+	exec_query(query, done);
 }
 
 
 //remove a workout from the database given a workout id
 function remove_workout(input, done){
 	var table = "Workouts";
-	var cond = `wid="${input.workoutid}`;
+	var cond = `wid="${input.wid}"`;
+
 
 	deletequery(table, cond, function(query){
 		exec_query(query, done);
@@ -350,17 +365,18 @@ function update_user(input, done){
 	var updates = [];
 
 		//add the conditions that were passed in
-	if(input.user) updates.push(`username="${input.user}"`);
-	if(input.pass) updates.push(`password="${input.pass}"`);
+	if(input.username) updates.push(`username="${input.username}"`);
+	if(input.password) updates.push(`password="${input.password}"`);
 	if(input.email) updates.push(`email="${input.email}"`);
 	if(input.first) updates.push(`first="${input.first}"`);
 	if(input.last) updates.push(`last="${input.last}"`);
 	if(input.role) updates.push(`role_name="${input.role}"`);
 
 	var updstring = updates.join(', ');
-	var condition = `uid="${input.uid}"`;
+	var condition = `username="${input.username}"`;
 
 	updatequery(table, updstring, condition, function(query){
+		console.log(query);
 		exec_query(query, done);
 	});
 }
