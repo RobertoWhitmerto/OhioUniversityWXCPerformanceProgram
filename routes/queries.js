@@ -21,7 +21,7 @@ function get_query(query, input, queryString) {
 	if(query == "authenticate")
 	{
 		string = authQuery;
-		string += ` WHERE username="${input.user}" AND password="${input.pass}"`;
+		string += ` WHERE username="${input.user}"`;
 	}
 	else if(query == "insertD")
 	{
@@ -135,7 +135,7 @@ function authenticate(input, done){
 
       	if (err) { return done(err); }
       	if (rows.length <= 0) {return done(null, false, {message: 'Username or password is incorrect'})}; 
-      	done(null, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role, team: teams});
+      	done(null, rows, teams);
       });
      });
 
