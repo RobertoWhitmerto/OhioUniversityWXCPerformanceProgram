@@ -133,8 +133,8 @@ function authenticate(input, done){
       		}
 
       	if (err) { return done(err); }
-      	if (rows.length <= 0) {return done(null, false, {message: 'Username or password is incorrect'})}; 
-      	done(null, rows, teams);
+		if(rows.length <= 0) { return done(null, false, false)}
+      	done(null, rows[0].password, {id: rows[0].username, name: rows[0].first + ' ' + rows[0].last, role: rows[0].role, team: teams});
       });
      });
 
