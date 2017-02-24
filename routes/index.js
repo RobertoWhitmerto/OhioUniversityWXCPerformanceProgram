@@ -346,8 +346,20 @@ router.post('/register', function(req, res){
 
 passport.use(new LocalStrategy( function(username, password, done){
 	queries.authenticate({user: username}, function(err, user, teams){
+		console.log(user);
 		console.log(teams);
-		console.log("local strategy " + user);
+		if(err) {
+			return done(err);
+		}
+		if(user.length <= 0) {
+			return done(null, false, {message: "invalid username"});
+		}
+		bcrypt.compare(password, user[0].password, function(err, res) {
+			if(res === true) {
+				
+			} else {
+				return done(null, false, {message: "incorrect password"});
+			}
 	});
 }));
 

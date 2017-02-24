@@ -132,7 +132,6 @@ function authenticate(input, done){
       			teams.push(teamrows[i].team_name);
       		}
 
-
       	if (err) { return done(err); }
       	if (rows.length <= 0) {return done(null, false, {message: 'Username or password is incorrect'})}; 
       	done(null, rows, teams);
