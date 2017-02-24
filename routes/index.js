@@ -346,12 +346,8 @@ router.post('/register', function(req, res){
 
 passport.use(new LocalStrategy( function(username, password, done){
 	queries.authenticate({user: username}, function(err, user, teams){
-		console.log(result);
-		if(err) {
-			return done(err);
-		}
-		if(user.length <= 0) {return done(null, false, {message: 'Username or password is incorrect'})};
-		done(null, {id: user[0].username, name: user[0].first + ' ' + user[0].last, role: user[0].role, team: teams});
+		console.log(teams);
+		console.log("local strategy " + user);
 	});
 }));
 
@@ -405,8 +401,19 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 router.post("/admin_add_user_form", function(req, res){
   console.log(req.body);
 
+	var input = req.body;
 
-  queries.add_user(req.body, function(err, result){
+	bcrypt.genSalt(10, function(err, salt) {
+		if(err) {
+			console.log(err);
+		}
+		bcrypt.hash(req.body.password, salt, function(err, hash) {
+			input.password = hash;
+		});
+	});
+
+
+  queries.add_user(input, function(err, result){
 		console.log(result);
 		if(result.affectedRows > 0)
 		{
