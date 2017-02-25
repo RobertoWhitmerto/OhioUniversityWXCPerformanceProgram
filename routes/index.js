@@ -215,7 +215,7 @@ router.get('/datadumpindividual', function(req, res){
 			if(req.isAuthenticated()){
 
 				if(req.user.role == 'Admin'){
-			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
+			queries.get_workout({username: req.user.id, teams: req.user.team}, function(err, result){
 					var users = result;
 					console.log(result);
 
