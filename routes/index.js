@@ -20,19 +20,7 @@ router.get('/', function(req, res){
 	req.visitor.pageview("/", "http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com/", "Login").send();
 	res.render('site.pug');
 });
-/*
-router.get('/home', function(req, res){
-	if(req.isAuthenticated()){
-		if(req.user.role == 'Athlete'){
-			res.redirect('/workoutentry');
-		} else {
-			res.redirect('/coaches');
-		}
-	} else {
-		res.redirect('/');
-	}
-});
-*/
+
 
 // Logout
 router.get('/logout', function(req, res){
@@ -50,7 +38,8 @@ router.get('/logout', function(req, res){
 router.get('/workoutentry', function(req, res){
 	req.visitor.pageview("/workoutentry").send();
 	if(req.isAuthenticated()){
-		res.render('workoutentry.pug');
+    var role = req.user.role;    
+		res.render('workoutentry.pug',{role});
 	} else {
 		res.redirect('/');
 	}
@@ -65,12 +54,15 @@ router.get('/myworkouts', function(req, res){
 
 		queries.get_workout({username: req.user.id}, function(err, result){
 			workouts = result;
-			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
+      var role = req.user.role;    
+			console.log(workouts);
+			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts, role });
 		});
 	} else {
 	 	res.redirect('/');
 	}
 });
+
 
 // View Athletes
 router.get('/admin_athlete_vis', function(req, res){
@@ -89,6 +81,7 @@ router.get('/admin_athlete_vis', function(req, res){
 		res.redirect('/');
 	}
 });
+
 
 // Add User
 router.get('/admin_add_user', function(req, res){
@@ -124,7 +117,8 @@ router.get('/about',
         function(req, res){
         	req.visitor.pageview("/about").send();
 			if(req.isAuthenticated()){
-				res.render('about.pug');
+        var role = req.user.role;
+				res.render('about.pug',{role});
 			} else {
 				res.redirect('/');
 			}
@@ -135,7 +129,8 @@ router.get('/changepassword',
         function(req, res){
         	req.visitor.pageview("/changepassword").send();
 			if(req.isAuthenticated()){
-				res.render('changepassword.pug');
+        var role = req.user.role;    
+				res.render('changepassword.pug', {role});
 			} else {
 				res.redirect('/');
 			}
@@ -146,7 +141,30 @@ router.get('/buggy',
         function(req, res){
         	req.visitor.pageview("/buggy").send();
 			if(req.isAuthenticated()){
-				res.render('buggy.pug');
+        var role = req.user.role;    
+				res.render('buggy.pug', {role});
+			} else {
+				res.redirect('/');
+			}
+});
+
+// Admin Team Creation
+router.get('/admin_create_team',
+        function(req, res){
+        	req.visitor.pageview("/admin_create_team").send();
+			if(req.isAuthenticated()){
+				res.render('admin_create_team.pug');
+			} else {
+				res.redirect('/');
+			}
+});
+
+// Admin Remove User From Team
+router.get('/admin_remove_user_team',
+        function(req, res){
+        	req.visitor.pageview("/admin_remove_user_team").send();
+			if(req.isAuthenticated()){
+				res.render('admin_remove_user_team.pug');
 			} else {
 				res.redirect('/');
 			}
@@ -176,7 +194,11 @@ router.get('/coaches', function(req, res){
 					//res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
 		queries.get_workout({team_name: req.user.team}, function(err, result){
 			var workouts = result;
-			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.teams, data_x: JSON.stringify(workouts), data: workouts });
+
+			console.log(workouts);
+          var role = req.user.role;    
+			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team, data_x: JSON.stringify(workouts), data: workouts, role });
+
 		});
 				
 				
@@ -191,8 +213,14 @@ router.get('/coaches', function(req, res){
 router.get('/datadumpindividual', function(req, res){
 			req.visitor.pageview("/datadumpindividual").send();
 			if(req.isAuthenticated()){
+
 				if(req.user.role == 'Admin'){
+			queries.list_users({user: req.user.id, team: req.user.team}, function(err, result){
+					var users = result;
+					console.log(result);
+
 					res.render('admin_data_dump_a.pug');
+});
 				} else {
 					res.redirect(req.get('referer'));
 				}

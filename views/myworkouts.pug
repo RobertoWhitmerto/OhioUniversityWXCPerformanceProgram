@@ -39,9 +39,11 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'hours');
+      data.addColumn('number', 'rolling_hours');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      console.log(oneWeekAgo);
+      var oneMonthAgo = new Date();
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
       var d = !{data_w};
       
       var oneWeekAgo_1 = new Date();
@@ -59,25 +61,60 @@ html
       var oneWeekAgo_7 = new Date();
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
-      console.log(JSON.stringify(d));
+      var rows = [[oneWeekAgo_1.toString(),0.0,100],[oneWeekAgo_2.toString(),0.0,100],
+                  [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
+                  [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
+      
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
           console.log("DATE: ");
-          //console.log(obj.date);
           var dt = new Date(Date.parse(obj.date));
+          var dt_fixed = dt.getDate() + 1;
+          //console.log(obj.date);
+          
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
             var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
+            var rolling_total=0;
+            var avg_count=0;
+            
+            console.log("COUNT:" + avg_count);
+            rolling_total /= avg_count;
+            console.log("rolling average for sleep: ");
+            console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
-            var dt_fixed = dt.getDate() + 1;
-            rows[slot][0] = dt_fixed.toString();
             rows[slot][1] = parseInt(obj.sleep, 10);
-            //rows[dt.getDay()][1] = parseInt(obj.sleep, 10);
           }
+      }
+      var now = new Date();
+      now.setDate(now.getDate() - 1);
+      //loop through last week's dates to add rolling averages
+      var slot = 0;
+      for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
+          console.log("K: " + k.getDate());
+          if(slot < 0)
+            slot = slot * (-1);
+          console.log("SLOT: " + slot);
+          var rolling_total=0;
+          var avg_count=0;
+          for(var j = 0; j < d.length; j++){
+            var wrk = d[j];
+            var wrk_dt = new Date(Date.parse(wrk.date));
+            if(wrk_dt > oneMonthAgo && wrk_dt < k){
+              rolling_total += parseInt(wrk.sleep, 10);
+              avg_count++;
+            }
+          }
+          console.log("COUNT:" + avg_count);
+          rolling_total /= avg_count;
+          console.log("rolling average for sleep: ");
+          console.log(rolling_total);
+          rows[slot][0] = k.getDate().toString();
+          rows[slot][2] = rolling_total;
+          slot++;
       }
       console.log(rows);
       data.addRows(rows);
@@ -88,11 +125,12 @@ html
       legend: 'none',
       lineWidth: 3,
       backgroundColor: '#ffffff',
+      legend: { position: 'bottom' },
       vAxis: {
       title: "Hours of Sleep",
       viewWindowMode:'explicit'
       },
-      colors: ['#006400'],
+      colors: ['#006400','#32cd32']
       };
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
@@ -105,11 +143,12 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'Distance (miles)');
+      data.addColumn('number', 'rolling_miles');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      console.log(oneWeekAgo);
+      var oneMonthAgo = new Date();
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
       var d = !{data_w};
-      
       
       var oneWeekAgo_1 = new Date();
       oneWeekAgo_1.setDate(oneWeekAgo + 1);
@@ -126,27 +165,60 @@ html
       var oneWeekAgo_7 = new Date();
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      var rows = [[oneWeekAgo_1.toString(),0.0,100],[oneWeekAgo_2.toString(),0.0,100],
+                  [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
+                  [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
       
-      console.log(JSON.stringify(d));
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
           console.log("DATE: ");
-          console.log(obj.date);
           var dt = new Date(Date.parse(obj.date));
-          console.log(dt+1);
-          console.log(oneWeekAgo);
+          var dt_fixed = dt.getDate() + 1;
+          //console.log(obj.date);
+          
+          //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
             var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
+            var rolling_total=0;
+            var avg_count=0;
+            
+            console.log("COUNT:" + avg_count);
+            rolling_total /= avg_count;
+            console.log("rolling average for sleep: ");
+            console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
-            var dt_fixed = dt.getDate() + 1;
-            rows[slot][0] = dt_fixed.toString();
-            rows[slot][1] += parseInt(obj.distance, 10);
-            //rows[dt.getDay()][1] = parseInt(obj.distance, 10);
+            rows[slot][1] = parseInt(obj.distance, 10);
           }
+      }
+      var now = new Date();
+      now.setDate(now.getDate() - 1);
+      //loop through last week's dates to add rolling averages
+      var slot = 0;
+      for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
+        console.log("K: " + k.getDate());
+        if(slot < 0)
+          slot = slot * (-1);
+        console.log("SLOT: " + slot);
+        var rolling_total=0;
+        var avg_count=0;
+        for(var j = 0; j < d.length; j++){
+          var wrk = d[j];
+          var wrk_dt = new Date(Date.parse(wrk.date));
+          if(wrk_dt > oneMonthAgo && wrk_dt < k){
+            rolling_total += parseInt(wrk.distance, 10);
+            avg_count++;
+          }
+        }
+        console.log("COUNT:" + avg_count);
+        rolling_total /= avg_count;
+        console.log("rolling average for dist: ");
+        console.log(rolling_total);
+        rows[slot][0] = k.getDate().toString();
+        rows[slot][2] = rolling_total;
+        slot++;
       }
       console.log(rows);
       data.addRows(rows);
@@ -160,7 +232,7 @@ html
       },
       legend: 'none',
       lineWidth: 3,
-      colors: ['#006400'],
+      colors: ['#006400','#32cd32'],
       backgroundColor: '#ffffff'
       };
       // Instantiate and draw our chart, passing in some options.
@@ -173,9 +245,11 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', '(RPE x Distance)');
+      data.addColumn('number', 'rolling_training_load_distance');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      console.log(oneWeekAgo);
+      var oneMonthAgo = new Date();
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
       var d = !{data_w};
       
       var oneWeekAgo_1 = new Date();
@@ -193,27 +267,60 @@ html
       var oneWeekAgo_7 = new Date();
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
-      //var rows = [['Sun.',0.0],['Mon.',0.0],['Tues.',0.0],['Wed.',0.0],['Th.',0.0],['Fri.',0.0],['Sat.',0.0]];
-      console.log(JSON.stringify(d));
+      var rows = [[oneWeekAgo_1.toString(),0.0,0],[oneWeekAgo_2.toString(),0.0,0],
+                  [oneWeekAgo_3.toString(),0.0,0],[oneWeekAgo_4.toString(),0.0,0],
+                  [oneWeekAgo_5.toString(),0.0,0],[oneWeekAgo_6.toString(),0.0,0],[oneWeekAgo_7.toString(),0.0,0]];
+      
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
           console.log("DATE: ");
-          console.log(obj.date);
           var dt = new Date(Date.parse(obj.date));
-          console.log(dt+1);
-          console.log(oneWeekAgo);
+          var dt_fixed = dt.getDate() + 1;
+          //console.log(obj.date);
+          
+          //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
             var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
+            var rolling_total=0;
+            var avg_count=0;
+            
+            console.log("COUNT:" + avg_count);
+            rolling_total /= avg_count;
+            console.log("rolling average for sleep: ");
+            console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
-            var dt_fixed = dt.getDate() + 1;
-            rows[slot][0] = dt_fixed.toString();
-            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
-            //rows[dt.getDay()][1] = parseFloat(obj.time, 10)/parseInt(obj.distance, 10);
+            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
           }
+      }
+      var now = new Date();
+      now.setDate(now.getDate() - 1);
+      //loop through last week's dates to add rolling averages
+      var slot = 0;
+      for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
+        console.log("K: " + k.getDate());
+        if(slot < 0)
+          slot = slot * (-1);
+        console.log("SLOT: " + slot);
+        var rolling_total=0;
+        var avg_count=0;
+        for(var j = 0; j < d.length; j++){
+          var wrk = d[j];
+          var wrk_dt = new Date(Date.parse(wrk.date));
+          if(wrk_dt > oneMonthAgo && wrk_dt < k){
+            rolling_total += parseInt(wrk.RPE, 10)*parseInt(wrk.time, 10);
+            avg_count++;
+          }
+        }
+        console.log("COUNT:" + avg_count);
+        rolling_total /= avg_count;
+        console.log("rolling average for dist: ");
+        console.log(rolling_total);
+        rows[slot][0] = k.getDate().toString();
+        rows[slot][2] = rolling_total;
+        slot++;
       }
       console.log(rows);
       data.addRows(rows);
@@ -227,7 +334,7 @@ html
       },
       legend: 'none',
       lineWidth: 3,
-      colors: ['#006400'],
+      colors: ['#006400','#32cd32'],
       backgroundColor: '#ffffff'
       };
       // Instantiate and draw our chart, passing in some options.
@@ -241,10 +348,13 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'Load');
+      data.addColumn('number', 'rolling_training_load_time');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      console.log(oneWeekAgo);
+      var oneMonthAgo = new Date();
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
       var d = !{data_w};
+      
       var oneWeekAgo_1 = new Date();
       oneWeekAgo_1.setDate(oneWeekAgo + 1);
       var oneWeekAgo_2 = new Date();
@@ -260,36 +370,62 @@ html
       var oneWeekAgo_7 = new Date();
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-      var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],[oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],[oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
-      var count = [0,0,0,0,0,0,0];
-      //console.log(JSON.stringify(d));
+      var rows = [[oneWeekAgo_1.toString(),0.0,0],[oneWeekAgo_2.toString(),0.0,0],
+                  [oneWeekAgo_3.toString(),0.0,0],[oneWeekAgo_4.toString(),0.0,0],
+                  [oneWeekAgo_5.toString(),0.0,0],[oneWeekAgo_6.toString(),0.0,0],[oneWeekAgo_7.toString(),0.0,0]];
+      
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
           console.log("DATE: ");
-          console.log(obj.date);
           var dt = new Date(Date.parse(obj.date));
-          console.log(dt.getDate());
-          console.log(oneWeekAgo);
+          var dt_fixed = dt.getDate() + 1;
+          //console.log(obj.date);
+          
+          //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
             var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
+            var rolling_total=0;
+            var avg_count=0;
+            
+            console.log("COUNT:" + avg_count);
+            rolling_total /= avg_count;
+            console.log("rolling average for sleep: ");
+            console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
-            var dt_fixed = dt.getDate() + 1;
-            rows[slot][0] = dt_fixed.toString();
-            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
-            count[slot]++;
+            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
           }
       }
-      //need to wait to talk to client about this calculation
-      for(var i = 0; i <= 7; i++) {
-        if (typeof rows[i] != 'undefined'){
-          ; //rows[i][1] /= count[i];
+      var now = new Date();
+      now.setDate(now.getDate() - 1);
+      //loop through last week's dates to add rolling averages
+      var slot = 0;
+      for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
+        console.log("K: " + k.getDate());
+        if(slot < 0)
+          slot = slot * (-1);
+        console.log("SLOT: " + slot);
+        var rolling_total=0;
+        var avg_count=0;
+        for(var j = 0; j < d.length; j++){
+          var wrk = d[j];
+          var wrk_dt = new Date(Date.parse(wrk.date));
+          if(wrk_dt > oneMonthAgo && wrk_dt < k){
+            rolling_total += parseInt(wrk.RPE, 10)*parseInt(wrk.distance, 10);
+            avg_count++;
+          }
         }
+        console.log("COUNT:" + avg_count);
+        rolling_total /= avg_count;
+        console.log("rolling average for dist: ");
+        console.log(rolling_total);
+        rows[slot][0] = k.getDate().toString();
+        rows[slot][2] = rolling_total;
+        slot++;
       }
       console.log(rows);
-      console.log(count);
       data.addRows(rows);
       // Set chart options
       var options = {'title':'Training Load - Time',
@@ -301,7 +437,7 @@ html
       title: "RPE x Time",
       viewWindowMode:'explicit'
       },
-      colors: ['#006400'],
+      colors: ['#006400','#32cd32'],
       lineWidth: 3,
       };
       // Instantiate and draw our chart, passing in some options.
@@ -315,54 +451,82 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'Wellness score');
+      data.addColumn('number', 'rolling_hours');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      console.log(oneWeekAgo);
+      var oneMonthAgo = new Date();
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
       var d = !{data_w};
       
-      if(Object.keys(d).length > 0){
+      var oneWeekAgo_1 = new Date();
+      oneWeekAgo_1.setDate(oneWeekAgo + 1);
+      var oneWeekAgo_2 = new Date();
+      oneWeekAgo_2.setDate(oneWeekAgo + 2);
+      var oneWeekAgo_3 = new Date();
+      oneWeekAgo_3.setDate(oneWeekAgo + 3);
+      var oneWeekAgo_4 = new Date();
+      oneWeekAgo_4.setDate(oneWeekAgo + 4);
+      var oneWeekAgo_5 = new Date();
+      oneWeekAgo_5.setDate(oneWeekAgo + 5);
+      var oneWeekAgo_6 = new Date();
+      oneWeekAgo_6.setDate(oneWeekAgo + 6);
+      var oneWeekAgo_7 = new Date();
+      oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-        var oneWeekAgo_1 = new Date();
-        oneWeekAgo_1.setDate(oneWeekAgo + 1);
-        var oneWeekAgo_2 = new Date();
-        oneWeekAgo_2.setDate(oneWeekAgo + 1);
-        var oneWeekAgo_3 = new Date();
-        oneWeekAgo_3.setDate(oneWeekAgo + 1);
-        var oneWeekAgo_4 = new Date();
-        oneWeekAgo_4.setDate(oneWeekAgo + 1);
-        var oneWeekAgo_5 = new Date();
-        oneWeekAgo_5.setDate(oneWeekAgo + 1);
-        var oneWeekAgo_6 = new Date();
-        oneWeekAgo_6.setDate(oneWeekAgo + 1);
-        var oneWeekAgo_7 = new Date();
-        oneWeekAgo_7.setDate(oneWeekAgo + 1);
-        
-        var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],[oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],[oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
-        //console.log(JSON.stringify(d));
-        for(var i = 0; i < d.length; i++) {
-            var obj = d[i];
-            //console.log("DATE: ");
-            //console.log(obj.date);
-            var dt = new Date(Date.parse(obj.date));
-            //console.log(dt+1);
-            //console.log(oneWeekAgo);
-            if(dt >= oneWeekAgo){
+      var rows = [[oneWeekAgo_1.toString(),0.0,100],[oneWeekAgo_2.toString(),0.0,100],
+                  [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
+                  [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
+      
+      for(var i = 0; i < d.length; i++) {
+          var obj = d[i];
+          console.log("DATE: ");
+          var dt = new Date(Date.parse(obj.date));
+          var dt_fixed = dt.getDate() + 1;
+          //console.log(obj.date);
+          
+          //console.log(oneWeekAgo);
+          if(dt >= oneWeekAgo){
             var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
+            var rolling_total=0;
+            var avg_count=0;
+            
+            console.log("COUNT:" + avg_count);
+            rolling_total /= avg_count;
+            console.log("rolling average for sleep: ");
+            console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
-            var dt_fixed = dt.getDate() + 1;
-              rows[slot][0] = dt_fixed.toString();
-              rows[slot][1] = parseInt(obj.percent_health, 10);
-              //rows[dt.getDay()][1] = parseInt(obj.sleep, 10);
-            }
-        }
+            rows[slot][1] = parseInt(obj.percent_health, 10);
+          }
       }
-      else{
-        var dt = new Date();
-        dt.setDate(dt.getDate());
-        var rows = [["No workouts this week", 0]];
+      var now = new Date();
+      now.setDate(now.getDate() - 1);
+      //loop through last week's dates to add rolling averages
+      var slot = 0;
+      for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
+          console.log("K: " + k.getDate());
+          if(slot < 0)
+            slot = slot * (-1);
+          console.log("SLOT: " + slot);
+          var rolling_total=0;
+          var avg_count=0;
+          for(var j = 0; j < d.length; j++){
+            var wrk = d[j];
+            var wrk_dt = new Date(Date.parse(wrk.date));
+            if(wrk_dt > oneMonthAgo && wrk_dt < k){
+              rolling_total += parseInt(wrk.percent_health, 10);
+              avg_count++;
+            }
+          }
+          console.log("COUNT:" + avg_count);
+          rolling_total /= avg_count;
+          console.log("rolling average for sleep: ");
+          console.log(rolling_total);
+          rows[slot][0] = k.getDate().toString();
+          rows[slot][2] = rolling_total;
+          slot++;
       }
       console.log("ROWS");
       console.log(rows);
@@ -390,7 +554,57 @@ html
       $(".dropdown-button").dropdown();
       $(".button-collapse").sideNav();
       });
-  body(background='/views/bg3.jpg')
+  //Background pattern from Subtle Patterns//
+  body(background='/views/bg3.png')
+    // Script to Limit What User Sees Based off Role ;[[]]
+    script.
+      window.onload = function(){
+      var x = "#{role}"
+        //Dat User B Athlete//
+        if (x == "Athlete"){
+          //Hiding Coach Content//
+          document.getElementById("DesktopCoach").style.display = "none";
+          document.getElementById("CoachMobT").style.display = "none";
+          document.getElementById("CoachMob1").style.display = "none";
+          document.getElementById("D1").style.display = "none";
+          document.getElementById("D2").style.display = "none";
+
+          //Hiding Admin Content//
+          document.getElementById("DesktopAdmin").style.display = "none";
+          document.getElementById("AdminMobT").style.display = "none";
+          document.getElementById("AdminMob1").style.display = "none";
+          document.getElementById("AdminMob2").style.display = "none";
+          document.getElementById("AdminMob3").style.display = "none";
+          document.getElementById("AdminMob4").style.display = "none";
+          document.getElementById("AdminMob5").style.display = "none";
+          document.getElementById("AdminMob6").style.display = "none";
+          document.getElementById("AdminMob7").style.display = "none";
+          document.getElementById("D3").style.display = "none";
+          document.getElementById("D4").style.display = "none";
+          document.getElementById("D5").style.display = "none";
+          document.getElementById("D6").style.display = "none";
+          document.getElementById("D7").style.display = "none";
+        }
+        //Dat User B Trainer Lettuce Hide Admin//
+        if(x == "Trainer"){
+          //Hiding Admin Content//
+          document.getElementById("DesktopAdmin").style.display = "none";
+          document.getElementById("AdminMobT").style.display = "none";
+          document.getElementById("AdminMob1").style.display = "none";
+          document.getElementById("AdminMob2").style.display = "none";
+          document.getElementById("AdminMob3").style.display = "none";
+          document.getElementById("AdminMob4").style.display = "none";
+          document.getElementById("AdminMob5").style.display = "none";
+          document.getElementById("AdminMob6").style.display = "none";
+          document.getElementById("AdminMob7").style.display = "none";
+          document.getElementById("D3").style.display = "none";
+          document.getElementById("D4").style.display = "none";
+          document.getElementById("D5").style.display = "none";
+          document.getElementById("D6").style.display = "none";
+          document.getElementById("D7").style.display = "none";
+        }
+      }
+
     // Navbar up at the top
     nav
       .nav-wrapper.light-blue.darken-4
@@ -404,11 +618,11 @@ html
               | Athletes
               i.material-icons.right arrow_drop_down
           li
-            a.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
+            a#DesktopCoach.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
               | Coaches/Trainers
               i.material-icons.right arrow_drop_down
           li
-            a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
+            a#DesktopAdmin.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
               | Administrators
               i.material-icons.right arrow_drop_down
           li
@@ -441,7 +655,13 @@ html
           a(href='/admin_remove_user') Remove a user
         li.divider
         li
-          a(href='/admin_add_team') Link a Team
+          a(href='/admin_add_team') Link a team
+        li.divider
+        li
+          a(href='/admin_create_team') Create a new team
+        li.divider
+        li
+          a(href='/admin_remove_user_team') Remove user from a team
       ul#Helpbar.dropdown-content
         li
           a(href='/about') About
@@ -463,31 +683,35 @@ html
         li.divider
         li
           font(color='blue')
-            h5 Trainers
-        li.divider
+            h5#CoachMobT Trainers
+        li#D1.divider
         li
-          a.waves-effect.waves-light.btn-large.blue.darken-3(href='/coaches') View Athletes
-        li.divider
+          a#CoachMob1.waves-effect.waves-light.btn-large.blue.darken-3(href='/coaches') View Athletes
+        li#D2.divider
         li
           font(color='red')
-            h5 Administrators
-        li.divider
+            h5#AdminMobT Administrators
+        li#D3.divider
         li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
+          a#AdminMob1.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
         li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
-        li.divider
+          a#AdminMob2.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
+        li#D4.divider
         li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
-        li.divider
+          a#AdminMob3.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
         li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
-        li.divider
+          a#AdminMob4.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
+        li#D5.divider
         li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_team') Link a Team
+          a#AdminMob5.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_team') Link a user to a Team
+        li
+          a#AdminMob6.waves-effect.waves-light.btn.red.darken-3(href='/admin_create_team') Create a new team
+        li
+          a#AdminMob7.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user_team') Remove user from a team
+        li#D6.divider
         li
           br
-        li.divider
+        li#D7.divider
         li
           a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
         li.divider
@@ -508,16 +732,16 @@ html
     hr
     style(type='text/css').
       div.ez{
-      background: #01579b;
+      background: #2f4f4f;
       width:900px;
-      border: 3px solid #82b1ff;
+      border: 3px solid #000000;
       margin: auto;
       }
     style(type='text/css').
       div.ez2{
-      background: #304ffe;
+      background: #b1f6cb;
       width:900px;
-      border: 3px solid #82b1ff;
+      border: 3px solid #000000;
       margin: auto;
       }
     style.
@@ -552,30 +776,30 @@ html
     // Div that will hold the pie chart [C]
     .ez2
       br
-      a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
+      a.btn.btn-info.teal(href='#demo1', data-toggle='collapse') Sleep
       br
       br
       #demo1.collapse
         #sleepchart
         br
-      a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
+      a.btn.btn-info.teal(href='#demo2', data-toggle='collapse') Distance
       br
       br
       #demo2.collapse
         #distancechart
-      a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Training Load - Distance
+      a.btn.btn-info.teal(href='#demo3', data-toggle='collapse') Training Load - Distance
       br
       br
       #demo3.collapse
         #tload_distchart
         br
-      a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load - Time
+      a.btn.btn-info.teal(href='#demo5', data-toggle='collapse') Training Load - Time
       br
       br
       #demo5.collapse
         #rpextimechart
         br
-      a.btn.btn-info.green(href='#demo6', data-toggle='collapse') Wellness
+      a.btn.btn-info.teal(href='#demo6', data-toggle='collapse') Wellness
       br
       br
       #demo6.collapse
