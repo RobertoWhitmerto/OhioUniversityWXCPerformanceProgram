@@ -1,5 +1,5 @@
 var util = require('util');
-var db = require('./localdb')
+var db = require('./db')
 
 var insert = 'INSERT INTO %s %s VALUES %s'; //insert into table columns VALUES (values)
 var select = 'SELECT %s FROM %s'; //select columns from table
