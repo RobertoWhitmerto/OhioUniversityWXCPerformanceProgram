@@ -84,6 +84,7 @@ function get_user(input, done){
 
 	//build and execute the query
 	selectquery(table, columns, condition, function(query){
+		console.log(query);
 		exec_query(query, done);
 	});
 }
@@ -96,7 +97,7 @@ function get_workout(input, done){
 	var conditions = [];
 
 	//check for all possible conditions passed in
-	if(input.athlete) conditions.push(`username="${input.username}"`);
+	if(input.username) conditions.push(`username="${input.username}"`);
 	if(input.teams) conditions.push(joinor(input.teams, "team_name"));
 	if(input.date) conditions.push(`date="${input.date}"`);
 	if(input.sleep) conditions.push(`sleep="${input.sleep}"`);
@@ -116,6 +117,7 @@ function get_workout(input, done){
 
 	//build and execute the query
 	selectquery(table, columns, condition, function(query){
+		console.log(query);
 		exec_query(query, function(err, rows, fields){
 			if(err) {return done(err);}
 			if(rows.length <= 0) {return done("could not find any matching workouts", false, false);}
