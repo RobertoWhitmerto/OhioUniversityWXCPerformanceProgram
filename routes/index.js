@@ -274,6 +274,15 @@ router.post('/admin_add_team', function(req, res) {
 	res.redirect('/admin_add_team');
 })
 
+router.post('/admin_create_team_form', function(req, res) {
+	console.log(req.body);
+
+	queries.insert_team(req.body, function(err, result){
+		console.log(result);
+		if(result.affectedRows > 0) {res.render('admin_create_team.pug');}
+	});
+})
+
 
 router.post('/getdatadumpind', function(req, res) {
 	console.log(req.body);
