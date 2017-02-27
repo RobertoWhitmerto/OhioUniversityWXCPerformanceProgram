@@ -39,11 +39,11 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'hours');
-      data.addColumn('number', 'rolling_hours');
+      data.addColumn('number', 'Chronic');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       var oneMonthAgo = new Date();
-      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 28);
       var d = !{data_w};
       
       var oneWeekAgo_1 = new Date();
@@ -109,7 +109,7 @@ html
             }
           }
           console.log("COUNT:" + avg_count);
-          rolling_total /= avg_count;
+          rolling_total /= 28;
           console.log("rolling average for sleep: ");
           console.log(rolling_total);
           rows[slot][0] = k.getDate().toString();
@@ -143,11 +143,11 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'Distance (miles)');
-      data.addColumn('number', 'rolling_miles');
+      data.addColumn('number', 'Chronic Distance');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       var oneMonthAgo = new Date();
-      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 28);
       var d = !{data_w};
       
       var oneWeekAgo_1 = new Date();
@@ -213,7 +213,7 @@ html
           }
         }
         console.log("COUNT:" + avg_count);
-        rolling_total /= avg_count;
+        rolling_total /= 28;
         console.log("rolling average for dist: ");
         console.log(rolling_total);
         rows[slot][0] = k.getDate().toString();
@@ -245,11 +245,11 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', '(RPE x Distance)');
-      data.addColumn('number', 'rolling_training_load_distance');
+      data.addColumn('number', 'Chronic Training Load (Dist)');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       var oneMonthAgo = new Date();
-      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 28);
       var d = !{data_w};
       
       var oneWeekAgo_1 = new Date();
@@ -315,7 +315,7 @@ html
           }
         }
         console.log("COUNT:" + avg_count);
-        rolling_total /= avg_count;
+        rolling_total /= 28;
         console.log("rolling average for dist: ");
         console.log(rolling_total);
         rows[slot][0] = k.getDate().toString();
@@ -348,11 +348,11 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'Load');
-      data.addColumn('number', 'rolling_training_load_time');
+      data.addColumn('number', 'Chronic Training Load (time)');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       var oneMonthAgo = new Date();
-      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 28);
       var d = !{data_w};
       
       var oneWeekAgo_1 = new Date();
@@ -418,7 +418,7 @@ html
           }
         }
         console.log("COUNT:" + avg_count);
-        rolling_total /= avg_count;
+        rolling_total /= 28;
         console.log("rolling average for dist: ");
         console.log(rolling_total);
         rows[slot][0] = k.getDate().toString();
@@ -451,11 +451,11 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'Wellness score');
-      data.addColumn('number', 'rolling_hours');
+      data.addColumn('number', 'Chronic Wellness');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       var oneMonthAgo = new Date();
-      oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+      oneMonthAgo.setDate(oneMonthAgo.getDate() - 28);
       var d = !{data_w};
       
       var oneWeekAgo_1 = new Date();
@@ -521,7 +521,7 @@ html
             }
           }
           console.log("COUNT:" + avg_count);
-          rolling_total /= avg_count;
+          rolling_total /= 28;
           console.log("rolling average for sleep: ");
           console.log(rolling_total);
           rows[slot][0] = k.getDate().toString();
