@@ -259,10 +259,9 @@ router.post('/changepass', function(req, res) {
 
 });
 
-router.post('/admin_add_team', function(req, res) {
+router.post('/admin_add_team_form', function(req, res) {
 
 	console.log(req.body);
-
 	queries.insert_userteam(req.body, function(err, result){
 
 		if(err)
@@ -271,7 +270,7 @@ router.post('/admin_add_team', function(req, res) {
 		}
 	});
 
-	res.redirect('/admin_add_team');
+	res.render('admin_add_team.pug');
 })
 
 router.post('/admin_create_team_form', function(req, res) {
