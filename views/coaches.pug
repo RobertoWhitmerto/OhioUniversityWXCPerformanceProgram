@@ -22,6 +22,7 @@ html
     // Load the AJAX API
     script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
     script(type='text/javascript').
+    
     script(type='text/javascript').
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
@@ -391,57 +392,7 @@ html
     $(".button-collapse").sideNav();
     });
     
-  //Background pattern from Subtle Patterns//
-  body(background='/views/bg3.png')
-    // Script to Limit What User Sees Based off Role ;[[]]
-    script.
-      window.onload = function(){
-      var x = "#{role}"
-        //Dat User B Athlete//
-        if (x == "Athlete"){
-          //Hiding Coach Content//
-          document.getElementById("DesktopCoach").style.display = "none";
-          document.getElementById("CoachMobT").style.display = "none";
-          document.getElementById("CoachMob1").style.display = "none";
-          document.getElementById("D1").style.display = "none";
-          document.getElementById("D2").style.display = "none";
-
-          //Hiding Admin Content//
-          document.getElementById("DesktopAdmin").style.display = "none";
-          document.getElementById("AdminMobT").style.display = "none";
-          document.getElementById("AdminMob1").style.display = "none";
-          document.getElementById("AdminMob2").style.display = "none";
-          document.getElementById("AdminMob3").style.display = "none";
-          document.getElementById("AdminMob4").style.display = "none";
-          document.getElementById("AdminMob5").style.display = "none";
-          document.getElementById("AdminMob6").style.display = "none";
-          document.getElementById("AdminMob7").style.display = "none";
-          document.getElementById("D3").style.display = "none";
-          document.getElementById("D4").style.display = "none";
-          document.getElementById("D5").style.display = "none";
-          document.getElementById("D6").style.display = "none";
-          document.getElementById("D7").style.display = "none";
-        }
-        //Dat User B Trainer Lettuce Hide Admin//
-        if(x == "Trainer"){
-          //Hiding Admin Content//
-          document.getElementById("DesktopAdmin").style.display = "none";
-          document.getElementById("AdminMobT").style.display = "none";
-          document.getElementById("AdminMob1").style.display = "none";
-          document.getElementById("AdminMob2").style.display = "none";
-          document.getElementById("AdminMob3").style.display = "none";
-          document.getElementById("AdminMob4").style.display = "none";
-          document.getElementById("AdminMob5").style.display = "none";
-          document.getElementById("AdminMob6").style.display = "none";
-          document.getElementById("AdminMob7").style.display = "none";
-          document.getElementById("D3").style.display = "none";
-          document.getElementById("D4").style.display = "none";
-          document.getElementById("D5").style.display = "none";
-          document.getElementById("D6").style.display = "none";
-          document.getElementById("D7").style.display = "none";
-        }
-      }
-
+  body(background='/views/bg3.jpg')
     // Navbar up at the top
     nav
       .nav-wrapper.light-blue.darken-4
@@ -455,11 +406,11 @@ html
               | Athletes
               i.material-icons.right arrow_drop_down
           li
-            a#DesktopCoach.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
+            a.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
               | Coaches/Trainers
               i.material-icons.right arrow_drop_down
           li
-            a#DesktopAdmin.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
+            a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
               | Administrators
               i.material-icons.right arrow_drop_down
           li
@@ -492,13 +443,7 @@ html
           a(href='/admin_remove_user') Remove a user
         li.divider
         li
-          a(href='/admin_add_team') Link a team
-        li.divider
-        li
-          a(href='/admin_create_team') Create a new team
-        li.divider
-        li
-          a(href='/admin_remove_user_team') Remove user from a team
+          a(href='/admin_add_team') Link a Team
       ul#Helpbar.dropdown-content
         li
           a(href='/about') About
@@ -520,35 +465,31 @@ html
         li.divider
         li
           font(color='blue')
-            h5#CoachMobT Trainers
-        li#D1.divider
+            h5 Trainers
+        li.divider
         li
-          a#CoachMob1.waves-effect.waves-light.btn-large.blue.darken-3(href='/coaches') View Athletes
-        li#D2.divider
+          a.waves-effect.waves-light.btn-large.blue.darken-3(href='/coaches') View Athletes
+        li.divider
         li
           font(color='red')
-            h5#AdminMobT Administrators
-        li#D3.divider
+            h5 Administrators
+        li.divider
         li
-          a#AdminMob1.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
+          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
         li
-          a#AdminMob2.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
-        li#D4.divider
+          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
+        li.divider
         li
-          a#AdminMob3.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
+        li.divider
         li
-          a#AdminMob4.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
-        li#D5.divider
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
+        li.divider
         li
-          a#AdminMob5.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_team') Link a user to a Team
-        li
-          a#AdminMob6.waves-effect.waves-light.btn.red.darken-3(href='/admin_create_team') Create a new team
-        li
-          a#AdminMob7.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user_team') Remove user from a team
-        li#D6.divider
+          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_team') Link a Team
         li
           br
-        li#D7.divider
+        li.divider
         li
           a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
         li.divider
@@ -627,8 +568,6 @@ html
                       br
                       #viewathletes.collapse
                         #showathletes
-                        - console.log("hey there\nhey there");
-                        - console.log(data_u);
                         - if (typeof(data_u) !== 'undefined'){
                         table.table.table-bordered
                           thead
@@ -669,47 +608,41 @@ html
        $(document).ready(function(){
        // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
        $('.modal-trigger').leanModal();
-       
     // Modal
-    #editModal.modal
-      .modal-content.light-blue.darken-4
-        button.close(type='button', data-dismiss='modal', aria-label='Close')
-          span(aria-hidden='true') x
-        h4
-          font(color='cyan') Weekly Charts:
-        center
-          .ez2
-            br
-            a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
-            br
-            #demo1.collapse
-              #sleepchart
-            br
-            a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
-            br
-            #demo2.collapse
-              #distancechart
-            br
-            a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Training Load - Distance
-            br
-            #demo3.collapse
-              #tload_distchart
-            br
-            a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load - Time
-            br
-            #demo5.collapse
-              #rpextimechart
-            br
-            a.btn.btn-info.green(href='#demo6', data-toggle='collapse') Wellness
-            br
-            #demo6.collapse
-              #wellnesschart
-            br
-            br
-            br
+    #editModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel').light-blue.darken-4
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4#myModalLabel.modal-title
+              center
+                font(color='cyan') Weekly Charts:
+                  .ez2
+                    br
+                    a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
+                    br
+                    #demo1.collapse
+                      #sleepchart
+                    a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
+                    br
+                    #demo2.collapse
+                      #distancechart
+                    a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Training Load - Distance
+                    br
+                    #demo3.collapse
+                      #tload_distchart
+                    a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load - Time
+                    br
+                    #demo5.collapse
+                      #rpextimechart
+                    a.btn.btn-info.green(href='#demo6', data-toggle='collapse') Wellness
+                    br
+                    #demo6.collapse
+                      #wellnesschart
+                    br
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js
     script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
     script(type='text/javascript', src='js/materialize.min.js')
-    

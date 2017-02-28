@@ -51,10 +51,10 @@ router.get('/myworkouts', function(req, res){
 	if(req.isAuthenticated()){
 		//access workout info through [] index operator, rows of query returned
 		var workouts;
-
 		queries.get_workout({username: req.user.id}, function(err, result){
 			workouts = result;
-      var role = req.user.role;    
+    		var role = req.user.role; 
+    		console.log("WORKOUTS QUERIED: ");
 			console.log(workouts);
 			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts, role });
 		});
@@ -192,11 +192,11 @@ router.get('/coaches', function(req, res){
 			queries.get_userteam({teams: req.user.teams}, function(err, result){
 					var users = result;
 					//res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
-		queries.get_workout({team_name: req.user.team}, function(err, result){
+			queries.get_workout({team_name: req.user.team}, function(err, result){
 			var workouts = result;
 
 			console.log(workouts);
-          var role = req.user.role;    
+        	var role = req.user.role;    
 			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team, data_x: JSON.stringify(workouts), data: workouts, role });
 
 		});
@@ -487,7 +487,6 @@ router.post("/bugreport", function(req, res){
 
 router.post("/myworkouts", function(req, res){
 		if(req.isAuthenticated()){
-
 		queries.remove_workout({wid: req.body.wID}, function(err, result){
 			console.log(result);
 		});
