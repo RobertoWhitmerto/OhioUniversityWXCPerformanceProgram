@@ -7,7 +7,9 @@ This repository is for Team on a Cob's senior design project for CS 4560/4561 at
 ## Branch Descriptions:
 Master - Main code base for the project.  This branch houses live versions of code that is running on our AWS server.
 
-Bcrypt - This branch is used to implement hashing to our login and user creation features of the application.
+Bcrypt(DEAD BRANCH) - This branch is used to implement hashing to our login and user creation features of the application.
+
+Bcrypt2 - Newest attempt to implement password hashing for the application
 
 Testing - This branch was used to implement unit testing features into the application.
 
@@ -22,7 +24,7 @@ Use "eb debloy" command upload the most recent commit to the live server.
 All code for the project is stored in the github repository that houses this README file.
 
 ## Project Directory Description:  
-Main Directory - houses configuration files for the database and application.  It also contains ignore files for git and ebcli.  
+__Main Directory__ - houses configuration files for the database and application.  It also contains ignore files for git and ebcli.  
 __Demos__ contains demo documents from first semester. Likely to be removed/trimmed prior to end of project.  
 __ExtraDocuments__ directory that contains testing information, presentations to fulfill course assignments.  Also contains documents to track individual goals for sprints.  
 __node_modules__ directory containing the nodejs modules the application needs to function.  
