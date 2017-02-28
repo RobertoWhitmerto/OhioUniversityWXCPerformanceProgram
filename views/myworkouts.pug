@@ -39,7 +39,7 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'hours');
-      data.addColumn('number', 'Chronic');
+      data.addColumn('number', 'Acute:Chronic Ratio');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       var oneMonthAgo = new Date();
@@ -77,13 +77,7 @@ html
             var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
-            var rolling_total=0;
-            var avg_count=0;
             
-            console.log("COUNT:" + avg_count);
-            rolling_total /= avg_count;
-            console.log("rolling average for sleep: ");
-            console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
             rows[slot][1] = parseInt(obj.sleep, 10);
@@ -98,22 +92,33 @@ html
           if(slot < 0)
             slot = slot * (-1);
           console.log("SLOT: " + slot);
-          var rolling_total=0;
+          var rolling_total_chronic=0;
+          var rolling_total_acute=0;
           var avg_count=0;
           for(var j = 0; j < d.length; j++){
             var wrk = d[j];
             var wrk_dt = new Date(Date.parse(wrk.date));
-            if(wrk_dt > oneMonthAgo && wrk_dt < k){
-              rolling_total += parseInt(wrk.sleep, 10);
+            var chronic_dt = new Date(k);
+            chronic_dt.setDate(chronic_dt.getDate() - 28);
+            if(wrk_dt > chronic_dt && wrk_dt < k){
+              rolling_total_chronic += parseInt(wrk.sleep, 10);
               avg_count++;
+            }
+            var acute_dt = new Date(k);
+            acute_dt.setDate(acute_dt.getDate() - 7);
+            if(wrk_dt > acute_dt && wrk_dt < k){
+              rolling_total_acute += parseInt(wrk.sleep, 10);
             }
           }
           console.log("COUNT:" + avg_count);
-          rolling_total /= 28;
-          console.log("rolling average for sleep: ");
-          console.log(rolling_total);
+          rolling_total_chronic /= 28;
+          rolling_total_acute /= 7;
+          console.log("chronic rolling average for sleep: ");
+          console.log(rolling_total_chronic);
+          console.log("acute rolling average for sleep: ");
+          console.log(rolling_total_acute);
           rows[slot][0] = k.getDate().toString();
-          rows[slot][2] = rolling_total;
+          rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
       console.log(rows);
@@ -124,6 +129,8 @@ html
       'height':200,
       legend: 'none',
       lineWidth: 3,
+      seriesType: 'bars',
+      series: {1: {type: 'line'}},
       backgroundColor: '#ffffff',
       legend: { position: 'bottom' },
       vAxis: {
@@ -133,7 +140,7 @@ html
       colors: ['#006400','#32cd32']
       };
       // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.LineChart(document.getElementById('sleepchart'));
+      var chart = new google.visualization.ComboChart(document.getElementById('sleepchart'));
       chart.draw(data, options);
       }
       
