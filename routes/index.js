@@ -193,7 +193,7 @@ router.get('/coaches', function(req, res){
 			queries.get_userteam({teams: req.user.teams}, function(err, result){
 					var users = result;
 					//res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
-			queries.get_workout({team_name: req.user.team}, function(err, result){
+			queries.get_workout({teams: req.user.teams}, function(err, result){
 			var workouts = result;
 
 			console.log(workouts);
