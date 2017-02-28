@@ -189,6 +189,7 @@ router.get('/coaches', function(req, res){
 		if(req.user.role == 'athlete'){
 			res.redirect(req.get('referer'));
 		} else {
+			console.log(req.user);
 			queries.get_userteam({teams: req.user.teams}, function(err, result){
 					var users = result;
 					//res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
@@ -197,7 +198,7 @@ router.get('/coaches', function(req, res){
 
 			console.log(workouts);
         	var role = req.user.role;    
-			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team, data_x: JSON.stringify(workouts), data: workouts, role });
+			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(req.user.teams), data_x: JSON.stringify(workouts), data: workouts, role });
 
 		});
 				
