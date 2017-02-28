@@ -282,6 +282,19 @@ router.post('/admin_create_team_form', function(req, res) {
 	});
 })
 
+router.post('/admin_remove_user_team_form', function(req, res){
+
+	console.log(req.body);
+	queries.remove_userteam(req.body, function(err, result){
+
+		if(err)
+		{
+			req.visitor.event("FAILURE", "User failed to remove team link").send();
+		}
+		if(result.affectedRows > 0) {res.render('admin_remove_user_team.pug');}
+	});
+})
+
 
 router.post('/getdatadumpind', function(req, res) {
 	console.log(req.body);

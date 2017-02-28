@@ -329,11 +329,19 @@ function remove_team(input, done){
 
 function remove_userteam(input, done){
 	var table = "User_Teams";
-	var cond = `username="${input.username}" AND team_name="${input.team_name}"`;
 
-	deletequery(table, cond, function(query){
-		exec_query(query, done);
+	get_userteam({users: [input.username], teams: [input.team_name]}, function(err, result){
+		console.log(result);
+		if(result.length <= 0) {return done(null, false);}
+
+		var cond = `uid=${result[0].uid} AND tid=${result[0].tid}`;
+
+		deletequery(table, cond, function(query){
+			console.log(query);
+			exec_query(query, done);
+		});
 	});
+
 }
 
 function update_workout(input, done){
