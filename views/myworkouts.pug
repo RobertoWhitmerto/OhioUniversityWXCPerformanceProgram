@@ -868,13 +868,13 @@ html
               for workout in data
                 tr
                   form(action='/myworkouts', method='post')
-                    input(type='hidden', value=workout['workout_id'], name='wID', required='')
+                    input(type='hidden', value=workout['wid'], name='wID', required='')
 
                     td.datetag= workout['date']
   
                     td.sleeptag= workout['sleep']
-                    td.illnesstag= workout['Illness']
-                    td.injurytag= workout['Injury']
+                    td.illnesstag= workout['health']
+                    td.injurytag= workout['injury']
                     td.percent_healthtag= workout['percent_health']
                     td.cycle_starttag= workout['cycle_start']
                     td.RPEtag= workout['RPE']
@@ -885,8 +885,8 @@ html
                       center
                         // Button trigger modal
                         // Modal Trigger
-                        a.waves-effect.waves-light.btn.modal-trigger(href='#modal1', data-id=workout['workout_id'], data-id2=workout['sleep'], data-id3=workout['Illness'], data-id4=workout['Injury'], data-id5=workout['percent_health'], data-id6=workout['cycle_start'], data-id7=workout['RPE'], data-id8=workout['time'], data-id9=workout['distance'], data-id10=workout['notes']) Edit
-                        button.btn.waves-effect.waves-light.red.lighten-1(type='submit', name='action', wID=workout['workout_id'])
+                        a.waves-effect.waves-light.btn.modal-trigger(href='#modal1', data-id=workout['wid'], data-id2=workout['sleep'], data-id3=workout['health'], data-id4=workout['injury'], data-id5=workout['percent_health'], data-id6=workout['cycle_start'], data-id7=workout['RPE'], data-id8=workout['time'], data-id9=workout['distance'], data-id10=workout['notes']) Edit
+                        button.btn.waves-effect.waves-light.red.lighten-1(type='submit', name='action', wID=workout['wid'])
                           | Remove
                           i.material-icons.right send
           -}
