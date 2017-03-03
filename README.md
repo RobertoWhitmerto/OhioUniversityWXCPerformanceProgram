@@ -33,6 +33,10 @@ __routes__ directory that holds code that determines how we handle user requests
 __test__ contains unit test code utilized by Mocha/Chai modules to test our code base.  
 __views__ directory that houses our applications front end jade/pug code   
 
+## Deployment URL
+
+http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com
+
 ## Team on a Cob members:
 
 Andrew Leach
