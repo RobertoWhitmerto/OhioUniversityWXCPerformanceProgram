@@ -1,0 +1,169 @@
+nav
+      .nav-wrapper.light-blue.darken-4
+        a.brand-logo
+          font(color='cyan') PPA
+        a.button-collapse(href='#', data-activates='mobile-demo')
+          i.material-icons menu
+        ul.right.hide-on-med-and-down
+          li
+            a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
+              | Athletes
+              i.material-icons.right arrow_drop_down
+          li
+            a#DesktopCoach.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
+              | Coaches/Trainers
+              i.material-icons.right arrow_drop_down
+          li
+            a#DesktopAdmin.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
+              | Administrators
+              i.material-icons.right arrow_drop_down
+          li
+            a.dropdown-button.red.accent-4(href='#', data-activates='Helpbar')
+              | Need Help?
+              i.material-icons.right arrow_drop_down
+          li
+            a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
+      // Drop down associations Non-Mobile
+      ul#Athletes.dropdown-content
+        li
+          a(href='/workoutentry') New Workout
+        li.divider
+        li
+          a(href='/myworkouts') Training Log
+      ul#CoachesTrainers.dropdown-content
+        li
+          a(href='/coaches') View Athletes
+      ul#Administrators.dropdown-content
+        li
+          a(href='/datadumpindividual') CSV Data Dump (Individual)
+        li.divider
+        li
+          a(href='/datadumpteam') CSV Data Dump (Team)
+        li.divider
+        li
+          a(href='/admin_add_user') Add a user
+        li.divider
+        li
+          a(href='/admin_remove_user') Remove a user
+        li.divider
+        li
+          a(href='/admin_add_team') Link a team
+        li.divider
+        li
+          a(href='/admin_create_team') Create a new team
+        li.divider
+        li
+          a(href='/admin_remove_user_team') Remove user from a team
+      ul#Helpbar.dropdown-content
+        li
+          a(href='/about') About
+        li
+          a(href='/changepassword') Change password
+        li
+          a(href='/buggy') Submit a bug
+      // Hambug Menu Options
+      ul#mobile-demo.side-nav.amber.lighten-5
+        li
+          font(color='green')
+            h5 Athletes
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') New Workout
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') Training Log
+        li.divider
+        li
+          font(color='blue')
+            h5#CoachMobT Trainers
+        li#D1.divider
+        li
+          a#CoachMob1.waves-effect.waves-light.btn-large.blue.darken-3(href='/coaches') View Athletes
+        li#D2.divider
+        li
+          font(color='red')
+            h5#AdminMobT Administrators
+        li#D3.divider
+        li
+          a#AdminMob1.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
+        li
+          a#AdminMob2.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
+        li#D4.divider
+        li
+          a#AdminMob3.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
+        li
+          a#AdminMob4.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
+        li#D5.divider
+        li
+          a#AdminMob5.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_team') Link a user to a Team
+        li
+          a#AdminMob6.waves-effect.waves-light.btn.red.darken-3(href='/admin_create_team') Create a new team
+        li
+          a#AdminMob7.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user_team') Remove user from a team
+        li#D6.divider
+        li
+          br
+        li#D7.divider
+        li
+          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/changepassword') Change password
+        li.divider
+        li
+          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/buggy') Submit a bug
+        li.divider
+        li
+          a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
+        li.divider
+        li
+          font(color='grey')
+            h6
+              center Team on a Cob 2016
+script.
+      window.onload = function(){
+      var x = "#{role}"
+        //Dat User B Athlete//
+        if (x == "Athlete"){
+          //Hiding Coach Content//
+          document.getElementById("DesktopCoach").style.display = "none";
+          document.getElementById("CoachMobT").style.display = "none";
+          document.getElementById("CoachMob1").style.display = "none";
+          document.getElementById("D1").style.display = "none";
+          document.getElementById("D2").style.display = "none";
+
+          //Hiding Admin Content//
+          document.getElementById("DesktopAdmin").style.display = "none";
+          document.getElementById("AdminMobT").style.display = "none";
+          document.getElementById("AdminMob1").style.display = "none";
+          document.getElementById("AdminMob2").style.display = "none";
+          document.getElementById("AdminMob3").style.display = "none";
+          document.getElementById("AdminMob4").style.display = "none";
+          document.getElementById("AdminMob5").style.display = "none";
+          document.getElementById("AdminMob6").style.display = "none";
+          document.getElementById("AdminMob7").style.display = "none";
+          document.getElementById("D3").style.display = "none";
+          document.getElementById("D4").style.display = "none";
+          document.getElementById("D5").style.display = "none";
+          document.getElementById("D6").style.display = "none";
+          document.getElementById("D7").style.display = "none";
+        }
+        //Dat User B Trainer Lettuce Hide Admin//
+        if(x == "Trainer"){
+          //Hiding Admin Content//
+          document.getElementById("DesktopAdmin").style.display = "none";
+          document.getElementById("AdminMobT").style.display = "none";
+          document.getElementById("AdminMob1").style.display = "none";
+          document.getElementById("AdminMob2").style.display = "none";
+          document.getElementById("AdminMob3").style.display = "none";
+          document.getElementById("AdminMob4").style.display = "none";
+          document.getElementById("AdminMob5").style.display = "none";
+          document.getElementById("AdminMob6").style.display = "none";
+          document.getElementById("AdminMob7").style.display = "none";
+          document.getElementById("D3").style.display = "none";
+          document.getElementById("D4").style.display = "none";
+          document.getElementById("D5").style.display = "none";
+          document.getElementById("D6").style.display = "none";
+          document.getElementById("D7").style.display = "none";
+        }
+      }
