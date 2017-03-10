@@ -23,11 +23,11 @@ html
     br
     br
     br
-    body
+    body(onload='myFunction()')
       .row
         .col.s12.m5.offset-m3
           .card.indigo.accent-4
-            .card-content.cyan-text
+            .card-content.white-text
               span.card-title
                 center
                   p.fonts
@@ -36,10 +36,10 @@ html
               .row
                 .col.s12.m12
                   .card.light-blue.darken-4
-                    .card-content.cyan-text
+                    .card-content.black-text
                       span.card-title Date Information:
                       center
-                        a.waves-effect.waves-light.btn.light-green(onclick='myFunction()') Autofill - Today
+                        a.waves-effect.waves-light.btn.blue.accent-3(onclick='myFunction()') Autofill - Today
                       br
                       script.
                         function myFunction() {
@@ -52,7 +52,8 @@ html
                         var y = p.getFullYear();
                         document.getElementById("currentyear").selectedIndex = y-2016;
                         }
-                      label Month
+                      label 
+                        font(color='black') Month
                       select#month.browser-default(name='month')
                         option(name='month', value='invalidmonth') --
                         option(name='month', value='January') January
@@ -69,7 +70,8 @@ html
                         option(name='month', value='December') December
                       br
                       br
-                      label Day of month
+                      label 
+                        font(color='black') Day of month
                       select#day.browser-default(name='day')
                         option(name='day', value='dayinvalid') --
                         option(name='day', value='1') 1
@@ -105,7 +107,8 @@ html
                         option(name='day', value='31') 31
                       br
                       br
-                      label Current Year
+                      label 
+                        font(color='black') Current Year
                       select#currentyear.browser-default(name='currentyear')
                         option(name='currentyear', value='0000') ----
                         option(name='currentyear', value='2017') 2017
@@ -123,17 +126,17 @@ html
               // Form Selector
               .col.s12.m12
                 .card.light-blue.darken-4
-                  .card-content.cyan-text
+                  .card-content.black-text
                     span.card-title Workout Entry Style:
                     br
                     input#f1.with-gap(name='fstyle', type='radio', onclick='formselection()', checked='')
                     label(name='fstyle', for='f1')
-                      font(color='white') First Workout Mode
+                      font(color='black') First Workout Mode
                     br
                     br
                     input#f2.with-gap(name='fstyle', type='radio', onclick='formselection()')
                     label(name='fstyle', for='f2')
-                      font(color='white') Interval Mode
+                      font(color='black') Interval Mode
               script.
                 function formselection(){
                 if(document.getElementById("f1").checked == true){
@@ -198,7 +201,7 @@ html
               .row
                 .col.s12.m12
                   .card.light-blue.darken-4
-                    .card-content.cyan-text
+                    .card-content.black-text
                       span.card-title Workout Information:
                       br
                       p#sleeplabel
@@ -295,19 +298,38 @@ html
                 .row
                   .col.s12.m12
                     .card.light-blue.darken-4
-                      .card-content.cyan-text
+                      .card-content.black-text
                         span.card-title Extra Information:
                         .row
                           .input-field.col.s12
                             textarea#textarea1.materialize-textarea(length='1024', name='mynotes')
-                            label(name='notes', for='textarea1') My Notes
+                            label(name='notes', for='textarea1') 
+                              font(color='black') My Notes
                         br
                         br
               center
-                button.btn.waves-effect.waves-light.light-blue.lighten-1(type='submit', name='action')
+                button.btn.waves-effect.waves-light.teal(type='submit', name='action')
                   | Submit My Workout
                   i.material-icons.right send
               br
+
+      //All labels should be visible//
+      style.
+        label {
+        color: #000;
+        }
+
+      //Change all of our primary colors that are THIS color to our new custom color//
+      style.
+        .card.indigo.accent-4 {
+        background-color: #2f4f4f !important;
+        }
+
+      //Change all of our secondary colors that are THIS color to our new custom color//
+      style.
+        .card.light-blue.darken-4 {
+        background-color: #b1f6cb !important;
+        }
       // Initialize the Labels
       script.
         document.getElementById("sleeplabel").innerHTML="<label>Hours of sleep</label>";
