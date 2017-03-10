@@ -27,7 +27,7 @@ html
       .row
         .col.s12.m5.offset-m3
           .card.indigo.accent-4
-            .card-content.cyan-text
+            .card-content.white-text
               span.card-title
                 center
                   p.fonts
@@ -35,17 +35,17 @@ html
             .row
               .col.s12.m12
                 .card.light-blue.darken-4
-                  .card-content.white-text
+                  .card-content.black-text
                     form(action='/admin_add_user_form', method='post')
                       label
-                        font(color='cyan') New username:
+                        font(color='black') New username:
                         font(color='red') *
                       input(type='text', name='newusername', required='')
                       br
                       br
                       label
-                        font(color='cyan') New user's password:
-                        font(color='cyan')
+                        font(color='black') New user's password:
+                        font(color='black')
                       br
                       label
                         b This is the unchangeable, default password for all users.
@@ -53,24 +53,24 @@ html
                       br
                       br
                       label
-                        font(color='cyan') New user's email:
+                        font(color='black') New user's email:
                       input(type='text', name='newuseremail')
                       br
                       br
                       label
-                        font(color='cyan') New user's first name:
+                        font(color='black') New user's first name:
                         font(color='red') *
                       input(type='text', name='newuserfirst', required='')
                       br
                       br
                       label
-                        font(color='cyan') New user's last name:
+                        font(color='black') New user's last name:
                         font(color='red') *
                       input(type='text', name='newuserlast', required='')
                       br
                       br
                       label
-                        font(color='cyan') New user's team association:
+                        font(color='black') New user's team association:
                         font(color='red') *
                       input(type='text', name='newuserteam', required='')
                       br
@@ -78,11 +78,11 @@ html
                       | Note: Fields with 
                       font(color='red')  * 
                       |  are a required field.
-                      font(color='cyan')
+                      font(color='black')
                         h5 Role Level:
                       .row
                         .col.s12.m12
-                          .card.indigo.accent-3
+                          .card.indigo.accent-4
                             .card-content.black-text
                               input#opt1.with-gap(name='userrole', type='radio', checked='', value='3')
                               label(name='userrole', for='opt1')
@@ -109,6 +109,24 @@ html
                           button.btn.waves-effect.waves-light.green(type='submit', name='action')
                             | Create User
                             i.material-icons.right send
+
+      //All labels should be visible//
+      style.
+        label {
+        color: #000;
+        }
+
+      //Change all of our primary colors that are THIS color to our new custom color//
+      style.
+        .card.indigo.accent-4 {
+        background-color: #2f4f4f !important;
+        }
+
+      //Change all of our secondary colors that are THIS color to our new custom color//
+      style.
+        .card.light-blue.darken-4 {
+        background-color: #b1f6cb !important;
+        }
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js

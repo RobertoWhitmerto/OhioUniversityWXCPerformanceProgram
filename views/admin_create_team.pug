@@ -31,26 +31,26 @@ html
               span.card-title
                 center
                   p.fonts
-                    font(color='cyan')
+                    font(color='white')
                       b Create a New Team
             .row
               .col.s12.m12
                 .card.light-blue.darken-4
                   .card-content.black-text
-                    font(color='cyan')
+                    font(color='black')
                       form(action='/admin_create_team_form', method='post')
                         label
-                          font(color='cyan') New Team Name:
+                          font(color='black') New Team Name:
                         input(type='text', name='team_name', required='')
                         br
                         br
                         label
-                          font(color='cyan') New Team Sport:
+                          font(color='black') New Team Sport:
                         input(type='text', name='sport', required='')
                         br
                         br
                         label
-                          font(color='cyan') New Team Gender:
+                          font(color='black') New Team Gender:
                         input(type='text', name='gender', required='')
                         br
                         br
@@ -60,6 +60,18 @@ html
                             i.material-icons.right send
                           br
                           br
+
+      //Change all of our primary colors that are THIS color to our new custom color//
+      style.
+        .card.indigo.accent-4 {
+        background-color: #2f4f4f !important;
+        }
+
+      //Change all of our secondary colors that are THIS color to our new custom color//
+      style.
+        .card.light-blue.darken-4 {
+        background-color: #b1f6cb !important;
+        }
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js

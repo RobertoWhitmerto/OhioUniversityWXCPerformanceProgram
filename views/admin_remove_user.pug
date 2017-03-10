@@ -31,21 +31,21 @@ html
               span.card-title
                 center
                   p.fonts
-                    font(color='cyan')
+                    font(color='white')
                       b Remove a User:
             .row
               .col.s12.m12
                 .card.light-blue.darken-4
                   .card-content.black-text
-                    font(color='cyan')
+                    font(color='black')
                       form(action='/admin_remove_user_form', method='post')
                         label
-                          font(color='cyan') Username:
+                          font(color='black') Username:
                         input(type='text', name='removeusername', required='')
                         br
                         br
                         label
-                          font(color='cyan') User's Last Name:
+                          font(color='black') User's Last Name:
                         input(type='text', name='removelastname', required='')
                         br
                         br
@@ -62,6 +62,18 @@ html
                   i.material-icons.right send
                 br
                 br
+
+      //Change all of our primary colors that are THIS color to our new custom color//
+      style.
+        .card.indigo.accent-4 {
+        background-color: #2f4f4f !important;
+        }
+
+      //Change all of our secondary colors that are THIS color to our new custom color//
+      style.
+        .card.light-blue.darken-4 {
+        background-color: #b1f6cb !important;
+        }
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js
