@@ -701,12 +701,12 @@ html
             h6
               center Team on a Cob 2016
     br
-    hr
+    br
     style(type='text/css').
       div.ez{
-      background: #01579b;
+      background: #b1f6cb;
       width:900px;
-      border: 3px solid #82b1ff;
+      border: 3px solid #000000;
       margin: auto;
       }
     style(type='text/css').
@@ -718,8 +718,9 @@ html
       }
     style.
       .table {
-      border: 3.5px solid #03a9f4;
+      border: 3.5px solid #000000;
       border-radius: 5px;
+      background: #2f4f4f;
       }
       .table-bordered > thead > tr > th,
       .table-bordered > tbody > tr > th,
@@ -727,7 +728,7 @@ html
       .table-bordered > thead > tr > td,
       .table-bordered > tbody > tr > td,
       .table-bordered > tfoot > tr > td {
-      border: 3px solid #03a9f4;
+      border: 3px solid #000000;
       border-radius: 5px;
       }
       h1{
@@ -749,14 +750,14 @@ html
       .container
         .row
           .col.s13.m13
-            .card.light-blue.darken-4
+            .card.teal.darken-3
               .card-content.white-text
                 span.card-title
                   center Coaches/Trainers View Athletes
                     .ez
                       br
                       - if (typeof(team) !== 'undefined'){
-                      li.btn.btn-info.red(href='#viewathletes', data-toggle='collapse') View Team - !{team}
+                      li.btn.btn-info.teal(href='#viewathletes', data-toggle='collapse') View Team - !{team}
                       -}
                       br
                       br
@@ -782,7 +783,7 @@ html
                                   td
                                     center
                                       // Button trigger modal
-                                      button.btn.cyan.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#editModal')
+                                      button.btn.teal.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#editModal')
                                         | View Charts
                         br
                         br
