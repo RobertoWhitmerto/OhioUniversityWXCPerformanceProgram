@@ -517,6 +517,25 @@ router.post("/myworkouts", function(req, res){
 	}
 });
 
+router.post("/myworkouts_update", function(req, res){
+		if(req.isAuthenticated()){
+		queries.update_workout({wid: req.body.wID}, function(err, result){
+			console.log(result);
+		});
+
+		//access workout info through [] index operator, rows of query returned
+		var workouts;
+
+		queries.get_workout({username: req.user.id}, function(err, result){
+			workouts = result;
+			console.log(req.body);
+			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
+		});
+	} else {
+	 	res.redirect('/');
+	}
+});
+
 router.post("/coaches", function(req, res){
 		if(req.isAuthenticated()){
 		if(req.user.role == 'Athlete'){
