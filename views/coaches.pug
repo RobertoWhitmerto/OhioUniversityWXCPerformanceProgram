@@ -826,9 +826,9 @@ html
       }
     style(type='text/css').
       div.ez2{
-      background: #304ffe;
+      background: #2f4f4f;
       width:525px;
-      border: 3px solid #82b1ff;
+      border: 3px solid #000000;
       margin: auto;
       }
     style.
@@ -850,7 +850,7 @@ html
       color:white;
       }
       td{
-      color:#18ffff;
+      color:#00cdcd;
       }
       th{
       color:white;
@@ -868,7 +868,7 @@ html
             .card.teal.darken-3
               .card-content.white-text
                 span.card-title
-                  center Coaches/Trainers View Athletes
+                  center Coaches View Athletes
                     .ez
                       br
                       - if (typeof(team) !== 'undefined'){
@@ -927,38 +927,47 @@ html
        // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
        $('.modal-trigger').leanModal();
     // Modal
-    #editModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel').light-blue.darken-4
-      .modal-dialog(role='document')
-        .modal-content
-          .modal-header
-            button.close(type='button', data-dismiss='modal', aria-label='Close')
-              span(aria-hidden='true') ×
-            h4#myModalLabel.modal-title
-              center
-                font(color='cyan') Weekly Charts:
-                  .ez2
-                    br
-                    a.btn.btn-info.green(href='#demo1', data-toggle='collapse') Sleep
-                    br
-                    #demo1.collapse
-                      #sleepchart
-                    a.btn.btn-info.green(href='#demo2', data-toggle='collapse') Distance
-                    br
-                    #demo2.collapse
-                      #distancechart
-                    a.btn.btn-info.green(href='#demo3', data-toggle='collapse') Training Load - Distance
-                    br
-                    #demo3.collapse
-                      #tload_distchart
-                    a.btn.btn-info.green(href='#demo5', data-toggle='collapse') Training Load - Time
-                    br
-                    #demo5.collapse
-                      #rpextimechart
-                    a.btn.btn-info.green(href='#demo6', data-toggle='collapse') Wellness
-                    br
-                    #demo6.collapse
-                      #wellnesschart
-                    br
+    #editModal.modal
+        .modal-content.teal.darken-3
+          button.close(type='button',data-dismiss='modal',aria-lebel='Close')
+            span(aria-hidden='true') x
+          h4
+            font(color='white') Weekly Charts:
+          center
+            .ez2
+              br
+              a.btn.btn-info.teal(href='#demo1', data-toggle='collapse') Sleep
+              br
+              br
+              #demo1.collapse
+                #sleepchart
+                br
+              a.btn.btn-info.teal(href='#demo2', data-toggle='collapse') Distance
+              br
+              br
+              #demo2.collapse
+                #distancechart
+                br
+              a.btn.btn-info.teal(href='#demo3', data-toggle='collapse') Training Load - Distance
+              br
+              br
+              #demo3.collapse
+                #tload_distchart
+                br
+              a.btn.btn-info.teal(href='#demo5', data-toggle='collapse') Training Load - Time
+              br
+              br
+              #demo5.collapse
+                #rpextimechart
+                br
+              a.btn.btn-info.teal(href='#demo6', data-toggle='collapse') Wellness
+              br
+              br
+              #demo6.collapse
+                #wellnesschart
+                br
+              br
+              br
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js
