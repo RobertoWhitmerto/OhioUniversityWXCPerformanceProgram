@@ -31,7 +31,15 @@ html
       google.charts.setOnLoadCallback(tload_dist);
       google.charts.setOnLoadCallback(tload_time);
       google.charts.setOnLoadCallback(wellness);
-      //Identifying Functions [B]
+      
+      // The following 5 functions create and fill a chart with data based on the 
+      // requested form by the client. They all utilize the data_w variable which
+      // is passed in through the myworkouts route which contains all of the workout
+      // information for that user. The date of each workout is then checked and either
+      // displayed in the chart (most recent 7 days) or used to calculate acute:chronic
+      // ratio (7, 28 days respectively). After this, two data points are drawn on the
+      // chart, the value for that day's workout, and the value for the acute:chronic
+      // ratio at that point in time.
       
       // ****************************** SLEEP CHART *************************************
       function sleepy() {
@@ -631,7 +639,9 @@ html
           h1
             b Weekly Charts:
           p
-    // Div that will hold the pie chart [C]
+    // Displaying the Weekly Charts
+    // The following creates 5 drop down buttons which display the chart 
+    // for the given data point.
     .ez2
       br
       a.btn.btn-info.teal(href='#demo1', data-toggle='collapse') Sleep
@@ -667,8 +677,6 @@ html
       br
     br
     hr
-    // END OF CHARTS 
-
          
     center
       .ez
@@ -678,6 +686,7 @@ html
           h1
             b Training Log:
           br
+          //if the data coming in is empty or invalid, just don't display the table
           - if (typeof(data) !== 'undefined'){  
           table.table.table-bordered
             thead
@@ -696,6 +705,8 @@ html
             tbody
               for workout in data
                 tr
+                  //this form holds the workout ID per workout as a hidden value, so if this workout should be deleted 
+                  //or edited, we know which workout to update/remove.
                   form(action='/myworkouts', method='post')
                     input(type='hidden', value=workout['wid'], name='wID', required='')
 
@@ -758,17 +769,6 @@ html
           $('.modal-trigger').leanModal();
           //$(_self.attr('href')).modal('show');
       });
-      //$('.modal-trigger').leanModal();
-      });
-      
-    //script. 
-      $('#modal1').on('modal-trigger', function(x) {
-      //get data-id attribute of the clicked element
-      var workoutId = $(x.relatedTarget).data('wID');
-      console.log("THIS\nIS\nIMPORTANT");
-      console.log(workoutId);
-      //populate the textbox
-      //$(e.currentTarget).find('input[name="bookId"]').val(bookId);
       });
 
 // Modal Structure
