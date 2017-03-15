@@ -247,6 +247,7 @@ router.post('/changepass', function(req, res) {
 
 	queries.update_user({username: req.user.id, password: req.body.pass}, function(err, result){
 
+
 		if(err)
 		{
 			req.visitor.event("FAILURE", "User failed to change Password").send();
@@ -256,6 +257,11 @@ router.post('/changepass', function(req, res) {
 			req.visitor.event("SUCCESS", "User changed password").send();
 		}
 
+		if(result.changedRows >= 1){
+			res.render('changepassword.pug', {message: "Change Successful!"});
+		} else {
+			res.render('changepassword.pug', {message: "Change Failed!"});
+		}
 	});
 
 });
