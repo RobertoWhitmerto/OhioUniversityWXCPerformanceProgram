@@ -783,7 +783,7 @@ html
     script.
       function myFunction() {
       console.log("HEY YO LOOK OVER HERE\n");
-      var test = $workoutID;
+      var wID = $workoutID;
       var sleep = $sleep;
       var illness = $illness;
       var injury = $injury;
@@ -793,7 +793,7 @@ html
       var time = $time;
       var distance = $distance;
       var notes = $notes;
-      console.log(test);
+      console.log(wID);
       //To Add the Links, assign dynamic value to these variables//
       var sleepV = sleep;           //Should read in the "number" value from original
       var illnessV =illness;    //String based selection, select input field
@@ -1032,7 +1032,11 @@ html
       br
       button.modal-action.modal-close.btn-flat.red(type='button', href='#!')
         font(color='white') Close
-      button.btn.blue.btn-primary(type='button') Update
+      form(action='/myworkouts_update', method='post')
+        input(type='hidden', value=wID, name='wID', required='')  
+        button.btn.blue.btn-primary(type='submit', name='action', wID)
+          | Update
+          i.material-icons.right send
 
     // Materialize CSS imports [body]
     // put this at the end of the body
