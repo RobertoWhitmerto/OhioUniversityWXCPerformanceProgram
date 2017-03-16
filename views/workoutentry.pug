@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title PPA - Workout Entry
+    title PPA - Daily Training Log
     // Materialize CSS imports [head]
     // Import Google Icon Font
     link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
@@ -31,7 +31,7 @@ html
               span.card-title
                 center
                   p.fonts
-                    b My Workout
+                    b Daily Training Log
             form(action='/workoutentry', method='post')
               .row
                 .col.s12.m12
@@ -127,41 +127,39 @@ html
               .col.s12.m12
                 .card.light-blue.darken-4
                   .card-content.black-text
-                    span.card-title Workout Entry Style:
+                    span.card-title Daily Workout Split:
                     br
                     input#f1.with-gap(name='fstyle', type='radio', onclick='formselection()', checked='')
                     label(name='fstyle', for='f1')
-                      font(color='black') First Workout Mode
+                      font(color='black') Primary Workout
                     br
                     br
                     input#f2.with-gap(name='fstyle', type='radio', onclick='formselection()')
                     label(name='fstyle', for='f2')
-                      font(color='black') Interval Mode
+                      font(color='black') Secondary Workout
               script.
                 function formselection(){
                 if(document.getElementById("f1").checked == true){
                 document.getElementById("sleephours").disabled = false;
-                document.getElementById("sleephours").type="number";
-                document.getElementById("sleeplabel").innerHTML="<label>Hours of sleep</label>";
+                document.getElementById("sleephours").style.display = "block";
+                document.getElementById("sleeplabel").innerHTML="<br><br><label>Hours of sleep</label>";
                 document.getElementById("illness").disabled = false;
-                document.getElementById("illness").style.visibility = "visible";
-                document.getElementById("illnesslabel").innerHTML="<label>General Health</label>";
+                document.getElementById("illness").style.display = "block";
+                document.getElementById("illnesslabel").innerHTML="<label>General Health Status</label>";
                 document.getElementById("injury").disabled = false;
                 document.getElementById("injury").style.visibility = "visible";
-                document.getElementById("injurylabel").innerHTML="<label>Irritation/Pain</label>";
+                document.getElementById("injurylabel").innerHTML="<label>Location of Pain, Discomfort, or Irritation</label>";
                 document.getElementById("percent_health").disabled = false;
-                document.getElementById("percent_health").type = "number";
-                document.getElementById("wellnesslabel").innerHTML = "<label>Wellness Score</label><br><label>(100% = Full Health, 0% = Not able to Workout)</label>";
+                document.getElementById("percent_health").style.visibility = "visible";
+                document.getElementById("wellnesslabel").innerHTML = "<label>Perception of Wellness, Health and Pain</label>";
                 document.getElementById("hungry").disabled = false;
                 document.getElementById("hungry").style.visibility = "visible";
-                document.getElementById("hungrylabel").innerHTML ="<label>24-hour Hunger Score</label>";
+                document.getElementById("hungrylabel").innerHTML ="<label>Perception of Hunger and Fullness Over 24-Hours</label>";
                 document.getElementById("opta").disabled = false;
                 document.getElementById("opta").style.display = "block";
                 document.getElementById("optb").disabled = false;
                 document.getElementById("optb").style.display = "block";
                 document.getElementById("cyclelabel").innerHTML ="<label>Start of cycle</label><br>";
-                document.getElementById("textarea1").disabled = false;
-                document.getElementById("et").style.display = "block";
                 document.getElementById("spacer1").innerHTML="<br><br>";
                 document.getElementById("spacer2").innerHTML="<br><br>";
                 document.getElementById("spacer3").innerHTML="<br><br>";
@@ -170,16 +168,18 @@ html
                 }
                 if(document.getElementById("f2").checked == true){
                 document.getElementById("sleephours").disabled = true;
-                document.getElementById("sleephours").type = "hidden";
+
+                document.getElementById("sleephours").style.display = "none";
                 document.getElementById("sleeplabel").innerHTML="";
                 document.getElementById("illness").disabled = true;
-                document.getElementById("illness").style.visibility = "hidden";
+
+                document.getElementById("illness").style.display = "none";
                 document.getElementById("illnesslabel").innerHTML="";
                 document.getElementById("injury").disabled = true;
                 document.getElementById("injury").style.visibility = "hidden";
                 document.getElementById("injurylabel").innerHTML="";
                 document.getElementById("percent_health").disabled = true;
-                document.getElementById("percent_health").type = "hidden";
+                document.getElementById("percent_health").style.visibility = "hidden";
                 document.getElementById("wellnesslabel").innerHTML="";
                 document.getElementById("hungry").disabled = true;
                 document.getElementById("hungry").style.visibility = "hidden";
@@ -189,8 +189,6 @@ html
                 document.getElementById("optb").disabled = true;
                 document.getElementById("optb").style.display = "none";
                 document.getElementById("cyclelabel").innerHTML ="";
-                document.getElementById("textarea1").disabled = true;
-                document.getElementById("et").style.display = "none";
                 document.getElementById("spacer1").innerHTML="";
                 document.getElementById("spacer2").innerHTML="";
                 document.getElementById("spacer3").innerHTML="";
@@ -203,38 +201,58 @@ html
                   .card.light-blue.darken-4
                     .card-content.black-text
                       span.card-title Workout Information:
-                      br
                       p#sleeplabel
-                      input#sleephours(type='number', name='sleephours', min='0', max='14')
+                      input#sleephours(type='number', name='sleephours', min='0', max='24', step='any')
                       p#spacer1
                       p#illnesslabel
                       select#illness.browser-default(name='illness')
                         option(name='illness', value='n/a') N/A
-                        option(name='illness', value='fever') Fever
-                        option(name='illness', value='gi_distress') GI Distress
-                        option(name='illness', value='upper respiratory') Upper Respiratory
                         option(name='illness', value='abnormal fatigue') Abnormal Fatigue
-                        option(name='illness', value='insomnia') Insomnia
-                        option(name='illness', value='irritability') Irritability
                         option(name='illness', value='decreased motivation') Decreased Motivation
-                        option(name='illness', value='weight loss') Weight Loss
-                        option(name='illness', value='chronic soreness') Chronic Soreness
+                        option(name='illness', value='muscle soreness') Muscle Soreness
+                        option(name='illness', value='fever') Fever
+                        option(name='illness', value='headache') Headache
+                        option(name='illness', value='chest congestion') Chest Congestion
+                        option(name='illness', value='upset stomach') Upset Stomach
+                        option(name='illness', value='insomnia') Insomnia
+                        option(name='illness', value='other') Other
                       p#spacer2
                       p#injurylabel
                       select#injury.browser-default(name='injury')
                         option(name='injury', value='n/a') N/A
-                        option(name='injury', value='foot arch') Foot Arch
-                        option(name='injury', value='Heel') Heel
+                        option(name='injury', value='foot') Foot
+                        option(name='injury', value='ankle') Ankle
                         option(name='injury', value='shin') Shin
+                        option(name='injury', value='calf') Calf
                         option(name='injury', value='knee') Knee
-                        option(name='injury', value='it band') IT Band
+                        option(name='injury', value='thigh') Thigh
+                        option(name='injury', value='hamstring') Hamstring
                         option(name='injury', value='hip') Hip
-                        option(name='injury', value='low back') Low Back
                         option(name='injury', value='pelvis') Pelvis
-                        option(name='injury', value='rib') Rib
+                        option(name='injury', value='low back') Low Back
+                        option(name='injury', value='mid back') Mid Back
+                        option(name='injury', value='upper back') Upper Back
+                        option(name='injury', value='shoulder') Shoulder
+                        option(name='injury', value='upper arm') Upper Arm
+                        option(name='injury', value='elbow') Elbow
+                        option(name='injury', value='wrist') Wrist
+                        option(name='injury', value='hand') Hand
+                        option(name='injury', value='neck') Neck
+                        option(name='injury', value='head') Head
                       p#spacer3
                       p#wellnesslabel
-                      input#percent_health(name='percent_health', type='number', min='0', max='100', step='10')
+                      select#percent_health.browser-default(name='percent_health')
+                        option(name='percent_health', value='100') 100% Healthy - Physically and Mentally Focused
+                        option(name='percent_health', value='90') 90%
+                        option(name='percent_health', value='80') 80%
+                        option(name='percent_health', value='70') 70%
+                        option(name='percent_health', value='60') 60%
+                        option(name='percent_health', value='50') 50%
+                        option(name='percent_health', value='40') 40%
+                        option(name='percent_health', value='30') 30%
+                        option(name='percent_health', value='20') 20%
+                        option(name='percent_health', value='10') 10%
+                        option(name='percent_health', value='0') 0% Unable to Function or Exercise
                       p#spacer5
                       label RPE Information
                       select#rpeinfo.browser-default(name='rpeinfo')
@@ -277,17 +295,17 @@ html
                       p#hungrylabel
                       select#hungry.browser-default(name='hungry')
                         option(name='hungry', value='unknown') --
-                        option(name='hungry', value='0') 0 - Empty
-                        option(name='hungry', value='1') 1 - Ravenous
-                        option(name='hungry', value='2') 2 - Very Hungry
-                        option(name='hungry', value='3') 3 - Lightly Hungry
-                        option(name='hungry', value='4') 4 - Lightly Hungry
-                        option(name='hungry', value='5') 5 - Neutral
-                        option(name='hungry', value='6') 6 - Lightly Full; Satisfied
-                        option(name='hungry', value='7') 7 - Lightly Full; Satisfied
-                        option(name='hungry', value='8') 8 - Full
-                        option(name='hungry', value='9') 9 - Stuffed
-                        option(name='hungry', value='10') 10 - Sick
+                        option(name='hungry', value='0') 0 - No Appetite
+                        option(name='hungry', value='1') 1 - 
+                        option(name='hungry', value='2') 2 - 
+                        option(name='hungry', value='3') 3 - Below Normal Appetite 
+                        option(name='hungry', value='4') 4 - 
+                        option(name='hungry', value='5') 5 - Normal Appetite
+                        option(name='hungry', value='6') 6 - 
+                        option(name='hungry', value='7') 7 - Above Normal Appetite
+                        option(name='hungry', value='8') 8 - 
+                        option(name='hungry', value='9') 9 - 
+                        option(name='hungry', value='10') 10 - Extremely High Appetite
                       p#spacer4
                       p#cyclelabel
                       input#opt1.with-gap(name='cycle', type='radio', checked='', value='no')
@@ -317,6 +335,7 @@ html
       //All labels should be visible//
       style.
         label {
+        font-weight: bold;
         color: #000;
         }
 
@@ -333,11 +352,11 @@ html
         }
       // Initialize the Labels
       script.
-        document.getElementById("sleeplabel").innerHTML="<label>Hours of sleep</label>";
-        document.getElementById("illnesslabel").innerHTML="<label>General Health</label>";
-        document.getElementById("injurylabel").innerHTML="<label>Irritation/Pain</label>";
-        document.getElementById("wellnesslabel").innerHTML = "<label>Wellness Score</label><br><label>(100% = Full Health, 0% = Not able to Workout)</label>";
-        document.getElementById("hungrylabel").innerHTML ="<label>24-hour Hunger Score</label>";
+        document.getElementById("sleeplabel").innerHTML="<br><br><label>Hours of sleep</label>";
+        document.getElementById("illnesslabel").innerHTML="<label>General Health Status</label>";
+        document.getElementById("injurylabel").innerHTML="<label>Location of Pain, Discomfort, or Irritation</label>";
+        document.getElementById("wellnesslabel").innerHTML = "<label>Perception of Wellness, Health and Pain</label>";
+        document.getElementById("hungrylabel").innerHTML ="<label>Perception of Hunger and Fullness Over 24-Hours</label>";
         document.getElementById("cyclelabel").innerHTML ="<label>Start of cycle</label><br>";
         document.getElementById("spacer1").innerHTML="<br><br>";
         document.getElementById("spacer2").innerHTML="<br><br>";
