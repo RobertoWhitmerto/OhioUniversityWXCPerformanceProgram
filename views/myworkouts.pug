@@ -28,7 +28,6 @@ html
       // Set a callback to run when the Google Visualization API is loaded [A].
       google.charts.setOnLoadCallback(sleepy);
       google.charts.setOnLoadCallback(dist);
-      google.charts.setOnLoadCallback(tload_dist);
       google.charts.setOnLoadCallback(tload_time);
       google.charts.setOnLoadCallback(wellness);
       
@@ -86,7 +85,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             
@@ -129,7 +128,7 @@ html
           console.log(rolling_total_chronic);
           console.log("acute rolling average for sleep: ");
           console.log(rolling_total_acute);
-          rows[slot][0] = k.getDate().toString();
+          rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
           //rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
@@ -142,9 +141,11 @@ html
       legend: 'none',
       lineWidth: 3,
       backgroundColor: '#ffffff',
-      legend: { position: 'bottom' },
+      hAxis: {
+         title: "Date"
+      },
       vAxis: {
-      title: "Hours of Sleep",
+      title: "Hours",
       viewWindowMode:'explicit'
       },
       colors: ['#006400','#32cd32']
@@ -199,7 +200,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             var rolling_total=0;
@@ -237,18 +238,19 @@ html
         rolling_total /= 28;
         console.log("rolling average for dist: ");
         console.log(rolling_total);
-        rows[slot][0] = k.getDate().toString();
+        rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
         //rows[slot][2] = rolling_total;
         slot++;
       }
       console.log(rows);
       data.addRows(rows);
       // Set chart options
-      var options = {'title':'Distance Ran',
+      var options = {
       'width':700,
       'height':200,
+      hAxis: { title: 'Date'},
       vAxis: {
-      title: "Distance",
+      title: "Miles",
       viewWindowMode:'explicit'
       },
       legend: 'none',
@@ -301,7 +303,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             
@@ -410,7 +412,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             
@@ -453,20 +455,21 @@ html
           console.log(rolling_total_chronic);
           console.log("acute rolling average for tload_time: ");
           console.log(rolling_total_acute);
-          rows[slot][0] = k.getDate().toString();
+          rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
           rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
       console.log(rows);
       data.addRows(rows);
       // Set chart options
-      var options = {'title':'Training Load - Time',
+      var options = {
       'width':700,
       'height':200,
       seriesType: 'bars',
       series: {1: {type: 'line', targetAxisIndex:1}},
-      vAxes: {0: {viewWindowMode:'explicit'},
-              1: {gridlines: {color: 'transparent'}},
+      hAxis: {title: 'Date'},
+      vAxes: {0: {viewWindowMode:'explicit', title: 'RPE x Mins'},
+              1: {gridlines: {color: 'transparent'}, title: 'Acute:Chronic Workload'},
               },
       legend: 'none',
       lineWidth: 3,
@@ -523,7 +526,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             var rolling_total=0;
@@ -561,7 +564,7 @@ html
           rolling_total /= 28;
           console.log("rolling average for sleep: ");
           console.log(rolling_total);
-          rows[slot][0] = k.getDate().toString();
+          rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
           //rows[slot][2] = rolling_total;
           slot++;
       }
@@ -575,8 +578,9 @@ html
       legend: 'none',
       lineWidth: 3,
       backgroundColor: '#ffffff',
+      hAxis: {title: 'Date'},
       vAxis: {
-      title: "Wellness %",
+      title: "% of Full Health",
       viewWindowMode:'explicit'
       },
       colors: ['#006400'],
@@ -655,13 +659,8 @@ html
       br
       #demo2.collapse
         #distancechart
-      tab1.btn.btn-info.teal(href='#demo3', data-toggle='collapse') Training Load - Distance
-      br
-      br
-      #demo3.collapse
-        #tload_distchart
         br
-      a.btn.btn-info.teal(href='#demo5', data-toggle='collapse') Training Load - Time
+      a.btn.btn-info.teal(href='#demo5', data-toggle='collapse') Accumulated Training Load
       br
       br
       #demo5.collapse
