@@ -17,7 +17,7 @@ html
     // Import materialize.css
     link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
     // Let browser know website is optimized for mobile
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     // Load the AJAX API
     script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
@@ -702,119 +702,7 @@ html
     });
     
   body(background='/views/bg3.png')
-    // Navbar up at the top
-    nav
-      .nav-wrapper.light-blue.darken-4
-        a.brand-logo
-          font(color='cyan') PPA
-        a.button-collapse(href='#', data-activates='mobile-demo')
-          i.material-icons menu
-        ul.right.hide-on-med-and-down
-          li
-            a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
-              | Athletes
-              i.material-icons.right arrow_drop_down
-          li
-            a.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
-              | Coaches/Trainers
-              i.material-icons.right arrow_drop_down
-          li
-            a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
-              | Administrators
-              i.material-icons.right arrow_drop_down
-          li
-            a.dropdown-button.red.accent-4(href='#', data-activates='Helpbar')
-              | Need Help?
-              i.material-icons.right arrow_drop_down
-          li
-            a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
-      // Drop down associations Non-Mobile
-      ul#Athletes.dropdown-content
-        li
-          a(href='/workoutentry') New Workout
-        li.divider
-        li
-          a(href='/myworkouts') Training Log
-      ul#CoachesTrainers.dropdown-content
-        li
-          a(href='/coaches') View Athletes
-      ul#Administrators.dropdown-content
-        li
-          a(href='/datadumpindividual') CSV Data Dump (Individual)
-        li.divider
-        li
-          a(href='/datadumpteam') CSV Data Dump (Team)
-        li.divider
-        li
-          a(href='/admin_add_user') Add a user
-        li.divider
-        li
-          a(href='/admin_remove_user') Remove a user
-        li.divider
-        li
-          a(href='/admin_add_team') Link a Team
-      ul#Helpbar.dropdown-content
-        li
-          a(href='/about') About
-        li
-          a(href='/changepassword') Change password
-        li
-          a(href='/buggy') Submit a bug
-      // Hambug Menu Options
-      ul#mobile-demo.side-nav.amber.lighten-5
-        li
-          font(color='green')
-            h5 Athletes
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') New Workout
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') Training Log
-        li.divider
-        li
-          font(color='blue')
-            h5 Trainers
-        li.divider
-        li
-          a.waves-effect.waves-light.btn-large.blue.darken-3(href='/coaches') View Athletes
-        li.divider
-        li
-          font(color='red')
-            h5 Administrators
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_team') Link a Team
-        li
-          br
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/changepassword') Change password
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/buggy') Submit a bug
-        li.divider
-        li
-          a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
-        li.divider
-        li
-          font(color='grey')
-            h6
-              center Team on a Cob 2016
+    include navi.pug
     br
     br
     style(type='text/css').
