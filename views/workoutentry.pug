@@ -254,17 +254,16 @@ html
                         option(name='percent_health', value='10') 10%
                         option(name='percent_health', value='0') 0% Unable to Function or Exercise
                       p#spacer5
-                      label RPE Information
+                      label Workout Type
                       select#rpeinfo.browser-default(name='rpeinfo')
                         option(name='rpeinfo', value='unknown') ----
-                        option(name='rpeinfo', value='aerobic') Zone 1: Aerobic
-                        option(name='rpeinfo', value='threshold') Zone 2: Threshold
-                        option(name='rpeinfo', value='interval') Zone 3: Interval
+                        option(name='rpeinfo', value='aerobic') Aerobic
+                        option(name='rpeinfo', value='sprint/interval') Sprint/Interval Training
+                        option(name='rpeinfo', value='resistance') Resistance Training
                         option(name='rpeinfo', value='crosstraining') Cross Training
-                        option(name='rpeinfo', value='strengthandconditioning') Strength and Conditioning
                       br
                       br
-                      label RPE (6-20)
+                      label Rating of Perceived Exertion
                       select.browser-default(name='rpeval')
                         option(name='rpeval', value='rpeinvalid') --
                         option(name='rpeval', value='6') 6 - Rest
