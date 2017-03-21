@@ -101,7 +101,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             
@@ -144,7 +144,7 @@ html
           //console.log(rolling_total_chronic);
           //console.log("acute rolling average for sleep: ");
           //console.log(rolling_total_acute);
-          rows[slot][0] = k.getDate().toString();
+          rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
           //rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
@@ -157,9 +157,9 @@ html
       legend: 'none',
       lineWidth: 3,
       backgroundColor: '#ffffff',
-      legend: { position: 'bottom' },
+      hAxis: { title: "Date" },
       vAxis: {
-      title: "Hours of Sleep",
+      title: "Hours",
       viewWindowMode:'explicit'
       },
       colors: ['#006400','#32cd32']
@@ -237,7 +237,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             var rolling_total=0;
@@ -275,18 +275,18 @@ html
         rolling_total /= 28;
         console.log("rolling average for dist: ");
         console.log(rolling_total);
-        rows[slot][0] = k.getDate().toString();
+        rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
         //rows[slot][2] = rolling_total;
         slot++;
       }
       console.log(rows);
       data.addRows(rows);
       // Set chart options
-      var options = {'title':'Distance Ran',
+      var options = {
       'width':500,
       'height':200,
-      vAxis: {
-      title: "Distance",
+      hAxis: { title: "Date"},
+      vAxis: { title: "Miles",
       viewWindowMode:'explicit'
       },
       legend: 'none',
@@ -413,13 +413,14 @@ html
       console.log(rows);
       data.addRows(rows);
       // Set chart options
-      var options = {'title':'Training Load - Time',
+      var options = {
       'width':500,
       'height':200,
       seriesType: 'bars',
       series: {1: {type: 'line', targetAxisIndex:1}},
-      vAxes: {0: {viewWindowMode:'explicit'},
-              1: {gridlines: {color: 'transparent'}},
+      hAxis: {title: "Date"},
+      vAxes: {0: {viewWindowMode:'explicit', title: 'RPE x Mins'},
+              1: {gridlines: {color: 'transparent'}, title: 'Acute:Chronic Workload'},
               },
       legend: 'none',
       lineWidth: 3,
@@ -465,7 +466,7 @@ html
       for(var i=0; i<d.length; i++) {
         var obj = d[i];
         console.log(obj);
-      }
+        }
       
       var oneWeekAgo_1 = new Date();
       oneWeekAgo_1.setDate(oneWeekAgo + 1);
@@ -499,7 +500,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             var rolling_total=0;
@@ -537,7 +538,7 @@ html
           rolling_total /= 28;
           console.log("rolling average for sleep: ");
           console.log(rolling_total);
-          rows[slot][0] = k.getDate().toString();
+          rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
           //rows[slot][2] = rolling_total;
           slot++;
       }
@@ -551,8 +552,9 @@ html
       legend: 'none',
       lineWidth: 3,
       backgroundColor: '#ffffff',
+      hAxis: {title: 'Date'},
       vAxis: {
-      title: "Wellness %",
+      title: "% of Full Health",
       viewWindowMode:'explicit'
       },
       colors: ['#006400'],
@@ -702,7 +704,7 @@ html
               #demo2.collapse
                 #distancechart
                 br
-              a.btn.btn-info.teal(href='#demo5', data-toggle='collapse') Training Load - Time
+              a.btn.btn-info.teal(href='#demo5', data-toggle='collapse') Accumulated Training Load
               br
               br
               #demo5.collapse
