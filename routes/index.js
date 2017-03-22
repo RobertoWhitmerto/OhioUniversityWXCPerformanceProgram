@@ -7,14 +7,14 @@ var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
 var ua = require('universal-analytics');
-var nodemailer = require("nodemailer");
+/*var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport("SMTP",{
    service: "Gmail",
    auth: {
        user: "ouwxcpp@gmail.com",
        pass: "teamonacob"
    }
-});
+});*/
 
 router.use(ua.middleware("UA-91318722-1", {cookieName: '_ga'}));
 
@@ -522,7 +522,7 @@ router.post("/bugreport", function(req, res){
 router.post("/emailpassword", function(req, res){
   console.log(req.body.forgot_email);
   
-  smtpTransport.sendMail({
+  /*smtpTransport.sendMail({
 	   from: "OUWXCPP <ouwxcpp@gmail.com>", // sender address
 	   to: req.body.forgot_email, // comma separated list of receivers
 	   subject: "Reset Password", // Subject line
@@ -534,7 +534,7 @@ router.post("/emailpassword", function(req, res){
 	       console.log("Mail sent: " + response.message);
 	   }
 	
-	});
+	});*/
     
   res.redirect('/');
 });
