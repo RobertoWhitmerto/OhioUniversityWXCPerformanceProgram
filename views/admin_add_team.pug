@@ -27,11 +27,11 @@ html
       function LoadTeams(){
       //Put the variable passed over here and remove static example//
       var example = !{homeboize};     //(!) UNCOMMENT (!) json object being passed to the pug file
-      var Result = [];    //(!) UNCOMMENT (!) array that should be empty to store the json as an array
+      var Result = [];                //(!) UNCOMMENT (!) array that should be empty to store the json as an array
 
       //Lets convert our team json data to an array in JavaScript//
-      for(var i in example)             //(!) UNCOMMENT (!) For each entry in the json
-        Result.push([example[i].team_name]);   //(!) UNCOMMENT (!) Push it to result as an array element
+      for(var i in example)                     //(!) UNCOMMENT (!) For each entry in the json
+        Result.push([example[i].team_name]);    //(!) UNCOMMENT (!) Push it to result as an array element
 
       //Lets display our teams in alphabetical order//
       Result.toString();  //Ensure that the data is type string
@@ -40,8 +40,9 @@ html
       var teams = document.getElementById("AllTeams");
 
       for(var i = 0; i < Result.length; i++){
-      var opt = document.createElement("option");
+      var opt = document.createElement("Option");
       opt.text = Result[i];
+      opt.value = Result[i];
       teams.add(opt);
       }
       document.getElementById("TeamButton").disabled = true;
@@ -60,7 +61,7 @@ html
       var Result = [];                //(!) UNCOMMENT (!) array that should be empty to store the json as an array
 
       //Lets convert our team json data to an array in JavaScript//
-      for(var i in example)             //(!) UNCOMMENT (!) For each entry in the json
+      for(var i in example)                   //(!) UNCOMMENT (!) For each entry in the json
         Result.push([example[i].username]);   //(!) UNCOMMENT (!) Push it to result as an array element
 
       //Lets display our teams in alphabetical order//
@@ -69,8 +70,9 @@ html
 
       var users = document.getElementById("AllUser");
       for(var i = 0; i < Result.length; i++){
-      var opt2 = document.createElement("option");
-      opt2.text = Result[i];
+      var opt2 = document.createElement("Option");
+      opt2.text = Result[i];  
+      opt2.value = Result[i];
       users.add(opt2);
       }
       document.getElementById("UserButton").disabled = true;
