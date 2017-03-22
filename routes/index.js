@@ -31,7 +31,7 @@ router.get('/', function(req, res){
 // Logout
 router.get('/logout', function(req, res){
 	req.visitor.pageview("/logout").send();
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		req.visitor.event("Sign in event", "User Logging out").send();
 		req.logout();
 		res.redirect('/');
@@ -43,7 +43,7 @@ router.get('/logout', function(req, res){
 // Workout Entry
 router.get('/workoutentry', function(req, res){
 	req.visitor.pageview("/workoutentry").send();
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
     var role = req.user.role;    
 		res.render('workoutentry.pug',{role});
 	} else {
@@ -54,7 +54,7 @@ router.get('/workoutentry', function(req, res){
 // View my workouts
 router.get('/myworkouts', function(req, res){
 	req.visitor.pageview("/myworkouts").send();
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		//access workout info through [] index operator, rows of query returned
 		var workouts;
 		queries.get_workout({username: req.user.id}, function(err, result){
@@ -74,7 +74,7 @@ router.get('/myworkouts', function(req, res){
 router.get('/admin_athlete_vis', function(req, res){
 	req.visitor.pageview("/admin_athlete_vis").send();
 
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == 'Admin' || admin.user.role == 'Coach'){
 			queries.get_workout({username: req.user.id}, function(err, result){
 			var users = result;
@@ -92,7 +92,7 @@ router.get('/admin_athlete_vis', function(req, res){
 // Add User
 router.get('/admin_add_user', function(req, res){
 	req.visitor.pageview("/admin_add_user").send();
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		console.log(req.user.role);
 		if(req.user.role == 'Admin'){
 			res.render('admin_add_user.pug');
@@ -107,7 +107,7 @@ router.get('/admin_add_user', function(req, res){
 // Remove User
 router.get('/admin_remove_user', function(req, res){
 	req.visitor.pageview("/admin_remove_user").send();
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == 'Admin'){
 			res.render('admin_remove_user.pug');
 		} else {
@@ -122,7 +122,7 @@ router.get('/admin_remove_user', function(req, res){
 router.get('/about',
         function(req, res){
         	req.visitor.pageview("/about").send();
-			if(req.isAuthenticated()){
+			if(req.isAuthenticated() && req.user.pass != 'T'){
         var role = req.user.role;
 				res.render('about.pug',{role});
 			} else {
@@ -146,7 +146,7 @@ router.get('/changepassword',
 router.get('/buggy',
         function(req, res){
         	req.visitor.pageview("/buggy").send();
-			if(req.isAuthenticated()){
+			if(req.isAuthenticated() && req.user.pass != 'T'){
         var role = req.user.role;    
 				res.render('buggy.pug', {role});
 			} else {
@@ -158,7 +158,7 @@ router.get('/buggy',
 router.get('/admin_create_team',
         function(req, res){
         	req.visitor.pageview("/admin_create_team").send();
-			if(req.isAuthenticated()){
+			if(req.isAuthenticated() && req.user.pass != 'T'){
 				res.render('admin_create_team.pug');
 			} else {
 				res.redirect('/');
@@ -169,7 +169,7 @@ router.get('/admin_create_team',
 router.get('/admin_remove_user_team',
         function(req, res){
         	req.visitor.pageview("/admin_remove_user_team").send();
-			if(req.isAuthenticated()){
+			if(req.isAuthenticated() && req.user.pass != 'T'){
 				res.render('admin_remove_user_team.pug');
 			} else {
 				res.redirect('/');
@@ -180,7 +180,8 @@ router.get('/admin_remove_user_team',
 router.get('/admin_add_team',
         function(req, res){
         	req.visitor.pageview("/admin_add_team").send();
-			if(req.isAuthenticated()){
+        	console.log(req.user);
+			if(req.isAuthenticated() && req.user.pass != 'T'){
 				res.render('admin_add_team.pug');
 			} else {
 				res.redirect('/');
@@ -191,7 +192,7 @@ router.get('/admin_add_team',
 router.get('/coaches', function(req, res){
 	req.visitor.pageview("/coaches").send();
 	
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == 'athlete'){
 			res.redirect(req.get('referer'));
 		} else {
@@ -219,7 +220,7 @@ router.get('/coaches', function(req, res){
 // Data Dump Individual
 router.get('/datadumpindividual', function(req, res){
 			req.visitor.pageview("/datadumpindividual").send();
-			if(req.isAuthenticated()){
+			if(req.isAuthenticated() && req.user.pass != 'T'){
 
 				if(req.user.role == 'Admin'){
 			queries.get_workout({username: req.user.id, teams: req.user.team}, function(err, result){
@@ -238,7 +239,7 @@ router.get('/datadumpindividual', function(req, res){
 
 router.get('/datadumpTeam',function(req, res){
 	req.visitor.pageview("/datadumpTeam").send();
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == "Admin"){
 			res.render('admin_data_dump_b.pug');
 		} else {
@@ -261,7 +262,7 @@ router.post('/changepass', function(req, res) {
 			}
 			console.log(hash);
 			
-			queries.update_user({username: req.user.id, password: hash}, function(err, result){
+			queries.update_user({username: req.user.id, password: hash, passflag: 'F'}, function(err, result){
 				console.log(result);
 
 				if(err)
@@ -406,7 +407,7 @@ router.post('/register', function(req, res){
 passport.use(new LocalStrategy( function(username, password, done){
 
 	queries.get_user({username: username}, function(err, users){
-		if(users.length <= 0) return done(null, false, {message: 'Username is invalid'});
+		if(!err && users.length <= 0) return done(null, false, {message: 'Username is invalid'});
 
 		//get the user's teams
 		queries.get_userteam({username: users[0].username}, function(err, teams){
@@ -457,13 +458,18 @@ passport.deserializeUser(function(id, done){
 		for(var i=0; i<teams.length; i++){
 			userteams.push(teams[i].team_name);
 		}
-		done(null,{uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams});
+		done(null,{uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams, pass: users[0].passflag});
 	});
 	});
 });
 
 
 router.post('/', passport.authenticate('local', {failureRedirect: '/'}), function(req, res){
+
+		if(req.user.pass == 'T')
+		{
+			res.redirect('/changepassword');
+		}
 
 		if(req.user.role == 'Athlete'){
 			req.visitor.event("Sign in", "Athlete Logging in").send();
@@ -474,6 +480,7 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 		}
 		req.visitor.set("Operating System", process.platform);
 		req.visitor.set("uid", req.user.id);
+
 
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
@@ -528,7 +535,7 @@ router.post("/admin_remove_user_form", function(req, res){
 });
 /*
 router.post("/changepass", function(req, res){
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		// Add db query here to store new password
 	} else {
 		res.redirect('/');
@@ -538,7 +545,7 @@ router.post("/changepass", function(req, res){
 
 /*
 router.post("/bugreport", function(req, res){
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		// Add database query or js email
 	} else {
 		res.redirect('/');
@@ -569,7 +576,7 @@ router.post("/emailpassword", function(req, res){
 
 router.post("/myworkouts", function(req, res){
 		console.log("$$$$$$$$$$$$$$$");
-		if(req.isAuthenticated()){
+		if(req.isAuthenticated() && req.user.pass != 'T'){
 		queries.remove_workout({wid: req.body.wID}, function(err, result){
 			console.log(result);
 		});
@@ -589,7 +596,7 @@ router.post("/myworkouts", function(req, res){
 
 router.post("/myworkouts_update", function(req, res){
 		console.log("@@@@@@@@@@@@@@@@");
-		if(req.isAuthenticated()){
+		if(req.isAuthenticated() && req.user.pass != 'T'){
 		queries.update_workout({wid: req.body.wID}, function(err, result){
 			console.log(result);
 		});
@@ -608,7 +615,7 @@ router.post("/myworkouts_update", function(req, res){
 });
 
 router.post("/coaches", function(req, res){
-		if(req.isAuthenticated()){
+		if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == 'Athlete'){
 			res.redirect(req.get('referer'));
 		} else {
