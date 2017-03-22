@@ -182,7 +182,19 @@ router.get('/admin_add_team',
         	req.visitor.pageview("/admin_add_team").send();
         	console.log(req.user);
 			if(req.isAuthenticated() && req.user.pass != 'T'){
-				res.render('admin_add_team.pug');
+		var allteams;
+    var allusr;
+    var role = req.user.role;
+    queries.get_user({},function(err, result){
+      allusr = result;
+		queries.get_team({},function(err, result){
+			allteams = result;
+
+			res.render('admin_add_team.pug', { homegang:JSON.stringify(allusr), homeboize: JSON.stringify(allteams), data: allteams, role });
+		});
+  });
+
+
 			} else {
 				res.redirect('/');
 			}

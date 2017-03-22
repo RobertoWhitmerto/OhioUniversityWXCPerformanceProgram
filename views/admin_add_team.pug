@@ -15,6 +15,84 @@ html
       $(".dropdown-button").dropdown();
       $(".button-collapse").sideNav();
       });
+
+
+
+
+
+
+    // ---------------------------------------------------------------------------------
+    // - Team Dynamic Select JavaScript Function -
+    script.
+      function LoadTeams(){
+      //Put the variable passed over here and remove static example//
+      var example = !{homeboize};     //(!) UNCOMMENT (!) json object being passed to the pug file
+      var Result = [];    //(!) UNCOMMENT (!) array that should be empty to store the json as an array
+
+      //Lets convert our team json data to an array in JavaScript//
+      for(var i in example)             //(!) UNCOMMENT (!) For each entry in the json
+        Result.push([example[i].team_name]);   //(!) UNCOMMENT (!) Push it to result as an array element
+
+      //Lets display our teams in alphabetical order//
+      Result.toString();  //Ensure that the data is type string
+      Result.sort();      //sort the teams
+
+      var teams = document.getElementById("AllTeams");
+
+      for(var i = 0; i < Result.length; i++){
+      var opt = document.createElement("option");
+      opt.text = Result[i];
+      teams.add(opt);
+      }
+      document.getElementById("TeamButton").disabled = true;
+      }
+    // - End of Team Dynamic Select JavaScript Function -
+
+
+
+
+    // ---------------------------------------------------------------------------------
+    // - User Dynamic Select JavaScript Function -
+    script.
+      function LoadUser(){
+      //Put the variable passed over here and remove static example//
+      var example = !{homegang};      //(!) UNCOMMENT (!) json object being passed to the pug file
+      var Result = [];                //(!) UNCOMMENT (!) array that should be empty to store the json as an array
+
+      //Lets convert our team json data to an array in JavaScript//
+      for(var i in example)             //(!) UNCOMMENT (!) For each entry in the json
+        Result.push([example[i].username]);   //(!) UNCOMMENT (!) Push it to result as an array element
+
+      //Lets display our teams in alphabetical order//
+      Result.toString();  //Ensure that the data is type string
+      Result.sort();      //sort the teams
+
+      var users = document.getElementById("AllUser");
+      for(var i = 0; i < Result.length; i++){
+      var opt2 = document.createElement("option");
+      opt2.text = Result[i];
+      users.add(opt2);
+      }
+      document.getElementById("UserButton").disabled = true;
+      }
+    // - End of User Dynamic Select JavaScript Function -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Background pattern from Subtle Patterns//
   body(background='/views/bg3.png')
     include navi.pug
@@ -39,14 +117,28 @@ html
                   .card-content.black-text
                     font(color='black')
                       form(action='/admin_add_team_form', method='post')
-                        label
-                          font(color='black') Username:
-                        input(type='text', name='username', required='')
+                        // - User Dynamic Select -
+                        p
+                          b  Select User:
+                        center
+                          button#UserButton(type='button', onclick='LoadUser()') Refresh Users
                         br
                         br
-                        label
-                          font(color='black') Team Name:
-                        input(type='text', name='team_name', required='')
+                        select#AllUser.browser-default
+                          option  ---- 
+                        // ---------------------------------------------------------------------------------
+                        br
+                        br
+                        // - Team Dynamic Select field -
+                        p
+                          b Team to add user to: 
+                        center
+                          button#TeamButton(type='button', onclick='LoadTeams()') Refresh Teams
+                        
+                        br
+                        select#AllTeams.browser-default
+                          option  ---- 
+                        // ---------------------------------------------------------------------------------
                         br
                         br
                         br
@@ -56,7 +148,9 @@ html
                             i.material-icons.right send
                           br
                           br
-
+      script.
+        document.getElementById("TeamButton").disabled = false;
+        document.getElementById("UserButton").disabled = false;
       //Change all of our primary colors that are THIS color to our new custom color//
       style.
         .card.indigo.accent-4 {
