@@ -8,6 +8,7 @@ html
     // Import materialize.css
     link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
     // Let browser know website is optimized for mobile
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
   body(background='/views/bg.jpg')
     br
@@ -33,7 +34,7 @@ html
                       .card.blue.accent-2
                         .card-content.white-text
                           span.card-title Log in:
-                          form(action='/', method='post')
+                          form(name='form1', method='post', action='/')
                             i.material-icons.prefix account_circle
                             input(type='text', placeholder='Username', name='username', required='')
                             br
@@ -47,19 +48,44 @@ html
                               i.material-icons.right send
                   .card-action
                     center
-                      a.waves-effect.waves-light.btn.modal-trigger(href='#modal')
+                      a.waves-effect.waves-light.btn.modal-trigger(href='#modal1')
                         | Forgot Password
                         i.material-icons.right help
                       b
                         h6
                           font(color='white') Team on a Cob 2017
                       
+    // Button trigger modal
     script.
       $(document).ready(function(){
       // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
       $(document).on("click", ".modal-trigger", function (e) {
       
           e.preventDefault();
+      
+          var _self = $(this);
+      
+          var wID = _self.data('id');
+          var sleep = _self.data('id2');
+          var illness = _self.data('id3');
+          var injury = _self.data('id4');
+          var percent_health = _self.data('id5');
+          var cycle_start = _self.data('id6');
+          var RPE = _self.data('id7');
+          var time = _self.data('id8');
+          var distance = _self.data('id9');
+          var notes = _self.data('id10');
+          //$("#workoutID") = wID;
+          $workoutID = wID;
+          $sleep = sleep;
+          $illness = illness;
+          $injury = injury;
+          $percent_health = percent_health;
+          $cycle_start = cycle_start;
+          $RPE = RPE;
+          $time = time
+          $distance = distance;
+          $notes = notes;
           $('.modal-trigger').leanModal();
           //$(_self.attr('href')).modal('show');
       });
@@ -67,14 +93,26 @@ html
         
 #modal1.modal
   .modal-content.light-blue.darken-4
-    h4 
-      font(color='cyan') Edit Workout
-    center
-      a.waves-effect.waves-light.btn.light-green(onclick='myFunction()') Load Workout Data
-     
-        
-      // Materialize CSS imports [body]
-      // put this at the end of the body
-      // Import jQuery before materialize.js
-      script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
-      script(type='text/javascript', src='js/materialize.min.js')
+    font(color='cyan')
+      .container
+        .row
+          .col.s12.m12
+            .card.light-blue.darken-2
+              .card-content.white-text
+                span.card-title
+                  center Forgot Password:
+                form(name='form2', method='post', action='/emailpassword')
+                  | Email registered to account:
+                  input(type='text', name='forgot_email')
+                  br
+                  br
+                  center
+                    button.waves-effect.waves-light.btn.light-green(type='submit', name='action')
+                      | Reset Password
+                      i.material-icons.right email
+
+    // Materialize CSS imports [body]
+    // put this at the end of the body
+    // Import jQuery before materialize.js
+    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(type='text/javascript', src='js/materialize.min.js')

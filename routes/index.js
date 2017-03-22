@@ -7,7 +7,14 @@ var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
 var ua = require('universal-analytics');
-
+var nodemailer = require("nodemailer");
+var smtpTransport = nodemailer.createTransport("SMTP",{
+   service: "Gmail",
+   auth: {
+       user: "ouwxcpp@gmail.com",
+       pass: "teamonacob"
+   }
+});
 
 router.use(ua.middleware("UA-91318722-1", {cookieName: '_ga'}));
 
@@ -438,7 +445,6 @@ passport.deserializeUser(function(id, done){
 
 router.post('/', passport.authenticate('local', {failureRedirect: '/'}), function(req, res){
 
-
 		if(req.user.role == 'Athlete'){
 			req.visitor.event("Sign in", "Athlete Logging in").send();
 			res.redirect('/workoutentry');
@@ -511,6 +517,27 @@ router.post("/bugreport", function(req, res){
 	}
 });
 */
+
+//this route is the post for the modal form for the "forgot password" function
+router.post("/emailpassword", function(req, res){
+  console.log(req.body.forgot_email);
+  
+  smtpTransport.sendMail({
+	   from: "OUWXCPP <ouwxcpp@gmail.com>", // sender address
+	   to: req.body.forgot_email, // comma separated list of receivers
+	   subject: "Reset Password", // Subject line
+	   text: "Here is your reset password: " // plaintext body
+	}, function(error, response){
+	   if(error){
+	       console.log(error);
+	   }else{
+	       console.log("Mail sent: " + response.message);
+	   }
+	
+	});
+    
+  res.redirect('/');
+});
 
 router.post("/myworkouts", function(req, res){
 		console.log("$$$$$$$$$$$$$$$");
