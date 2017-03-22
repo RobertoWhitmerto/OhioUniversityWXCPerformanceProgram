@@ -457,15 +457,23 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 router.post("/admin_add_user_form", function(req, res){
   console.log(req.body);
 
+  var message;
+
   queries.insert_user({username: req.body.newusername, email: req.body.newuseremail, first: req.body.newuserfirst, last: req.body.newuserlast, password: req.body.newuserpass, role: req.body.userrole}, function(err, result){
 		console.log(result);
-		if(result.affectedRows > 0)
+		if(!err && result.affectedRows > 0)
 		{
 			console.log("successfully added user");
+			message = "successfully added user";
+		}
+		else
+		{
+			console.log("Could Not add user " + err);
+			message = "Error: Could not add user";
 		}
 	});
 
-  res.redirect('/admin_add_user');
+  res.render('admin_add_user.pug', {message: message} );
 });
 
 //ADMIN REMOVE USER FORM PARSER
