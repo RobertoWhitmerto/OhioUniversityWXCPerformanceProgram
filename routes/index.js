@@ -473,6 +473,7 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 			res.redirect('/coaches');
 		}
 		req.visitor.set("Operating System", process.platform);
+		req.visitor.set("uid", req.user.id);
 
 		// If this function is called, the authentication was succesful.
 		// 'req.user' contains the authenticated user.
