@@ -368,7 +368,7 @@ router.post('/getdatadumpteam', function(req, res) {
 
 
 
-
+/*
 // Register a User
 router.post('/register', function(req, res){
 
@@ -401,7 +401,7 @@ router.post('/register', function(req, res){
 			message: 'User successfully added!'
 		});
 	}
-});
+});*/
 
 passport.use(new LocalStrategy( function(username, password, done){
 
@@ -416,11 +416,7 @@ passport.use(new LocalStrategy( function(username, password, done){
 				userteams.push(teams[i].team_name);
 			}
 
-			if(users[0].username = ('Admin' |'roberto' | 'brent' | 'Andy'| 'poeisforplebs') ){
-				return done(null, {uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams, pass: users[0].passflag });
-			}
-
-			bcrypt.compare(password, user[0].password, function(err, res) {
+			bcrypt.compare(password, users[0].password, function(err, res) {
 				if(res == true) {
 					console.log("we get here?");
 					return done(null, {uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams, pass: users[0].passflag });

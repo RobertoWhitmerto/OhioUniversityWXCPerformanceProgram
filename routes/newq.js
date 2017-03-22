@@ -227,7 +227,7 @@ function get_RPEInfo(done){
 function insert_user(input, done){
 	var table = "User";
 	var columns = "(username, password, email, first, last, rid, create_time, passflag)";
-	var values = `("${input.username}", "password", "${input.email}", "${input.first}", "${input.last}", "${input.role}", NOW(), "T")`;
+	var values = `("${input.username}", "${input.password}", "${input.email}", "${input.first}", "${input.last}", "${input.role}", NOW(), "T")`;
 	console.log(input);
 
 	insertquery(table, columns, values, function(query){
@@ -381,6 +381,7 @@ function update_user(input, done){
 	if(input.first) updates.push(`first="${input.first}"`);
 	if(input.last) updates.push(`last="${input.last}"`);
 	if(input.role) updates.push(`role_name="${input.role}"`);
+	if(input.passflag) updates.push(`passflag="${input.passflag}"`);
 
 	var updstring = updates.join(', ');
 	var condition = `username="${input.username}"`;

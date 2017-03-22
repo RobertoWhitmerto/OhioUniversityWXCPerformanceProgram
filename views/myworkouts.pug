@@ -706,7 +706,7 @@ html
                 tr
                   //this form holds the workout ID per workout as a hidden value, so if this workout should be deleted 
                   //or edited, we know which workout to update/remove.
-                  form(action='/myworkouts', method='post')
+                  form(name='form1', action='/myworkouts', method='post')
                     input(type='hidden', value=workout['wid'], name='wID', required='')
 
                     td.datetag= workout['date']
@@ -1031,7 +1031,7 @@ html
       br
       button.modal-action.modal-close.btn-flat.red(type='button', href='#!')
         font(color='white') Close
-      form(action='/myworkouts_update', method='post')
+      form(name='form2', action='/myworkouts_update', method='post')
         input(type='hidden', value=wID, name='wID', required='')  
         button.btn.blue.btn-primary(type='submit', name='action', wID)
           -console.log("%%%%%%%%%%%%%%%%%%");
