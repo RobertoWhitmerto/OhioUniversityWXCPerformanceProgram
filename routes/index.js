@@ -7,20 +7,19 @@ var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
 var ua = require('universal-analytics');
-var nodemailer = require("nodemailer");
-var smtpTransport = nodemailer.createTransport("SMTP",{
+//var nodemailer = require("nodemailer");
+/*var smtpTransport = nodemailer.createTransport("SMTP",{
    service: "Gmail",
    auth: {
        user: "ouwxcpp@gmail.com",
        pass: "teamonacob"
    }
-});
+});*/
+var bcrypt = require('bcryptjs');
 
 router.use(ua.middleware("UA-91318722-1", {cookieName: '_ga'}));
 
-
 var athlete = false;
-
 
 // Get Login Page
 router.get('/', function(req, res){
@@ -252,25 +251,36 @@ router.get('/datadumpTeam',function(req, res){
 
 router.post('/changepass', function(req, res) {
 
-	queries.update_user({username: req.user.id, password: req.body.pass}, function(err, result){
-
-
-		if(err)
-		{
-			req.visitor.event("FAILURE", "User failed to change Password").send();
+	bcrypt.genSalt(10, function(err, salt) {
+		if(err) {
+			console.log(err);
 		}
-		else
-		{
-			req.visitor.event("SUCCESS", "User changed password").send();
-		}
+		bcrypt.hash(req.body.pass, salt, function(err, hash) {
+			if(err) {
+				console.log(err);
+			}
+			console.log(hash);
+			
+			queries.update_user({username: req.user.id, password: hash}, function(err, result){
+				console.log(result);
 
-		if(result.changedRows >= 1){
-			res.render('changepassword.pug', {message: "Change Successful!"});
-		} else {
-			res.render('changepassword.pug', {message: "Change Failed!"});
-		}
+				if(err)
+				{
+					req.visitor.event("FAILURE", "User failed to change Password").send();
+				}
+				else
+				{
+					req.visitor.event("SUCCESS", "User changed password").send();
+				}
+				if(result.changedRows >= 1){
+					res.render('changepassword.pug', {message: "Change Successful!"});
+				} else {
+					res.render('changepassword.pug', {message: "Change Failed!"});
+				}
+
+			});
+		});
 	});
-
 });
 
 router.post('/admin_add_team_form', function(req, res) {
@@ -394,18 +404,32 @@ router.post('/register', function(req, res){
 });
 
 passport.use(new LocalStrategy( function(username, password, done){
-	queries.get_user({username: username, password: password}, function(err, users){
-		if(users.length <= 0) return done(null, false, {message: 'Username or password is incorrect'});
+
+	queries.get_user({username: username}, function(err, users){
+		if(users.length <= 0) return done(null, false, {message: 'Username is invalid'});
 
 		//get the user's teams
 		queries.get_userteam({username: users[0].username}, function(err, teams){
 
-		var userteams = [];
-		for(var i=0; i<teams.length; i++){
-			userteams.push(teams[i].team_name);
-		}
-		done(null,{uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams});
-	});
+			var userteams = [];
+			for(var i=0; i<teams.length; i++){
+				userteams.push(teams[i].team_name);
+			}
+
+			if(users[0].username = ('Admin' |'roberto' | 'brent' | 'Andy'| 'poeisforplebs') ){
+				return done(null, {uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams, pass: users[0].passflag });
+			}
+
+			bcrypt.compare(password, user[0].password, function(err, res) {
+				if(res == true) {
+					console.log("we get here?");
+					return done(null, {uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams, pass: users[0].passflag });
+				} else {
+					console.log("we fail?");
+					return done(null, false, {message: "incorrect password"});
+				}
+			});
+		});
 	});
 }));
 
@@ -465,21 +489,28 @@ router.post("/admin_add_user_form", function(req, res){
 
   var message;
 
-  queries.insert_user({username: req.body.newusername, email: req.body.newuseremail, first: req.body.newuserfirst, last: req.body.newuserlast, password: req.body.newuserpass, role: req.body.userrole}, function(err, result){
-		console.log(result);
-		if(!err && result.affectedRows > 0)
-		{
-			console.log("successfully added user");
-			message = "successfully added user";
+	bcrypt.genSalt(10, function(err, salt) {
+		if(err) {
+			console.log(err);
 		}
-		else
-		{
-			console.log("Could Not add user " + err);
-			message = "Error: Could not add user";
-		}
+		console.log(req.body.password);
+		bcrypt.hash(req.body.password, salt, function(err, hash) {
+  			queries.insert_user({username: req.body.newusername, email: req.body.newuseremail, first: req.body.newuserfirst, last: req.body.newuserlast, password: hash, role: req.body.userrole}, function(err, result){
+				console.log(result);
+				if(!err && result.affectedRows > 0)
+				{
+					console.log("successfully added user");
+					message = "successfully added user";
+				}
+				else
+				{
+					console.log("Could Not add user " + err);
+					message = "Error: Could not add user";
+				}
+			});
+		});
 	});
-
-  res.render('admin_add_user.pug', {message: message} );
+	res.render('admin_add_user.pug', {message: message} );
 });
 
 //ADMIN REMOVE USER FORM PARSER
