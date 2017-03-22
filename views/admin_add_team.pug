@@ -43,6 +43,7 @@ html
       var opt = document.createElement("Option");
       opt.text = Result[i];
       opt.value = Result[i];
+      opt.name = "team_name";
       teams.add(opt);
       }
       document.getElementById("TeamButton").disabled = true;
@@ -73,6 +74,7 @@ html
       var opt2 = document.createElement("Option");
       opt2.text = Result[i];  
       opt2.value = Result[i];
+      opt2.name = "username";
       users.add(opt2);
       }
       document.getElementById("UserButton").disabled = true;
@@ -128,10 +130,8 @@ html
                         br
                         select#AllUser.browser-default
                           option  ---- 
-                        // ---------------------------------------------------------------------------------
                         br
                         br
-                        // - Team Dynamic Select field -
                         p
                           b Team to add user to: 
                         center
@@ -140,7 +140,6 @@ html
                         br
                         select#AllTeams.browser-default
                           option  ---- 
-                        // ---------------------------------------------------------------------------------
                         br
                         br
                         br
