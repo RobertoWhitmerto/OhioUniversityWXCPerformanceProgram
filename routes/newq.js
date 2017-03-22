@@ -381,6 +381,7 @@ function update_user(input, done){
 	if(input.first) updates.push(`first="${input.first}"`);
 	if(input.last) updates.push(`last="${input.last}"`);
 	if(input.role) updates.push(`role_name="${input.role}"`);
+	if(input.passflag) updates.push(`passflag="${input.passflag}"`);
 
 	var updstring = updates.join(', ');
 	var condition = `username="${input.username}"`;
