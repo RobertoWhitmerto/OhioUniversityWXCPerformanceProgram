@@ -1034,6 +1034,7 @@ html
       form(action='/myworkouts_update', method='post')
         input(type='hidden', value=wID, name='wID', required='')  
         button.btn.blue.btn-primary(type='submit', name='action', wID)
+          -console.log("%%%%%%%%%%%%%%%%%%");
           | Update
           i.material-icons.right send
 

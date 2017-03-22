@@ -47,9 +47,32 @@ html
                               i.material-icons.right send
                   .card-action
                     center
+                      a.waves-effect.waves-light.btn.modal-trigger(href='#modal')
+                        | Forgot Password
+                        i.material-icons.right help
                       b
                         h6
-                          font(color='grey') Team on a Cob 2016
+                          font(color='white') Team on a Cob 2017
+                      
+    script.
+      $(document).ready(function(){
+      // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
+      $(document).on("click", ".modal-trigger", function (e) {
+      
+          e.preventDefault();
+          $('.modal-trigger').leanModal();
+          //$(_self.attr('href')).modal('show');
+      });
+      });
+        
+#modal1.modal
+  .modal-content.light-blue.darken-4
+    h4 
+      font(color='cyan') Edit Workout
+    center
+      a.waves-effect.waves-light.btn.light-green(onclick='myFunction()') Load Workout Data
+     
+        
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js

@@ -505,6 +505,7 @@ router.post("/bugreport", function(req, res){
 */
 
 router.post("/myworkouts", function(req, res){
+		console.log("$$$$$$$$$$$$$$$");
 		if(req.isAuthenticated()){
 		queries.remove_workout({wid: req.body.wID}, function(err, result){
 			console.log(result);
@@ -524,6 +525,7 @@ router.post("/myworkouts", function(req, res){
 });
 
 router.post("/myworkouts_update", function(req, res){
+		console.log("@@@@@@@@@@@@@@@@");
 		if(req.isAuthenticated()){
 		queries.update_workout({wid: req.body.wID}, function(err, result){
 			console.log(result);
