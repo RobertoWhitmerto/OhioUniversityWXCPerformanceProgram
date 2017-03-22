@@ -17,7 +17,7 @@ html
     // Import materialize.css
     link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
     // Let browser know website is optimized for mobile
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     // Load the AJAX API
     script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
@@ -29,7 +29,6 @@ html
       // Set a callback to run when the Google Visualization API is loaded [A].
       google.charts.setOnLoadCallback(sleepy);
       google.charts.setOnLoadCallback(dist);
-      google.charts.setOnLoadCallback(tload_dist);
       google.charts.setOnLoadCallback(tload_time);
       google.charts.setOnLoadCallback(wellness);
       //Identifying Functions [B]
@@ -102,7 +101,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             
@@ -145,7 +144,7 @@ html
           //console.log(rolling_total_chronic);
           //console.log("acute rolling average for sleep: ");
           //console.log(rolling_total_acute);
-          rows[slot][0] = k.getDate().toString();
+          rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
           //rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
@@ -158,9 +157,9 @@ html
       legend: 'none',
       lineWidth: 3,
       backgroundColor: '#ffffff',
-      legend: { position: 'bottom' },
+      hAxis: { title: "Date" },
       vAxis: {
-      title: "Hours of Sleep",
+      title: "Hours",
       viewWindowMode:'explicit'
       },
       colors: ['#006400','#32cd32']
@@ -238,7 +237,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             var rolling_total=0;
@@ -276,18 +275,18 @@ html
         rolling_total /= 28;
         console.log("rolling average for dist: ");
         console.log(rolling_total);
-        rows[slot][0] = k.getDate().toString();
+        rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
         //rows[slot][2] = rolling_total;
         slot++;
       }
       console.log(rows);
       data.addRows(rows);
       // Set chart options
-      var options = {'title':'Distance Ran',
+      var options = {
       'width':500,
       'height':200,
-      vAxis: {
-      title: "Distance",
+      hAxis: { title: "Date"},
+      vAxis: { title: "Miles",
       viewWindowMode:'explicit'
       },
       legend: 'none',
@@ -298,138 +297,6 @@ html
       // Instantiate and draw our chart, passing in some options.
       var chart2 = new google.visualization.LineChart(document.getElementById('distancechart'));
       chart2.draw(data, options);
-      }
-      
-      //********************* tload_dist CHART ***********************************
-      function tload_dist() {
-      // Create the data table.
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'day');
-      data.addColumn('number', '(RPE x Distance)');
-      data.addColumn('number', 'Acute:Chronic Ratio');
-      var oneWeekAgo = new Date();
-      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      var oneMonthAgo = new Date();
-      oneMonthAgo.setDate(oneMonthAgo.getDate() - 28);
-      var x = !{data_x};
-      var d = [];
-      
-      var currentathlete = window.currentuid;
-      console.log(currentathlete);
-      
-      for(var i=0; i<x.length; i++) {
-        var obj = x[i];
-        console.log(obj);
-      }
-        
-        
-      for(var i=0; i<x.length; i++) {
-        var obj = x[i];
-        if(obj.username == currentathlete) {
-          console.log(obj);
-          d.push(obj);
-        }
-      }
-      
-      for(var i=0; i<d.length; i++) {
-        var obj = d[i];
-        console.log(obj);
-        }      
-      
-      var oneWeekAgo_1 = new Date();
-      oneWeekAgo_1.setDate(oneWeekAgo + 1);
-      var oneWeekAgo_2 = new Date();
-      oneWeekAgo_2.setDate(oneWeekAgo + 2);
-      var oneWeekAgo_3 = new Date();
-      oneWeekAgo_3.setDate(oneWeekAgo + 3);
-      var oneWeekAgo_4 = new Date();
-      oneWeekAgo_4.setDate(oneWeekAgo + 4);
-      var oneWeekAgo_5 = new Date();
-      oneWeekAgo_5.setDate(oneWeekAgo + 5);
-      var oneWeekAgo_6 = new Date();
-      oneWeekAgo_6.setDate(oneWeekAgo + 6);
-      var oneWeekAgo_7 = new Date();
-      oneWeekAgo_7.setDate(oneWeekAgo + 7);
-      
-      var rows = [[oneWeekAgo_1.toString(),0.0,100],[oneWeekAgo_2.toString(),0.0,100],
-                  [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
-                  [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
-      
-      for(var i = 0; i < d.length; i++) {
-          var obj = d[i];
-          console.log("DATE: ");
-          var dt = new Date(Date.parse(obj.date));
-          var dt_fixed = dt.getDate() + 1;
-          //console.log(obj.date);
-          
-          //console.log(oneWeekAgo);
-          if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
-            if(slot < 0)
-              slot = slot * (-1);
-            
-            console.log(slot);
-            console.log(dt.getDate() + 1);
-            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
-          }
-      }
-      var now = new Date();
-      now.setDate(now.getDate() - 1);
-      //loop through last week's dates to add rolling averages
-      var slot = 0;
-      for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
-          console.log("K: " + k.getDate());
-          if(slot < 0)
-            slot = slot * (-1);
-          console.log("SLOT: " + slot);
-          var rolling_total_chronic=0;
-          var rolling_total_acute=0;
-          var avg_count=0;
-          for(var j = 0; j < d.length; j++){
-            var wrk = d[j];
-            var wrk_dt = new Date(Date.parse(wrk.date));
-            var chronic_dt = new Date(k);
-            chronic_dt.setDate(chronic_dt.getDate() - 28);
-            if(wrk_dt > chronic_dt && wrk_dt < k){
-              rolling_total_chronic += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
-              avg_count++;
-            }
-            var acute_dt = new Date(k);
-            acute_dt.setDate(acute_dt.getDate() - 7);
-            if(wrk_dt > acute_dt && wrk_dt < k){
-              rolling_total_acute += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
-            }
-          }
-          console.log("COUNT:" + avg_count);
-          rolling_total_chronic /= 28;
-          rolling_total_acute /= 7;
-          console.log("chronic rolling average for tload_dist: ");
-          console.log(rolling_total_chronic);
-          console.log("acute rolling average for tload_dist: ");
-          console.log(rolling_total_acute);
-          rows[slot][0] = k.getDate().toString();
-          rows[slot][2] = rolling_total_acute / rolling_total_chronic;
-          slot++;
-      }
-      console.log(rows);
-      data.addRows(rows);
-      // Set chart options
-      var options = {'title':'Training Load - Distance',
-      'width':500,
-      'height':200,
-      seriesType: 'bars',
-      series: {1: {type: 'line', targetAxisIndex:1}},
-      vAxes: {0: {viewWindowMode:'explicit'},
-              1: {gridlines: {color: 'transparent'}},
-              },
-      legend: 'none',
-      lineWidth: 3,
-      colors: ['#006400','#32cd32'],
-      backgroundColor: '#ffffff'
-      };
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.ComboChart(document.getElementById('tload_distchart'));
-      chart.draw(data, options);
       }
       
       // ************************* TRAINING LOAD TIME CHART ******************************************
@@ -546,13 +413,14 @@ html
       console.log(rows);
       data.addRows(rows);
       // Set chart options
-      var options = {'title':'Training Load - Time',
+      var options = {
       'width':500,
       'height':200,
       seriesType: 'bars',
       series: {1: {type: 'line', targetAxisIndex:1}},
-      vAxes: {0: {viewWindowMode:'explicit'},
-              1: {gridlines: {color: 'transparent'}},
+      hAxis: {title: "Date"},
+      vAxes: {0: {viewWindowMode:'explicit', title: 'RPE x Mins', textPosition: 'in'},
+              1: {gridlines: {color: 'transparent'}, title: 'Acute:Chronic Workload', textPosition: 'in'},
               },
       legend: 'none',
       lineWidth: 3,
@@ -598,7 +466,7 @@ html
       for(var i=0; i<d.length; i++) {
         var obj = d[i];
         console.log(obj);
-      }
+        }
       
       var oneWeekAgo_1 = new Date();
       oneWeekAgo_1.setDate(oneWeekAgo + 1);
@@ -632,7 +500,7 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = dt.getDate() - oneWeekAgo.getDate();
             if(slot < 0)
               slot = slot * (-1);
             var rolling_total=0;
@@ -670,7 +538,7 @@ html
           rolling_total /= 28;
           console.log("rolling average for sleep: ");
           console.log(rolling_total);
-          rows[slot][0] = k.getDate().toString();
+          rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
           //rows[slot][2] = rolling_total;
           slot++;
       }
@@ -684,8 +552,9 @@ html
       legend: 'none',
       lineWidth: 3,
       backgroundColor: '#ffffff',
+      hAxis: {title: 'Date'},
       vAxis: {
-      title: "Wellness %",
+      title: "% of Full Health",
       viewWindowMode:'explicit'
       },
       colors: ['#006400'],
@@ -702,119 +571,7 @@ html
     });
     
   body(background='/views/bg3.png')
-    // Navbar up at the top
-    nav
-      .nav-wrapper.light-blue.darken-4
-        a.brand-logo
-          font(color='cyan') PPA
-        a.button-collapse(href='#', data-activates='mobile-demo')
-          i.material-icons menu
-        ul.right.hide-on-med-and-down
-          li
-            a.dropdown-button.green.lighten-1(href='#', data-activates='Athletes')
-              | Athletes
-              i.material-icons.right arrow_drop_down
-          li
-            a.dropdown-button.blue.lighten-1(href='#', data-activates='CoachesTrainers')
-              | Coaches/Trainers
-              i.material-icons.right arrow_drop_down
-          li
-            a.dropdown-button.red.lighten-1(href='#', data-activates='Administrators')
-              | Administrators
-              i.material-icons.right arrow_drop_down
-          li
-            a.dropdown-button.red.accent-4(href='#', data-activates='Helpbar')
-              | Need Help?
-              i.material-icons.right arrow_drop_down
-          li
-            a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
-      // Drop down associations Non-Mobile
-      ul#Athletes.dropdown-content
-        li
-          a(href='/workoutentry') New Workout
-        li.divider
-        li
-          a(href='/myworkouts') Training Log
-      ul#CoachesTrainers.dropdown-content
-        li
-          a(href='/coaches') View Athletes
-      ul#Administrators.dropdown-content
-        li
-          a(href='/datadumpindividual') CSV Data Dump (Individual)
-        li.divider
-        li
-          a(href='/datadumpteam') CSV Data Dump (Team)
-        li.divider
-        li
-          a(href='/admin_add_user') Add a user
-        li.divider
-        li
-          a(href='/admin_remove_user') Remove a user
-        li.divider
-        li
-          a(href='/admin_add_team') Link a Team
-      ul#Helpbar.dropdown-content
-        li
-          a(href='/about') About
-        li
-          a(href='/changepassword') Change password
-        li
-          a(href='/buggy') Submit a bug
-      // Hambug Menu Options
-      ul#mobile-demo.side-nav.amber.lighten-5
-        li
-          font(color='green')
-            h5 Athletes
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.green.darken-3(href='/workoutentry') New Workout
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.green.darken-3(href='/myworkouts') Training Log
-        li.divider
-        li
-          font(color='blue')
-            h5 Trainers
-        li.divider
-        li
-          a.waves-effect.waves-light.btn-large.blue.darken-3(href='/coaches') View Athletes
-        li.divider
-        li
-          font(color='red')
-            h5 Administrators
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpindividual') CSV Data Dump (Individual)
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/datadumpteam') CSV Data Dump (Team)
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_user') Add a User
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_remove_user') Remove a User
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.red.darken-3(href='/admin_add_team') Link a Team
-        li
-          br
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/about') About
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/changepassword') Change password
-        li.divider
-        li
-          a.waves-effect.waves-light.btn.blue-grey.darken-3(href='/buggy') Submit a bug
-        li.divider
-        li
-          a.waves-effect.waves-light.btn-large.orange(href='/logout') Log-out
-        li.divider
-        li
-          font(color='grey')
-            h6
-              center Team on a Cob 2016
+    include navi.pug
     br
     br
     style(type='text/css').
@@ -908,7 +665,6 @@ html
          //console.log(this.value);
          sleepy();
          dist();
-         tload_dist();
          tload_time();
          wellness();
        });
@@ -948,13 +704,7 @@ html
               #demo2.collapse
                 #distancechart
                 br
-              a.btn.btn-info.teal(href='#demo3', data-toggle='collapse') Training Load - Distance
-              br
-              br
-              #demo3.collapse
-                #tload_distchart
-                br
-              a.btn.btn-info.teal(href='#demo5', data-toggle='collapse') Training Load - Time
+              a.btn.btn-info.teal(href='#demo5', data-toggle='collapse') Accumulated Training Load
               br
               br
               #demo5.collapse

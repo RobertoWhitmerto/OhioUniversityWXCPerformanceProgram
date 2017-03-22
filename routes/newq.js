@@ -13,7 +13,7 @@ var join = ' JOIN %s ON %s'; //join clause
 //return a selection string from the desired table
 //precondition: columns is a string in the form "*" or "column1, column2, column3,...etc"
 function selectquery(table, columns, cond, result){
-	if(table == null) throw err;
+	if(table == null) console.log(err.code);
 	if(columns == null) columns = "*";
 
 	var string = util.format(select, columns, table);
@@ -27,7 +27,7 @@ function selectquery(table, columns, cond, result){
 //return a string that is an insert query to the given table with the given values
 function insertquery(table, columns, values, result){
 	if(table == null || columns == null || values == null)
-		throw err;
+		console.log(err.code);
 
 	var string = util.format(insert, table, columns, values);
 	return result(string);
@@ -37,7 +37,7 @@ function insertquery(table, columns, values, result){
 //return a string that is a delete query for a given table
 function deletequery(table, condition, result){
 	//don't allow delete without condition
-	if(table == null || condition == null) throw err;
+	if(table == null || condition == null) console.log(err.code);
 
 	var string = util.format(del, table, condition);
 	return result(string);
@@ -46,7 +46,7 @@ function deletequery(table, condition, result){
 //return a string that is an update query for a given table;
 function updatequery(table, updates, conditions, result){
 
-	if(table == null || updates == null || condition == null) throw err;
+	if(table == null || updates == null || condition == null) console.log(err.code);
 
 	var string = util.format(update, table, updates, conditions);
 
@@ -56,8 +56,8 @@ function updatequery(table, updates, conditions, result){
 //execute a query
 function exec_query(querystring, result){
 	db.query(querystring, function(err, rows, fields) {
-		if(err) throw err;
-		if(rows.length<=0) result("query failed", rows);
+		if(err) return result(err.code, rows);
+		else if(rows.length<=0) result("query failed", rows);
 		else {
 			result(null, rows);
 		}
@@ -262,12 +262,12 @@ function insert_userteam(input, done){
 
 	var uid;
 	get_user(input, function(err, rows, fields){
-		if(err) throw err;
+		if(err) console.log(err.code);
 		uid = rows[0].uid;
 
 	var tid;
 	get_team(input, function(err, rows, fields){
-		if(err) throw err;
+		if(err) console.log(err.code);
 		tid = rows[0].tid;
 
 	console.log(tid);
