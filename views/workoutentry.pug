@@ -362,6 +362,16 @@ html
         document.getElementById("spacer3").innerHTML="<br><br>";
         document.getElementById("spacer4").innerHTML="<br><br>";
         document.getElementById("spacer5").innerHTML="<br><br>";
+        var d = new Date();
+        var n = d.getDate();
+        var m = d.getMonth();
+        document.getElementById("month").selectedIndex = m + 1;
+        document.getElementById("day").selectedIndex = n;
+        var p = new Date();
+        var y = p.getFullYear();
+        document.getElementById("currentyear").selectedIndex = y-2016;
+
+
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js

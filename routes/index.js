@@ -97,8 +97,12 @@ router.get('/admin_add_user', function(req, res){
 		/* Debug/Dev Code - remove later
 		console.log(req.user.role);*/
 		if(req.user.role == 'Admin'){
-			res.render('admin_add_user.pug');
-		} else {
+      queries.get_team({},function(err, result){
+		  var allteams = result;
+			res.render('admin_add_user.pug',{ homeboize: JSON.stringify(allteams) });
+    });
+		} 
+    else {
 			res.redirect(req.get('referer'));
 		}
 	} else {
@@ -111,8 +115,12 @@ router.get('/admin_remove_user', function(req, res){
 	req.visitor.pageview("/admin_remove_user").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == 'Admin'){
-			res.render('admin_remove_user.pug');
-		} else {
+      queries.get_user({},function(err, result){
+      var allusr = result;
+			res.render('admin_remove_user.pug', { homegang:JSON.stringify(allusr)});
+    }); 
+		}
+    else {
 			res.redirect(req.get('referer'));
 		}
 	} else {
@@ -229,8 +237,11 @@ router.get('/datadumpindividual', function(req, res){
 				var users = result;
 				/* Debug/Dev Code - Remove later
 				console.log(result);*/
-				res.render('admin_data_dump_a.pug');
+        queries.get_user({},function(err, result){
+        var allusr = result;
+				res.render('admin_data_dump_a.pug',{ homegang:JSON.stringify(allusr) });
 			});
+    });
 		} else {
 			res.redirect(req.get('referer'));
 		}
@@ -244,7 +255,10 @@ router.get('/datadumpTeam',function(req, res){
 	req.visitor.pageview("/datadumpTeam").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == "Admin"){
-			res.render('admin_data_dump_b.pug');
+      queries.get_team({},function(err, result){
+		  var allteams = result;
+			res.render('admin_data_dump_b.pug',{ homeboize: JSON.stringify(allteams) });
+    });
 		} else {
 			res.redirect(req.get('referer'));
 		}

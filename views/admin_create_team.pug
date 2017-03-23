@@ -39,6 +39,7 @@ html
                   .card-content.black-text
                     font(color='black')
                       form(action='/admin_create_team_form', method='post')
+                      b
                         label
                           font(color='black') New Team Name:
                         input(type='text', name='team_name', required='')
@@ -48,10 +49,6 @@ html
                           font(color='black') New Team Sport:
                         input(type='text', name='sport', required='')
                         br
-                        br
-                        label
-                          font(color='black') New Team Gender:
-                        input(type='text', name='gender', required='')
                         br
                         br
                         center
