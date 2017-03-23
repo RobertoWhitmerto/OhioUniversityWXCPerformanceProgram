@@ -319,13 +319,13 @@ router.post('/admin_add_team_form', function(req, res) {
 	console.log(req.body);
 	queries.insert_userteam(req.body, function(err, result){
 
-		if(err)
-		{
+		if(err) {
 			req.visitor.event("FAILURE", "User failed to link team").send();
+			res.render('admin_add_team.pug', { message: "Failed to link user and team" });
+		} else {
+			res.render('admin_add_team.pug', { message: "Successfully linked user and team" });
 		}
 	});
-
-	res.render('admin_add_team.pug');
 })
 
 router.post('/admin_create_team_form', function(req, res) {
@@ -333,7 +333,7 @@ router.post('/admin_create_team_form', function(req, res) {
 
 	queries.insert_team(req.body, function(err, result){
 		console.log(result);
-		if(result.affectedRows > 0) {res.render('admin_create_team.pug');}
+		if(result.affectedRows > 0) {res.render('admin_create_team.pug', { message: "Team added" });}
 	});
 })
 
