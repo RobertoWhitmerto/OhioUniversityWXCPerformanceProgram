@@ -43,6 +43,7 @@ html
                       span.card-title Device Information:
                       br
                       form(action='/', method='post')
+                      b
                         label Platform:
                         select.browser-default(name='platform', required='')
                           option(name='platform', value='unknown') ----
@@ -77,7 +78,8 @@ html
                     .card-content.black-text
                       span.card-title Role Level:
                       br
-                      label Role:
+                      b
+                        label Role:
                       select.browser-default(name='role', required='')
                         option(name='role', value='unknown') ----
                         option(name='role', value='Athlete') Athlete
