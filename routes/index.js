@@ -471,7 +471,7 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 
 		if(req.user.pass == 'T')
 		{
-			res.redirect('/changepassword');
+			res.render('changepassword.pug', { message: "You Must Update Your Password!" });
 		}
 
 		if(req.user.role == 'Athlete'){
@@ -500,8 +500,8 @@ router.post("/admin_add_user_form", function(req, res){
 		if(err) {
 			console.log(err);
 		}
-		console.log(req.body.password);
-		bcrypt.hash(req.body.password, salt, function(err, hash) {
+		console.log(req.body.newuserpw);
+		bcrypt.hash(req.body.newuserpw, salt, function(err, hash) {
   			queries.insert_user({username: req.body.newusername, email: req.body.newuseremail, first: req.body.newuserfirst, last: req.body.newuserlast, password: hash, role: req.body.userrole}, function(err, result){
 				console.log(result);
 				if(!err && result.affectedRows > 0)
