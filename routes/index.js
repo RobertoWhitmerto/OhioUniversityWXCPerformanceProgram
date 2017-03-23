@@ -181,7 +181,8 @@ router.get('/admin_remove_user_team', function(req, res){
     	allusrteam = result;
 		queries.get_team({},function(err, result){
 		  allteams = result;
-    console.log(allusr);
+    console.log("---------------------------------");
+    console.log(allusrteam);
     console.log("---------------------------------");
     console.log(allteams);
 		res.render('admin_remove_user_team.pug',{ userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});

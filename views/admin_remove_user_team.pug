@@ -46,12 +46,12 @@ html
                       form(action='/admin_remove_user_team_form', method='post')
                         label
                           font(color='black') Select a Team:
-                        select#AllTeams.browser-default(name='team_name', onchange='TeamsUsers()')
+                        select#AllTeams.browser-default(name='team_name' onchange='TeamsUsers()')
                         br
                         br
                         label
                           font(color='black') Username to be Remove from Team Above:
-                        input(type='text', name='username', required='')
+                        select#TUser.browser-default(name='username')
                         br
                         br
                         br
@@ -91,12 +91,6 @@ html
 
         var teams = document.getElementById("AllTeams");
 
-        var tmp = document.createElement("option");
-        tmp.text = "----";
-        tmp.value = "unknown";
-        tmp.name = "team_name";
-        teams.add(tmp);
-
         for(var i = 0; i < Result.length; i++){
         var opt = document.createElement("option");
         opt.text = Result[i];
@@ -111,7 +105,39 @@ html
       // - Users on a given team
       script.
         function TeamsUsers(){
-        alert("HI");
+        var example = !{userteam};  //JSON for all usernames and team data
+        var output = [];            //result being stored
+        var x = document.getElementById("AllTeams").value;  //The value to compare users to
+
+        //Lets convert our team json data to an array in JavaScript//
+        for(var i in example){
+          if(example[i].team_name == x)
+            output.push([example[i].username]);    //(!) UNCOMMENT (!) Push it to result as an array element
+        }
+
+        //Lets display our teams in alphabetical order//
+        output.toString();  //Ensure that the data is type string
+        output.sort();      //sort the teams
+
+        for(i = 0; i < output.length; i++)
+          alert(output[i]);
+
+        var userteam = document.getElementById("TUser");
+
+        //Lets ensure that we are not duplicating results//
+        for(i = userteam.options.length - 1; i >= 0; i--){
+          userteam.remove(i);
+        }
+
+        var newteam = document.getElementById("TUser");
+
+        for(var i = 0; i < output.length; i++){
+        var opt = document.createElement("option");
+        opt.text = output[i];
+        opt.value = output[i];
+        opt.name = "username";
+        newteam.add(opt);
+        }
         }
 
 
