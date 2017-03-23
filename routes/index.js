@@ -229,8 +229,11 @@ router.get('/datadumpindividual', function(req, res){
 				var users = result;
 				/* Debug/Dev Code - Remove later
 				console.log(result);*/
-				res.render('admin_data_dump_a.pug');
+        queries.get_user({},function(err, result){
+        var allusr = result;
+				res.render('admin_data_dump_a.pug',{ homegang:JSON.stringify(allusr) });
 			});
+    });
 		} else {
 			res.redirect(req.get('referer'));
 		}
