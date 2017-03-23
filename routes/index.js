@@ -318,13 +318,13 @@ router.post('/admin_add_team_form', function(req, res) {
 	console.log(req.body);
 	queries.insert_userteam(req.body, function(err, result){
 
-		if(err)
-		{
+		if(err) {
 			req.visitor.event("FAILURE", "User failed to link team").send();
+			res.render('admin_add_team.pug', { message: "Failed to link user and team" });
+		} else {
+			res.render('admin_add_team.pug', { message: "Successfully linked user and team" });
 		}
 	});
-
-	res.render('admin_add_team.pug');
 })
 
 router.post('/admin_create_team_form', function(req, res) {
