@@ -819,46 +819,65 @@ html
       //Autoselect General Health from Source//
       if(illnessV == "n/a")
       document.getElementById("illness").selectedIndex = 0;
-      if(illnessV == "fever")
-      document.getElementById("illness").selectedIndex = 1;
-      if(illnessV == "gi_distress")
-      document.getElementById("illness").selectedIndex = 2;
-      if(illnessV == "upper respiratory")
-      document.getElementById("illness").selectedIndex = 3;
       if(illnessV == "abnormal fatigue")
-      document.getElementById("illness").selectedIndex = 4;
-      if(illnessV == "insomnia")
-      document.getElementById("illness").selectedIndex = 5;
-      if(illnessV == "irritability")
-      document.getElementById("illness").selectedIndex = 6;
+      document.getElementById("illness").selectedIndex = 1;
       if(illnessV == "decreased motivation")
+      document.getElementById("illness").selectedIndex = 2;
+      if(illnessV == "muscle soreness")
+      document.getElementById("illness").selectedIndex = 3;
+      if(illnessV == "fever")
+      document.getElementById("illness").selectedIndex = 4;
+      if(illnessV == "headache")
+      document.getElementById("illness").selectedIndex = 5;
+      if(illnessV == "chest congestion")
+      document.getElementById("illness").selectedIndex = 6;
+      if(illnessV == "upset stomach")
       document.getElementById("illness").selectedIndex = 7;
-      if(illnessV == "weight loss")
+      if(illnessV == "insomnia")
       document.getElementById("illness").selectedIndex = 8;
-      if(illnessV == "chronic soreness")
+      if(illnessV == "other")
       document.getElementById("illness").selectedIndex = 9;
       //--------------------------------------//
       //Autoselect Irritation/Pain from Source//
       if(injuryV == "n/a")
       document.getElementById("injury").selectedIndex = 0;
-      if(injuryV == "foot arch")
+      if(injuryV == "foot")
       document.getElementById("injury").selectedIndex = 1;
-      if(injuryV == "Heel")
+      if(injuryV == "ankle")
       document.getElementById("injury").selectedIndex = 2;
       if(injuryV == "shin")
       document.getElementById("injury").selectedIndex = 3;
-      if(injuryV == "knee")
+      if(injuryV == "calf")
       document.getElementById("injury").selectedIndex = 4;
-      if(injuryV == "it band")
+      if(injuryV == "knee")
       document.getElementById("injury").selectedIndex = 5;
-      if(injuryV == "hip")
+      if(injuryV == "thigh")
       document.getElementById("injury").selectedIndex = 6;
-      if(injuryV == "low back")
+      if(injuryV == "hamstring")
       document.getElementById("injury").selectedIndex = 7;
-      if(injuryV == "pelvis")
+      if(injuryV == "hip")
       document.getElementById("injury").selectedIndex = 8;
-      if(injuryV == "rib")
+      if(injuryV == "pelvis")
       document.getElementById("injury").selectedIndex = 9;
+      if(injuryV == "low back")
+      document.getElementById("injury").selectedIndex = 10;
+      if(injuryV == "mid back")
+      document.getElementById("injury").selectedIndex = 11;
+      if(injuryV == "upper back")
+      document.getElementById("injury").selectedIndex = 12;
+      if(injuryV == "shoulder")
+      document.getElementById("injury").selectedIndex = 13;
+      if(injuryV == "upper arm")
+      document.getElementById("injury").selectedIndex = 14;
+      if(injuryV == "elbow")
+      document.getElementById("injury").selectedIndex = 15;
+      if(injuryV == "wrist")
+      document.getElementById("injury").selectedIndex = 16;
+      if(injuryV == "hand")
+      document.getElementById("injury").selectedIndex = 17;
+      if(injuryV == "neck")
+      document.getElementById("injury").selectedIndex = 18;
+      if(injuryV == "head")
       //--------------------------------------//
       //Autofill Wellness Score//
       document.getElementById("percent_health").value = perhealthV;
@@ -867,14 +886,12 @@ html
       document.getElementById("rpeinfo").selectedIndex = 0;
       if(rpeinfoV == "aerobic")
       document.getElementById("rpeinfo").selectedIndex = 1;
-      if(rpeinfoV == "threshold")
+      if(rpeinfoV == "sprint/interval")
       document.getElementById("rpeinfo").selectedIndex = 2;
-      if(rpeinfoV == "interval")
+      if(rpeinfoV == "resistance")
       document.getElementById("rpeinfo").selectedIndex = 3;
       if(rpeinfoV == "crosstraining")
       document.getElementById("rpeinfo").selectedIndex = 4;
-      if(rpeinfoV == "strengthandconditioning")
-      document.getElementById("rpeinfo").selectedIndex = 5;
       //--------------------------------------//
       //Autoselect RPE Value from Source//
       if(rpevalV == "rpeinvalid")
@@ -946,46 +963,55 @@ html
       font(color='cyan')
         input#sleephours(type='number', name='sleephours', min='0', max='14')
         br
-      label General Health
+      label General Health Status
       select#illness.browser-default(name='illness')
         option(name='illness', value='n/a') N/A
-        option(name='illness', value='fever') Fever
-        option(name='illness', value='gi_distress') GI Distress
-        option(name='illness', value='upper respiratory') Upper Respiratory
         option(name='illness', value='abnormal fatigue') Abnormal Fatigue
-        option(name='illness', value='insomnia') Insomnia
-        option(name='illness', value='irritability') Irritability
         option(name='illness', value='decreased motivation') Decreased Motivation
-        option(name='illness', value='weight loss') Weight Loss
-        option(name='illness', value='chronic soreness') Chronic Soreness
+        option(name='illness', value='muscle soreness') Muscle Soreness
+        option(name='illness', value='fever') Fever 
+        option(name='illness', value='headache') Headache
+        option(name='illness', value='chest congestion') Chest Congestion
+        option(name='illness', value='upset stomach') Upset Stomach
+        option(name='illness', value='insomnia') Insomnia
+        option(name='illness', value='other') Other
       br
-      label Irritation/Pain
+      label Location of Pain, Discomfort, or Irritation
       select#injury.browser-default(name='injury')
         option(name='injury', value='n/a') N/A
-        option(name='injury', value='foot arch') Foot Arch
-        option(name='injury', value='Heel') Heel
+        option(name='injury', value='foot') Foot
+        option(name='injury', value='ankle') Ankle
         option(name='injury', value='shin') Shin
+        option(name='injury', value='calf') Calf
         option(name='injury', value='knee') Knee
-        option(name='injury', value='it band') IT Band
+        option(name='injury', value='thigh') Thigh
+        option(name='injury', value='hamstring') Hamstring
         option(name='injury', value='hip') Hip
-        option(name='injury', value='low back') Low Back
         option(name='injury', value='pelvis') Pelvis
-        option(name='injury', value='rib') Rib
+        option(name='injury', value='low back') Low Back
+        option(name='injury', value='mid back') Mid Back
+        option(name='injury', value='upper back') Upper Back
+        option(name='injury', value='shoulder') Shoulder
+        option(name='injury', value='upper arm') Upper Arm
+        option(name='injury', value='elbow') Elbow
+        option(name='injury', value='wrist') Wrist
+        option(name='injury', value='hand') Hand
+        option(name='injury', value='neck') Neck
+        option(name='injury', value='head') Head
       br
-      label Wellness Score
+      label Perception of Wellness, Health, and Pain
       br
-      label (100% = Full Health, 0% = Not able to Workout
+      label (100% = Healthy - Physically and Mentally Focused, 0% = Unable to Function or Exercise
       font(color='cyan')
         input#percent_health(name='percent_health', type='number', min='0', max='100', step='10')
         br
-      label RPE Information
+      label Workout Type
       select#rpeinfo.browser-default(name='rpeinfo')
         option(name='rpeinfo', value='unknown') ----
-        option(name='rpeinfo', value='aerobic') Zone 1: Aerobic
-        option(name='rpeinfo', value='threshold') Zone 2: Threshold
-        option(name='rpeinfo', value='interval') Zone 3: Interval
+        option(name='rpeinfo', value='aerobic') Aerobic
+        option(name='rpeinfo', value='sprint/interval') Sprint/Interval Training
+        option(name='rpeinfo', value='resistance') Resistance Training
         option(name='rpeinfo', value='crosstraining') Cross Training
-        option(name='rpeinfo', value='strengthandconditioning') Strength and Conditioning
       br
       br
       label RPE (6-20)
@@ -1017,20 +1043,20 @@ html
         input#distance(name='distance', type='number', min='0.0', max='100.0')
         br
         br
-      label 24-hour Hunger Score
+      label Perception of Hunger and Fullness Over 24-Hours
       select#hungry.browser-default(name='hungry')
         option(name='hungry', value='unknown') --
-        option(name='hungry', value='0') 0 - Empty
-        option(name='hungry', value='1') 1 - Ravenous
-        option(name='hungry', value='2') 2 - Very Hungry
-        option(name='hungry', value='3') 3 - Lightly Hungry
-        option(name='hungry', value='4') 4 - Lightly Hungry
-        option(name='hungry', value='5') 5 - Neutral
-        option(name='hungry', value='6') 6 - Lightly Full; Satisfied
-        option(name='hungry', value='7') 7 - Lightly Full; Satisfied
-        option(name='hungry', value='8') 8 - Full
-        option(name='hungry', value='9') 9 - Stuffed
-        option(name='hungry', value='10') 10 - Sick
+        option(name='hungry', value='0') 0 - No Appetite
+        option(name='hungry', value='1') 1 - 
+        option(name='hungry', value='2') 2 - 
+        option(name='hungry', value='3') 3 - Below Normal Appetite
+        option(name='hungry', value='4') 4 - 
+        option(name='hungry', value='5') 5 - Normal Appetite
+        option(name='hungry', value='6') 6 - 
+        option(name='hungry', value='7') 7 - Above Normal Appetite
+        option(name='hungry', value='8') 8 - 
+        option(name='hungry', value='9') 9 - 
+        option(name='hungry', value='10') 10 - Extremely High Appetite
       br
       label Start of cycle
       input#opt1.with-gap(name='cycle', type='radio', checked='', value='no')
