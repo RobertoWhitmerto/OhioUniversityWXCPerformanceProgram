@@ -438,7 +438,8 @@ router.post('/register', function(req, res){
 passport.use(new LocalStrategy( function(username, password, done){
 
 	queries.get_user({username: username}, function(err, users){
-		if(!err && users.length <= 0) return done(null, false, {message: 'Username is invalid'});
+		if(!users) return done(null, false, {message: "Username not found"});
+		if(users.length <= 0) return done(null, false, {message: 'Username is invalid'});
 
 		//get the user's teams
 		queries.get_userteam({username: users[0].username}, function(err, teams){
