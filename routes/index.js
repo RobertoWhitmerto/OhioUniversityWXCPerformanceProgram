@@ -176,19 +176,20 @@ router.get('/admin_create_team', function(req, res){
 router.get('/admin_remove_user_team', function(req, res){
 	req.visitor.pageview("/admin_remove_user_team").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-    var allusr;
-    var role = req.user.role;
-    queries.get_userteam({},function(err, result){
-    	allusrteam = result;
-		queries.get_team({},function(err, result){
-		  allteams = result;
-    //console.log("---------------------------------");
-    //console.log(allusrteam);
-    //console.log("---------------------------------");
-    //console.log(allteams);
-		res.render('admin_remove_user_team.pug',{ userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
+    	var allusr;
+    	var role = req.user.role;
+    	queries.get_userteam({},function(err, result){
+    		allusrteam = result;
+			queries.get_team({},function(err, result){
+				allteams = result;
+				/* Debug/Dev Code - remove later
+    			console.log("---------------------------------");
+    			console.log(allusrteam);
+    			console.log("---------------------------------");
+    			console.log(allteams);*/
+				res.render('admin_remove_user_team.pug',{ userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
 			});
-  	});
+  		});
 	} else {
 		res.redirect('/');
 	}
@@ -346,7 +347,7 @@ router.post('/admin_remove_user_team_form', function(req, res){
 		{
 			req.visitor.event("FAILURE", "User failed to remove team link").send();
 		}
-		if(result.affectedRows > 0) {res.render('admin_remove_user_team.pug');}
+		if(result.affectedRows > 0) {res.render('admin_remove_user_team.pug', { message: "Successfully removed user from team" });}
 	});
 })
 
