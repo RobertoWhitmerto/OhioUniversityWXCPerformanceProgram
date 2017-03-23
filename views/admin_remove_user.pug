@@ -40,13 +40,9 @@ html
                     font(color='black')
                       form(action='/admin_remove_user_form', method='post')
                         label
+                        b
                           font(color='black') Username:
-                        input(type='text', name='removeusername', required='')
-                        br
-                        br
-                        label
-                          font(color='black') User's Last Name:
-                        input(type='text', name='removelastname', required='')
+                        select#AllUser.browser-default(name='removeusername', required='')
                         br
                         br
                         br
@@ -74,6 +70,40 @@ html
         .card.light-blue.darken-4 {
         background-color: #b1f6cb !important;
         }
+
+      // ---------------------------------------------------------------------------------
+      // - User Dynamic Select JavaScript Function -
+      script.
+        //Put the variable passed over here and remove static example//
+        var example = !{homegang};      //(!) UNCOMMENT (!) json object being passed to the pug file
+        var Result = [];                //(!) UNCOMMENT (!) array that should be empty to store the json as an array
+
+        //Lets convert our team json data to an array in JavaScript//
+        for(var i in example)                   //(!) UNCOMMENT (!) For each entry in the json
+          Result.push([example[i].username]);   //(!) UNCOMMENT (!) Push it to result as an array element
+
+        //Lets display our teams in alphabetical order//
+        Result.toString();  //Ensure that the data is type string
+        Result.sort();      //sort the teams
+
+        var users = document.getElementById("AllUser");
+
+        var tmp = document.createElement("option");
+        tmp.text = "----";
+        tmp.value = "unknown";
+        tmp.name = "removeusername";
+        users.add(tmp);
+
+        for(var i = 0; i < Result.length; i++){
+        var opt2 = document.createElement("option");
+        opt2.text = Result[i];  
+        opt2.value = Result[i];
+        opt2.name = "removeusername";
+        users.add(opt2);
+        }
+        document.getElementById("UserButton").disabled = true;
+      // - End of User Dynamic Select JavaScript Function -
+
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js
