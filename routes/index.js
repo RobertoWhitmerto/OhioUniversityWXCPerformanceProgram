@@ -97,8 +97,12 @@ router.get('/admin_add_user', function(req, res){
 		/* Debug/Dev Code - remove later
 		console.log(req.user.role);*/
 		if(req.user.role == 'Admin'){
-			res.render('admin_add_user.pug');
-		} else {
+      queries.get_team({},function(err, result){
+		  var allteams = result;
+			res.render('admin_add_user.pug',{ homeboize: JSON.stringify(allteams) });
+    });
+		} 
+    else {
 			res.redirect(req.get('referer'));
 		}
 	} else {

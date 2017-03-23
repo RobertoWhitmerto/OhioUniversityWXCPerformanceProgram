@@ -72,7 +72,7 @@ html
                       label
                         font(color='black') New user's team association:
                         font(color='red') *
-                      input(type='text', name='newuserteam', required='')
+                      select#AllTeams.browser-default(name='newuserteam', required='')
                       br
                       br
                       | Note: Fields with 
@@ -127,6 +127,40 @@ html
         .card.light-blue.darken-4 {
         background-color: #b1f6cb !important;
         }
+
+      // ---------------------------------------------------------------------------------
+      // - Team Dynamic Select JavaScript Function -
+      script.
+        //Put the variable passed over here and remove static example//
+        var example = !{homeboize};     //(!) UNCOMMENT (!) json object being passed to the pug file
+        var Result = [];                //(!) UNCOMMENT (!) array that should be empty to store the json as an array
+
+        //Lets convert our team json data to an array in JavaScript//
+        for(var i in example)                     //(!) UNCOMMENT (!) For each entry in the json
+          Result.push([example[i].team_name]);    //(!) UNCOMMENT (!) Push it to result as an array element
+
+        //Lets display our teams in alphabetical order//
+        Result.toString();  //Ensure that the data is type string
+        Result.sort();      //sort the teams
+
+        var teams = document.getElementById("AllTeams");
+
+        var tmp = document.createElement("option");
+        tmp.text = "----";
+        tmp.value = "unknown";
+        tmp.name = "newuserteam";
+        teams.add(tmp);
+
+        for(var i = 0; i < Result.length; i++){
+        var opt = document.createElement("option");
+        opt.text = Result[i];
+        opt.value = Result[i];
+        opt.name = "newuserteam";
+        teams.add(opt);
+        }
+        document.getElementById("TeamButton").disabled = true;
+      // - End of Team Dynamic Select JavaScript Function -
+
       // Materialize CSS imports [body]
       // put this at the end of the body
       // Import jQuery before materialize.js
