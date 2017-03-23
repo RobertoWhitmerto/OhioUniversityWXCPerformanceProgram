@@ -175,7 +175,18 @@ router.get('/admin_create_team', function(req, res){
 router.get('/admin_remove_user_team', function(req, res){
 	req.visitor.pageview("/admin_remove_user_team").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-		res.render('admin_remove_user_team.pug');
+    var allusr;
+    var role = req.user.role;
+    queries.get_userteam({},function(err, result){
+    	allusrteam = result;
+		queries.get_team({},function(err, result){
+		  allteams = result;
+    console.log(allusr);
+    console.log("---------------------------------");
+    console.log(allteams);
+		res.render('admin_remove_user_team.pug',{ userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
+			});
+  	});
 	} else {
 		res.redirect('/');
 	}
