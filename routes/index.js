@@ -19,6 +19,7 @@ var bcrypt = require('bcryptjs');
 
 router.use(ua.middleware("UA-91318722-1", {cookieName: '_ga'}));
 
+/* Variable needed? */
 var athlete = false;
 
 // Get Login Page
@@ -44,7 +45,7 @@ router.get('/logout', function(req, res){
 router.get('/workoutentry', function(req, res){
 	req.visitor.pageview("/workoutentry").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-    var role = req.user.role;    
+    	var role = req.user.role;    
 		res.render('workoutentry.pug',{role});
 	} else {
 		res.redirect('/');
@@ -60,8 +61,9 @@ router.get('/myworkouts', function(req, res){
 		queries.get_workout({username: req.user.id}, function(err, result){
 			workouts = result;
     		var role = req.user.role; 
+			/* Debug/Dev Code - remove later
     		console.log("WORKOUTS QUERIED: ");
-			console.log(workouts);
+			console.log(workouts);*/
 			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts, role });
 		});
 	} else {
@@ -73,13 +75,12 @@ router.get('/myworkouts', function(req, res){
 // View Athletes
 router.get('/admin_athlete_vis', function(req, res){
 	req.visitor.pageview("/admin_athlete_vis").send();
-
 	if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == 'Admin' || admin.user.role == 'Coach'){
 			queries.get_workout({username: req.user.id}, function(err, result){
-			var users = result;
-			res.render('admin_athlete_vis.pug', {  data: users });
-		});
+				var users = result;
+				res.render('admin_athlete_vis.pug', {  data: users });
+			});
 		} else {
 			res.redirect(req.get('referer'));
 		}
@@ -93,7 +94,8 @@ router.get('/admin_athlete_vis', function(req, res){
 router.get('/admin_add_user', function(req, res){
 	req.visitor.pageview("/admin_add_user").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-		console.log(req.user.role);
+		/* Debug/Dev Code - remove later
+		console.log(req.user.role);*/
 		if(req.user.role == 'Admin'){
 			res.render('admin_add_user.pug');
 		} else {
@@ -119,109 +121,98 @@ router.get('/admin_remove_user', function(req, res){
 });
 
 // About Page
-router.get('/about',
-        function(req, res){
-        	req.visitor.pageview("/about").send();
-			if(req.isAuthenticated() && req.user.pass != 'T'){
-        var role = req.user.role;
-				res.render('about.pug',{role});
-			} else {
-				res.redirect('/');
-			}
+router.get('/about', function(req, res){
+	req.visitor.pageview("/about").send();
+	if(req.isAuthenticated() && req.user.pass != 'T'){
+		var role = req.user.role;
+		res.render('about.pug',{role});
+	} else {
+		res.redirect('/');
+	}
 });
 
 // Change Pass
-router.get('/changepassword',
-        function(req, res){
-        	req.visitor.pageview("/changepassword").send();
-			if(req.isAuthenticated()){
+router.get('/changepassword', function(req, res){
+	req.visitor.pageview("/changepassword").send();
+	if(req.isAuthenticated()){
         var role = req.user.role;    
-				res.render('changepassword.pug', {role});
-			} else {
-				res.redirect('/');
-			}
+		res.render('changepassword.pug', {role});
+	} else {
+		res.redirect('/');
+	}
 });
 
 // Submit a Bug
-router.get('/buggy',
-        function(req, res){
-        	req.visitor.pageview("/buggy").send();
-			if(req.isAuthenticated() && req.user.pass != 'T'){
-        var role = req.user.role;    
-				res.render('buggy.pug', {role});
-			} else {
-				res.redirect('/');
-			}
+router.get('/buggy', function(req, res){
+	req.visitor.pageview("/buggy").send();
+	if(req.isAuthenticated() && req.user.pass != 'T'){
+		var role = req.user.role;    
+		res.render('buggy.pug', {role});
+	} else {
+		res.redirect('/');
+	}
 });
 
 // Admin Team Creation
-router.get('/admin_create_team',
-        function(req, res){
-        	req.visitor.pageview("/admin_create_team").send();
-			if(req.isAuthenticated() && req.user.pass != 'T'){
-				res.render('admin_create_team.pug');
-			} else {
-				res.redirect('/');
-			}
+router.get('/admin_create_team', function(req, res){
+	req.visitor.pageview("/admin_create_team").send();
+	if(req.isAuthenticated() && req.user.pass != 'T'){
+		res.render('admin_create_team.pug');
+	} else {
+		res.redirect('/');
+	}
 });
 
 // Admin Remove User From Team
-router.get('/admin_remove_user_team',
-        function(req, res){
-        	req.visitor.pageview("/admin_remove_user_team").send();
-			if(req.isAuthenticated() && req.user.pass != 'T'){
-				res.render('admin_remove_user_team.pug');
-			} else {
-				res.redirect('/');
-			}
+router.get('/admin_remove_user_team', function(req, res){
+	req.visitor.pageview("/admin_remove_user_team").send();
+	if(req.isAuthenticated() && req.user.pass != 'T'){
+		res.render('admin_remove_user_team.pug');
+	} else {
+		res.redirect('/');
+	}
 });
 
 // Link a Team
-router.get('/admin_add_team',
-        function(req, res){
-        	req.visitor.pageview("/admin_add_team").send();
-        	console.log(req.user);
-			if(req.isAuthenticated() && req.user.pass != 'T'){
+router.get('/admin_add_team', function(req, res){
+	req.visitor.pageview("/admin_add_team").send();
+	/* Debug/Dev Code - Remove later
+	console.log(req.user);*/
+	if(req.isAuthenticated() && req.user.pass != 'T'){
 		var allteams;
-    var allusr;
-    var role = req.user.role;
-    queries.get_user({},function(err, result){
-      allusr = result;
-		queries.get_team({},function(err, result){
-			allteams = result;
-
-			res.render('admin_add_team.pug', { homegang:JSON.stringify(allusr), homeboize: JSON.stringify(allteams), data: allteams, role });
-		});
-  });
-
-
-			} else {
-				res.redirect('/');
-			}
+    	var allusr;
+    	var role = req.user.role;
+    	queries.get_user({},function(err, result){
+      		allusr = result;
+			queries.get_team({},function(err, result){
+				allteams = result;
+				res.render('admin_add_team.pug', { homegang:JSON.stringify(allusr), homeboize: JSON.stringify(allteams), data: allteams, role });
+			});
+  		});
+	} else {
+		res.redirect('/');
+	}
 });
 
 // Coach/Trainer Page
 router.get('/coaches', function(req, res){
 	req.visitor.pageview("/coaches").send();
-	
 	if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == 'athlete'){
 			res.redirect(req.get('referer'));
 		} else {
-			console.log(req.user);
+			/* Debug/Dev Code - Remove later
+			console.log(req.user);*/
 			queries.get_userteam({teams: req.user.teams}, function(err, result){
 					var users = result;
 					//res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
-			queries.get_workout({teams: req.user.teams}, function(err, result){
-			var workouts = result;
-
-			console.log(workouts);
-        	var role = req.user.role;    
-			res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(req.user.teams), data_x: JSON.stringify(workouts), data: workouts, role });
-
-		});
-				
-				
+					queries.get_workout({teams: req.user.teams}, function(err, result){
+						var workouts = result;
+						/* Debug/Dev Code - Remove later
+						console.log(workouts);*/
+        				var role = req.user.role;    
+						res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(req.user.teams), data_x: JSON.stringify(workouts), data: workouts, role });
+					});
 			});
 		}
 	} else {
@@ -231,24 +222,24 @@ router.get('/coaches', function(req, res){
 
 // Data Dump Individual
 router.get('/datadumpindividual', function(req, res){
-			req.visitor.pageview("/datadumpindividual").send();
-			if(req.isAuthenticated() && req.user.pass != 'T'){
-
-				if(req.user.role == 'Admin'){
+	req.visitor.pageview("/datadumpindividual").send();
+	if(req.isAuthenticated() && req.user.pass != 'T'){
+		if(req.user.role == 'Admin'){
 			queries.get_workout({username: req.user.id, teams: req.user.team}, function(err, result){
-					var users = result;
-					console.log(result);
-
-					res.render('admin_data_dump_a.pug');
+				var users = result;
+				/* Debug/Dev Code - Remove later
+				console.log(result);*/
+				res.render('admin_data_dump_a.pug');
+			});
+		} else {
+			res.redirect(req.get('referer'));
+		}
+	} else {
+		res.redirect('/');
+	}
 });
-				} else {
-					res.redirect(req.get('referer'));
-				}
-			} else {
-				res.redirect('/');
-			}
-});
 
+// Get Team Data
 router.get('/datadumpTeam',function(req, res){
 	req.visitor.pageview("/datadumpTeam").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
