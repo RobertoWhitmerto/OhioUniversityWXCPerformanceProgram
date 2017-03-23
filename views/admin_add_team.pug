@@ -124,15 +124,15 @@ html
       script.
         //Put the variable passed over here and remove static example//
         var example = !{homegang};      //(!) UNCOMMENT (!) json object being passed to the pug file
-        var Result = [];                //(!) UNCOMMENT (!) array that should be empty to store the json as an array
+        var arr2 = [];                //(!) UNCOMMENT (!) array that should be empty to store the json as an array
 
         //Lets convert our team json data to an array in JavaScript//
         for(var i in example)                   //(!) UNCOMMENT (!) For each entry in the json
-          Result.push([example[i].username]);   //(!) UNCOMMENT (!) Push it to result as an array element
+          arr2.push([example[i].username]);   //(!) UNCOMMENT (!) Push it to result as an array element
 
         //Lets display our teams in alphabetical order//
-        Result.toString();  //Ensure that the data is type string
-        Result.sort();      //sort the teams
+        arr2.toString();  //Ensure that the data is type string
+        arr2.sort();      //sort the teams
 
         var users = document.getElementById("AllUser");
 
@@ -142,10 +142,10 @@ html
         tmp.name = "username";
         users.add(tmp);
 
-        for(var i = 0; i < Result.length; i++){
+        for(var i = 0; i < arr2.length; i++){
         var opt2 = document.createElement("option");
-        opt2.text = Result[i];  
-        opt2.value = Result[i];
+        opt2.text = arr2[i];  
+        opt2.value = arr2[i];
         opt2.name = "username";
         users.add(opt2);
         }
