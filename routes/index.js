@@ -247,7 +247,10 @@ router.get('/datadumpTeam',function(req, res){
 	req.visitor.pageview("/datadumpTeam").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
 		if(req.user.role == "Admin"){
-			res.render('admin_data_dump_b.pug');
+      queries.get_team({},function(err, result){
+		  var allteams = result;
+			res.render('admin_data_dump_b.pug',{ homeboize: JSON.stringify(allteams) });
+    });
 		} else {
 			res.redirect(req.get('referer'));
 		}

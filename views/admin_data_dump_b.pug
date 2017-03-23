@@ -30,10 +30,11 @@ html
             .card.light-blue.darken-4
               .card-content.white-text
                 span.card-title
-                  center Team Data Dump:
+                  center Team Data Export:
                 form(action='/getdatadumpteam', method='post')
-                    | Team Name:
-                    input(type='text', name='datadumpteam')
+                    | Select a Team:
+                font(color='black')
+                    select#AllTeams.browser-default(name='datadumpteam', required='')
                     br
                     br
                     button.btn.waves-effect.light-green(type='submit', name='action')
@@ -51,6 +52,40 @@ html
         .card.light-blue.darken-4 {
         background-color: #2f4f4f !important;
         }
+
+      // ---------------------------------------------------------------------------------
+      // - Team Dynamic Select JavaScript Function -
+      script.
+        //Put the variable passed over here and remove static example//
+        var example = !{homeboize};     //(!) UNCOMMENT (!) json object being passed to the pug file
+        var Result = [];                //(!) UNCOMMENT (!) array that should be empty to store the json as an array
+
+        //Lets convert our team json data to an array in JavaScript//
+        for(var i in example)                     //(!) UNCOMMENT (!) For each entry in the json
+          Result.push([example[i].team_name]);    //(!) UNCOMMENT (!) Push it to result as an array element
+
+        //Lets display our teams in alphabetical order//
+        Result.toString();  //Ensure that the data is type string
+        Result.sort();      //sort the teams
+
+        var teams = document.getElementById("AllTeams");
+
+        var tmp = document.createElement("option");
+        tmp.text = "----";
+        tmp.value = "unknown";
+        tmp.name = "datadumpteam";
+        teams.add(tmp);
+
+        for(var i = 0; i < Result.length; i++){
+        var opt = document.createElement("option");
+        opt.text = Result[i];
+        opt.value = Result[i];
+        opt.name = "datadumpteam";
+        teams.add(opt);
+        }
+        document.getElementById("TeamButton").disabled = true;
+      // - End of Team Dynamic Select JavaScript Function -
+
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js

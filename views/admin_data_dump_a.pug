@@ -30,11 +30,12 @@ html
             .card.light-blue.darken-4
               .card-content.white-text
                 span.card-title
-                  center Individual Data Dump:
+                  center Individual Data Export:
                 form(action='/getdatadumpind', method='post')
                   b  Select User:
                   br
                   br
+                font(color='black')
                   select#AllUser.browser-default(name='datadumpusr', required='')
                   br
                   br
