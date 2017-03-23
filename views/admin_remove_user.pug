@@ -40,10 +40,35 @@ html
                     font(color='black')
                       form(action='/admin_remove_user_form', method='post')
                         label
-                        b
                           font(color='black') Username:
-                        select#AllUser.browser-default(name='removeusername', required='')
+                        select#AllUser.browser-default(name='removeusername', required='', onchange='userinfo()')
                         br
+                        br
+                        label
+                          font(color='black') Username:
+                            br
+                            b
+                              p#UName
+                        label
+                          font(color='black') First Name:
+                            br
+                            b
+                              p#FName
+                        label
+                          font(color='black') Last Name:
+                            br
+                            b
+                              p#LName
+                        label
+                          font(color='black') Email:
+                            br
+                            b
+                              p#Email
+                        label
+                          font(color='black') Role Level:
+                            br
+                            b
+                              p#URole
                         br
                         br
                         | Note: 
@@ -101,8 +126,27 @@ html
         opt2.name = "removeusername";
         users.add(opt2);
         }
-        document.getElementById("UserButton").disabled = true;
       // - End of User Dynamic Select JavaScript Function -
+
+      script.
+        function userinfo(){
+        var ex = !{homegang};
+        var arr2 = [];
+        var x = document.getElementById("AllUser").value;         
+
+        for(var i in ex){
+          if(ex[i].username == x){
+          document.getElementById("UName").innerHTML=ex[i].username;
+          document.getElementById("FName").innerHTML=ex[i].first;
+          document.getElementById("LName").innerHTML=ex[i].last;
+          document.getElementById("Email").innerHTML=ex[i].email;
+          document.getElementById("URole").innerHTML=ex[i].role_name;
+          break;
+          }
+        }
+        
+
+        }
 
       // Materialize CSS imports [body]
       // put this at the end of the body

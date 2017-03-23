@@ -117,6 +117,7 @@ router.get('/admin_remove_user', function(req, res){
 		if(req.user.role == 'Admin'){
       queries.get_user({},function(err, result){
       var allusr = result;
+      console.log(allusr);
 			res.render('admin_remove_user.pug', { homegang:JSON.stringify(allusr)});
     }); 
 		}
@@ -181,10 +182,10 @@ router.get('/admin_remove_user_team', function(req, res){
     	allusrteam = result;
 		queries.get_team({},function(err, result){
 		  allteams = result;
-    console.log("---------------------------------");
-    console.log(allusrteam);
-    console.log("---------------------------------");
-    console.log(allteams);
+    //console.log("---------------------------------");
+    //console.log(allusrteam);
+    //console.log("---------------------------------");
+    //console.log(allteams);
 		res.render('admin_remove_user_team.pug',{ userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
 			});
   	});
