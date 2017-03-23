@@ -518,9 +518,6 @@ router.post('/', passport.authenticate('local', {failureRedirect: '/'}), functio
 
 router.post("/admin_add_user_form", function(req, res){
   console.log(req.body);
-
-  var message;
-
 	bcrypt.genSalt(10, function(err, salt) {
 		if(err) {
 			console.log(err);
@@ -532,17 +529,16 @@ router.post("/admin_add_user_form", function(req, res){
 				if(!err && result.affectedRows > 0)
 				{
 					console.log("successfully added user");
-					message = "successfully added user";
+					res.render('admin_add_user.pug', { message: "Successfully added user" } );
 				}
 				else
 				{
 					console.log("Could Not add user " + err);
-					message = "Error: Could not add user";
+					res.render('admin_add_user.pug', { message: "Error: Could not add user" } );
 				}
 			});
 		});
 	});
-	res.render('admin_add_user.pug', {message: message} );
 });
 
 //ADMIN REMOVE USER FORM PARSER
