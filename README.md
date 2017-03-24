@@ -35,6 +35,8 @@ __views__ directory that houses our applications front end jade/pug code
 
 ## Deployment URL
 
+![alt text](http://i.imgur.com/frAKmKN.png "Deployment URL")
+
 http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com
 
 ## Team on a Cob members:
