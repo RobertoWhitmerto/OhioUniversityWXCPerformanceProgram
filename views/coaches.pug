@@ -144,7 +144,9 @@ html
           //console.log(rolling_total_chronic);
           //console.log("acute rolling average for sleep: ");
           //console.log(rolling_total_acute);
-          rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
+           var k_day = new Date();
+           k_day.setDate(k.getDate() + 1);
+           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           //rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
@@ -275,7 +277,9 @@ html
         rolling_total /= 28;
         console.log("rolling average for dist: ");
         console.log(rolling_total);
-        rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
+        var k_day = new Date();
+        k_day.setDate(k.getDate() + 1);
+        rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
         //rows[slot][2] = rolling_total;
         slot++;
       }
@@ -383,30 +387,40 @@ html
           console.log("SLOT: " + slot);
           var rolling_total_chronic=0;
           var rolling_total_acute=0;
-          var avg_count=0;
+          var avg_count_a=0;
+          var avg_count_c=0;
+          
+          var acute_dt = new Date(k);
+          acute_dt.setDate(acute_dt.getDate() - 7);
+          var chronic_dt = new Date(k);
+          chronic_dt.setDate(chronic_dt.getDate() - 28);
           for(var j = 0; j < d.length; j++){
             var wrk = d[j];
             var wrk_dt = new Date(Date.parse(wrk.date));
-            var chronic_dt = new Date(k);
-            chronic_dt.setDate(chronic_dt.getDate() - 28);
-            if(wrk_dt > chronic_dt && wrk_dt < k){
-              rolling_total_chronic += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
-              avg_count++;
+            var k_plus_one = new Date(k);
+            k_plus_one.setDate(k_plus_one.getDate() + 1);
+            console.log("wrk_dt: " + wrk_dt + " | acute_dt: " + acute_dt + " | chronic_dt: " + chronic_dt);
+            if(wrk_dt > chronic_dt && wrk_dt <= k_plus_one){
+              rolling_total_chronic += parseInt(wrk.RPE, 10)*parseInt(wrk.time, 10);
+              avg_count_c++;
+              console.log(wrk_dt + "is in Chronic ratio");
             }
-            var acute_dt = new Date(k);
-            acute_dt.setDate(acute_dt.getDate() - 7);
-            if(wrk_dt > acute_dt && wrk_dt < k){
-              rolling_total_acute += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+            if(wrk_dt > acute_dt && wrk_dt <= k_plus_one){
+               rolling_total_acute += parseInt(wrk.RPE, 10)*parseInt(wrk.time, 10);
+               console.log(wrk_dt + "is in Acute ratio");
+              }
             }
-          }
-          console.log("COUNT:" + avg_count);
+          console.log("COUNT:" + avg_count_c);
           rolling_total_chronic /= 28;
           rolling_total_acute /= 7;
           console.log("chronic rolling average for tload_time: ");
           console.log(rolling_total_chronic);
           console.log("acute rolling average for tload_time: ");
           console.log(rolling_total_acute);
-          rows[slot][0] = k.getDate().toString();
+          console.log("ratio for" + k + ": " + (rolling_total_acute / rolling_total_chronic));
+          var k_day = new Date();
+          k_day.setDate(k.getDate() + 1);
+          rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
@@ -538,7 +552,9 @@ html
           rolling_total /= 28;
           console.log("rolling average for sleep: ");
           console.log(rolling_total);
-          rows[slot][0] = k.getMonth().toString() + '/' + k.getDate().toString() + '/' + (k.getYear()-100);
+          var k_day = new Date();
+          k_day.setDate(k.getDate() + 1);
+          rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           //rows[slot][2] = rolling_total;
           slot++;
       }
