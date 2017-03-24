@@ -449,7 +449,7 @@ passport.use(new LocalStrategy( function(username, password, done){
 				userteams.push(teams[i].team_name);
 			}
 
-			if( username == 'Clev' || username == 'JYoYo'){
+			if( username == 'Clev' || username == 'JYoYo' || username == 'Cleviden'){
 				return done(null, {uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams, pass: users[0].passflag });
 			}
 
