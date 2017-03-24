@@ -449,10 +449,6 @@ passport.use(new LocalStrategy( function(username, password, done){
 				userteams.push(teams[i].team_name);
 			}
 
-			if( username == 'Clev' || username == 'JYoYo' || username == 'Cleviden'){
-				return done(null, {uid: users[0].uid, id: users[0].username, first: users[0].first, last: users[0].last, role: users[0].role_name, teams: userteams, pass: users[0].passflag });
-			}
-
 			bcrypt.compare(password, users[0].password, function(err, res) {
 				if(res == true) {
 					console.log("we get here?");
@@ -560,10 +556,9 @@ router.post("/admin_remove_user_form", function(req, res){
 		{
 			console.log("successfully removed user");
 			req.visitor.event("Admin", "User was removed").send();
+  			res.render('admin_remove_user.pug', { message: "User successfully removed" });
 		}
 	});
-
-  res.redirect('/admin_add_user');
 });
 /*
 router.post("/changepass", function(req, res){
