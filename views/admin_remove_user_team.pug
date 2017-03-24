@@ -94,6 +94,12 @@ html
 
         var teams = document.getElementById("AllTeams");
 
+        var tmp = document.createElement("option");
+        tmp.text = "----";
+        tmp.value = "unknown";
+        tmp.name = "team_name";
+        teams.add(tmp);
+
         for(var i = 0; i < Result.length; i++){
         var opt = document.createElement("option");
         opt.text = Result[i];
