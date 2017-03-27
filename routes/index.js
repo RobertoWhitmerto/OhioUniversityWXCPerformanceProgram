@@ -166,7 +166,11 @@ router.get('/buggy', function(req, res){
 router.get('/admin_remove_team', function(req, res){
 	req.visitor.pageview("/admin_remove_team").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-		res.render('admin_remove_team.pug');
+		queries.get_team({}, function(err, result){
+			var allteams = result;
+
+			res.render('admin_remove_team.pug', {AllTeams: JSON.stringify(allteams)});
+		});
 	} else {
 		res.redirect('/');
 	}
