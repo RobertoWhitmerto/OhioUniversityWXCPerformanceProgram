@@ -162,6 +162,16 @@ router.get('/buggy', function(req, res){
 	}
 });
 
+// Admin Remove Team 
+router.get('/admin_remove_team', function(req, res){
+	req.visitor.pageview("/admin_remove_team").send();
+	if(req.isAuthenticated() && req.user.pass != 'T'){
+		res.render('admin_remove_team.pug');
+	} else {
+		res.redirect('/');
+	}
+});
+
 // Admin Team Creation
 router.get('/admin_create_team', function(req, res){
 	req.visitor.pageview("/admin_create_team").send();
