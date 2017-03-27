@@ -348,7 +348,11 @@ router.post('/admin_create_team_form', function(req, res) {
 
 	queries.insert_team(req.body, function(err, result){
 		console.log(result);
-		if(result.affectedRows > 0) {res.render('admin_create_team.pug', { message: "Team added" });}
+
+		if(result.affectedRows > 0){
+    var firstn = req.user.first;
+ {res.render('admin_create_team.pug', { firstn, message: "you have successfully added a new team!" });}
+}
 	});
 })
 
