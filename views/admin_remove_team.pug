@@ -1,0 +1,92 @@
+doctype html
+html
+  head
+    title PPA - Remove a Team
+    // Materialize CSS imports [head]
+    // Import Google Icon Font
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    // Import materialize.css
+    link(type='text/css', rel='stylesheet', href='css/materialize.min.css', media='screen,projection')
+    // Let browser know website is optimized for mobile
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script.
+      $(document).ready(function(){
+      $(".dropdown-button").dropdown();
+      $(".button-collapse").sideNav();
+      });
+  //Background pattern from Subtle Patterns//
+  body(background='/views/bg3.png')
+    include navi.pug
+    br
+    br
+    br
+    br
+    br
+    font(color='cyan')
+      .container
+        .row
+          .col.s12.m12
+            .card.light-blue.darken-4
+              .card-content.white-text
+                span.card-title
+                  center Remove a Team:
+                form(action='/admin_remove_team', method='post')
+                  | Select a Team:
+                  font(color='black')
+                    select#AllTeams.browser-default(name='datadumpteam', required='')
+                    br
+                    br
+                    button.btn.waves-effect.light-green(type='submit', name='action')
+                      | Remove Team
+
+      //Change all of our primary colors that are THIS color to our new custom color//
+      style.
+        .card.indigo.accent-4 {
+        background-color: #2f4f4f !important;
+        }
+
+      //Change all of our secondary colors that are THIS color to our new custom color//
+      style.
+        .card.light-blue.darken-4 {
+        background-color: #2f4f4f !important;
+        }
+
+      // ---------------------------------------------------------------------------------
+      // - Team Dynamic Select JavaScript Function -
+      script.
+        //Put the variable passed over here and remove static example//
+        var example = !{homeboize};     //(!) UNCOMMENT (!) json object being passed to the pug file
+        var Result = [];                //(!) UNCOMMENT (!) array that should be empty to store the json as an array
+
+        //Lets convert our team json data to an array in JavaScript//
+        for(var i in example)                     //(!) UNCOMMENT (!) For each entry in the json
+          Result.push([example[i].team_name]);    //(!) UNCOMMENT (!) Push it to result as an array element
+
+        //Lets display our teams in alphabetical order//
+        Result.toString();  //Ensure that the data is type string
+        Result.sort();      //sort the teams
+
+        var teams = document.getElementById("AllTeams");
+
+        var tmp = document.createElement("option");
+        tmp.text = "----";
+        tmp.value = "unknown";
+        tmp.name = "datadumpteam";
+        teams.add(tmp);
+
+        for(var i = 0; i < Result.length; i++){
+        var opt = document.createElement("option");
+        opt.text = Result[i];
+        opt.value = Result[i];
+        opt.name = "datadumpteam";
+        teams.add(opt);
+        }
+        document.getElementById("TeamButton").disabled = true;
+      // - End of Team Dynamic Select JavaScript Function -
+
+    // Materialize CSS imports [body]
+    // put this at the end of the body
+    // Import jQuery before materialize.js
+    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(type='text/javascript', src='js/materialize.min.js')
