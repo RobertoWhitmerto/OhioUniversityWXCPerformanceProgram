@@ -169,7 +169,7 @@ router.get('/admin_remove_team', function(req, res){
 		queries.get_team({}, function(err, result){
 			var allteams = result;
 
-			res.render('admin_remove_team.pug', {AllTeams: JSON.stringify(allteams)});
+			res.render('admin_remove_team.pug', {homeboize: JSON.stringify(allteams)});
 		});
 	} else {
 		res.redirect('/');
@@ -372,6 +372,7 @@ router.post('/admin_create_team_form', function(req, res) {
 
 router.post('/admin_remove_team', function(req, res) {
 	var message;
+	console.log(req.body);
 	queries.remove_team(req.body, function(err, result){
 		if(err || result.affectedRows <= 0) {message = "Could not remove team";}
 		else{ message = "Successfully Removed team"; }

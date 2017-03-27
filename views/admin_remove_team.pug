@@ -34,7 +34,7 @@ html
                 form(action='/admin_remove_team', method='post')
                   | Select a Team:
                   font(color='black')
-                    select#AllTeams.browser-default(name='datadumpteam', required='')
+                    select#AllTeams.browser-default(name='team_name', required='')
                     br
                     br
                     button.btn.waves-effect.light-green(type='submit', name='action')
@@ -72,14 +72,14 @@ html
         var tmp = document.createElement("option");
         tmp.text = "----";
         tmp.value = "unknown";
-        tmp.name = "datadumpteam";
+        tmp.name = "team_name";
         teams.add(tmp);
 
         for(var i = 0; i < Result.length; i++){
         var opt = document.createElement("option");
         opt.text = Result[i];
         opt.value = Result[i];
-        opt.name = "datadumpteam";
+        opt.name = "team_name";
         teams.add(opt);
         }
         document.getElementById("TeamButton").disabled = true;
