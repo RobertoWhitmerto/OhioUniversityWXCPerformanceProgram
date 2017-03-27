@@ -117,7 +117,7 @@ router.get('/admin_remove_user', function(req, res){
 		if(req.user.role == 'Admin'){
       queries.get_user({},function(err, result){
       var allusr = result;
-      console.log(allusr);
+      //console.log(req.user.first);
 			res.render('admin_remove_user.pug', { homegang:JSON.stringify(allusr)});
     }); 
 		}
@@ -556,7 +556,12 @@ router.post("/admin_remove_user_form", function(req, res){
 		{
 			console.log("successfully removed user");
 			req.visitor.event("Admin", "User was removed").send();
-  			res.render('admin_remove_user.pug', { message: "User successfully removed" });
+      queries.get_user({},function(err, result){
+      var allusr = result;
+		  var role = req.user;
+      var firstn = req.user.first;    
+			res.render('admin_remove_user.pug', { firstn, message: "the user was successfully removed", homegang:JSON.stringify(allusr)});
+    }); 
 		}
 	});
 });
