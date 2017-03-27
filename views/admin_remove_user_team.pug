@@ -17,7 +17,11 @@ html
       });
 
 
-
+    script.
+      $(document).ready(function(){
+      if("#{message}")
+      Materialize.toast('#{firstn}, #{message} ', 5000, 'rounded');
+      });
 
 
   //Background pattern from Subtle Patterns//
@@ -39,8 +43,6 @@ html
                     font(color='white')
                       b Remove a User From a Team
                       br
-                      if(message)
-                        b #{message}
             .row
               .col.s12.m12
                 .card.light-blue.darken-4

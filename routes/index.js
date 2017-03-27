@@ -321,10 +321,24 @@ router.post('/admin_add_team_form', function(req, res) {
 	queries.insert_userteam(req.body, function(err, result){
 
 		if(err) {
-			req.visitor.event("FAILURE", "User failed to link team").send();
+			req.visitor.event("FAILURE", "there was a problem, the user failed to link team").send();
 			res.render('admin_add_team.pug', { message: "Failed to link user and team" });
 		} else {
-			res.render('admin_add_team.pug', { message: "Successfully linked user and team" });
+
+
+
+		var allteams;
+    	var allusr;
+    	var role = req.user.role;
+    	queries.get_user({},function(err, result){
+      		allusr = result;
+			queries.get_team({},function(err, result){
+				allteams = result;
+      var firstn = req.user.first;
+				res.render('admin_add_team.pug', { firstn, message: "you have successfully linked the user and team", homegang:JSON.stringify(allusr), homeboize: JSON.stringify(allteams), data: allteams, role });
+			});
+  		});
+
 		}
 	});
 })
@@ -345,9 +359,25 @@ router.post('/admin_remove_user_team_form', function(req, res){
 
 		if(err)
 		{
-			req.visitor.event("FAILURE", "User failed to remove team link").send();
+			req.visitor.event("FAILURE", "there was a problem, the selected user wasn't removed from the team").send();
 		}
-		if(result.affectedRows > 0) {res.render('admin_remove_user_team.pug', { message: "Successfully removed user from team" });}
+		if(result.affectedRows > 0){
+    	var allusr;
+    	var role = req.user.role;
+    	queries.get_userteam({},function(err, result){
+    		allusrteam = result;
+			queries.get_team({},function(err, result){
+				allteams = result;
+      var firstn = req.user.first;    
+				/* Debug/Dev Code - remove later
+    			console.log("---------------------------------");
+    			console.log(allusrteam);
+    			console.log("---------------------------------");
+    			console.log(allteams);*/
+				res.render('admin_remove_user_team.pug',{ firstn, message: "you have successfully removed the selected user from the team", userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
+			});
+  		});
+}
 	});
 })
 

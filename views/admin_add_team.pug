@@ -21,7 +21,11 @@ html
 
 
 
-
+    script.
+      $(document).ready(function(){
+      if("#{message}")
+      Materialize.toast('#{firstn}, #{message} ', 5000, 'rounded');
+      });
 
 
 
@@ -44,8 +48,6 @@ html
                     font(color='white')
                       b Link a Team to a User
                       br
-                      if(message)
-                        b #{message}
             .row
               .col.s12.m12
                 .card.light-blue.darken-4
