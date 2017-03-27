@@ -791,8 +791,7 @@ html
     br
     script.
       function myFunction() {
-      console.log("HEY YO LOOK OVER HERE\n");
-      var wID = $workoutID;
+      var wID_ = $workoutID;
       var sleep = $sleep;
       var illness = $illness;
       var injury = $injury;
@@ -802,7 +801,7 @@ html
       var time = $time;
       var distance = $distance;
       var notes = $notes;
-      console.log(wID);
+
       //To Add the Links, assign dynamic value to these variables//
       var sleepV = sleep;           //Should read in the "number" value from original
       var illnessV =illness;    //String based selection, select input field
@@ -958,7 +957,8 @@ html
       document.getElementById("hungry").selectedIndex = 11;
       //--------------------------------------//
       }
-    form
+    form(name='form2', action='/myworkouts_update', method='post')
+      input(type='hidden', value=wID, name='wID', required='')
       label Hours of Sleep
       font(color='cyan')
         input#sleephours(type='number', name='sleephours', min='0', max='14')
@@ -1067,12 +1067,9 @@ html
       br
       button.modal-action.modal-close.btn-flat.red(type='button', href='#!')
         font(color='white') Close
-      form(name='form2', action='/myworkouts_update', method='post')
-        input(type='hidden', value=wID, name='wID', required='')  
-        button.btn.blue.btn-primary(type='submit', name='action', wID)
-          -console.log("%%%%%%%%%%%%%%%%%%");
-          | Update
-          i.material-icons.right send
+      button.btn.blue.btn-primary(type='submit', name='action', wID)
+        | Update
+        i.material-icons.right send
 
     // Materialize CSS imports [body]
     // put this at the end of the body

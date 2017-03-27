@@ -353,7 +353,7 @@ router.post('/admin_remove_user_team_form', function(req, res){
 
 
 router.post('/getdatadumpind', function(req, res) {
-	console.log(req.body);
+	console.log("meme town");
 	
 	//access workout info through [] index operator, rows of query returned
 	var workouts;
@@ -673,7 +673,7 @@ function dump(team,objArray, res)
             var str = '';
             for (var i = 0; i < array.length; i++) {
             	if(i == 0){
-            		str += 'athlete,date,sleep,health_status,Illness,Injury,percent_health,cycle_start,RPE,time,distance,notes,workoutID\r\n';
+            		str += 'workout_id,user_id,user_id,username,team_name,date,sleep,health,injury,percent_health,cycle_start,RPE,RPEinfo,time,distance,hunger,notes\r\n';
             	}
                 var line = '';
                 for (var index in array[i]) {
