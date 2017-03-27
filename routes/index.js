@@ -354,7 +354,17 @@ router.post('/admin_create_team_form', function(req, res) {
  {res.render('admin_create_team.pug', { firstn, message: "you have successfully added a new team!" });}
 }
 	});
-})
+});
+
+router.post('/admin_remove_team', function(req, res) {
+	var message;
+	queries.remove_team(req.body, function(err, result){
+		if(err || result.affectedRows <= 0) {message = "Could not remove team";}
+		else{ message = "Successfully Removed team"; }
+
+		res.render('admin_remove_team.pug', {message: message});
+	});
+});
 
 router.post('/admin_remove_user_team_form', function(req, res){
 
