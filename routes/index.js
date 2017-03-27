@@ -533,12 +533,14 @@ router.post("/admin_add_user_form", function(req, res){
 				if(!err && result.affectedRows > 0)
 				{
 					console.log("successfully added user");
-					res.render('admin_add_user.pug', { message: "Successfully added user" } );
+          var firstn = req.user.first;
+					res.render('admin_add_user.pug', { firstn, message: "you have successfully added a new user" } );
 				}
 				else
 				{
+          var firstn = req.user.first;
 					console.log("Could Not add user " + err);
-					res.render('admin_add_user.pug', { message: "Error: Could not add user" } );
+					res.render('admin_add_user.pug', { firstn, message: "there was a problem, unable to add the new user" } );
 				}
 			});
 		});
@@ -560,7 +562,7 @@ router.post("/admin_remove_user_form", function(req, res){
       var allusr = result;
 		  var role = req.user;
       var firstn = req.user.first;    
-			res.render('admin_remove_user.pug', { firstn, message: "the user was successfully removed", homegang:JSON.stringify(allusr)});
+			res.render('admin_remove_user.pug', { firstn, message: "the selected user was successfully removed", homegang:JSON.stringify(allusr)});
     }); 
 		}
 	});

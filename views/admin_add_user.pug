@@ -15,6 +15,12 @@ html
       $(".dropdown-button").dropdown();
       $(".button-collapse").sideNav();
       });
+
+    script.
+      $(document).ready(function(){
+      if("#{message}")
+      Materialize.toast('#{firstn}, #{message} ', 5000, 'rounded');
+      });
   //Background pattern from Subtle Patterns//
   body(background='/views/bg3.png')
     include navi.pug
@@ -33,8 +39,6 @@ html
                   p.fonts
                     b Create a New User:
                     br
-                    if(message)
-                      b #{message}
             .row
               .col.s12.m12
                 .card.light-blue.darken-4
