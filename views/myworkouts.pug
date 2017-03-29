@@ -214,7 +214,7 @@ html
             console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
-            rows[slot][1] = parseInt(obj.distance, 10);
+            rows[slot][1] += parseInt(obj.distance, 10);
           }
       }
       var now = new Date();
@@ -313,7 +313,7 @@ html
             
             console.log(slot);
             console.log(dt.getDate() + 1);
-            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
+            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
           }
       }
       var now = new Date();
@@ -424,7 +424,7 @@ html
             
             console.log(slot);
             console.log(dt.getDate() + 1);
-            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
           }
       }
       var now = new Date();
