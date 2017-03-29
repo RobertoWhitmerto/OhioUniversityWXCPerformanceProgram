@@ -117,6 +117,7 @@ function get_workout(input, done){
 
 	//build and execute the query
 	selectquery(table, columns, condition, function(query){
+		query = query + " ORDER BY date DESC";
 		console.log(query);
 		exec_query(query, function(err, rows, fields){
 			if(err) {return done(err);}
