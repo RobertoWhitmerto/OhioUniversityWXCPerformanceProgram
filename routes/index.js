@@ -319,9 +319,11 @@ router.post('/changepass', function(req, res) {
 					req.visitor.event("SUCCESS", "User changed password").send();
 				}
 				if(result.changedRows >= 1){
-					res.render('changepassword.pug', {message: "Change Successful!"});
+          var firstn = req.user.first;
+					res.render('changepassword.pug', {firstn, message: "the change was successful!"});
 				} else {
-					res.render('changepassword.pug', {message: "Change Failed!"});
+          var firstn = req.user.first;
+					res.render('changepassword.pug', {firstn, message: "the change has failed!"});
 				}
 
 			});
@@ -374,10 +376,21 @@ router.post('/admin_remove_team', function(req, res) {
 	var message;
 	console.log(req.body);
 	queries.remove_team(req.body, function(err, result){
-		if(err || result.affectedRows <= 0) {message = "Could not remove team";}
-		else{ message = "Successfully Removed team"; }
 
-		res.render('admin_remove_team.pug', {message: message});
+
+
+
+var firstn = req.user.first;
+		queries.get_team({}, function(err, result){
+			var allteams = result;
+
+
+
+		if(err || result.affectedRows <= 0) {message = "there was a problem, could not remove team";}
+		else{ message = "you have Successfully removed the selected team"; }
+
+		res.render('admin_remove_team.pug', {firstn, message: message, homeboize: JSON.stringify(allteams)});
+		});
 	});
 });
 
