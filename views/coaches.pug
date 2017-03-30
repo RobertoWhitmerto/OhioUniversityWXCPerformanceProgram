@@ -58,7 +58,7 @@ html
       for(var i=0; i<x.length; i++) {
         var obj = x[i];
         if(obj.username == currentathlete) {
-          //onsole.log(obj);
+          //console.log(obj);
           d.push(obj);
         }
       }
@@ -250,7 +250,7 @@ html
             //console.log(rolling_total);
             //console.log(slot);
             //console.log(dt.getDate() + 1);
-            rows[slot][1] = parseInt(obj.distance, 10);
+            rows[slot][1] += parseInt(obj.distance, 10);
           }
       }
       var now = new Date();
@@ -372,7 +372,7 @@ html
             
             //console.log(slot);
             //console.log(dt.getDate() + 1);
-            rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
           }
       }
       var now = new Date();
@@ -433,7 +433,7 @@ html
       series: {1: {type: 'line', targetAxisIndex:1}},
       hAxis: {title: "Date"},
       vAxes: {0: {viewWindowMode:'explicit', title: 'RPE x Mins', textPosition: 'in'},
-              1: {gridlines: {color: 'transparent'}, title: 'Acute:Chronic Workload', textPosition: 'in'},
+              1: {gridlines: {color: 'transparent'}, title: 'Acute:Chronic Workload'},
               },
       legend: 'none',
       lineWidth: 3,
@@ -525,7 +525,7 @@ html
             //console.log(rolling_total);
             //console.log(slot);
             //console.log(dt.getDate() + 1);
-            rows[slot][1] = parseInt(obj.percent_health, 10);
+            rows[slot][1] += parseInt(obj.percent_health, 10);
           }
       }
       var now = new Date();
@@ -716,8 +716,9 @@ html
          //console.log(this.value);
          sleepy();
          dist();
-         //tload_time();
+         tload_time();
          wellness();
+         
          
        });
     style.
