@@ -47,25 +47,25 @@ html
       var d = [];
       
       var currentathlete = window.currentuid;
-      console.log(currentathlete);
+      //console.log(currentathlete);
       
       for(var i=0; i<x.length; i++) {
         var obj = x[i];
-        console.log(obj);
+        //console.log(obj);
       }
         
         
       for(var i=0; i<x.length; i++) {
         var obj = x[i];
         if(obj.username == currentathlete) {
-          console.log(obj);
+          //onsole.log(obj);
           d.push(obj);
         }
       }
       
       for(var i=0; i<d.length; i++) {
         var obj = d[i];
-        console.log(obj);
+        //console.log(obj);
         }
       
       var oneWeekAgo_1 = new Date();
@@ -185,25 +185,25 @@ html
       var d = [];
       
       var currentathlete = window.currentuid;
-      console.log(currentathlete);
+      //console.log(currentathlete);
       
       for(var i=0; i<x.length; i++) {
         var obj = x[i];
-        console.log(obj);
+        //console.log(obj);
       }
         
         
       for(var i=0; i<x.length; i++) {
         var obj = x[i];
         if(obj.username == currentathlete) {
-          console.log(obj);
+          //console.log(obj);
           d.push(obj);
         }
       }
       
       for(var i=0; i<d.length; i++) {
         var obj = d[i];
-        console.log(obj);
+        //console.log(obj);
         }
       
       var oneWeekAgo_1 = new Date();
@@ -231,7 +231,7 @@ html
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
-          console.log("DATE: ");
+          //console.log("DATE: ");
           var dt = new Date(Date.parse(obj.date));
           var dt_fixed = dt.getDate() + 1;
           //console.log(obj.date);
@@ -244,12 +244,12 @@ html
             var rolling_total=0;
             var avg_count=0;
             
-            console.log("COUNT:" + avg_count);
+            //console.log("COUNT:" + avg_count);
             rolling_total /= avg_count;
-            console.log("rolling average for sleep: ");
-            console.log(rolling_total);
-            console.log(slot);
-            console.log(dt.getDate() + 1);
+            //console.log("rolling average for sleep: ");
+            //console.log(rolling_total);
+            //console.log(slot);
+            //console.log(dt.getDate() + 1);
             rows[slot][1] = parseInt(obj.distance, 10);
           }
       }
@@ -258,10 +258,10 @@ html
       //loop through last week's dates to add rolling averages
       var slot = 0;
       for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
-        console.log("K: " + k.getDate());
+        //console.log("K: " + k.getDate());
         if(slot < 0)
           slot = slot * (-1);
-        console.log("SLOT: " + slot);
+        //console.log("SLOT: " + slot);
         var rolling_total=0;
         var avg_count=0;
         for(var j = 0; j < d.length; j++){
@@ -272,17 +272,17 @@ html
             avg_count++;
           }
         }
-        console.log("COUNT:" + avg_count);
+        //console.log("COUNT:" + avg_count);
         rolling_total /= 28;
-        console.log("rolling average for dist: ");
-        console.log(rolling_total);
+        //console.log("rolling average for dist: ");
+        //console.log(rolling_total);
         var k_day = new Date();
         k_day.setDate(k.getDate() + 1);
         rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
         //rows[slot][2] = rolling_total;
         slot++;
       }
-      console.log(rows);
+      //console.log(rows);
       data.addRows(rows);
       // Set chart options
       var options = {
@@ -317,25 +317,25 @@ html
       var d = [];
       
       var currentathlete = window.currentuid;
-      console.log(currentathlete);
+      //console.log(currentathlete);
       
       for(var i=0; i<x.length; i++) {
         var obj = x[i];
-        console.log(obj);
+        //console.log(obj);
       }
         
         
       for(var i=0; i<x.length; i++) {
         var obj = x[i];
         if(obj.username == currentathlete) {
-          console.log(obj);
+          //console.log(obj);
           d.push(obj);
         }
       }
       
       for(var i=0; i<d.length; i++) {
         var obj = d[i];
-        console.log(obj);
+        //console.log(obj);
         }
       
       var oneWeekAgo_1 = new Date();
@@ -359,7 +359,7 @@ html
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
-          console.log("DATE: ");
+          //console.log("DATE: ");
           var dt = new Date(Date.parse(obj.date));
           var dt_fixed = dt.getDate() + 1;
           //console.log(obj.date);
@@ -370,8 +370,8 @@ html
             if(slot < 0)
               slot = slot * (-1);
             
-            console.log(slot);
-            console.log(dt.getDate() + 1);
+            //console.log(slot);
+            //console.log(dt.getDate() + 1);
             rows[slot][1] = parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
           }
       }
@@ -380,10 +380,10 @@ html
       //loop through last week's dates to add rolling averages
       var slot = 0;
       for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
-          console.log("K: " + k.getDate());
+          //console.log("K: " + k.getDate());
           if(slot < 0)
             slot = slot * (-1);
-          console.log("SLOT: " + slot);
+          //console.log("SLOT: " + slot);
           var rolling_total_chronic=0;
           var rolling_total_acute=0;
           var avg_count_a=0;
@@ -398,32 +398,32 @@ html
             var wrk_dt = new Date(Date.parse(wrk.date));
             var k_plus_one = new Date(k);
             k_plus_one.setDate(k_plus_one.getDate() + 1);
-            console.log("wrk_dt: " + wrk_dt + " | acute_dt: " + acute_dt + " | chronic_dt: " + chronic_dt);
+            //console.log("wrk_dt: " + wrk_dt + " | acute_dt: " + acute_dt + " | chronic_dt: " + chronic_dt);
             if(wrk_dt > chronic_dt && wrk_dt <= k_plus_one){
               rolling_total_chronic += parseInt(wrk.RPE, 10)*parseInt(wrk.time, 10);
               avg_count_c++;
-              console.log(wrk_dt + "is in Chronic ratio");
+              //console.log(wrk_dt + "is in Chronic ratio");
             }
             if(wrk_dt > acute_dt && wrk_dt <= k_plus_one){
                rolling_total_acute += parseInt(wrk.RPE, 10)*parseInt(wrk.time, 10);
-               console.log(wrk_dt + "is in Acute ratio");
+               //console.log(wrk_dt + "is in Acute ratio");
               }
             }
-          console.log("COUNT:" + avg_count_c);
+          //console.log("COUNT:" + avg_count_c);
           rolling_total_chronic /= 28;
           rolling_total_acute /= 7;
-          console.log("chronic rolling average for tload_time: ");
-          console.log(rolling_total_chronic);
-          console.log("acute rolling average for tload_time: ");
-          console.log(rolling_total_acute);
-          console.log("ratio for" + k + ": " + (rolling_total_acute / rolling_total_chronic));
+          //console.log("chronic rolling average for tload_time: ");
+          //console.log(rolling_total_chronic);
+          //console.log("acute rolling average for tload_time: ");
+          //console.log(rolling_total_acute);
+          //console.log("ratio for" + k + ": " + (rolling_total_acute / rolling_total_chronic));
           var k_day = new Date();
           k_day.setDate(k.getDate() + 1);
           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
-      console.log(rows);
+      //console.log(rows);
       data.addRows(rows);
       // Set chart options
       var options = {
@@ -460,25 +460,25 @@ html
       var d = [];
       
       var currentathlete = window.currentuid;
-      console.log(currentathlete);
+      //console.log(currentathlete);
       
       for(var i=0; i<x.length; i++) {
         var obj = x[i];
-        console.log(obj);
+        //console.log(obj);
       }
         
         
       for(var i=0; i<x.length; i++) {
         var obj = x[i];
         if(obj.username == currentathlete) {
-          console.log(obj);
+          //console.log(obj);
           d.push(obj);
         }
       }
       
       for(var i=0; i<d.length; i++) {
         var obj = d[i];
-        console.log(obj);
+        //console.log(obj);
         }
       
       var oneWeekAgo_1 = new Date();
@@ -506,7 +506,7 @@ html
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
-          console.log("DATE: ");
+          //console.log("DATE: ");
           var dt = new Date(Date.parse(obj.date));
           var dt_fixed = dt.getDate() + 1;
           //console.log(obj.date);
@@ -519,12 +519,12 @@ html
             var rolling_total=0;
             var avg_count=0;
             
-            console.log("COUNT:" + avg_count);
+            //console.log("COUNT:" + avg_count);
             rolling_total /= avg_count;
-            console.log("rolling average for sleep: ");
-            console.log(rolling_total);
-            console.log(slot);
-            console.log(dt.getDate() + 1);
+            //console.log("rolling average for sleep: ");
+            //console.log(rolling_total);
+            //console.log(slot);
+            //console.log(dt.getDate() + 1);
             rows[slot][1] = parseInt(obj.percent_health, 10);
           }
       }
@@ -533,10 +533,10 @@ html
       //loop through last week's dates to add rolling averages
       var slot = 0;
       for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
-          console.log("K: " + k.getDate());
+          //console.log("K: " + k.getDate());
           if(slot < 0)
             slot = slot * (-1);
-          console.log("SLOT: " + slot);
+          //console.log("SLOT: " + slot);
           var rolling_total=0;
           var avg_count=0;
           for(var j = 0; j < d.length; j++){
@@ -547,18 +547,18 @@ html
               avg_count++;
             }
           }
-          console.log("COUNT:" + avg_count);
+          //console.log("COUNT:" + avg_count);
           rolling_total /= 28;
-          console.log("rolling average for sleep: ");
-          console.log(rolling_total);
+          //console.log("rolling average for sleep: ");
+          //console.log(rolling_total);
           var k_day = new Date();
           k_day.setDate(k.getDate() + 1);
           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           //rows[slot][2] = rolling_total;
           slot++;
       }
-      console.log("ROWS");
-      console.log(rows);
+      //console.log("ROWS");
+      //console.log(rows);
       data.addRows(rows);
       // Set chart options
       var options = {'title':'Weekly Wellness',
@@ -578,7 +578,7 @@ html
       var chart = new google.visualization.LineChart(document.getElementById('wellnesschart'));
       chart.draw(data, options);
       }
-  
+
   script.
     $(document).ready(function(){
     $(".dropdown-button").dropdown();
@@ -603,11 +603,43 @@ html
       border: 3px solid #000000;
       margin: auto;
       }
+    style(type='text/css').
+      div.ez3{
+      background: #b1f6cb;
+      width:775px;
+      border: 3px solid #000000;
+      margin: auto;
+      }
     style.
       .table {
       border: 3.5px solid #000000;
       border-radius: 5px;
       background: #2f4f4f;
+      }
+      .table-bordered > thead > tr > th,
+      .table-bordered > tbody > tr > th,
+      .table-bordered > tfoot > tr > th,
+      .table-bordered > thead > tr > td,
+      .table-bordered > tbody > tr > td,
+      .table-bordered > tfoot > tr > td {
+      border: 3px solid #000000;
+      border-radius: 5px;
+      }
+      h1{
+      color:white;
+      }
+      td{
+      color:#00cdcd;
+      }
+      th{
+      color:white;
+      }
+    style.
+      .table2 {
+      border: 3.5px solid #000000;
+      border-radius: 5px;
+      background: #2f4f4f;
+      width: 770px;
       }
       .table-bordered > thead > tr > th,
       .table-bordered > tbody > tr > th,
@@ -671,6 +703,10 @@ html
                                       // Button trigger modal
                                       button.btn.teal.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#editModal',id='uid', value=user['username'])
                                         | View Charts
+                                  td
+                                    center
+                                      button.btn.teal.btn-primary.btn-lg(type='button', data-toggle='modal',data-target='#editModal_tl',id='uid',value=user['username'])
+                                        | Training Log
                         br
                         br
                         -}
@@ -680,8 +716,9 @@ html
          //console.log(this.value);
          sleepy();
          dist();
-         tload_time();
+         //tload_time();
          wellness();
+         
        });
     style.
       .modal-body {
@@ -732,7 +769,51 @@ html
                 #wellnesschart
                 br
               br
-              br
+    // Modal for Training log
+    #editModal_tl.modal
+        .modal-content.teal.darken-3
+          button.close(type='button',data-dismiss='modal',aria-lebel='Close')
+            span(aria-hidden='true') x
+          h4
+            font(color='white') Training Log:
+          left
+            .ez3
+              - if (typeof(data) !== 'undefined'){  
+              #tl_table
+                table.table2.table-bordered
+                  thead
+                    tr
+                      th Date
+                      th Hours Slept
+                      th Illness
+                      th Injury
+                      th Percent Health
+                      th Cycle
+                      th RPE
+                      th Time
+                      th Distance
+                      th Notes
+                  tbody
+                    for workout in data
+                      tr
+                        //this form holds the workout ID per workout as a hidden value, so if this workout should be deleted 
+                        //or edited, we know which workout to update/remove.
+                        form(name='tl_form', action='/coaches', method='post')
+                          input(type='hidden', value=workout['wid'], name='wID', required='')
+        
+                          td.datetag= workout['date']
+          
+                          td.sleeptag= workout['sleep']
+                          td.illnesstag= workout['health']
+                          td.injurytag= workout['injury']
+                          td.percent_healthtag= workout['percent_health']
+                          td.cycle_starttag= workout['cycle_start']
+                          td.RPEtag= workout['RPE']
+                          td.timetag= workout['time']
+                          td.distancetag= workout['distance']
+                          td.notestag= workout['notes']
+                          //td.usertag= workout['username']
+                  -}
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js
