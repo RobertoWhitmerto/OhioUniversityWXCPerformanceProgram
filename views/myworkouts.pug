@@ -815,6 +815,7 @@ html
       var cycleV = cycle_start;               //? This still isnt fixed from the roots
       //Autofill Hours of Sleep from Source//
       document.getElementById("sleephours").value =  sleep;
+      document.getElementById("wrk_id").value = wID_;
       //Autoselect General Health from Source//
       if(illnessV == "n/a")
       document.getElementById("illness").selectedIndex = 0;
@@ -958,7 +959,7 @@ html
       //--------------------------------------//
       }
     form(name='form2', action='/myworkouts_update', method='post')
-      input(type='hidden', value=wID, name='wID', required='')
+      input#wrk_id(type='hidden', name='wrk_id', required='')
       label Hours of Sleep
       font(color='cyan')
         input#sleephours(type='number', name='sleephours', min='0', max='14')
