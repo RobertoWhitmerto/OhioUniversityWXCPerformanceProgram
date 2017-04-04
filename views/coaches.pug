@@ -31,6 +31,8 @@ html
       google.charts.setOnLoadCallback(tload_time);
       google.charts.setOnLoadCallback(wellness);
       //Identifying Functions [B]
+      //Initializing global variables
+      var exclude = [];
     
       // ****************************** SLEEP CHART *************************************
       function sleepy() {
@@ -690,6 +692,7 @@ html
                               th First
                               th Last
                               th
+                              th
                           tbody
                             for user in data_u
                               tr
@@ -712,14 +715,87 @@ html
                         -}
     script.
      $('[id*=uid]').click(function(){
-         currentuid=this.value;
-         //console.log(this.value);
-         sleepy();
-         dist();
-         tload_time();
-         wellness();
-         
-         
+        currentuid=this.value;
+        //console.log(this.value);
+        sleepy();
+        dist();
+        tload_time();
+        wellness();
+        
+        var table = document.getElementById("tl_table");
+        //console.log(table);
+        
+        var tablebody = table.getElementsByTagName("tbody")[0];
+        //console.log(tablebody);
+        
+        var tablerows = tablebody.getElementsByTagName("TR");
+        //console.log(tablerows);
+        
+        //if exclude[] is already populated, reset the data/table.
+        if(exclude.length > 0) {
+          for(var i=0; i< exclude.length; i++) {
+            var newrow = tablebody.insertRow(0);
+            var date_cell = newrow.insertCell(0);
+            date_cell.className = "datetag";
+            var sleep_cell = newrow.insertCell(1);
+            sleep_cell.className = "sleeptag";
+            var illness_cell = newrow.insertCell(2);
+            illness_cell.className = "illnesstag"
+            var injury_cell = newrow.insertCell(3);
+            injury_cell.className = "injurytag";
+            var phealth_cell = newrow.insertCell(4);
+            phealth_cell = "percent_healthtag";
+            var cycle_cell = newrow.insertCell(5);
+            cycle_cell.className = "cycle_starttag";
+            var RPE_cell = newrow.insertCell(6);
+            RPE_cell.className = "RPEtag";
+            var time_cell = newrow.insertCell(7);
+            time_cell.className = "timetag";
+            var dist_cell = newrow.insertCell(8);
+            dist_cell.className = "distancetag";
+            var notes_cell = newrow.insertCell(9);
+            notes_cell.className = "notestag";
+            var user_cell = newrow.insertCell(10);
+            user_cell.className = "usertag";
+            user_cell.style.display = "none";
+            
+            date_cell.innerHTML = exclude[i].cells[0].innerHTML;
+            sleep_cell.innerHTML = exclude[i].cells[1].innerHTML;
+            illness_cell.innerHTML = exclude[i].cells[2].innerHTML;
+            injury_cell.innerHTML = exclude[i].cells[3].innerHTML;
+            phealth_cell.innerHTML = exclude[i].cells[4].innerHTML;
+            cycle_cell.innerHTML = exclude[i].cells[5].innerHTML;
+            RPE_cell.innerHTML = exclude[i].cells[6].innerHTML;
+            time_cell.innerHTML = exclude[i].cells[7].innerHTML;
+            dist_cell.innerHTML = exclude[i].cells[8].innerHTML;
+            notes_cell.innerHTML = exclude[i].cells[9].innerHTML;
+            user_cell.innerHTML = exclude[i].cells[10].innerHTML;
+          }
+          
+          exclude = [];
+          
+        }
+        
+        //populate exclude[]
+        for(var i=0; i<tablerows.length; i++) {
+          var t = tablerows[i].cells[10].innerHTML;
+          if(currentuid != t) {
+            exclude.push(tablerows[i]);
+            }
+          }
+        
+        //remove unwanted elements from training log table
+        for(var i=0; i<exclude.length; i++) {
+          for(var j=0; j<tablerows.length; j++) {
+            var exclude_uid = exclude[i].cells[10].innerHTML;
+            var row_uid = tablerows[j].cells[10].innerHTML;
+            if(exclude_uid == row_uid) {
+              tablerows[j].remove();
+            }
+          }
+        }
+        
+           
        });
     style.
       .modal-body {
@@ -780,41 +856,41 @@ html
           left
             .ez3
               - if (typeof(data) !== 'undefined'){  
-              #tl_table
-                table.table2.table-bordered
-                  thead
-                    tr
-                      th Date
-                      th Hours Slept
-                      th Illness
-                      th Injury
-                      th Percent Health
-                      th Cycle
-                      th RPE
-                      th Time
-                      th Distance
-                      th Notes
-                  tbody
-                    for workout in data
+                #tl_table
+                  table.table2.table-bordered
+                    thead
                       tr
-                        //this form holds the workout ID per workout as a hidden value, so if this workout should be deleted 
-                        //or edited, we know which workout to update/remove.
-                        form(name='tl_form', action='/coaches', method='post')
-                          input(type='hidden', value=workout['wid'], name='wID', required='')
-        
-                          td.datetag= workout['date']
+                        th Date
+                        th Hours Slept
+                        th Illness
+                        th Injury
+                        th Percent Health
+                        th Cycle
+                        th RPE
+                        th Time
+                        th Distance
+                        th Notes
+                    tbody
+                      for workout in data
+                        tr
+                          //this form holds the workout ID per workout as a hidden value, so if this workout should be deleted 
+                          //or edited, we know which workout to update/remove.
+                          form(name='tl_form', action='/coaches', method='post')
+                            input(type='hidden', value=workout['wid'], name='wID', required='')
           
-                          td.sleeptag= workout['sleep']
-                          td.illnesstag= workout['health']
-                          td.injurytag= workout['injury']
-                          td.percent_healthtag= workout['percent_health']
-                          td.cycle_starttag= workout['cycle_start']
-                          td.RPEtag= workout['RPE']
-                          td.timetag= workout['time']
-                          td.distancetag= workout['distance']
-                          td.notestag= workout['notes']
-                          //td.usertag= workout['username']
-                  -}
+                            td.datetag= workout['date']
+            
+                            td.sleeptag= workout['sleep']
+                            td.illnesstag= workout['health']
+                            td.injurytag= workout['injury']
+                            td.percent_healthtag= workout['percent_health']
+                            td.cycle_starttag= workout['cycle_start']
+                            td.RPEtag= workout['RPE']
+                            td.timetag= workout['time']
+                            td.distancetag= workout['distance']
+                            td.notestag= workout['notes']
+                            td(style='display:none;').usertag= workout['username']
+                    -}
     // Materialize CSS imports [body]
     // put this at the end of the body
     // Import jQuery before materialize.js
