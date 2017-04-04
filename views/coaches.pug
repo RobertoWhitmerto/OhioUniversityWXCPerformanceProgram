@@ -734,7 +734,7 @@ html
         //if exclude[] is already populated, reset the data/table.
         if(exclude.length > 0) {
           for(var i=0; i< exclude.length; i++) {
-            var newrow = tablebody.insertRow(0);
+            var newrow = tablebody.insertRow(-1);
             var date_cell = newrow.insertCell(0);
             date_cell.className = "datetag";
             var sleep_cell = newrow.insertCell(1);
