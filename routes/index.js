@@ -79,7 +79,7 @@ router.get('/admin_athlete_vis', function(req, res){
 		if(req.user.role == 'Admin' || admin.user.role == 'Coach'){
 			queries.get_workout({username: req.user.id}, function(err, result){
 				var users = result;
-				res.render('admin_athlete_vis.pug', {  data: users });
+				res.render('admin_athlete_vis.pug', {  data: users, role: req.user.role});
 			});
 		} else {
 			res.redirect(req.get('referer'));
@@ -99,7 +99,7 @@ router.get('/admin_add_user', function(req, res){
 		if(req.user.role == 'Admin'){
       queries.get_team({},function(err, result){
 		  var allteams = result;
-			res.render('admin_add_user.pug',{ homeboize: JSON.stringify(allteams) });
+			res.render('admin_add_user.pug',{ homeboize: JSON.stringify(allteams), role: req.user.role });
     });
 		} 
     else {
@@ -118,7 +118,7 @@ router.get('/admin_remove_user', function(req, res){
       queries.get_user({},function(err, result){
       var allusr = result;
       //console.log(req.user.first);
-			res.render('admin_remove_user.pug', { homegang:JSON.stringify(allusr)});
+			res.render('admin_remove_user.pug', { homegang:JSON.stringify(allusr), role: req.user.role});
     }); 
 		}
     else {
@@ -169,7 +169,7 @@ router.get('/admin_remove_team', function(req, res){
 		queries.get_team({}, function(err, result){
 			var allteams = result;
 
-			res.render('admin_remove_team.pug', {homeboize: JSON.stringify(allteams)});
+			res.render('admin_remove_team.pug', {homeboize: JSON.stringify(allteams), role: req.user.role});
 		});
 	} else {
 		res.redirect('/');
@@ -180,7 +180,7 @@ router.get('/admin_remove_team', function(req, res){
 router.get('/admin_create_team', function(req, res){
 	req.visitor.pageview("/admin_create_team").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-		res.render('admin_create_team.pug');
+		res.render('admin_create_team.pug', { role: req.user.role });
 	} else {
 		res.redirect('/');
 	}
