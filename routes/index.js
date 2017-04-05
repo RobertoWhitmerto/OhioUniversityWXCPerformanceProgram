@@ -319,9 +319,11 @@ router.post('/changepass', function(req, res) {
 					req.visitor.event("SUCCESS", "User changed password").send();
 				}
 				if(result.changedRows >= 1){
-					res.render('changepassword.pug', {message: "Change Successful!"});
+var role = req.user.role; 
+					res.render('changepassword.pug', {message: "Change Successful!", role});
 				} else {
-					res.render('changepassword.pug', {message: "Change Failed!"});
+var role = req.user.role; 
+					res.render('changepassword.pug', {message: "Change Failed!", role});
 				}
 
 			});
