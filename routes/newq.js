@@ -54,10 +54,10 @@ function updatequery(table, updates, conditions, result){
 }
 
 //execute a query
-function exec_query(querystring, result){
-	db.query(querystring, function(err, rows, fields) {
+function exec_query(querystring, values, result){
+	db.query(querystring, values, function(err, rows, fields) {
 		if(err) return result(err.code, rows);
-		else if(rows.length<=0) result("query failed", rows);
+		else if(rows.length<=0) {result("query failed", rows);}
 		else {
 			result(null, rows);
 		}
@@ -70,22 +70,40 @@ function get_user(input, done){
 	var table = "user_view";
 	var columns = "*";
 	var conditions = [];
+	var values = [];
 
 	//add the conditions that were passed in
-	if(input.username) conditions.push(`username="${input.username}"`);
-	if(input.password) conditions.push(`password="${input.password}"`);
-	if(input.email) conditions.push(`email="${input.email}"`);
-	if(input.first) conditions.push(`first="${input.first}"`);
-	if(input.last) conditions.push(`last="${input.last}"`);
-	if(input.role) conditions.push(`role_name="${input.role}"`);
+	if(input.username){ 
+		conditions.push(`username=?`);
+		values.push(input.username);
+	}
+	if(input.password){
+		conditions.push(`password=?`);
+		values.push(input.password);
+	}
+	if(input.email){
+	 	conditions.push(`email=?`);
+	 	values.push(input.email);
+	}
+	if(input.first){
+		conditions.push(`first=?`);
+		values.push(input.first);
+	}
+	if(input.last){
+		conditions.push(`last=?`);
+		values.push(input.last);
+	}
+	if(input.role){
+		conditions.push(`role_name=?`);
+		values.push(input.role);
+	}
 	
 	//join array with seperator
 	var condition = conditions.join(' AND ');
 
 	//build and execute the query
 	selectquery(table, columns, condition, function(query){
-		console.log(query);
-		exec_query(query, done);
+		exec_query(query, values, done);
 	});
 }
 
@@ -95,31 +113,69 @@ function get_workout(input, done){
 	var table = "workout_view";
 	var columns = "*";
 	var conditions = [];
+	var values = [];
 
 	//check for all possible conditions passed in
-	if(input.username) conditions.push(`username="${input.username}"`);
+	if(input.username){ 
+		conditions.push(`username=?`);
+		values.push(input.username);
+	};
 	if(input.teams) conditions.push(joinor(input.teams, "team_name"));
-	if(input.date) conditions.push(`date="${input.date}"`);
-	if(input.sleep) conditions.push(`sleep="${input.sleep}"`);
-	if(input.Illness) conditions.push(`health="${input.Illness}"`);
-	if(input.Injury) conditions.push(`injury="${input.Injury}"`);
-	if(input.percent_health) conditions.push(`percent_health="${input.percent_health}"`);
-	if(input.cycle_start) conditions.push(`cycle_start="${input.cycle_start}"`);
-	if(input.RPE) conditions.push(`RPE="${input.RPE}"`);
-	if(input.time) conditions.push(`time="${input.time}"`);
-	if(input.distance) conditions.push(`distance="${input.distance}"`);
-	if(input.workout_id) conditions.push(`workout_id="${input.workout_id}"`);
-	if(input.rpeinfo) conditions.push(`RPEinfo="${input.rpeinfo}"`);
-	if(input.hungry) conditions.push(`score="${input.hungry}"`);
+	if(input.date){ 
+		conditions.push(`date=?`);
+		values.push(input.date);
+	}
+	if(input.sleep){ 
+		conditions.push(`sleep=?`);
+		values.push(input.sleep);
+	}
+	if(input.Illness){
+		conditions.push(`health=?`);
+		values.push(input.Illness);
+	}
+	if(input.Injury){ 
+		conditions.push(`injury=?`);
+		values.push(input.Injury);
+	}
+	if(input.percent_health){ 
+		conditions.push(`percent_health=?`);
+		values.push(input.percent_health);
+	}
+	if(input.cycle_start){
+	 	conditions.push(`cycle_start=?`);
+	 	values.push(input.cycle_start);
+	}
+	if(input.RPE){
+		conditions.push(`RPE=?`);
+		values.push(input.RPE);
+	}
+	if(input.time){
+	 	conditions.push(`time=?`);
+	 	values.push(input.time);
+	}
+	if(input.distance){ 
+		conditions.push(`distance=?`);
+		values.push(input.distance);
+	}
+	if(input.workout_id){
+	 	conditions.push(`workout_id=?`);
+	 	values.push(input.workout_id);
+	}
+	if(input.rpeinfo){ 
+		conditions.push(`RPEinfo=?`);
+		values.push(input.rpeinfo);
+	}
+	if(input.hungry){ 
+		conditions.push(`score=?`);
+		values.push(input.hungry);
+	}
 
 	//join array
 	var condition = conditions.join(' AND ');
 
 	//build and execute the query
 	selectquery(table, columns, condition, function(query){
-		query = query + " ORDER BY date DESC";
-		console.log(query);
-		exec_query(query, function(err, rows, fields){
+		exec_query(query, values, function(err, rows, fields){
 			if(err) {return done(err);}
 			if(rows.length <= 0) {return done("could not find any matching workouts", false, false);}
 			return done(null, rows);
@@ -229,7 +285,6 @@ function insert_user(input, done){
 	var table = "User";
 	var columns = "(username, password, email, first, last, rid, create_time, passflag)";
 	var values = `("${input.username}", "${input.password}", "${input.email}", "${input.first}", "${input.last}", "${input.role}", NOW(), "T")`;
-	console.log(input);
 
 	insertquery(table, columns, values, function(query){
 		exec_query(query, function(err, rows, fields){
@@ -259,8 +314,6 @@ function insert_userteam(input, done){
 	var columns = "(uid, tid)";
 	var values = `("${input.username}", "${input.team_name}")`;
 
-	console.log(input);
-
 	var uid;
 	get_user(input, function(err, rows, fields){
 		if(err) console.log(err.code);
@@ -270,8 +323,6 @@ function insert_userteam(input, done){
 	get_team(input, function(err, rows, fields){
 		if(err) console.log(err.code);
 		tid = rows[0].tid;
-
-	console.log(tid);
 
 	values = `("${uid}", "${tid}")`;
 
@@ -292,8 +343,6 @@ function insert_workout(input, done){
 	var columns = "(uid, date, sleep, health, Injury, percent_health, cycle_start, RPE, RPEInfo, time, distance, hunger, notes)";
 	var date = input.currentyear+"-"+month_lookup(input.month)+"-"+input.day;
 	var query = `INSERT INTO ${table} ${columns} SELECT User.uid, "${date}", "${input.sleephours}", "${input.illness}", "${input.injury}", "${input.percent_health}", "${input.cycle}", "${input.rpeval}", "${input.rpeinfo}", "${input.time}", "${input.distance}", "${input.hungry}", "${input.mynotes}" FROM User WHERE username="${input.user}"`; 
-
-	console.log(query);
 
 	exec_query(query, done);
 }
@@ -332,13 +381,11 @@ function remove_userteam(input, done){
 	var table = "User_Teams";
 
 	get_userteam({users: [input.username], teams: [input.team_name]}, function(err, result){
-		console.log(result);
 		if(result.length <= 0) {return done(null, false);}
 
 		var cond = `uid=${result[0].uid} AND tid=${result[0].tid}`;
 
 		deletequery(table, cond, function(query){
-			console.log(query);
 			exec_query(query, done);
 		});
 	});
@@ -388,7 +435,6 @@ function update_user(input, done){
 	var condition = `username="${input.username}"`;
 
 	updatequery(table, updstring, condition, function(query){
-		console.log(query);
 		exec_query(query, done);
 	});
 }
