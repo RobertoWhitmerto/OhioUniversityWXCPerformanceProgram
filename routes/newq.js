@@ -55,6 +55,8 @@ function updatequery(table, updates, conditions, result){
 
 //execute a query
 function exec_query(querystring, values, result){
+	console.log("EXECUTING QUERY");
+	console.log(querystring);
 	db.query(querystring, values, function(err, rows, fields) {
 		if(err) return result(err.code, rows);
 		else if(rows.length<=0) {result("query failed", rows);}
@@ -392,9 +394,11 @@ function remove_userteam(input, done){
 
 }
 
+//Preconditions, workout_id is provided
 function update_workout(input, done){
 	var table = "Workouts";
 	var updates = [];
+
 
 	//check for all possible conditions passed in
 	if(input.date) updates.push(`date="${input.date}"`);
@@ -406,12 +410,11 @@ function update_workout(input, done){
 	if(input.RPE) updates.push(`RPE="${input.RPE}"`);
 	if(input.time) updates.push(`time="${input.time}"`);
 	if(input.distance) updates.push(`distance="${input.distance}"`);
-	if(input.workout_id) updates.push(`workout_id="${input.workout_id}"`);
 	if(input.rpeinfo) updates.push(`RPEinfo="${input.rpeinfo}"`);
-	if(input.hungry) updates.push(`score="${input.hungry}"`);
+	if(input.hungry) updates.push(`hunger="${input.hungry}"`);
 
 	var updstring = updates.join(', ');
-	var condition = `wid="${input.workoutid}"`;
+	var condition = `wid="${input.wrk_id}"`;
 
 	updatequery(table, updstring, condition, function(query){
 		exec_query(query, done);

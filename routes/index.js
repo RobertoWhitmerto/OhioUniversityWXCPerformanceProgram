@@ -319,11 +319,9 @@ router.post('/changepass', function(req, res) {
 					req.visitor.event("SUCCESS", "User changed password").send();
 				}
 				if(result.changedRows >= 1){
-          var firstn = req.user.first;
-					res.render('changepassword.pug', {firstn, message: "the change was successful!"});
+					res.render('changepassword.pug', {message: "Change Successful!"});
 				} else {
-          var firstn = req.user.first;
-					res.render('changepassword.pug', {firstn, message: "the change has failed!"});
+					res.render('changepassword.pug', {message: "Change Failed!"});
 				}
 
 			});
@@ -376,21 +374,10 @@ router.post('/admin_remove_team', function(req, res) {
 	var message;
 	console.log(req.body);
 	queries.remove_team(req.body, function(err, result){
+		if(err || result.affectedRows <= 0) {message = "Could not remove team";}
+		else{ message = "Successfully Removed team"; }
 
-
-
-
-var firstn = req.user.first;
-		queries.get_team({}, function(err, result){
-			var allteams = result;
-
-
-
-		if(err || result.affectedRows <= 0) {message = "there was a problem, could not remove team";}
-		else{ message = "you have Successfully removed the selected team"; }
-
-		res.render('admin_remove_team.pug', {firstn, message: message, homeboize: JSON.stringify(allteams)});
-		});
+		res.render('admin_remove_team.pug', {message: message});
 	});
 });
 
@@ -703,7 +690,7 @@ router.post("/myworkouts", function(req, res){
 router.post("/myworkouts_update", function(req, res){
 		console.log("@@@@@@@@@@@@@@@@");
 		if(req.isAuthenticated() && req.user.pass != 'T'){
-		queries.update_workout({wid: req.body.wID}, function(err, result){
+		queries.update_workout(req.body, function(err, result){
 			console.log(result);
 		});
 
