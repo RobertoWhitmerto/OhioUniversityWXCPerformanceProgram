@@ -79,7 +79,7 @@ router.get('/admin_athlete_vis', function(req, res){
 		if(req.user.role == 'Admin' || admin.user.role == 'Coach'){
 			queries.get_workout({username: req.user.id}, function(err, result){
 				var users = result;
-				res.render('admin_athlete_vis.pug', {  data: users });
+				res.render('admin_athlete_vis.pug', {  data: users, role: req.user.role});
 			});
 		} else {
 			res.redirect(req.get('referer'));
@@ -99,7 +99,7 @@ router.get('/admin_add_user', function(req, res){
 		if(req.user.role == 'Admin'){
       queries.get_team({},function(err, result){
 		  var allteams = result;
-			res.render('admin_add_user.pug',{ homeboize: JSON.stringify(allteams) });
+			res.render('admin_add_user.pug',{ homeboize: JSON.stringify(allteams), role: req.user.role });
     });
 		} 
     else {
@@ -118,7 +118,7 @@ router.get('/admin_remove_user', function(req, res){
       queries.get_user({},function(err, result){
       var allusr = result;
       //console.log(req.user.first);
-			res.render('admin_remove_user.pug', { homegang:JSON.stringify(allusr)});
+			res.render('admin_remove_user.pug', { homegang:JSON.stringify(allusr), role: req.user.role});
     }); 
 		}
     else {
@@ -169,7 +169,7 @@ router.get('/admin_remove_team', function(req, res){
 		queries.get_team({}, function(err, result){
 			var allteams = result;
 
-			res.render('admin_remove_team.pug', {homeboize: JSON.stringify(allteams)});
+			res.render('admin_remove_team.pug', {homeboize: JSON.stringify(allteams), role: req.user.role});
 		});
 	} else {
 		res.redirect('/');
@@ -180,7 +180,7 @@ router.get('/admin_remove_team', function(req, res){
 router.get('/admin_create_team', function(req, res){
 	req.visitor.pageview("/admin_create_team").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-		res.render('admin_create_team.pug');
+		res.render('admin_create_team.pug', { role: req.user.role });
 	} else {
 		res.redirect('/');
 	}
@@ -319,11 +319,9 @@ router.post('/changepass', function(req, res) {
 					req.visitor.event("SUCCESS", "User changed password").send();
 				}
 				if(result.changedRows >= 1){
-          var firstn = req.user.first;
-					res.render('changepassword.pug', {firstn, message: "the change was successful!"});
+					res.render('changepassword.pug', {message: "Change Successful!"});
 				} else {
-          var firstn = req.user.first;
-					res.render('changepassword.pug', {firstn, message: "the change has failed!"});
+					res.render('changepassword.pug', {message: "Change Failed!"});
 				}
 
 			});
@@ -376,21 +374,10 @@ router.post('/admin_remove_team', function(req, res) {
 	var message;
 	console.log(req.body);
 	queries.remove_team(req.body, function(err, result){
+		if(err || result.affectedRows <= 0) {message = "Could not remove team";}
+		else{ message = "Successfully Removed team"; }
 
-
-
-
-var firstn = req.user.first;
-		queries.get_team({}, function(err, result){
-			var allteams = result;
-
-
-
-		if(err || result.affectedRows <= 0) {message = "there was a problem, could not remove team";}
-		else{ message = "you have Successfully removed the selected team"; }
-
-		res.render('admin_remove_team.pug', {firstn, message: message, homeboize: JSON.stringify(allteams)});
-		});
+		res.render('admin_remove_team.pug', {message: message});
 	});
 });
 
@@ -703,7 +690,7 @@ router.post("/myworkouts", function(req, res){
 router.post("/myworkouts_update", function(req, res){
 		console.log("@@@@@@@@@@@@@@@@");
 		if(req.isAuthenticated() && req.user.pass != 'T'){
-		queries.update_workout({wid: req.body.wID}, function(err, result){
+		queries.update_workout(req.body, function(err, result){
 			console.log(result);
 		});
 
