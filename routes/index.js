@@ -757,8 +757,14 @@ function dump(team,objArray, res)
                 var line = '';
                 for (var index in array[i]) {
                     if (line != '') line += ','
- 
-                    line += array[i][index];
+					if(index == 5){
+						var dt = new Date(Date.parse(array[i][index]));
+						line += (dt.getMonth()+1).toString() + '/' + dt.getDate().toString() + '/' + (dt.getYear()-100);
+						console.log("yoyoyo: ");
+						console.log((dt.getMonth()+1).toString() + '/' + dt.getDate().toString() + '/' + (dt.getYear()-100));
+					}
+					else
+                    	line += array[i][index];
                 }
                 str += line + '\r\n';
             }

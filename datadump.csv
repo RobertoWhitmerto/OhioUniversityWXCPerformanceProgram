@@ -1,25 +1,8 @@
 workout_id,user_id,user_id,username,team_name,date,sleep,health,injury,percent_health,cycle_start,RPE,RPEinfo,time,distance,hunger,notes
-23,21,21,Clev,OUWXC,Sat Mar 04 2017 00:00:00 GMT+0000 (UTC),9,n/a,n/a,90,no,11,aerobic,78,23,4,
-24,20,20,JYoYO,OUWXC,Sat Mar 04 2017 00:00:00 GMT+0000 (UTC),8,chronic soreness,it band,80,no,13,aerobic,120,11,5,
-25,21,21,Clev,OUWXC,Sat Mar 04 2017 00:00:00 GMT+0000 (UTC),0,undefined,undefined,undefined,no,12,strengthandconditioning,30,0,undefined,undefined
-26,20,20,JYoYO,OUWXC,Sun Mar 05 2017 00:00:00 GMT+0000 (UTC),8,chronic soreness,it band,60,no,15,crosstraining,120,0,8,Interval cycling, zero appetite afterwards. 
-27,21,21,Clev,OUWXC,Sun Mar 05 2017 00:00:00 GMT+0000 (UTC),7,n/a,n/a,90,no,11,aerobic,250,70,5,
-28,20,20,JYoYO,OUWXC,Mon Mar 06 2017 00:00:00 GMT+0000 (UTC),8,chronic soreness,it band,60,no,12,aerobic,120,11.5,8,Right IT band tightness, periodic stretching during run helps. Mike 11, left Achilles pain onset. Glut soreness. 
-30,21,21,Clev,OUWXC,Wed Mar 08 2017 00:00:00 GMT+0000 (UTC),8,n/a,low back,90,no,13,aerobic,258,70,4,
-31,21,21,Clev,OUWXC,Thu Mar 09 2017 00:00:00 GMT+0000 (UTC),6,insomnia,low back,70,no,15,aerobic,258,68,5,
-32,21,21,Clev,OUWXC,Fri Mar 10 2017 00:00:00 GMT+0000 (UTC),9,chronic soreness,low back,70,no,13,strengthandconditioning,45,0,5,
-33,21,21,Clev,OUWXC,Sat Mar 11 2017 00:00:00 GMT+0000 (UTC),9,decreased motivation,n/a,90,no,13,strengthandconditioning,45,0,3,
-34,20,20,JYoYO,OUWXC,Sat Mar 11 2017 00:00:00 GMT+0000 (UTC),8,chronic soreness,hip,75,no,13,aerobic,105,11.5,8,
-36,21,21,Clev,OUWXC,Sun Mar 12 2017 00:00:00 GMT+0000 (UTC),8,decreased motivation,n/a,90,no,11,aerobic,108,24,3,
-38,21,21,Clev,OUWXC,Mon Mar 13 2017 00:00:00 GMT+0000 (UTC),8,chronic soreness,low back,,no,13,strengthandconditioning,45,0,4,
-39,21,21,Clev,OUWXC,Mon Mar 13 2017 00:00:00 GMT+0000 (UTC),0,undefined,undefined,undefined,no,9,aerobic,30,0,undefined,undefined
-41,20,20,JYoYO,OUWXC,Wed Mar 15 2017 00:00:00 GMT+0000 (UTC),7,n/a,n/a,80,no,15,crosstraining,80,0,3,Cross training in addition to running, 30 minutes interval cycling, 20 minutes interval elliptical 
-42,21,21,Clev,OUWXC,Wed Mar 15 2017 00:00:00 GMT+0000 (UTC),7,chronic soreness,low back,80,no,12,aerobic,60,0,6,Low back pain after lifting.  Result of beny over rows. 
-48,21,21,Clev,OUWXC,Thu Mar 16 2017 00:00:00 GMT+0000 (UTC),8,muscle soreness,low back,60,no,12,aerobic,60,18,unknown,
-49,21,21,Clev,OUWXC,Fri Mar 17 2017 00:00:00 GMT+0000 (UTC),7,muscle soreness,low back,70,no,13,strengthandconditioning,40,0,6,
-50,21,21,Clev,OUWXC,Sat Mar 18 2017 00:00:00 GMT+0000 (UTC),8,muscle soreness,low back,70,no,13,aerobic,158,45,5,Legs are heavy. Lifting? Or workload?
-51,21,21,Clev,OUWXC,Sun Mar 19 2017 00:00:00 GMT+0000 (UTC),11,abnormal fatigue,thigh,90,no,13,aerobic,200,70,5,
-52,21,21,Clev,OUWXC,Wed Mar 22 2017 00:00:00 GMT+0000 (UTC),6,abnormal fatigue,n/a,80,no,9,aerobic,115,27,5,
-53,21,21,Clev,OUWXC,Tue Mar 21 2017 00:00:00 GMT+0000 (UTC),8,muscle soreness,n/a,90,no,17,threshold,122,30,5,
-57,21,21,Clev,OUWXC,Thu Mar 23 2017 00:00:00 GMT+0000 (UTC),8,muscle soreness,thigh,80,no,12,aerobic,87,21,5,
-58,21,21,Clev,OUWXC,Sat Mar 25 2017 00:00:00 GMT+0000 (UTC),8,muscle soreness,thigh,80,no,15,aerobic,257,75,3,
+55,10,10,roberto,null,Thu Mar 23 2017 00:00:00 GMT+0000 (UTC),13,n/a,n/a,100,no,13,aerobic,26,3,4,asdasd
+54,10,10,roberto,null,Wed Mar 22 2017 00:00:00 GMT+0000 (UTC),13,n/a,n/a,100,no,14,aerobic,26,3,unknown,
+56,10,10,roberto,null,Tue Mar 21 2017 00:00:00 GMT+0000 (UTC),17,headache,n/a,100,no,11,aerobic,12,1,unknown,
+47,10,10,roberto,null,Tue Mar 14 2017 00:00:00 GMT+0000 (UTC),12,n/a,n/a,100,no,13,aerobic,16,2,3,dwrfgsdfgsdfg
+35,10,10,roberto,null,Sun Mar 12 2017 00:00:00 GMT+0000 (UTC),12,n/a,n/a,100,no,12,aerobic,12,1,unknown,
+20,10,10,roberto,null,Thu Mar 02 2017 00:00:00 GMT+0000 (UTC),12,n/a,n/a,100,no,13,aerobic,30,3,5,
+19,10,10,roberto,null,Tue Feb 28 2017 00:00:00 GMT+0000 (UTC),11,n/a,n/a,100,no,11,aerobic,15,1,unknown,
