@@ -246,7 +246,7 @@ router.get('/coaches', function(req, res){
 						var workouts = result;
 						/* Debug/Dev Code - Remove later
 						console.log(workouts);*/
-        				var role = req.user.role;    
+        				var role = req.user.role;  
 						res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(req.user.teams), data_x: JSON.stringify(workouts), data: workouts, role });
 					});
 			});
@@ -503,8 +503,8 @@ passport.use(new LocalStrategy( function(username, password, done){
 		if(users.length <= 0) return done(null, false, {message: 'Username is invalid'});
 
 		//get the user's teams
-		queries.get_userteam({username: users[0].username}, function(err, teams){
-
+		queries.get_userteam({users: [users[0].username]}, function(err, teams){
+			console.log(teams);
 			var userteams = [];
 			for(var i=0; i<teams.length; i++){
 				userteams.push(teams[i].team_name);
@@ -546,7 +546,7 @@ passport.serializeUser(function(user, done){
 
 passport.deserializeUser(function(id, done){
 	queries.get_user({username: id}, function(err, users){
-		queries.get_userteam({username: id}, function(err, teams){
+		queries.get_userteam({users: [users[0].username]}, function(err, teams){
 		var userteams = [];
 		for(var i=0; i<teams.length; i++){
 			userteams.push(teams[i].team_name);

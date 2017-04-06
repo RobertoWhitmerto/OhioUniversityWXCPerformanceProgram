@@ -216,6 +216,8 @@ function get_userteam(input, done){
 	var conditions = [];
 	var users = "";
 	var teams = "";
+	console.log("get_userteam entry");
+	console.log(input);
 
 	if(input.users){
 		users = joinor(input.users, "username");

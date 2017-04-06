@@ -670,7 +670,7 @@ html
     font(color='cyan')
       .container
         .row
-          .col.s13.m13
+          .col.s12.m12.offset-m0
             .card.teal.darken-3
               .card-content.white-text
                 span.card-title
@@ -678,7 +678,7 @@ html
                     .ez
                       br
                       - if (typeof(team) !== 'undefined'){
-                      li.btn.btn-info.teal(href='#viewathletes', data-toggle='collapse') View Team
+                      li.btn.btn-info.teal(href='#viewathletes', data-toggle='collapse', id='team') View Team
                       -}
                       br
                       br
@@ -698,6 +698,7 @@ html
                               tr
                                 form(action='/coaches', method='post')
                                   input(type='hidden', value=user['username'], name='username', required='')
+                                  input(type='hidden', value=user['team_name'], name='team_name', required='')
                                   td.utag= user['username']
                                   td.ftag= user['first']
                                   td.ltag= user['last']
@@ -713,6 +714,11 @@ html
                         br
                         br
                         -}
+    script.
+     $('[id*=team]').click(function(){
+      var u = !{team};
+      console.log(u);
+        });
     script.
      $('[id*=uid]').click(function(){
         currentuid=this.value;
