@@ -503,7 +503,7 @@ passport.use(new LocalStrategy( function(username, password, done){
 		if(users.length <= 0) return done(null, false, {message: 'Username is invalid'});
 
 		//get the user's teams
-		queries.get_userteam({username: users[0].username}, function(err, teams){
+		queries.get_userteam({users: [users[0].username]}, function(err, teams){
 
 			var userteams = [];
 			for(var i=0; i<teams.length; i++){
@@ -546,7 +546,7 @@ passport.serializeUser(function(user, done){
 
 passport.deserializeUser(function(id, done){
 	queries.get_user({username: id}, function(err, users){
-		queries.get_userteam({username: id}, function(err, teams){
+		queries.get_userteam({users: [id]}, function(err, teams){
 		var userteams = [];
 		for(var i=0; i<teams.length; i++){
 			userteams.push(teams[i].team_name);
@@ -717,13 +717,13 @@ router.post("/coaches", function(req, res){
 			var users;
 			var teams = [];
 
-			queries.get_userteam({username: req.user.id}, function(err, result){
+			queries.get_userteam({users: [req.user.id]}, function(err, result){
 					for(var i=0; i<result.length; i++){
 						console.log(result[i].team_name);
 						teams.push(result[i].team_name);
 					}
 					console.log("Teams = " + teams);
-					queries.get_userteam({team_name: teams[0]}, function(err, result){
+					queries.get_userteam({teams: [teams[0]]}, function(err, result){
 						users = result;
 						res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(teams) });
 				});
