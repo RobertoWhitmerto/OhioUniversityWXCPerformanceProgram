@@ -504,11 +504,7 @@ passport.use(new LocalStrategy( function(username, password, done){
 
 		//get the user's teams
 		queries.get_userteam({users: [users[0].username]}, function(err, teams){
-<<<<<<< HEAD
-			console.log(teams);
-=======
 
->>>>>>> 3fd5d3793cd069d75a8efc53fa14cf4425ad6146
 			var userteams = [];
 			for(var i=0; i<teams.length; i++){
 				userteams.push(teams[i].team_name);
@@ -550,11 +546,8 @@ passport.serializeUser(function(user, done){
 
 passport.deserializeUser(function(id, done){
 	queries.get_user({username: id}, function(err, users){
-<<<<<<< HEAD
-		queries.get_userteam({users: [users[0].username]}, function(err, teams){
-=======
+
 		queries.get_userteam({users: [id]}, function(err, teams){
->>>>>>> 3fd5d3793cd069d75a8efc53fa14cf4425ad6146
 		var userteams = [];
 		for(var i=0; i<teams.length; i++){
 			userteams.push(teams[i].team_name);
