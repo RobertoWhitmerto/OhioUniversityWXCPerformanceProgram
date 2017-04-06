@@ -36,7 +36,7 @@ html
     
       // ****************************** SLEEP CHART *************************************
       function sleepy() {
-     // Create the data table.
+      // Create the data table.
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'hours');
@@ -102,7 +102,8 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate();
+            //var slot = dt.getDate() - oneWeekAgo.getDate();
+            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
             if(slot < 0)
               slot = slot * (-1);
             
@@ -240,7 +241,8 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate();
+            //var slot = dt.getDate() - oneWeekAgo.getDate();
+            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
             if(slot < 0)
               slot = slot * (-1);
             var rolling_total=0;
@@ -368,7 +370,8 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            //var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
+            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
             if(slot < 0)
               slot = slot * (-1);
             
@@ -515,7 +518,8 @@ html
           
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            var slot = dt.getDate() - oneWeekAgo.getDate();
+            //var slot = dt.getDate() - oneWeekAgo.getDate();
+            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
             if(slot < 0)
               slot = slot * (-1);
             var rolling_total=0;
