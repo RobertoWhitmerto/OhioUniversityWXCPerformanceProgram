@@ -191,18 +191,24 @@ function get_team(input, done){
 	var table = "Teams";
 	var columns = "*";
 	var conditions = [];
+	var values = [];
 
 	//check for all possible conditions
-	if(input.team_name) conditions.push(`team_name="${input.team_name}"`);
-	if(input.sport) conditions.push(`sport="${input.sport}"`);
-	if(input.gender) conditions.push(`gender="${input.gender}"`);
+	if(input.team_name){
+		conditions.push(`team_name=?`);
+		values.push(input.team_name);
+	}
+	if(input.sport){
+		conditions.push(`sport="${input.sport}"`);
+		values.push(input.sport);
+	}
 
 	//join array
 	var condition = conditions.join(' AND ');
 
 	//build and execute the query
 	selectquery(table, columns, condition, function(query){
-		exec_query(query, function(err, rows, fields){
+		exec_query(query, values, function(err, rows, fields){
 			if(err) {return done(err);}
 			if(rows.length <= 0) {return done("could not find any matching teams", false, false);}
 			return done(null, rows);
@@ -291,7 +297,7 @@ function insert_user(input, done){
 	var values = `("${input.username}", "${input.password}", "${input.email}", "${input.first}", "${input.last}", "${input.role}", NOW(), "T")`;
 
 	insertquery(table, columns, values, function(query){
-		exec_query(query, function(err, rows, fields){
+		exec_query(query, null, function(err, rows, fields){
 			if(err) {return done(err);}
 			if(rows.length <= 0) {return done("could not insert user", false, false);}
 			return done(null, rows);
@@ -305,7 +311,7 @@ function insert_team(input, done){
 	var values = `("${input.team_name}", "${input.sport}", "${input.gender}")`;
 
 	insertquery(table, columns, values, function(query){
-		exec_query(query, function(err, rows, fields){
+		exec_query(query, null, function(err, rows, fields){
 			if(err) {return done(err);}
 			if(rows.length <= 0) {return done("could not insert user", false, false);}
 			return done(null, rows);
@@ -332,7 +338,7 @@ function insert_userteam(input, done){
 
 
 	insertquery(table, columns, values, function(query){
-		exec_query(query, function(err, rows, fields){
+		exec_query(query, null, function(err, rows, fields){
 			if(err) {return done(err);}
 			if(rows.length <= 0) {return done("could not insert user", false, false);}
 			return done(null, rows);
@@ -348,36 +354,39 @@ function insert_workout(input, done){
 	var date = input.currentyear+"-"+month_lookup(input.month)+"-"+input.day;
 	var query = `INSERT INTO ${table} ${columns} SELECT User.uid, "${date}", "${input.sleephours}", "${input.illness}", "${input.injury}", "${input.percent_health}", "${input.cycle}", "${input.rpeval}", "${input.rpeinfo}", "${input.time}", "${input.distance}", "${input.hungry}", "${input.mynotes}" FROM User WHERE username="${input.user}"`; 
 
-	exec_query(query, done);
+	exec_query(query, null, done);
 }
 
 
 //remove a workout from the database given a workout id
 function remove_workout(input, done){
 	var table = "Workouts";
-	var cond = `wid="${input.wid}"`;
+	var cond = `wid=?`;
+	var values = [input.wid];
 
 
 	deletequery(table, cond, function(query){
-		exec_query(query, done);
+		exec_query(query, values, done);
 	});
 }
 
 function remove_user(input, done){
 	var table = "User";
-	var cond = `username="${input.username}"`;
+	var cond = `username=?`;
+	var values = [input.username];
 
 	deletequery(table, cond, function(query){
-		exec_query(query, done);
+		exec_query(query, values, done);
 	});
 }
 
 function remove_team(input, done){
 	var table = "Teams";
-	var cond = `team_name="${input.team_name}"`;
+	var cond = `team_name=?`;
+	var values = [input.team_name];
 
 	deletequery(table, cond, function(query){
-		exec_query(query, done);
+		exec_query(query, values, done);
 	});
 }
 
@@ -400,65 +409,142 @@ function remove_userteam(input, done){
 function update_workout(input, done){
 	var table = "Workouts";
 	var updates = [];
+	var values = [];
 
 
 	//check for all possible conditions passed in
-	if(input.date) updates.push(`date="${input.date}"`);
-	if(input.sleep) updates.push(`sleep="${input.sleep}"`);
-	if(input.Illness) updates.push(`health="${input.Illness}"`);
-	if(input.Injury) updates.push(`injury="${input.Injury}"`);
-	if(input.percent_health) updates.push(`percent_health="${input.percent_health}"`);
-	if(input.cycle_start) updates.push(`cycle_start="${input.cycle_start}"`);
-	if(input.RPE) updates.push(`RPE="${input.RPE}"`);
-	if(input.time) updates.push(`time="${input.time}"`);
-	if(input.distance) updates.push(`distance="${input.distance}"`);
-	if(input.rpeinfo) updates.push(`RPEinfo="${input.rpeinfo}"`);
-	if(input.hungry) updates.push(`hunger="${input.hungry}"`);
-	if(input.mynotes) updates.push(`notes="${input.mynotes}"`);
+	if(input.date){
+		updates.push(`date=?`);
+		values.push(input.date);
+	}
+	if(input.sleep){
+		updates.push(`sleep=?`);
+		values.push(input.sleep);
+	}
+	if(input.Illness){
+		updates.push(`health=?`);
+		values.push(input.Illness);
+	}
+	if(input.Injury){
+		updates.push(`injury=?`);
+		values.push(input.Injury);
+	}
+	if(input.percent_health){
+		updates.push(`percent_health=?`);
+		values.push(input.percent_health);
+	}
+	if(input.cycle_start){
+		updates.push(`cycle_start=?`);
+		values.push(input.cycle_start);
+	}
+	if(input.RPE){
+		updates.push(`RPE=?`);
+		values.push(input.RPE);
+	}
+	if(input.time){
+		updates.push(`time=?`);
+		values.push(input.time);
+	}
+	if(input.distance){
+		updates.push(`distance=?`);
+		values.push(input.distance);
+	}
+	if(input.rpeinfo){
+		updates.push(`RPEinfo=?`);
+		values.push(input.rpeinfo);
+	}
+	if(input.hungry){
+		updates.push(`hunger=?`);
+		values.push(input.hungry);
+	}
+	if(input.mynotes){ 
+		updates.push(`notes=?`);
+		values.push(input.mynotes);
+	}
 
 	var updstring = updates.join(', ');
-	var condition = `wid="${input.wrk_id}"`;
+	var condition = `wid=?`;
+	values.push(input.wrk_id);
 
 	updatequery(table, updstring, condition, function(query){
-		exec_query(query, done);
+		exec_query(query,values, done);
 	});
 }
 
 function update_user(input, done){
 	var table = "User";
 	var updates = [];
+	var values = [];
+
+
+	get_user({username: input.username}, function(err, result){
 
 		//add the conditions that were passed in
-	if(input.username) updates.push(`username="${input.username}"`);
-	if(input.password) updates.push(`password="${input.password}"`);
-	if(input.email) updates.push(`email="${input.email}"`);
-	if(input.first) updates.push(`first="${input.first}"`);
-	if(input.last) updates.push(`last="${input.last}"`);
-	if(input.role) updates.push(`role_name="${input.role}"`);
-	if(input.passflag) updates.push(`passflag="${input.passflag}"`);
+		if(input.username){ 
+			updates.push(`username=?`);
+			values.push(input.username);
+		}
+		if(input.password){ 
+			updates.push(`password=?`);
+			values.push(input.password);
+		}
+		if(input.email){
+			updates.push(`email=?`);
+			values.push(input.email);
+		}
+		if(input.first){ 
+			updates.push(`first=?`);
+			values.push(input.first);
+		}
+		if(input.last){ 
+			updates.push(`last=?`);
+			values.push(input.last);
+		}
+		if(input.role){ 
+			updates.push(`role_name=?`);
+			values.push(input.role);
+		}
+		if(input.passflag){ 
+			updates.push(`passflag=?`);
+			values.push(input.passflag);
+		}
 
-	var updstring = updates.join(', ');
-	var condition = `username="${input.username}"`;
+		var updstring = updates.join(', ');
+		var condition = `uid=?`;
+		values.push(result[0].uid);
 
-	updatequery(table, updstring, condition, function(query){
-		exec_query(query, done);
-	});
+		updatequery(table, updstring, condition, function(query){
+			exec_query(query, values, done);
+		});
+
+	})
 }
 
 function update_team(input, done){
 	var table = "Teams";
 	var updates = [];
+	var values = [];
 
 	//check for all possible conditions
-	if(input.team_name) updates.push(`team_name="${input.team_name}"`);
-	if(input.sport) updates.push(`sport="${input.sport}"`);
-	if(input.gender) updates.push(`gender="${input.gender}"`);
+	if(input.team_name){ 
+		updates.push(`team_name=?`);
+		values.push(input.team_name);
+	}
+	if(input.sport){ 
+		updates.push(`sport=?`);
+		values.push(input.sport);
+	}
+	if(input.gender){ 
+		updates.push(`gender=?`);
+		values.push(input.gender);
+	}
 
 	var updstring = updates.join(', ');
-	var condition = `team_name="${input.team_name}"`;
+	var condition = `team_name=?`;
+	values.push(input.team_name);
 
 	updatequery(table, updstring, condition, function(query){
-		exec_query(query, done);
+		exec_query(query, values, done);
 	});
 }
 
