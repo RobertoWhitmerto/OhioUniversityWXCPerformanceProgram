@@ -818,9 +818,14 @@ html
       var distanceV = distance;       //Should read in the number value from original
       var hungryV = 10;         //Should read in the number value from original
       var cycleV = cycle_start;               //? This still isnt fixed from the roots
+      var notesV = notes;
+      console.log("notes field: " + notesV);
       //Autofill Hours of Sleep from Source//
       document.getElementById("sleephours").value =  sleep;
+      //load in workout id (can't be edited)
       document.getElementById("wrk_id").value = wID_;
+      //autofill notes
+      document.getElementById("notes").value = notesV;
       //Autoselect General Health from Source//
       if(illnessV == "n/a")
       document.getElementById("illness").selectedIndex = 0;
@@ -1069,6 +1074,11 @@ html
       label#opta(name='cycle', for='opt1') No
       input#opt2.with-gap(name='cycle', type='radio', value='yes')
       label#optb(name='cycle', for='opt2') Yes
+      br
+      label Notes
+      font(color='cyan')
+        input#notes(name='notes', type='text')
+        br
       br
       br
       button.modal-action.modal-close.btn-flat.red(type='button', href='#!')
