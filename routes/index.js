@@ -295,6 +295,12 @@ router.get('/datadumpTeam',function(req, res){
 	}
 });
 
+
+router.get('*', function(req, res) {
+    res.redirect('/');
+});
+
+
 router.post('/changepass', function(req, res) {
 
 	bcrypt.genSalt(10, function(err, salt) {
@@ -703,7 +709,8 @@ router.post("/myworkouts_update", function(req, res){
 		queries.get_workout({username: req.user.id}, function(err, result){
 			workouts = result;
 			console.log(req.body);
-			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
+			res.redirect('/myworkouts');
+			//res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
 		});
 	} else {
 	 	res.redirect('/');
@@ -769,5 +776,8 @@ function dump(team,objArray, res)
 			else res.render('admin_data_dump_a.pug');
 		}
 }
+
+
+
 
 module.exports = router;
