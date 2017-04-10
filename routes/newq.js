@@ -414,6 +414,7 @@ function update_workout(input, done){
 	if(input.distance) updates.push(`distance="${input.distance}"`);
 	if(input.rpeinfo) updates.push(`RPEinfo="${input.rpeinfo}"`);
 	if(input.hungry) updates.push(`hunger="${input.hungry}"`);
+	if(input.mynotes) updates.push(`notes="${input.mynotes}"`);
 
 	var updstring = updates.join(', ');
 	var condition = `wid="${input.wrk_id}"`;
