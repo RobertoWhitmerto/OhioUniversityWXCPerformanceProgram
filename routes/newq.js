@@ -55,8 +55,6 @@ function updatequery(table, updates, conditions, result){
 
 //execute a query
 function exec_query(querystring, values, result){
-	console.log("EXECUTING QUERY");
-	console.log(querystring);
 	db.query(querystring, values, function(err, rows, fields) {
 		if(err) return result(err.code, rows);
 		else if(rows.length<=0) {result("query failed", rows);}
@@ -222,8 +220,6 @@ function get_userteam(input, done){
 	var conditions = [];
 	var users = "";
 	var teams = "";
-	console.log("get_userteam entry");
-	console.log(input);
 
 	if(input.users){
 		users = joinor(input.users, "username");
