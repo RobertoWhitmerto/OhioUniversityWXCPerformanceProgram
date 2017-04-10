@@ -825,7 +825,7 @@ html
       //load in workout id (can't be edited)
       document.getElementById("wrk_id").value = wID_;
       //autofill notes
-      document.getElementById("notes").value = notesV;
+      document.getElementById("mynotes").value = notesV;
       //Autoselect General Health from Source//
       if(illnessV == "n/a")
       document.getElementById("illness").selectedIndex = 0;
@@ -1077,7 +1077,7 @@ html
       br
       label Notes
       font(color='cyan')
-        input#notes(name='notes', type='text')
+        input#mynotes(name='mynotes', type='text')
         br
       br
       br
