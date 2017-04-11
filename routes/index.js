@@ -24,6 +24,8 @@ var athlete = false;
 
 // Get Login Page
 router.get('/', function(req, res){
+	console.log("ENVIRONMENTAL VARS: ");
+	console.log(process.env);
 	req.visitor.pageview("/", "http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com/", "Login").send();
 	res.render('site.pug');
 });
