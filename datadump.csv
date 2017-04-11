@@ -1,8 +1,8 @@
 workout_id,user_id,user_id,username,team_name,date,sleep,health,injury,percent_health,cycle_start,RPE,RPEinfo,time,distance,hunger,notes
-55,10,10,roberto,null,Thu Mar 23 2017 00:00:00 GMT+0000 (UTC),13,n/a,n/a,100,no,13,aerobic,26,3,4,asdasd
-54,10,10,roberto,null,Wed Mar 22 2017 00:00:00 GMT+0000 (UTC),13,n/a,n/a,100,no,14,aerobic,26,3,unknown,
-56,10,10,roberto,null,Tue Mar 21 2017 00:00:00 GMT+0000 (UTC),17,headache,n/a,100,no,11,aerobic,12,1,unknown,
-47,10,10,roberto,null,Tue Mar 14 2017 00:00:00 GMT+0000 (UTC),12,n/a,n/a,100,no,13,aerobic,16,2,3,dwrfgsdfgsdfg
-35,10,10,roberto,null,Sun Mar 12 2017 00:00:00 GMT+0000 (UTC),12,n/a,n/a,100,no,12,aerobic,12,1,unknown,
-20,10,10,roberto,null,Thu Mar 02 2017 00:00:00 GMT+0000 (UTC),12,n/a,n/a,100,no,13,aerobic,30,3,5,
-19,10,10,roberto,null,Tue Feb 28 2017 00:00:00 GMT+0000 (UTC),11,n/a,n/a,100,no,11,aerobic,15,1,unknown,
+19,10,10,roberto,null,2/28/17,13,n/a,n/a,100,no,11,unknown,15,1,10,
+20,10,10,roberto,null,3/2/17,12,n/a,n/a,100,no,13,aerobic,30,3,5,
+35,10,10,roberto,null,3/12/17,12,n/a,n/a,100,no,12,unknown,12,1,10,
+47,10,10,roberto,null,3/14/17,12,n/a,n/a,100,no,13,aerobic,16,2,3,dwrfgsdfgsdfg
+54,10,10,roberto,null,3/22/17,13,n/a,n/a,100,no,14,aerobic,26,3,unknown,
+55,10,10,roberto,null,3/23/17,13,n/a,n/a,100,no,13,unknown,26,3,10,asdasd
+56,10,10,roberto,null,3/21/17,17,headache,n/a,100,no,11,aerobic,12,1,unknown,
