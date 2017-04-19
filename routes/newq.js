@@ -111,7 +111,7 @@ function get_user(input, done){
 //returns false if none found
 function get_workout(input, done){
 	var table = "workout_view";
-	var columns = "*";
+	var columns = '*';
 	var conditions = [];
 	var values = [];
 
@@ -175,9 +175,19 @@ function get_workout(input, done){
 
 	//build and execute the query
 	selectquery(table, columns, condition, function(query){
+		query = query + " ORDER BY date DESC";
+		console.log(query);
+
 		exec_query(query, values, function(err, rows, fields){
+
 			if(err) {return done(err);}
 			if(rows.length <= 0) {return done("could not find any matching workouts", false, false);}
+
+			var date = rows[0].date;
+			rows[0].date = date.toDateString();
+			rows[0].timestamp = date.toTimeString();
+			console.log(rows[0].date);
+			console.log(rows[0].timestamp);
 			return done(null, rows);
 		});
 	});
