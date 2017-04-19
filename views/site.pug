@@ -60,34 +60,9 @@ html
       $(document).ready(function(){
       // the "href" attribute of .modal-trigger must specify the modal ID that   wants to be triggered
       $(document).on("click", ".modal-trigger", function (e) {
-      
           e.preventDefault();
-      
-          var _self = $(this);
-      
-          var wID = _self.data('id');
-          var sleep = _self.data('id2');
-          var illness = _self.data('id3');
-          var injury = _self.data('id4');
-          var percent_health = _self.data('id5');
-          var cycle_start = _self.data('id6');
-          var RPE = _self.data('id7');
-          var time = _self.data('id8');
-          var distance = _self.data('id9');
-          var notes = _self.data('id10');
-          //$("#workoutID") = wID;
-          $workoutID = wID;
-          $sleep = sleep;
-          $illness = illness;
-          $injury = injury;
-          $percent_health = percent_health;
-          $cycle_start = cycle_start;
-          $RPE = RPE;
-          $time = time
-          $distance = distance;
-          $notes = notes;
+          var _self = $(this)
           $('.modal-trigger').leanModal();
-          //$(_self.attr('href')).modal('show');
       });
       });
         
@@ -100,7 +75,7 @@ html
             .card.light-blue.darken-2
               .card-content.white-text
                 span.card-title
-                  center Forgot Password:
+                  center Forgot Password (Not currently working):
                 form(name='form2', method='post', action='/emailpassword')
                   | Email registered to account:
                   input(type='text', name='forgot_email')

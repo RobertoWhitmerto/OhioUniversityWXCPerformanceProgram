@@ -7,14 +7,6 @@ var db = require('./db');
 var child = require('child_process');
 var filesystem = require('fs');
 var ua = require('universal-analytics');
-//var nodemailer = require("nodemailer");
-/*var smtpTransport = nodemailer.createTransport("SMTP",{
-   service: "Gmail",
-   auth: {
-       user: "ouwxcpp@gmail.com",
-       pass: "teamonacob"
-   }
-});*/
 var bcrypt = require('bcryptjs');
 
 router.use(ua.middleware("UA-91318722-1", {cookieName: '_ga'}));
@@ -24,8 +16,6 @@ var athlete = false;
 
 // Get Login Page
 router.get('/', function(req, res){
-	console.log("ENVIRONMENTAL VARS: ");
-	console.log(process.env);
 	req.visitor.pageview("/", "http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com/", "Login").send();
 	res.render('site.pug');
 });
@@ -198,11 +188,7 @@ router.get('/admin_remove_user_team', function(req, res){
     		allusrteam = result;
 			queries.get_team({},function(err, result){
 				allteams = result;
-				/* Debug/Dev Code - remove later
-    			console.log("---------------------------------");
-    			console.log(allusrteam);
-    			console.log("---------------------------------");
-    			console.log(allteams);*/
+
 				res.render('admin_remove_user_team.pug',{ userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
 			});
   		});
@@ -406,14 +392,9 @@ router.post('/admin_remove_user_team_form', function(req, res){
     	queries.get_userteam({},function(err, result){
     		allusrteam = result;
 			queries.get_team({},function(err, result){
-				allteams = result;
-      var firstn = req.user.first;    
-				/* Debug/Dev Code - remove later
-    			console.log("---------------------------------");
-    			console.log(allusrteam);
-    			console.log("---------------------------------");
-    			console.log(allteams);*/
-				res.render('admin_remove_user_team.pug',{ firstn, message: "you have successfully removed the selected user from the team", userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
+			allteams = result;
+    		var firstn = req.user.first;    
+			res.render('admin_remove_user_team.pug',{ firstn, message: "you have successfully removed the selected user from the team", userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
 			});
   		});
 }
@@ -531,6 +512,7 @@ passport.use(new LocalStrategy( function(username, password, done){
 	});
 }));
 
+//post for adding a workout on workout entry page
 router.post('/workoutentry', function(req, res){
 	req.body.user = req.user.id;
 
@@ -658,6 +640,8 @@ router.post("/bugreport", function(req, res){
 */
 
 //this route is the post for the modal form for the "forgot password" function
+//This does not currently work, will need to figure out how to use a 3rd party service
+//to serve the emails, but the post correctly gets the email off of the screen.
 router.post("/emailpassword", function(req, res){
   console.log(req.body.forgot_email);
   
@@ -678,8 +662,8 @@ router.post("/emailpassword", function(req, res){
   res.redirect('/');
 });
 
+//this is the post for the remove button on the training log page
 router.post("/myworkouts", function(req, res){
-		console.log("$$$$$$$$$$$$$$$");
 		if(req.isAuthenticated() && req.user.pass != 'T'){
 		queries.remove_workout({wid: req.body.wID}, function(err, result){
 			console.log(result);
@@ -698,8 +682,8 @@ router.post("/myworkouts", function(req, res){
 	}
 });
 
+//this is the post for the edit button on the training log page
 router.post("/myworkouts_update", function(req, res){
-		console.log("@@@@@@@@@@@@@@@@");
 		if(req.isAuthenticated() && req.user.pass != 'T'){
 		queries.update_workout(req.body, function(err, result){
 			console.log(result);
@@ -712,7 +696,6 @@ router.post("/myworkouts_update", function(req, res){
 			workouts = result;
 			console.log(req.body);
 			res.redirect('/myworkouts');
-			//res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
 		});
 	} else {
 	 	res.redirect('/');
@@ -744,6 +727,7 @@ router.post("/coaches", function(req, res){
 	}
 });
 
+//this function takes the workout data and converts it into a .csv file for the user to download
 function dump(team,objArray, res)
 {
 			if(typeof objArray == 'object'){
