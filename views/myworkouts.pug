@@ -36,7 +36,8 @@ html
       // is passed in through the myworkouts route which contains all of the workout
       // information for that user. The date of each workout is then checked and either
       // displayed in the chart (most recent 7 days) or used to calculate acute:chronic
-      // ratio (7, 28 days respectively). After this, two data points are drawn on the
+      // ratio (7, 28 days respectively) for the training load chart.
+      // After this, two data points are drawn on the
       // chart, the value for that day's workout, and the value for the acute:chronic
       // ratio at that point in time.
       
@@ -46,7 +47,7 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'hours');
-      //data.addColumn('number', 'Acute:Chronic Ratio');
+
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       var oneMonthAgo = new Date();
@@ -68,30 +69,20 @@ html
       var oneWeekAgo_7 = new Date();
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-      //var rows = [[oneWeekAgo_1.toString(),0.0,100],[oneWeekAgo_2.toString(),0.0,100],
-      //            [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
-      //            [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
-      
       var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],
                   [oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],
                   [oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
-          console.log("DATE: ");
           var dt = new Date(Date.parse(obj.date));
           var dt_fixed = dt.getDate() + 1;
-          //console.log(obj.date);
-          
-          //console.log(oneWeekAgo);
+
           if(dt >= oneWeekAgo){
-            //var slot = dt.getDate() - oneWeekAgo.getDate();
             var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
             if(slot < 0)
               slot = slot * (-1);
             
-            console.log(slot);
-            console.log(dt.getDate() + 1);
             if (!rows[slot][1])
               rows[slot][1] = parseInt(obj.sleep, 10);
           }
@@ -101,10 +92,8 @@ html
       //loop through last week's dates to add rolling averages
       var slot = 0;
       for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
-          console.log("K: " + k.getDate());
           if(slot < 0)
             slot = slot * (-1);
-          console.log("SLOT: " + slot);
           var rolling_total_chronic=0;
           var rolling_total_acute=0;
           var avg_count=0;
@@ -123,20 +112,14 @@ html
               rolling_total_acute += parseInt(wrk.sleep, 10);
             }
           }
-          console.log("COUNT:" + avg_count);
-          rolling_total_chronic /= 28;
+          rolling_total_chronic /= 28;  
           rolling_total_acute /= 7;
-          console.log("chronic rolling average for sleep: ");
-          console.log(rolling_total_chronic);
-          console.log("acute rolling average for sleep: ");
-          console.log(rolling_total_acute);
+
           var k_day = new Date();
           k_day.setDate(k.getDate() + 1);
           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
-          //rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
-      console.log(rows);
       data.addRows(rows);
       // Set chart options
       var options = {'title':'Weekly Sleep Pattern',
@@ -165,7 +148,6 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'Distance (miles)');
-      //data.addColumn('number', 'Chronic Distance');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       var oneMonthAgo = new Date();
@@ -187,36 +169,23 @@ html
       var oneWeekAgo_7 = new Date();
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-      //var rows = [[oneWeekAgo_1.toString(),0.0,100],[oneWeekAgo_2.toString(),0.0,100],
-      //            [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
-      //            [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
-      
       var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],
                   [oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],
                   [oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
-          console.log("DATE: ");
           var dt = new Date(Date.parse(obj.date));
           var dt_fixed = dt.getDate() + 1;
-          //console.log(obj.date);
-          
-          //console.log(oneWeekAgo);
+
           if(dt >= oneWeekAgo){
-            //var slot = dt.getDate() - oneWeekAgo.getDate();
             var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
             if(slot < 0)
               slot = slot * (-1);
             var rolling_total=0;
             var avg_count=0;
             
-            console.log("COUNT:" + avg_count);
             rolling_total /= avg_count;
-            console.log("rolling average for sleep: ");
-            console.log(rolling_total);
-            console.log(slot);
-            console.log(dt.getDate() + 1);
             if (!rows[slot][1])
               rows[slot][1] += parseInt(obj.distance, 10);
           }
@@ -226,10 +195,8 @@ html
       //loop through last week's dates to add rolling averages
       var slot = 0;
       for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
-        console.log("K: " + k.getDate());
         if(slot < 0)
           slot = slot * (-1);
-        console.log("SLOT: " + slot);
         var rolling_total=0;
         var avg_count=0;
         for(var j = 0; j < d.length; j++){
@@ -240,17 +207,12 @@ html
             avg_count++;
           }
         }
-        console.log("COUNT:" + avg_count);
         rolling_total /= 28;
-        console.log("rolling average for dist: ");
-        console.log(rolling_total);
         var k_day = new Date();
         k_day.setDate(k.getDate() + 1);
         rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
-        //rows[slot][2] = rolling_total;
         slot++;
       }
-      console.log(rows);
       data.addRows(rows);
       // Set chart options
       var options = {
@@ -304,20 +266,13 @@ html
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
-          console.log("DATE: ");
           var dt = new Date(Date.parse(obj.date));
           var dt_fixed = dt.getDate() + 1;
-          //console.log(obj.date);
-          
-          //console.log(oneWeekAgo);
+
           if(dt >= oneWeekAgo){
-            //var slot = dt.getDate() - oneWeekAgo.getDate();
             var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
             if(slot < 0)
               slot = slot * (-1);
-            
-            console.log(slot);
-            console.log(dt.getDate() + 1);
             rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
           }
       }
@@ -326,10 +281,8 @@ html
       //loop through last week's dates to add rolling averages
       var slot = 0;
       for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
-          console.log("K: " + k.getDate());
           if(slot < 0)
             slot = slot * (-1);
-          console.log("SLOT: " + slot);
           var rolling_total_chronic=0;
           var rolling_total_acute=0;
           var avg_count=0;
@@ -348,20 +301,14 @@ html
               rolling_total_acute += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
             }
           }
-          console.log("COUNT:" + avg_count);
           rolling_total_chronic /= 28;
           rolling_total_acute /= 7;
-          console.log("chronic rolling average for tload_dist: ");
-          console.log(rolling_total_chronic);
-          console.log("acute rolling average for tload_dist: ");
-          console.log(rolling_total_acute);
           var k_day = new Date();
           k_day.setDate(k.getDate() + 1);
           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
-      console.log(rows);
       data.addRows(rows);
       // Set chart options
       var options = {'title':'Training Load - Distance',
@@ -416,20 +363,13 @@ html
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
-          console.log("DATE: ");
           var dt = new Date(Date.parse(obj.date));
           var dt_fixed = dt.getDate() + 1;
-          //console.log(obj.date);
-          
-          //console.log(oneWeekAgo);
+
           if(dt >= oneWeekAgo){
-            //var slot = dt.getDate() - oneWeekAgo.getDate();
             var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
             if(slot < 0)
               slot = slot * (-1);
-            
-            console.log(slot);
-            console.log(dt.getDate() + 1);
             rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
           }
       }
@@ -438,10 +378,8 @@ html
       //loop through last week's dates to add rolling averages
       var slot = 0;
       for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
-          console.log("K: " + k.getDate());
           if(slot < 0)
             slot = slot * (-1);
-          console.log("SLOT: " + slot);
           var rolling_total_chronic=0;
           var rolling_total_acute=0;
           var avg_count_a=0;
@@ -456,33 +394,23 @@ html
             var wrk_dt = new Date(Date.parse(wrk.date));
             var k_plus_one = new Date(k);
             k_plus_one.setDate(k_plus_one.getDate() + 1);
-            console.log("wrk_dt: " + wrk_dt + " | acute_dt: " + acute_dt + " | chronic_dt: " + chronic_dt);
             if(wrk_dt > chronic_dt && wrk_dt <= k_plus_one){
               rolling_total_chronic += parseInt(wrk.RPE, 10)*parseInt(wrk.time, 10);
               avg_count_c++;
-              console.log(wrk_dt + "is in Chronic ratio");
             }
             
             if(wrk_dt > acute_dt && wrk_dt <= k_plus_one){
               rolling_total_acute += parseInt(wrk.RPE, 10)*parseInt(wrk.time, 10);
-              console.log(wrk_dt + "is in Acute ratio");
             }
           }
-          console.log("COUNT:" + avg_count_c);
           rolling_total_chronic /= 28;
           rolling_total_acute /= 7;
-          console.log("chronic rolling average for tload_time: ");
-          console.log(rolling_total_chronic);
-          console.log("acute rolling average for tload_time: ");
-          console.log(rolling_total_acute);
-          console.log("ratio for" + k + ": " + (rolling_total_acute / rolling_total_chronic));
           var k_day = new Date();
           k_day.setDate(k.getDate() + 1);
           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
-      console.log(rows);
       data.addRows(rows);
       // Set chart options
       var options = {
@@ -510,7 +438,6 @@ html
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'day');
       data.addColumn('number', 'Wellness score');
-      //data.addColumn('number', 'Chronic Wellness');
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       var oneMonthAgo = new Date();
@@ -532,24 +459,16 @@ html
       var oneWeekAgo_7 = new Date();
       oneWeekAgo_7.setDate(oneWeekAgo + 7);
       
-      //var rows = [[oneWeekAgo_1.toString(),0.0,100],[oneWeekAgo_2.toString(),0.0,100],
-      //            [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
-      //            [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
-      
       var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],
                   [oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],
                   [oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
-          console.log("DATE: ");
           var dt = new Date(Date.parse(obj.date));
           var dt_fixed = dt.getDate() + 1;
-          //console.log(obj.date);
           
-          //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
-            //var slot = dt.getDate() - oneWeekAgo.getDate();
             var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
             if(slot < 0)
               slot = slot * (-1);
@@ -584,7 +503,6 @@ html
           var k_day = new Date();
           k_day.setDate(k.getDate() + 1);
           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
-          //rows[slot][2] = rolling_total;
           slot++;
       }
 
