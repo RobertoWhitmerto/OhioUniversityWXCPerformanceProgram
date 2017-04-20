@@ -72,9 +72,9 @@ html
       //            [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
       //            [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
       
-      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],
-                  [oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],
-                  [oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],
+                  [oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],
+                  [oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
@@ -92,7 +92,8 @@ html
             
             console.log(slot);
             console.log(dt.getDate() + 1);
-            rows[slot][1] = parseInt(obj.sleep, 10);
+            if (!rows[slot][1])
+              rows[slot][1] = parseInt(obj.sleep, 10);
           }
       }
       var now = new Date();
@@ -190,9 +191,9 @@ html
       //            [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
       //            [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
       
-      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],
-                  [oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],
-                  [oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],
+                  [oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],
+                  [oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
@@ -216,7 +217,8 @@ html
             console.log(rolling_total);
             console.log(slot);
             console.log(dt.getDate() + 1);
-            rows[slot][1] += parseInt(obj.distance, 10);
+            if (!rows[slot][1])
+              rows[slot][1] += parseInt(obj.distance, 10);
           }
       }
       var now = new Date();
@@ -534,9 +536,9 @@ html
       //            [oneWeekAgo_3.toString(),0.0,100],[oneWeekAgo_4.toString(),0.0,100],
       //            [oneWeekAgo_5.toString(),0.0,100],[oneWeekAgo_6.toString(),0.0,100],[oneWeekAgo_7.toString(),0.0,100]];
       
-      var rows = [[oneWeekAgo_1.toString(),0.0],[oneWeekAgo_2.toString(),0.0],
-                  [oneWeekAgo_3.toString(),0.0],[oneWeekAgo_4.toString(),0.0],
-                  [oneWeekAgo_5.toString(),0.0],[oneWeekAgo_6.toString(),0.0],[oneWeekAgo_7.toString(),0.0]];
+      var rows = [[oneWeekAgo_1.toString(),0],[oneWeekAgo_2.toString(),0],
+                  [oneWeekAgo_3.toString(),0],[oneWeekAgo_4.toString(),0],
+                  [oneWeekAgo_5.toString(),0],[oneWeekAgo_6.toString(),0],[oneWeekAgo_7.toString(),0]];
       
       for(var i = 0; i < d.length; i++) {
           var obj = d[i];
@@ -556,7 +558,8 @@ html
             
             rolling_total /= avg_count;
 
-            rows[slot][1] = parseInt(obj.percent_health, 10);
+            if (!rows[slot][1])
+              rows[slot][1] = parseInt(obj.percent_health, 10);
           }
       }
       var now = new Date();
