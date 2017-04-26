@@ -1,7 +1,7 @@
 {
-  "name": "Node.js Sample",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-sample",
-  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "name": "Ohio Performance Program",
+  "description": "A web application which allows users to enter workout data for trainers to collect/view",
+  "repository": "https://github.com/RobertoWhitmerto/OhioUniversityWXCPerformanceProgram",
+  "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/7/78/Ohio_Bobcats_logo.svg/1193px-Ohio_Bobcats_logo.svg.png",
   "keywords": ["node", "express", "static"]
 }
