@@ -39,7 +39,7 @@ __views__ directory that houses our applications front end jade/pug code
 
 http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com
 
-![Video Walkthrough](https://m.youtube.com/watch?v=fYns7_QJ8Ic)
+[![Video Walkthrough](https://puu.sh/vx7mu/0017e8c84d.png)](https://m.youtube.com/watch?v=fYns7_QJ8Ic "Video Walkthrough")
 
 ## Team on a Cob members:
 
