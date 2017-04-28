@@ -35,7 +35,7 @@ __views__ directory that houses our applications front end jade/pug code
 
 ## Deployment URL
 
-![alt text](http://i.imgur.com/frAKmKN.png "Deployment URL")
+![alt text](http://i.imgur.com/JX5SOqy.png "Deployment URL")
 
 Developer AWS account: http://ouwxcpp.ik3pvw7c5h.us-west-2.elasticbeanstalk.com (will be deleted soon)
 
