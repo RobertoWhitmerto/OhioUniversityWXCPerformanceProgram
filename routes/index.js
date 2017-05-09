@@ -158,11 +158,17 @@ router.get('/buggy', function(req, res){
 router.get('/admin_remove_team', function(req, res){
 	req.visitor.pageview("/admin_remove_team").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-		queries.get_team({}, function(err, result){
-			var allteams = result;
-
-			res.render('admin_remove_team.pug', {homeboize: JSON.stringify(allteams), role: req.user.role});
-		});
+		var role = req.user.role;
+		if(role == 'Admin'){
+			queries.get_team({}, function(err, result){
+				var allteams = result;
+	
+				res.render('admin_remove_team.pug', {homeboize: JSON.stringify(allteams), role: req.user.role});
+			});
+		}
+		else{
+			res.redirect('/');
+		}
 	} else {
 		res.redirect('/');
 	}
@@ -172,7 +178,13 @@ router.get('/admin_remove_team', function(req, res){
 router.get('/admin_create_team', function(req, res){
 	req.visitor.pageview("/admin_create_team").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-		res.render('admin_create_team.pug', { role: req.user.role });
+		var role = req.user.role;
+		if(role == 'Admin'){
+			res.render('admin_create_team.pug', { role: req.user.role });
+		}
+		else{
+			res.redirect('/');
+		}
 	} else {
 		res.redirect('/');
 	}
@@ -184,14 +196,19 @@ router.get('/admin_remove_user_team', function(req, res){
 	if(req.isAuthenticated() && req.user.pass != 'T'){
     	var allusr;
     	var role = req.user.role;
-    	queries.get_userteam({},function(err, result){
-    		allusrteam = result;
-			queries.get_team({},function(err, result){
-				allteams = result;
-
-				res.render('admin_remove_user_team.pug',{ userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
-			});
-  		});
+    	if(role == 'Admin'){
+	    	queries.get_userteam({},function(err, result){
+	    		allusrteam = result;
+				queries.get_team({},function(err, result){
+					allteams = result;
+	
+					res.render('admin_remove_user_team.pug',{ userteam:JSON.stringify(allusrteam), homeboize: JSON.stringify(allteams)});
+				});
+	  		});
+    	}
+    	else{
+    		res.redirect('/');
+    	}
 	} else {
 		res.redirect('/');
 	}
@@ -206,13 +223,18 @@ router.get('/admin_add_team', function(req, res){
 		var allteams;
     	var allusr;
     	var role = req.user.role;
-    	queries.get_user({},function(err, result){
-      		allusr = result;
-			queries.get_team({},function(err, result){
-				allteams = result;
-				res.render('admin_add_team.pug', { homegang:JSON.stringify(allusr), homeboize: JSON.stringify(allteams), data: allteams, role });
-			});
-  		});
+    	if(role == 'Admin'){
+	    	queries.get_user({},function(err, result){
+	      		allusr = result;
+				queries.get_team({},function(err, result){
+					allteams = result;
+					res.render('admin_add_team.pug', { homegang:JSON.stringify(allusr), homeboize: JSON.stringify(allteams), data: allteams, role });
+				});
+	  		});
+    	}
+    	else{
+    		res.redirect('/');	
+    	}
 	} else {
 		res.redirect('/');
 	}
@@ -222,8 +244,8 @@ router.get('/admin_add_team', function(req, res){
 router.get('/coaches', function(req, res){
 	req.visitor.pageview("/coaches").send();
 	if(req.isAuthenticated() && req.user.pass != 'T'){
-		if(req.user.role == 'athlete'){
-			res.redirect(req.get('referer'));
+		if(req.user.role == 'Athlete'){
+			res.redirect('/');
 		} else {
 			/* Debug/Dev Code - Remove later
 			console.log(req.user);*/
@@ -520,12 +542,12 @@ router.post('/workoutentry', function(req, res){
 		if(result.affectedRows > 0)
 		{
 			req.visitor.event("Athlete", "Posting workout").send();
-			res.render('workoutentry.pug', {message: 'Workout successfully added'});
+			res.render('workoutentry.pug', {message: 'Workout successfully added', role: req.user.role});
 		}
 		else
 		{
 			req.visitor.event("Athlete", "Failed to post workout").send();
-			res.render('workoutentry.pug', {message: 'Failed to add workout'});
+			res.render('workoutentry.pug', {message: 'Failed to add workout', role: req.user.role});
 		}
 	});
 });
@@ -675,7 +697,7 @@ router.post("/myworkouts", function(req, res){
 		queries.get_workout({username: req.user.id}, function(err, result){
 			workouts = result;
 			console.log(req.body);
-			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts });
+			res.render('myworkouts.pug', {  data_w: JSON.stringify(workouts), data: workouts, role: req.user.role });
 		});
 	} else {
 	 	res.redirect('/');
