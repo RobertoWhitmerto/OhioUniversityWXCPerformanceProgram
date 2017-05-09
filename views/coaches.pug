@@ -101,15 +101,17 @@ html
           //console.log(obj.date);
           
           //console.log(oneWeekAgo);
-          if(dt >= oneWeekAgo){
+          if(true){
             //var slot = dt.getDate() - oneWeekAgo.getDate();
-            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
-            if(slot < 0)
-              slot = slot * (-1);
+            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24)) + 1;
+            if(slot == 7){
+              slot = 6;
+            }
             
             //console.log(slot);
             //console.log(dt.getDate() + 1);
-            rows[slot][1] = parseInt(obj.sleep, 10);
+            if (slot >= 0 && slot <= 7 && !rows[slot][1])
+              rows[slot][1] = parseInt(obj.sleep, 10);
           }
       }
       var now = new Date();
@@ -240,11 +242,12 @@ html
           //console.log(obj.date);
           
           //console.log(oneWeekAgo);
-          if(dt >= oneWeekAgo){
+          if(true){
             //var slot = dt.getDate() - oneWeekAgo.getDate();
-            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
-            if(slot < 0)
-              slot = slot * (-1);
+            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24)) + 1;
+            if(slot == 7){
+              slot = 6;
+            }
             var rolling_total=0;
             var avg_count=0;
             
@@ -254,7 +257,8 @@ html
             //console.log(rolling_total);
             //console.log(slot);
             //console.log(dt.getDate() + 1);
-            rows[slot][1] += parseInt(obj.distance, 10);
+            if (slot >= 0 && slot <= 7 && !rows[slot][1])
+              rows[slot][1] += parseInt(obj.distance, 10);
           }
       }
       var now = new Date();
@@ -369,15 +373,17 @@ html
           //console.log(obj.date);
           
           //console.log(oneWeekAgo);
-          if(dt >= oneWeekAgo){
+          if(true){
             //var slot = dt.getDate() - oneWeekAgo.getDate() + 1;
-            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
-            if(slot < 0)
-              slot = slot * (-1);
+            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24)) + 1;
+            if(slot == 7){
+              slot = 6;
+            }
             
             //console.log(slot);
             //console.log(dt.getDate() + 1);
-            rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+            if (slot >= 0 && slot <= 7 && !rows[slot][1])
+              rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
           }
       }
       var now = new Date();
@@ -519,9 +525,10 @@ html
           //console.log(oneWeekAgo);
           if(dt >= oneWeekAgo){
             //var slot = dt.getDate() - oneWeekAgo.getDate();
-            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24));
-            if(slot < 0)
-              slot = slot * (-1);
+            var slot = Math.floor((dt - oneWeekAgo) / (1000*60*60*24)) + 1;
+            if(slot == 7){
+              slot = 6;
+            }
             var rolling_total=0;
             var avg_count=0;
             
@@ -531,7 +538,8 @@ html
             //console.log(rolling_total);
             //console.log(slot);
             //console.log(dt.getDate() + 1);
-            rows[slot][1] += parseInt(obj.percent_health, 10);
+            if (slot >= 0 && slot <= 7 && !rows[slot][1])
+              rows[slot][1] += parseInt(obj.percent_health, 10);
           }
       }
       var now = new Date();
