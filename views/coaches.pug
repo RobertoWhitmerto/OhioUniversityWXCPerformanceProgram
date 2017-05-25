@@ -605,8 +605,9 @@ html
     br
     style(type='text/css').
       div.ez{
+      overflow-x: auto;
+      white-space: nowrap;
       background: #b1f6cb;
-      width:900px;
       border: 3px solid #000000;
       margin: auto;
       }
@@ -619,10 +620,8 @@ html
       }
     style(type='text/css').
       div.ez3{
-      background: #b1f6cb;
-      width:775px;
-      border: 3px solid #000000;
-      margin: auto;
+      overflow-x: auto;
+      white-space: nowrap;
       }
     style.
       .table {
@@ -893,7 +892,7 @@ html
                           //or edited, we know which workout to update/remove.
                           form(name='tl_form', action='/coaches', method='post')
                             input(type='hidden', value=workout['wid'], name='wID', required='')
-          
+                        
                             td.datetag= workout['date']
             
                             td.sleeptag= workout['sleep']

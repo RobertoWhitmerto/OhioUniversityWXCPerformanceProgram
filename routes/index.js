@@ -254,8 +254,7 @@ router.get('/coaches', function(req, res){
 					//res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: req.user.team });
 					queries.get_workout({teams: req.user.teams}, function(err, result){
 						var workouts = result;
-						/* Debug/Dev Code - Remove later
-						console.log(workouts);*/
+						//console.log(workouts);
         				var role = req.user.role;  
 						res.render('coaches.pug', {  data_w: JSON.stringify(users), data_u: users, team: JSON.stringify(req.user.teams), data_x: JSON.stringify(workouts), data: workouts, role });
 					});
