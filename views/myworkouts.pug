@@ -85,7 +85,7 @@ html
             }
             
             if (slot >= 0 && slot <= 7 && !rows[slot][1])
-              rows[slot][1] = parseInt(obj.sleep, 10);
+              rows[slot][1] = parseFloat(obj.sleep, 10);
           }
       }
       var now = new Date();
@@ -104,13 +104,13 @@ html
             var chronic_dt = new Date(k);
             chronic_dt.setDate(chronic_dt.getDate() - 28);
             if(wrk_dt > chronic_dt && wrk_dt < k){
-              rolling_total_chronic += parseInt(wrk.sleep, 10);
+              rolling_total_chronic += parseFloat(wrk.sleep, 10);
               avg_count++;
             }
             var acute_dt = new Date(k);
             acute_dt.setDate(acute_dt.getDate() - 7);
             if(wrk_dt > acute_dt && wrk_dt < k){
-              rolling_total_acute += parseInt(wrk.sleep, 10);
+              rolling_total_acute += parseFloat(wrk.sleep, 10);
             }
           }
           rolling_total_chronic /= 28;  
@@ -189,7 +189,7 @@ html
             
             rolling_total /= avg_count;
             if (slot >= 0 && slot <= 7 && !rows[slot][1])
-              rows[slot][1] += parseInt(obj.distance, 10);
+              rows[slot][1] += parseFloat(obj.distance, 10);
           }
       }
       var now = new Date();
@@ -205,7 +205,7 @@ html
           var wrk = d[j];
           var wrk_dt = new Date(Date.parse(wrk.date));
           if(wrk_dt > oneMonthAgo && wrk_dt < k){
-            rolling_total += parseInt(wrk.distance, 10);
+            rolling_total += parseFloat(wrk.distance, 10);
             avg_count++;
           }
         }
@@ -277,7 +277,7 @@ html
               slot = 6;
             }
             if (slot >= 0 && slot <= 7 && !rows[slot][1])
-              rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
+              rows[slot][1] += parseInt(obj.RPE, 10)*parseFloat(obj.distance, 10);
           }
       }
       var now = new Date();
@@ -296,13 +296,13 @@ html
             var chronic_dt = new Date(k);
             chronic_dt.setDate(chronic_dt.getDate() - 28);
             if(wrk_dt > chronic_dt && wrk_dt < k){
-              rolling_total_chronic += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
+              rolling_total_chronic += parseInt(obj.RPE, 10)*parseFloat(obj.distance, 10);
               avg_count++;
             }
             var acute_dt = new Date(k);
             acute_dt.setDate(acute_dt.getDate() - 7);
             if(wrk_dt > acute_dt && wrk_dt < k){
-              rolling_total_acute += parseInt(obj.RPE, 10)*parseInt(obj.distance, 10);
+              rolling_total_acute += parseInt(obj.RPE, 10)*parseFloat(obj.distance, 10);
             }
           }
           rolling_total_chronic /= 28;
@@ -376,7 +376,7 @@ html
               slot = 6;
             }
             if (slot >= 0 && slot <= 7 && !rows[slot][1])  
-              rows[slot][1] += parseInt(obj.RPE, 10)*parseInt(obj.time, 10);
+              rows[slot][1] += parseInt(obj.RPE, 10)*parseFloat(obj.time, 10);
           }
       }
       var now = new Date();
@@ -401,12 +401,12 @@ html
             var k_plus_one = new Date(k);
             k_plus_one.setDate(k_plus_one.getDate() + 1);
             if(wrk_dt > chronic_dt && wrk_dt <= k_plus_one){
-              rolling_total_chronic += parseInt(wrk.RPE, 10)*parseInt(wrk.time, 10);
+              rolling_total_chronic += parseInt(wrk.RPE, 10)*parseFloat(wrk.time, 10);
               avg_count_c++;
             }
             
             if(wrk_dt > acute_dt && wrk_dt <= k_plus_one){
-              rolling_total_acute += parseInt(wrk.RPE, 10)*parseInt(wrk.time, 10);
+              rolling_total_acute += parseInt(wrk.RPE, 10)*parseFloat(wrk.time, 10);
             }
           }
           rolling_total_chronic /= 28;
@@ -900,7 +900,7 @@ html
       input#wrk_id(type='hidden', name='wrk_id', required='')
       label Hours of Sleep
       font(color='cyan')
-        input#sleephours(type='number', name='sleep', min='0', max='14')
+        input#sleephours(type='number', name='sleep', min='0', max='14', step='any')
         br
       label General Health Status
       select#illness.browser-default(name='illness')
@@ -979,7 +979,7 @@ html
         br
         br
         label Distance (miles)
-        input#distance(name='distance', type='number', min='0.0', max='100.0')
+        input#distance(name='distance', type='number', min='0.0', max='100.0', step='any')
         br
         br
       label Perception of Hunger and Fullness Over 24-Hours

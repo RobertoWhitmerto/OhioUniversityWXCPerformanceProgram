@@ -289,7 +289,7 @@ CREATE TABLE `Workouts` (
   `wid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `date` datetime NOT NULL,
-  `sleep` int(11) DEFAULT NULL,
+  `sleep` float DEFAULT NULL,
   `health` varchar(45) DEFAULT NULL,
   `injury` varchar(45) DEFAULT NULL,
   `percent_health` varchar(45) DEFAULT NULL,
