@@ -537,6 +537,8 @@ passport.use(new LocalStrategy( function(username, password, done){
 router.post('/workoutentry', function(req, res){
 	req.body.user = req.user.id;
 
+	req.body.mynotes = req.body.mynotes.replace(/,/g, '');
+
 	queries.insert_workout(req.body, function(err, result){
 		if(result.affectedRows > 0)
 		{
@@ -681,6 +683,27 @@ router.post("/emailpassword", function(req, res){
 	});
     
   res.redirect('/');
+});
+
+//this is the post for the remove button on the training log page
+router.post("/bugreport", function(req, res){
+		if(req.isAuthenticated() && req.user.pass != 'T'){
+		console.log("body is");
+		console.log(req.body);
+		db.query("insert into `bugs` (`platform`, `browser`, `role`, `description`) VALUE (?, ?, ?, ?)" , [req.body.platform, req.body.browser, req.body.role, req.body.mynotes] ,function(err, rows, fields) {
+			var firstn = req.user.first
+			if(!err){
+				var message="Succesfully reported bug! Thank you!";
+			}
+			else{
+				var message="Unsuccesfully reported bug, something is wrong!";
+			}
+			res.render('buggy.pug', {firstn, message});
+		});
+	
+	} else {
+	 	res.redirect('/');
+	}
 });
 
 //this is the post for the remove button on the training log page

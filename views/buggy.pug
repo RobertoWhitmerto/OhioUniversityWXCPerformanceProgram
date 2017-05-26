@@ -15,6 +15,11 @@ html
       $(".dropdown-button").dropdown();
       $(".button-collapse").sideNav();
       });
+    script.
+      $(document).ready(function(){
+      if("#{message}")
+      Materialize.toast('#{firstn}, #{message} ', 5000, 'rounded');
+      });
   //Background pattern from Subtle Patterns//
   body(background='/views/bg3.png')
     include navi.pug
@@ -42,35 +47,34 @@ html
                     .card-content.black-text
                       span.card-title Device Information:
                       br
-                      form(action='/', method='post')
-                        label Platform:
-                        select.browser-default(name='platform', required='')
-                          option(name='platform', value='unknown') ----
-                          option(name='platform', value='desktop') Desktop
-                          option(name='platform', value='mobile') Mobile
-                        br
-                        label Internet Browser Used:
-                        select#browser.browser-default(name='browser', required='', onchange='checkbrowser()')
-                          option(name='browser', value='unknown') ----
-                          option(name='browser', value='chrome') Chrome
-                          option(name='browser', value='safari') Safari
-                          option(name='browser', value='ie') Internet Explorer
-                          option(name='browser', value='edge') Microsoft Edge
-                          option(name='browser', value='other') Other
-                        br
-                        script.
-                          function checkbrowser(){
-                          if(document.getElementById("browser").value == "other"){
-                          document.getElementById("hideme").innerHTML = "Type the browser you used that was not listed";
-                          document.getElementById("other").disabled = false;
-                          }
-                          else{
-                          document.getElementById("hideme").innerHTML = "";
-                          document.getElementById("other").disabled = true;
-                          }
-                          }
-                        span#hideme
-                        input#other(type='text', disabled='true', name='otherbrowser')
+                      label Platform:
+                      select.browser-default(name='platform', required='')
+                        option(name='platform', value='unknown') ----
+                        option(name='platform', value='desktop') Desktop
+                        option(name='platform', value='mobile') Mobile
+                      br
+                      label Internet Browser Used:
+                      select#browser.browser-default(name='browser', required='', onchange='checkbrowser()')
+                        option(name='browser', value='unknown') ----
+                        option(name='browser', value='chrome') Chrome
+                        option(name='browser', value='safari') Safari
+                        option(name='browser', value='ie') Internet Explorer
+                        option(name='browser', value='edge') Microsoft Edge
+                        option(name='browser', value='other') Other
+                      br
+                      script.
+                        function checkbrowser(){
+                        if(document.getElementById("browser").value == "other"){
+                        document.getElementById("hideme").innerHTML = "Type the browser you used that was not listed";
+                        document.getElementById("other").disabled = false;
+                        }
+                        else{
+                        document.getElementById("hideme").innerHTML = "";
+                        document.getElementById("other").disabled = true;
+                        }
+                        }
+                      span#hideme
+                      input#other(type='text', disabled='true', name='otherbrowser')
               .row
                 .col.s12.m12
                   .card.light-blue.darken-4
