@@ -116,8 +116,11 @@ html
           rolling_total_chronic /= 28;  
           rolling_total_acute /= 7;
 
-          var k_day = new Date();
-          k_day.setDate(k.getDate() + 1);
+          var k_day = new Date(
+              k.getFullYear(),
+              k.getMonth(),
+              (k.getDate() + 1)
+          );
           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           slot++;
       }
@@ -210,8 +213,11 @@ html
           }
         }
         rolling_total /= 28;
-        var k_day = new Date();
-        k_day.setDate(k.getDate() + 1);
+        var k_day = new Date(
+              k.getFullYear(),
+              k.getMonth(),
+              (k.getDate() + 1)
+          );
         rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
         slot++;
       }
@@ -307,8 +313,11 @@ html
           }
           rolling_total_chronic /= 28;
           rolling_total_acute /= 7;
-          var k_day = new Date();
-          k_day.setDate(k.getDate() + 1);
+          var k_day = new Date(
+              k.getFullYear(),
+              k.getMonth(),
+              (k.getDate() + 1)
+          );
           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
@@ -347,7 +356,7 @@ html
       var d = !{data_w};
       
       var oneWeekAgo_1 = new Date();
-      oneWeekAgo_1.setDate(oneWeekAgo + 1);
+      oneWeekAgo_1.setDate(oneWeekAgo.getDate() + 1);
       var oneWeekAgo_2 = new Date();
       oneWeekAgo_2.setDate(oneWeekAgo + 2);
       var oneWeekAgo_3 = new Date();
@@ -383,7 +392,10 @@ html
       now.setDate(now.getDate() - 1);
       //loop through last week's dates to add rolling averages
       var slot = 0;
+      console.log("owa1: " + oneWeekAgo_1);
+      console.log("now: " + now);
       for (var k = oneWeekAgo; k <= now; k.setDate(k.getDate() + 1)) {
+          console.log("k: " + k);
           if(slot < 0)
             slot = slot * (-1);
           var rolling_total_chronic=0;
@@ -411,9 +423,14 @@ html
           }
           rolling_total_chronic /= 28;
           rolling_total_acute /= 7;
-          var k_day = new Date();
-          k_day.setDate(k.getDate() + 1);
-          rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
+          var k_day = new Date(
+              k.getFullYear(),
+              k.getMonth(),
+              (k.getDate() + 1)
+          );
+          //k_day.setDate(k.getDate() + 1);
+          console.log("Date: " + k_day);
+          rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k.getYear()-100);
           rows[slot][2] = rolling_total_acute / rolling_total_chronic;
           slot++;
       }
@@ -507,8 +524,11 @@ html
           }
 
           rolling_total /= 28;
-          var k_day = new Date();
-          k_day.setDate(k.getDate() + 1);
+          var k_day = new Date(
+              k.getFullYear(),
+              k.getMonth(),
+              (k.getDate() + 1)
+          );
           rows[slot][0] = (k_day.getMonth()+1).toString() + '/' + k_day.getDate().toString() + '/' + (k_day.getYear()-100);
           slot++;
       }
@@ -975,7 +995,7 @@ html
       br
       label Time of workout (minutes)
       font(color='cyan')
-        input#time(name='time', type='number', min='0', max='999')
+        input#time(name='time', type='number', min='0', max='999', step='any')
         br
         br
         label Distance (miles)
